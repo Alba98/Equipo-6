@@ -1,10 +1,10 @@
--- GESTIONAR_JUGADORES_CUERPO
+-- GESTIONAR_ENTRENADORES_CUERPO
 /* 
  Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
- Descripcion:  Paquete gestion de jugadores
+ Descripcion:  Paquete gestion de entrenadores
 */
- 
+
 CREATE OR REPLACE PACKAGE BODY GEST_JUGADOR AS
 
 FUNCTION BUSCAR_PERSONA_POR_NICKNAME
@@ -42,39 +42,38 @@ END BUSCAR_PERSONA_POR_NICKNAME;
 
 -- **************************************************************
 /*
-Procedimiento INSERT_JUGADOR: insertar un jugador tras haber sido insertados 
+Procedimiento INSERT_ENTRENADOR: insertar un ENTRENADOR tras haber sido insertados 
 sus datos en personas
 */
-PROCEDURE INSERT_JUGADOR(
-	P_NICKNAME PERSONA.NICKNAME%TYPE,
-	P_ROL JUGADORES.ROL%TYPE)
+PROCEDURE INSERT_ENTRENADOR(
+	P_NICKNAME PERSONA.NICKNAME%TYPE)
 AS
-    V_COD_JUGADOR NUMBER;
+    V_COD_ENTRENADOR NUMBER;
     PERSONA_NO_ENCONTRADA EXCEPTION;
 BEGIN
 	-- comprobando que existe una persona con ese nickname
-    V_COD_JUGADOR := BUSCAR_PERSONA_POR_NICKNAME(P_NICKNAME);
+    V_COD_ENTRENADOR := BUSCAR_PERSONA_POR_NICKNAME(P_NICKNAME);
 
-    IF (V_COD_JUGADOR IS NULL)
+    IF (V_COD_ENTRENADOR IS NULL)
     THEN      
         RAISE PERSONA_NO_ENCONTRADA;
     ELSE 
          --insertar el jugador
-        INSERT INTO JUGADORES (COD_JUGADOR, ROL) 
-        VALUES (V_COD_JUGADOR, UPPER(P_ROL));
+        INSERT INTO ENTRENADORES (COD_ENTRENADOR) 
+        VALUES (V_COD_ENTRENADOR);
     END IF;   
 
 EXCEPTION
     WHEN PERSONA_NO_ENCONTRADA THEN
         RAISE_APPLICATION_ERROR (-20001 ,'Err. la persona q intenta insertar 
-            como jugador no existe');
+            como entrenador no existe');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido');
-END INSERT_JUGADOR;
+END INSERT_ENTRENADOR;
 
 -- **************************************************************
 /*
-Procedimiento INSERT_JUGADOR: insertar un jugador insertando los datos en 
+Procedimiento INSERT_JUGADOR: insertar un ENTRENADOR insertando los datos en 
 persona
 */
 PROCEDURE INSERT_PERSONA(
@@ -93,7 +92,7 @@ BEGIN
 	-- comprobando que no existe otra persona con ese nickname
     V_COD_JUGADOR := BUSCAR_PERSONA_POR_NICKNAME(P_NICKNAME);
     
-    IF (V_COD_JUGADOR IS not NULL)
+    IF (V_COD_JUGADOR IS NULL)
     THEN      
         --insertar persona
         INSERT INTO PERSONA (NICKNAME, NOMBRE, APELLIDO, FECHA_NACIMIENTO, 
@@ -101,15 +100,15 @@ BEGIN
         VALUES (UPPER(P_NICKNAME), UPPER(P_NOMBRE), UPPER(P_APELLIDO), 
             P_FECHA_NACIMIENTO, UPPER(P_NACIONALIDAD), P_SUELDO);
         -- insertar jugador
-        INSERT_JUGADOR(P_NICKNAME, P_ROL);
+        INSERT_ENTRENADOR(P_NICKNAME);
     ELSE
         RAISE DUP_VAL_ON_INDEX;
     END IF;       
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
-        RAISE_APPLICATION_ERROR (-20003 ,'Err. nickname departamento duplicado');
+        RAISE_APPLICATION_ERROR (-20003 ,'Err. nickname duplicado');
 	WHEN OTHERS THEN
-        RAISE_APPLICATION_ERROR('-20998','Error desconocido');
+        RAISE_APPLICATION_ERROR('-20999','Error desconocido' || SQLERRM);
 END INSERT_PERSONA;
 
 END GEST_JUGADOR;
