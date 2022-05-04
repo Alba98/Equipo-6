@@ -70,9 +70,9 @@ BEGIN
     NULL;
 EXCEPTION
     WHEN TEMPORADA_NO_EXISTE THEN
-        RAISE_APPLICATION_ERROR ('-20004' ,'Err. temporada inexistent');
+        RAISE_APPLICATION_ERROR ('-20004' ,'Err. temporada inexistente');
     WHEN DUP_VAL_ON_INDEX THEN
-        RAISE_APPLICATION_ERROR ('-20003' ,'Err. nombre de equipo duplicado');
+        RAISE_APPLICATION_ERROR ('-20003' ,'Err. jornada duplicada');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20998','Error desconocido');
 END INSERT_JORNADA;
