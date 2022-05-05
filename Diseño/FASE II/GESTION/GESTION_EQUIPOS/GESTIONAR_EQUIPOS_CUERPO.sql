@@ -77,10 +77,10 @@ EXCEPTION
 END INSERT_EQUIPO;
 
 -- **************************************************************
-    /*
+/*
 Procedimiento CONTRATO_JUGADOR: suponemos q sabemos cada codigo asociado al nombre
 xq en java le ofrecemos los nombres directamente
-    */    
+*/    
 PROCEDURE CONTRATO_JUGADOR(
         P_COD_JUGADOR JUGAR_PARA.COD_JUGADOR%TYPE,
         P_COD_EQUIPO JUGAR_PARA.COD_EQUIPO%TYPE,
@@ -98,10 +98,10 @@ EXCEPTION
 END CONTRATO_JUGADOR;
 
 -- **************************************************************
-    /*
+/*
 Procedimiento CONTRATO_ENTRENADOR: suponemos q sabemos cada codigo asociado al nombre
 xq en java le ofrecemos los nombres directamente
-    */        
+*/        
 PROCEDURE CONTRATO_ENTRENADOR(
         P_COD_ENTRENADOR ENTRENA.COD_ENTRENADOR%TYPE,
         P_COD_EQUIPO ENTRENA.COD_EQUIPO%TYPE,
@@ -117,5 +117,27 @@ EXCEPTION
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido CONTRATO_ENTRENADOR');
 END CONTRATO_ENTRENADOR;
+
+        
+-- **************************************************************
+/*
+Procedimiento CONTRATO_ASISTENTE: suponemos q sabemos cada codigo asociado al nombre
+xq en java le ofrecemos los nombres directamente
+*/        
+PROCEDURE CONTRATO_ASISTENTE(
+        P_COD_ASISTENTE ASISTE.COD_ASISTENTE%TYPE,
+        P_COD_EQUIPO ASISTE.COD_EQUIPO%TYPE,
+        P_FECHA_FIN ASISTE.FECHA_FIN%TYPE,
+        P_FECHA_INICIO ASISTE.FECHA_INICIO%TYPE 
+        )
+AS
+BEGIN    
+    --insertar equipo
+    INSERT INTO ASISTE (COD_ASISTENTE,COD_EQUIPO,FECHA_FIN,FECHA_INICIO)
+    VALUES (P_COD_ASISTENTE, P_COD_EQUIPO, P_FECHA_FIN, P_FECHA_INICIO);   
+EXCEPTION
+	WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR('-20999','Error desconocido CONTRATO_ASISTENTE');
+END CONTRATO_ASISTENTE;
 
 END GEST_EQUIPO;
