@@ -31,7 +31,7 @@ CREATE OR REPLACE TRIGGER MAX_JUGADORES
     
     IF V_CANTIDADJUGADORES>=6 THEN
     
-    RAISE_APPLICATION_ERROR(-20100,'Error,solo puede haver 6 jugadores por equipo');
+    RAISE_APPLICATION_ERROR(-20100,'Error,solo puede haber 6 jugadores por equipo');
     
     END IF;
     
