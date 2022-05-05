@@ -1,0 +1,48 @@
+
+
+   CREATE OR REPLACE TRIGGER MIN_SALARIO
+   BEFORE INSERT OR UPDATE ON JUGADORES
+   FOR EACH ROW
+   
+   DECLARE
+   
+   V_SALMIN PERSONAS.SUELDO%TYPE;
+   VAR_ERROR EXCEPTION;
+   
+   BEGIN
+        V_SALMIN:=NEW.SUELDO;
+        SELECT SUELDO INTO V_SALMIN
+        FROM PERSONAS
+        WHERE SUELDO>=200.000;
+  
+  IF(V_SALMIN<SUELDO) THEN
+  RAISE V_ERROR;
+  END IF;
+
+
+ EXCEPTION
+     
+     WHEN VAR_ERROR THEN 
+     
+     RAISE_APLICCATION_ERROR(-20002,'Error,el salario no es correcto||SQLERRM);
+     
+END;   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
