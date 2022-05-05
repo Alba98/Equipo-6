@@ -50,6 +50,8 @@ AS
     V_COD_TEMPORADA NUMBER;
     TEMPORADA_NO_EXISTE EXCEPTION;
     DUP_VAL_ON_INDEX EXCEPTION;
+    v_count number;
+    p_fecha_resultado date:= p_fecha_jornada;
 BEGIN
 	-- comprobando que no existe otra equipo con ese nombre
     V_COD_TEMPORADA := EXISTE_TEMPORADA(P_COD_TEMPORADA);
@@ -62,8 +64,17 @@ BEGIN
         RAISE DUP_VAL_ON_INDEX;
     ELSE
        --insertar jornada
-        INSERT INTO JORNADAS(COD_TEMPORADA, FECHA_JORNADA)
-        VALUES (P_COD_TEMPORADA, P_FECHA_JORNADA);
+       
+            Select count(*) into v_count from equipos;
+            v_count:= v_count -1;
+
+            for cod_jornada in 0 .. v_count loop
+
+            p_fecha_resultado := p_fecha_resultado + 7;
+
+            Insert INTO jornadas(fecha_jornada, cod_temporada) values (p_fecha_resultado, p_cod_temporada);
+
+            end loop;
     END IF;
     
     NULL;
