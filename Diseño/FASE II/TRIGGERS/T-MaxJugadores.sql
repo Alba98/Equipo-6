@@ -1,43 +1,44 @@
-
-
- CREATE OR REPLACE TRIGGER MaxJugadores
- 
-    BEFORE  INSERT ON JUGADORES
+CREATE OR REPLACE TRIGGER MAX_JUGADORES
+  
+    FOR INSERT OR UPDATE ON JUGAR_PARA 
     
-     FOR EACH ROW 
-     
-     DECLARE
-     
-     V_CANTIDADJUGADORES NUMBER;
-     V_CODEQUIPO NUMBER;
-     V_ERROR EXCEPTION;
-     
-     BEGIN
-     
-       V_CODEQUIPO:=NEW.COD_EQUIPO;
-       SELECT COUNT(*) INTO V_CANTIDADJUGADORES
-       FROM JUGADORES
-       WHERE COD_EQUIPO=V_CODEQUIPO
-       AND COD_EQUIPO!=1;
-       
-       IF(V_CANTIDADJUGADORES>6) THEN
-       RAISE  V_ERROR;
-       END IF;
-       
-     EXCEPTION
-     
-     WHEN V_ERROR THEN 
-     
-     RAISE_APLICCATION_ERROR(-20100,'Error, solo puede haber 6 jugadores por 
-                                    equipo'||SQLERRM);
-     END;                               
+    COMPOUND TRIGGER
+    NEW_JUGADOR JUGAR_PARA%ROWTYPE;
+ 
+    V_CANTIDADJUGADORES NUMBER;
     
-     
-     
- 
- 
- 
- 
- 
+    BEFORE EACH ROW IS
+    BEGIN
+    IF INSERTING THEN
+    NEW_JUGADOR.COD_JUGADOR:= :NEW.COD_JUGADOR;
+    NEW_JUGADOR.COD_EQUIPO:= :NEW.COD_EQUIPO;
+    
+    ELSE
+    
+    NEW_JUGADOR.COD_EQUIPO:= :NEW.COD_EQUIPO;
+    END IF;
+    
+    END BEFORE EACH ROW;
+    
+    AFTER STATEMENT IS
+    BEGIN
+    
+    SELECT COUNT(*) INTO  V_CANTIDADJUGADORES
+    FROM JUGAR_PARA
+    WHERE COD_EQUIPO=NEW_JUGADOR.COD_EQUIPO;
+    
+    DBMS_OUTPUT.PUT_LINE(V_CANTIDADJUGADORES);
+    
+    IF V_CANTIDADJUGADORES>=6 THEN
+    
+    RAISE_APPLICATION_ERROR(-20100,'Error,solo puede haver 6 jugadores por equipo');
+    
+    END IF;
+    
+    END AFTER STATEMENT;
+    
+    END MAX_JUGADORES;
+    
+
 
 
