@@ -1,6 +1,5 @@
 -- GESTIONAR_JORNADAS_CUERPO
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 04/05/2022
   Descripcion:  Paquete gestion de jornadas
  */

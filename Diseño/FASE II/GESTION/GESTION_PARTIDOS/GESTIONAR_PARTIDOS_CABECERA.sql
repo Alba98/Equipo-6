@@ -1,9 +1,7 @@
 -- GESTIONAR_PARTIDOS_CABECERA
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 04/05/2022
  Descripcion:  Porcedimientos publicos del paquete gestion de partidos
-
  */
  
 

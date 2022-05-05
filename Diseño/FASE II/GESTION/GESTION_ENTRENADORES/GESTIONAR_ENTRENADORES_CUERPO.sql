@@ -1,6 +1,5 @@
 -- GESTIONAR_ENTRENADORES_CUERPO
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
  Descripcion:  Paquete gestion de entrenadores
 */

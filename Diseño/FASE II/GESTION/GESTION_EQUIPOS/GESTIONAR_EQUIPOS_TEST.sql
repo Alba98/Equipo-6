@@ -1,6 +1,5 @@
 -- GESTIONAR_EQUIPOS_TEST
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
  Descripcion:  Testeo paquete gestion de EQUIPOS
 
