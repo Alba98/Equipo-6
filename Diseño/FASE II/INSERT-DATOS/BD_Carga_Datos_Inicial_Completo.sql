@@ -1,6 +1,3 @@
-
-
-
 INSERT INTO temporadas (abierta) VALUES ('N');
 INSERT INTO temporadas (abierta) VALUES ('N');
 INSERT INTO temporadas (abierta) VALUES ('S');
@@ -26,20 +23,20 @@ INSERT INTO participa VALUES (02, 01, 02);
 INSERT INTO participa VALUES (03, 04,02);
 INSERT INTO participa VALUES (04, 03, 01);
 
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Darcy','Wuenz',2000,TO_DATE('14/05/2001','DD/MM/YYYY'),'Taiwanesa','The_Core');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Inaki','Birel',1500,TO_DATE('09/07/1997','DD/MM/YYYY'),'Espaniola','Slayo_15');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Juan','Desestepo',2500,TO_DATE('23/12/1979','DD/MM/YYYY'),'Espaniola','Destepo');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Sara','Barracas',2000,TO_DATE('15/03/1999','DD/MM/YYYY'),'Espaniola','Sabacas');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Arnau','Ivancic',1500,TO_DATE('20/10/1995','DD/MM/YYYY'),'Croata','Nautic');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Miku','Hara',2500,TO_DATE('10/12/2002','DD/MM/YYYY'),'Japonesa','Hara_0_0');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Jordi','Juanpues',2000,TO_DATE('01/04/1990','DD/MM/YYYY'),'Espaniola','Jojus');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Silk','Songson',1500,TO_DATE('07/07/1997','DD/MM/YYYY'),'Islandesa','Hollow97');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Alfonso','Torres',2000,TO_DATE('18/05/2001','DD/MM/YYYY'),'Peruana','Alf_Tor6');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Natalia','Campillo',1500,TO_DATE('31/08/1994','DD/MM/YYYY'),'Espaniola','PanTortug');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Rafael','Avila',3000,TO_DATE('24/11/1997','DD/MM/YYYY'),'Espaniola','Sir_Ravila79');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Amalia','Luciernagas',2000,TO_DATE('15/01/1980','DD/MM/YYYY'),'Canadiense','Buharte');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Marcos','Fausto',2000,TO_DATE('11/06/2000','DD/MM/YYYY'),'Andorrana','ElFaustero');
-INSERT INTO persona (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Leilani','Aikau',1500,TO_DATE('13/02/2002','DD/MM/YYYY'),'Estadounidense','Hawainu');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Darcy','Wuenz',2000,TO_DATE('14/05/2001','DD/MM/YYYY'),'Taiwanesa','The_Core');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Inaki','Birel',1500,TO_DATE('09/07/1997','DD/MM/YYYY'),'Espaniola','Slayo_15');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Juan','Desestepo',2500,TO_DATE('23/12/1979','DD/MM/YYYY'),'Espaniola','Destepo');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Sara','Barracas',2000,TO_DATE('15/03/1999','DD/MM/YYYY'),'Espaniola','Sabacas');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Arnau','Ivancic',1500,TO_DATE('20/10/1995','DD/MM/YYYY'),'Croata','Nautic');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Miku','Hara',2500,TO_DATE('10/12/2002','DD/MM/YYYY'),'Japonesa','Hara_0_0');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Jordi','Juanpues',2000,TO_DATE('01/04/1990','DD/MM/YYYY'),'Espaniola','Jojus');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Silk','Songson',1500,TO_DATE('07/07/1997','DD/MM/YYYY'),'Islandesa','Hollow97');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Alfonso','Torres',2000,TO_DATE('18/05/2001','DD/MM/YYYY'),'Peruana','Alf_Tor6');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Natalia','Campillo',1500,TO_DATE('31/08/1994','DD/MM/YYYY'),'Espaniola','PanTortug');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Rafael','Avila',3000,TO_DATE('24/11/1997','DD/MM/YYYY'),'Espaniola','Sir_Ravila79');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Amalia','Luciernagas',2000,TO_DATE('15/01/1980','DD/MM/YYYY'),'Canadiense','Buharte');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Marcos','Fausto',2000,TO_DATE('11/06/2000','DD/MM/YYYY'),'Andorrana','ElFaustero');
+INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Leilani','Aikau',1500,TO_DATE('13/02/2002','DD/MM/YYYY'),'Estadounidense','Hawainu');
 
 INSERT INTO jugadores VALUES (01,'TOP');
 INSERT INTO jugadores VALUES (04,'JGL');
