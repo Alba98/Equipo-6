@@ -1,7 +1,7 @@
-INSERT INTO temporadas (abierta) VALUES ('N');
-INSERT INTO temporadas (abierta) VALUES ('N');
 INSERT INTO temporadas (abierta) VALUES ('S');
-INSERT INTO temporadas (abierta) VALUES ('N');
+INSERT INTO temporadas (abierta) VALUES ('S');
+INSERT INTO temporadas (abierta) VALUES ('S');
+INSERT INTO temporadas (abierta) VALUES ('S');
 
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('04/11/2022','DD/MM/YYYY'));
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('11/11/2022','DD/MM/YYYY'));

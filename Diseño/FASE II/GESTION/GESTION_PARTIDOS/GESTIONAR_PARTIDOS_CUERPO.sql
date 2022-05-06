@@ -72,7 +72,7 @@ BEGIN
              --insertar el partido
             INSERT INTO PARTIDOS (HORA_PARTIDO, COD_JORNADA) 
             VALUES (P_HORA_PARTIDO, P_COD_JORNADA);
-           /*
+           
             --obtener codigo partido
             SELECT COD_PARTIDO INTO V_COD_PARTIDO
             FROM PARTIDOS
@@ -82,14 +82,13 @@ BEGIN
             --insertar participa
             INSERT INTO PARTICIPA (COD_EQUIPO1, COD_EQUIPO2, COD_PARTIDO) 
             VALUES (V_COD_EQUIPO1, V_COD_EQUIPO2, V_COD_PARTIDO);
-        */
         END IF;   
     END IF; 
 EXCEPTION
     WHEN EQUIPO1_NO_ENCONTRADO THEN
-        RAISE_APPLICATION_ERROR (-20020 ,'Err. el equipo1' || P_EQUIPO1 ||'no existe');
+        RAISE_APPLICATION_ERROR (-20020 ,'Err. el ' || P_EQUIPO1 ||'no existe');
 	 WHEN EQUIPO2_NO_ENCONTRADO THEN
-        RAISE_APPLICATION_ERROR (-20021 ,'Err. el equipo2' || P_EQUIPO2 ||'no existe');
+        RAISE_APPLICATION_ERROR (-20021 ,'Err. el ' || P_EQUIPO2 ||'no existe');
     WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido INSERT_PARTIDO');
 END INSERT_PARTIDO;

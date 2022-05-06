@@ -10,22 +10,32 @@ SET SERVEROUTPUT ON;
 /*
 INSERT_PARTIDO
 */
-
-INSERT INTO equipos (nombre, fecha_fundacion, ciudad, esponsor, nombre_duenio) 
-    VALUES('Gasteiz-Goya', TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Alonso');
-INSERT INTO equipos (nombre, fecha_fundacion, ciudad, esponsor, nombre_duenio) 
-    VALUES('Real Horses', TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
+/*
+INSERT INTO temporadas (abierta) VALUES ('S');
 
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('04/11/2022','DD/MM/YYYY'));
 
-INSERT INTO PARTIDOS (HORA_PARTIDO, COD_JORNADA) 
-        VALUES ('19:00', 01);
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) 
+    VALUES('Gasteiz-Goya',    TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Ruiz de Villareal');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) 
+    VALUES('Real Horses',     TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
 
+*/
 DECLARE
     P_HORA_PARTIDO PARTIDOS.HORA_PARTIDO%TYPE := '19:00';
     P_COD_JORNADA PARTIDOS.COD_JORNADA%TYPE := 01;
     P_EQUIPO1 VARCHAR2(30) := 'Real Horses';
     P_EQUIPO2 VARCHAR2(30) := 'Gasteiz-Goya';
+BEGIN
+    GEST_PARTIDOS.INSERT_PARTIDO(P_HORA_PARTIDO, P_COD_JORNADA, P_EQUIPO1, P_EQUIPO2); 
+END;
+
+--GENERA ERROR
+DECLARE
+    P_HORA_PARTIDO PARTIDOS.HORA_PARTIDO%TYPE := '19:00';
+    P_COD_JORNADA PARTIDOS.COD_JORNADA%TYPE := 01;
+    P_EQUIPO1 VARCHAR2(30) := 'Real Horses';
+    P_EQUIPO2 VARCHAR2(30) := 'Duero-Pascual';
 BEGIN
     GEST_PARTIDOS.INSERT_PARTIDO(P_HORA_PARTIDO, P_COD_JORNADA, P_EQUIPO1, P_EQUIPO2); 
 END;
