@@ -7,6 +7,10 @@
  
 SET SERVEROUTPUT ON;
 
+-- **************************************************************
+/*
+    Procedimiento INSERT_EQUIPO: 
+*/
 DECLARE
     P_NOMBRE VARCHAR2(30) := 'Gasteiz-Goya';
     P_FECHA_FUNDACION DATE := TO_DATE('23/01/2021','DD/MM/YYYY');
@@ -31,6 +35,12 @@ BEGIN
 END;
 
 SELECT * FROM EQUIPOS;
+
+-- **************************************************************
+/*
+    Procedimiento INSERT_EQUIPO: 
+*/
+
 
 
 --ROLLBACK;

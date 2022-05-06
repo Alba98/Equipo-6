@@ -63,7 +63,7 @@ BEGIN
 
 EXCEPTION
     WHEN PERSONA_NO_ENCONTRADA THEN
-        RAISE_APPLICATION_ERROR (-20001 ,'Err. la persona q intenta insertar 
+        RAISE_APPLICATION_ERROR (-20010 ,'Err. la persona q intenta insertar 
             como entrenador no existe');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido');
@@ -104,7 +104,7 @@ BEGIN
     
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
-        RAISE_APPLICATION_ERROR (-20003 ,'Err. nickname duplicado');
+        RAISE_APPLICATION_ERROR (-20007 ,'Err. nickname duplicado');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido');
 END INSERT_PERSONA;
