@@ -61,7 +61,7 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
   
   WHEN NO_DATA_FOUND THEN 
   
-  RAISE_APPLICATION_ERROR (-200122,'Error.No se ha encontrado la jornada');
+  RAISE_APPLICATION_ERROR (-20122,'Error.No se ha encontrado la jornada');
   
   WHEN OTHERS THEN 
   
