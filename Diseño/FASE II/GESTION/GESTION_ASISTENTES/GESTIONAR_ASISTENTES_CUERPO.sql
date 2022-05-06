@@ -74,10 +74,10 @@ BEGIN
 
 EXCEPTION
     WHEN ASISTENTE_NO_ENCONTRADA THEN
-        RAISE_APPLICATION_ERROR (-20001 ,'Err. la persona q intenta insertar 
+        RAISE_APPLICATION_ERROR (-20011 ,'Err. la persona q intenta insertar 
             como asistente no existe');
     WHEN ENTRENADOR_NO_ENCONTRADA THEN
-        RAISE_APPLICATION_ERROR (-20006 ,'Err. la persona q intenta insertar 
+        RAISE_APPLICATION_ERROR (-20010 ,'Err. la persona q intenta insertar 
             como entrenador no existe');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido');
