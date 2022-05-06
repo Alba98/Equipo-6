@@ -43,17 +43,17 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
 
 --------------------------------------------------------------------------------
   PROCEDURE p_resultados(p_num_jornada IN OUT NUMBER,
-                         p_cod_partido OUT NUMBER,
-                         p_resultado OUT VARCHAR2,
-                         p_horapartido OUT VARCHAR2)
+                           p_cod_equipo OUT NUMBER,
+                           p_resultado OUT VARCHAR2,
+                           p_horapartido OUT varchar2)
                          
   AS 
   
   
   BEGIN
   
-  SELECT J.COD_JORNADA  ,P.COD_PARTIDO  ,P.RESULTADO, P.HORA_PARTIDO
-  INTO P_NUM_JORNADA, P_COD_PARTIDO, P_RESULTADO, P_HORAPARTIDO
+  SELECT J.COD_JORNADA  ,P.RESULTADO, P.HORA_PARTIDO
+  INTO P_NUM_JORNADA, P_RESULTADO, P_HORAPARTIDO
   FROM JORNADAS J , PARTIDOS P
   WHERE J.COD_JORNADA=P.COD_JORNADA;
   
@@ -61,7 +61,7 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
   
   WHEN NO_DATA_FOUND THEN 
   
-  RAISE_APPLICATION_ERROR (-200122,'Error.No se ha encontrado la jornada');
+  RAISE_APPLICATION_ERROR (-20122,'Error.No se ha encontrado la jornada');
   
   WHEN OTHERS THEN 
   
@@ -70,20 +70,21 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
  end   p_resultados;
 -------------------------------------------------------------------------------- 
  
-   PROCEDURE obtener_datos_jugadores(p_nick_jugador varchar2,
-                                      p_cod_equipo number,
-                                      p_apellido_jugador varchar2,
-                                      p_nom_jugador varchar2,
-                                      p_rol_jugador varchar2)
+   PROCEDURE obtener_datos_jugadores(p_nick_jugador IN OUT  varchar2,
+                                      p_nom_equipo OUT varchar2,
+                                      p_apellido_jugador OUT varchar2,
+                                      p_nom_jugador OUT varchar2,
+                                      p_rol_jugador OUT varchar2,
+                                      p_cod_equipo OUT number)
                                          
    AS 
-
+    
    BEGIN    
    SELECT P.NICKNAME,P.NOMBRE,P.APELLIDO,J.ROL, JP.COD_EQUIPO
    INTO   p_nick_jugador, p_nom_jugador,p_apellido_jugador, p_rol_jugador,
           p_cod_equipo
    
-   FROM  JUGAR_PARA JP,PERSONA P, JUGADORES J 
+   FROM  JUGAR_PARA JP,PERSONAS P, JUGADORES J 
    
    WHERE  UPPER(P.NICKNAME)=UPPER(P_NICK_JUGADOR) AND P.COD_PERSONA=J.COD_JUGADOR
    AND J.COD_JUGADOR=JP.COD_JUGADOR;
@@ -115,8 +116,8 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
    BEGIN
    
    SELECT     E.NOMBRE, P.NOMBRE , P.APELLIDO , P.NICKNAME,P.NACIONALIDAD
-   INTO       P_NOM_EQUIPO,P_NOMBRE,P_APELLIDO,P_NICK_P_NACIONALIDAD
-   FROM       EQUIPOS E, PERSONA P, ENTRENADORES EN , ENTRENA ET
+   INTO       P_NOM_EQUIPO,P_NOMBRE,P_APELLIDO,P_NICK, P_NACIONALIDAD
+   FROM       EQUIPOS E, PERSONAS P, ENTRENADORES EN , ENTRENA ET
    WHERE      P.COD_PERSONA=EN.COD_ENTRENADOR 
               AND EN.COD_ENTRENADOR=ET.COD_ENTRENADOR 
               AND ET.COD_EQUIPO=E.COD_EQUIPO;
@@ -139,8 +140,8 @@ CREATE OR REPLACE PACKAGE BODY GESTION_INFORMES AS
    
 --------------------------------------------------------------------------------   
    
- PROCEDURE obtener_datos_equipos(c_nombre varchar2,
-                                 c_equipo OUT tcursor)
+ PROCEDURE obtener_datos_equipos(c_nombre IN VARCHAR2,
+                                c_equipo OUT tcursor)
  AS 
  
  

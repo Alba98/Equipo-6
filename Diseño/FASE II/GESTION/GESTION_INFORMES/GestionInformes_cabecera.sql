@@ -13,7 +13,8 @@ TYPE TCURSOR IS REF CURSOR;
                                       p_nom_equipo OUT varchar2,
                                       p_apellido_jugador OUT varchar2,
                                       p_nom_jugador OUT varchar2,
-                                      p_rol_jugador OUT varchar2);
+                                      p_rol_jugador OUT varchar2,
+                                      p_cod_equipo OUT number);
                                            
     PROCEDURE obtener_datos_equipos(c_nombre IN VARCHAR2,
                                     c_equipo OUT tcursor);
