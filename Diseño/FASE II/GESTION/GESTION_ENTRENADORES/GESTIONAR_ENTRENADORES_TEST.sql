@@ -1,19 +1,17 @@
 -- GESTIONAR_ENTRENADORES_TEST
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
  Descripcion:  Testeo paquete gestion de entrenadores
-
  */
  
 SET SERVEROUTPUT ON;
 
 DECLARE
     P_NICKNAME VARCHAR2(15) := 'Slayo_15';
-    P_NOMBRE VARCHAR2(15) := 'Iñaki';
+    P_NOMBRE VARCHAR2(15) := 'Iï¿½aki';
     P_APELLIDO VARCHAR2(15) := 'Birel';
     P_FECHA_NACIMIENTO DATE := TO_DATE('09/07/1997','DD/MM/YYYY');
-    P_NACIONALIDAD VARCHAR2(20) := 'Española';
+    P_NACIONALIDAD VARCHAR2(20) := 'Espaï¿½ola';
     P_SUELDO  NUMBER(6) := 1500;
 BEGIN
     GEST_ENTRENADORES.INSERT_PERSONA(P_NICKNAME, P_NOMBRE, P_APELLIDO, 
@@ -23,10 +21,10 @@ END;
  -- genera error de nickname duplicado
 DECLARE
     P_NICKNAME VARCHAR2(15) := 'Slayo_15';
-    P_NOMBRE VARCHAR2(15) := 'Iñaki';
+    P_NOMBRE VARCHAR2(15) := 'Iï¿½aki';
     P_APELLIDO VARCHAR2(15) := 'Birel';
     P_FECHA_NACIMIENTO DATE := TO_DATE('09/07/1997','DD/MM/YYYY');
-    P_NACIONALIDAD VARCHAR2(20) := 'Española';
+    P_NACIONALIDAD VARCHAR2(20) := 'Espaï¿½ola';
     P_SUELDO  NUMBER(6) := 1500;
 BEGIN
     GEST_ENTRENADORES.INSERT_PERSONA(P_NICKNAME, P_NOMBRE, P_APELLIDO, 
