@@ -1,9 +1,7 @@
 -- GESTIONAR_JUGADORES_TEST
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
  Descripcion:  Testeo paquete gestion de jugadores
-
  */
  
 SET SERVEROUTPUT ON;
@@ -24,7 +22,7 @@ END;
  -- genera error de nickname duplicado
 DECLARE
     P_NICKNAME VARCHAR2(15) := 'The_Core';
-    P_ROL VARCHAR2(15)  := 'TOP';
+    P_ROL VARCHAR2(15) := 'TOP';
     P_NOMBRE VARCHAR2(15) := 'DARCY';
     P_APELLIDO VARCHAR2(15) := 'Wuenz';
     P_FECHA_NACIMIENTO DATE := TO_DATE('14/5/2001');

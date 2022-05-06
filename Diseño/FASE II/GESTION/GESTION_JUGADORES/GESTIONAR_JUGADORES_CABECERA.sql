@@ -1,9 +1,7 @@
 -- GESTIONAR_JUGADORES_CABECERA
 /* 
- Autor: Alba Alonso Marmany
  Fecha: 03/05/2022
  Descripcion:  Porcedimientos publicos del paquete gestion de jugadores
-
  */
  
 
