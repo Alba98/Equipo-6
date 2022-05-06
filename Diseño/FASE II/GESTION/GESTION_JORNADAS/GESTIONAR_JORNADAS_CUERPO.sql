@@ -70,9 +70,9 @@ BEGIN
 
             for cod_jornada in 0 .. v_count loop
 
-            p_fecha_resultado := p_fecha_resultado + 7;
-
-            Insert INTO jornadas(fecha_jornada, cod_temporada) values (p_fecha_resultado, p_cod_temporada);
+                p_fecha_resultado := p_fecha_resultado + 7;
+    
+                Insert INTO jornadas(fecha_jornada, cod_temporada) values (p_fecha_resultado, p_cod_temporada);
 
             end loop;
     END IF;
