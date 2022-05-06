@@ -106,7 +106,7 @@ BEGIN
     
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
-        RAISE_APPLICATION_ERROR (-20003 ,'Err. nickname departamento duplicado');
+        RAISE_APPLICATION_ERROR (-20033 ,'Err. nickname jugador duplicado');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20998','Error desconocido');
 END INSERT_PERSONA;

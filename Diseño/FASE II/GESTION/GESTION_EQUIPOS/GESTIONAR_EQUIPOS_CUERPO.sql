@@ -71,7 +71,7 @@ BEGIN
     
 EXCEPTION
     WHEN DUP_VAL_ON_INDEX THEN
-        RAISE_APPLICATION_ERROR (-20003 ,'Err. nombre de equipo duplicado');
+        RAISE_APPLICATION_ERROR (-20049 ,'Err. nombre de equipo duplicado');
 	WHEN OTHERS THEN
         RAISE_APPLICATION_ERROR('-20999','Error desconocido INSERT_EQUIPO');
 END INSERT_EQUIPO;
