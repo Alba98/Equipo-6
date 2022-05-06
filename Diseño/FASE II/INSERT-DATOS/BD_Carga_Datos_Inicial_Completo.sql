@@ -1,7 +1,7 @@
-INSERT INTO temporadas (abierta) VALUES ('N');
-INSERT INTO temporadas (abierta) VALUES ('N');
 INSERT INTO temporadas (abierta) VALUES ('S');
-INSERT INTO temporadas (abierta) VALUES ('N');
+INSERT INTO temporadas (abierta) VALUES ('S');
+INSERT INTO temporadas (abierta) VALUES ('S');
+INSERT INTO temporadas (abierta) VALUES ('S');
 
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('04/11/2022','DD/MM/YYYY'));
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('11/11/2022','DD/MM/YYYY'));
@@ -13,15 +13,15 @@ INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('21:00','1-3
 INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('20:00','3-0',3);
 INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('19:00','3-1',4);
 
-INSERT INTO equipos (cod_partido, nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES(0001, 'Gasteiz-Goya',    TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Ruiz de Villareal');
-INSERT INTO equipos (cod_partido, nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES(0002, 'Real Horses',     TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
-INSERT INTO equipos (cod_partido, nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES(0002, 'UCUENCA E-Sports',TO_DATE('26/11/2018','DD/MM/YYYY'), 'Cuenca', 'Universidad de Cuenca', 'Manuela Penial');
-INSERT INTO equipos (cod_partido, nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES(0001, 'Duero-Pascual',   TO_DATE('30/04/2022','DD/MM/YYYY'), 'Burgos', 'Pascual', 'Rodrigo Infante');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Gasteiz-Goya',    TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Ruiz de Villareal');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Real Horses',     TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('UCUENCA E-Sports',TO_DATE('26/11/2018','DD/MM/YYYY'), 'Cuenca', 'Universidad de Cuenca', 'Manuela Penial');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Duero-Pascual',   TO_DATE('30/04/2022','DD/MM/YYYY'), 'Burgos', 'Pascual', 'Rodrigo Infante');
 
 INSERT INTO participa VALUES (01, 02, 01);
 INSERT INTO participa VALUES (02, 01, 02);
 INSERT INTO participa VALUES (03, 04,02);
-INSERT INTO participa VALUES (04, 03, 01);
+--INSERT INTO participa VALUES (04, 03, 01);
 
 INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Darcy','Wuenz',2000,TO_DATE('14/05/2001','DD/MM/YYYY'),'Taiwanesa','The_Core');
 INSERT INTO personas (nombre, apellido, sueldo, fecha_nacimiento, nacionalidad, nickname) VALUES ('Inaki','Birel',1500,TO_DATE('09/07/1997','DD/MM/YYYY'),'Espaniola','Slayo_15');
