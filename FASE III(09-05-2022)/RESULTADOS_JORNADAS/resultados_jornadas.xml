@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DEFINICIÓN DEL TIPO DE DOCUMENTO -->
+<!DOCTYPE resultados_jornadas SYSTEM "resultados_J.dtd"[
+]>
+<resultados_jornadas>
+    <jornada>
+        <num_jornada></num_jornada>
+         <fecha_jornada></fecha_jornada> 
+         <partido>
+             <fecha_partido></fecha_partido>
+             <cod_partido></cod_partido>
+             <resultado></resultado>
+             <nombre_equipo ></nombre_equipo>
+         </partido>
+    </jornada>
+</resultados_jornadas>
