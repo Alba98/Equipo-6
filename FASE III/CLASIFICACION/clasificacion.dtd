@@ -1,0 +1,6 @@
+<!ELEMENT clasificacion (equipo*)>
+<!ELEMENT equipo (nombre, duenio?,resultado)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT duenio (#PCDATA)>
+<!ELEMENT resultado (#PCDATA)>
+<!ATTLIST resultado puntuacion NMTOKEN #REQUIRED>
