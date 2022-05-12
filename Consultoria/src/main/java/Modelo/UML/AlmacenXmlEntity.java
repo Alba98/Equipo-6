@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ALMACEN_XML", schema = "DAW26", catalog = "")
+@Table(name = "ALMACEN_XML", schema = "SYSTEM", catalog = "")
 public class AlmacenXmlEntity {
     @Basic
     @Column(name = "RESULT_XML", nullable = true)
