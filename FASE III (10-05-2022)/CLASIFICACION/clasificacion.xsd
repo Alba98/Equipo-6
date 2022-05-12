@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="clasificacion" type="clasificacionType"/>
+  
+  <xs:complexType name="clasificacionType">
+    <xs:sequence>
+      <xs:element name="equipo" type="equipoType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="equipoType">
+    <xs:sequence>
+      <xs:element name="nombre" type="xs:string" />
+      <xs:element name="duenio" type="xs:string" />
+      <xs:element name="resultado" type="resultadoType" />
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="resultadoType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="puntuacion" type="t_puntuacion"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  
+  <xs:simpleType name="t_puntuacion">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]-[0-9]"/>    
+    </xs:restriction>
+</xs:simpleType>
+  
+  </xs:schema>
