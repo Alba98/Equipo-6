@@ -11,25 +11,25 @@ import java.util.Objects;
 @Table(name = "VISTA_USUARIOS", schema = "SYSTEM", catalog = "")
 public class VistaUsuariosEntity {
     @Basic
-    @Column(name = "COD_USUARIO")
+    @Column(name = "COD_USUARIO", nullable = false, precision = 0)
     private byte codUsuario;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 15)
     private String nombre;
     @Basic
-    @Column(name = "FECHA_NACIMIENTO")
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
     private Date fechaNacimiento;
     @Basic
-    @Column(name = "PASSWORD_")
+    @Column(name = "PASSWORD_", nullable = true, length = 20)
     private String password;
     @Basic
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false, length = 30)
     private String email;
     @Basic
-    @Column(name = "COD_ROL")
+    @Column(name = "COD_ROL", nullable = false, precision = 0)
     private byte codRol;
     @Basic
-    @Column(name = "NOM_ROL")
+    @Column(name = "NOM_ROL", nullable = true, length = 15)
     private String nomRol;
 
     public byte getCodUsuario() {

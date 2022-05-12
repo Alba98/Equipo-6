@@ -13,17 +13,20 @@ public class VistaPartidoEntity {
     @Column(name = "COD_PARTIDO")
     private byte codPartido;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 30)
     private String nombre;
     @Basic
-    @Column(name = "HORA_PARTIDO")
+    @Column(name = "HORA_PARTIDO", nullable = true, length = 30)
     private String horaPartido;
     @Basic
-    @Column(name = "COD_JORNADA")
+    @Column(name = "COD_JORNADA", nullable = true, precision = 0)
     private Byte codJornada;
     @Basic
-    @Column(name = "RESULTADO")
+    @Column(name = "RESULTADO", nullable = true, length = 3)
     private String resultado;
+    @Basic
+    @Column(name = "COD_EQUIPO", nullable = false, precision = 0)
+    private byte codEquipo;
 
     public byte getCodPartido() {
         return codPartido;
@@ -76,5 +79,13 @@ public class VistaPartidoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codPartido, nombre, horaPartido, codJornada, resultado);
+    }
+
+    public byte getCodEquipo() {
+        return codEquipo;
+    }
+
+    public void setCodEquipo(byte codEquipo) {
+        this.codEquipo = codEquipo;
     }
 }

@@ -11,16 +11,16 @@ import java.util.Objects;
 @Table(name = "VISTA_JORNADA", schema = "SYSTEM", catalog = "")
 public class VistaJornadaEntity {
     @Basic
-    @Column(name = "COD_JORNADA")
+    @Column(name = "COD_JORNADA", nullable = false, precision = 0)
     private byte codJornada;
     @Basic
-    @Column(name = "FECHA_JORNADA")
+    @Column(name = "FECHA_JORNADA", nullable = true)
     private Date fechaJornada;
     @Basic
-    @Column(name = "COD_PARTIDO")
+    @Column(name = "COD_PARTIDO", nullable = false, precision = 0)
     private byte codPartido;
     @Basic
-    @Column(name = "RESULTADO")
+    @Column(name = "RESULTADO", nullable = true, length = 3)
     private String resultado;
 
     public byte getCodJornada() {

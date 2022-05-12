@@ -11,28 +11,28 @@ import java.util.Objects;
 @Table(name = "VISTA_ASISTENTE", schema = "SYSTEM", catalog = "")
 public class VistaAsistenteEntity {
     @Basic
-    @Column(name = "COD_ASISTENTE")
+    @Column(name = "COD_ASISTENTE", nullable = false, precision = 0)
     private byte codAsistente;
     @Basic
-    @Column(name = "NICKNAME")
+    @Column(name = "NICKNAME", nullable = true, length = 15)
     private String nickname;
     @Basic
-    @Column(name = "COD_EQUIPO")
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
     private Byte codEquipo;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 15)
     private String nombre;
     @Basic
-    @Column(name = "APELLIDO")
+    @Column(name = "APELLIDO", nullable = true, length = 15)
     private String apellido;
     @Basic
-    @Column(name = "FECHA_NACIMIENTO")
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
     private Date fechaNacimiento;
     @Basic
-    @Column(name = "NACIONALIDAD")
+    @Column(name = "NACIONALIDAD", nullable = true, length = 20)
     private String nacionalidad;
     @Basic
-    @Column(name = "SUELDO")
+    @Column(name = "SUELDO", nullable = true, precision = 0)
     private Integer sueldo;
 
     public byte getCodAsistente() {

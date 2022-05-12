@@ -11,32 +11,35 @@ import java.util.Objects;
 @Table(name = "VISTA_EQUIPO", schema = "SYSTEM", catalog = "")
 public class VistaEquipoEntity {
     @Basic
-    @Column(name = "COD_EQUIPO")
+    @Column(name = "COD_EQUIPO", nullable = false, precision = 0)
     private byte codEquipo;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 30)
     private String nombre;
     @Basic
-    @Column(name = "COD_ENTRENADOR")
+    @Column(name = "COD_ENTRENADOR", nullable = true, precision = 0)
     private Byte codEntrenador;
     @Basic
-    @Column(name = "COD_ASISTENTE")
+    @Column(name = "COD_ASISTENTE", nullable = true, precision = 0)
     private Byte codAsistente;
     @Basic
-    @Column(name = "COD_JUGADOR")
+    @Column(name = "COD_JUGADOR", nullable = true, precision = 0)
     private Byte codJugador;
     @Basic
     @Column(name = "FECHA_FUNDACION")
     private Date fechaFundacion;
     @Basic
-    @Column(name = "CIUDAD")
+    @Column(name = "CIUDAD", nullable = true, length = 30)
     private String ciudad;
     @Basic
-    @Column(name = "ESPONSOR")
+    @Column(name = "ESPONSOR", nullable = false, length = 25)
     private String esponsor;
     @Basic
-    @Column(name = "NOMBRE_DUENIO")
+    @Column(name = "NOMBRE_DUENIO", nullable = true, length = 30)
     private String nombreDuenio;
+    @Basic
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
+    private Date fechaNacimiento;
 
     public byte getCodEquipo() {
         return codEquipo;
@@ -121,5 +124,13 @@ public class VistaEquipoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codEquipo, nombre, codEntrenador, codAsistente, codJugador, fechaFundacion, ciudad, esponsor, nombreDuenio);
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }
