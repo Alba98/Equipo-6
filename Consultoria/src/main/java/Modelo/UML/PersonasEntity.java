@@ -5,30 +5,36 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PERSONAS", schema = "SYSTEM", catalog = "")
+@Table(name = "PERSONAS", schema = "DAW26", catalog = "")
 public class PersonasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_PERSONA")
+    @Column(name = "COD_PERSONA", nullable = false, precision = 0)
     private byte codPersona;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 15)
     private String nombre;
     @Basic
-    @Column(name = "APELLIDO")
+    @Column(name = "APELLIDO", nullable = true, length = 15)
     private String apellido;
     @Basic
-    @Column(name = "SUELDO")
+    @Column(name = "SUELDO", nullable = true, precision = 0)
     private Integer sueldo;
     @Basic
-    @Column(name = "FECHA_NACIMIENTO")
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
     private Date fechaNacimiento;
     @Basic
-    @Column(name = "NACIONALIDAD")
+    @Column(name = "NACIONALIDAD", nullable = true, length = 20)
     private String nacionalidad;
     @Basic
-    @Column(name = "NICKNAME")
+    @Column(name = "NICKNAME", nullable = true, length = 15)
     private String nickname;
+    @OneToOne(mappedBy = "personasByCodAsistente")
+    private AsistentesEntity asistentesByCodPersona;
+    @OneToOne(mappedBy = "personasByCodEntrenador")
+    private EntrenadoresEntity entrenadoresByCodPersona;
+    @OneToOne(mappedBy = "personasByCodJugador")
+    private JugadoresEntity jugadoresByCodPersona;
 
     public byte getCodPersona() {
         return codPersona;
@@ -97,5 +103,29 @@ public class PersonasEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codPersona, nombre, apellido, sueldo, fechaNacimiento, nacionalidad, nickname);
+    }
+
+    public AsistentesEntity getAsistentesByCodPersona() {
+        return asistentesByCodPersona;
+    }
+
+    public void setAsistentesByCodPersona(AsistentesEntity asistentesByCodPersona) {
+        this.asistentesByCodPersona = asistentesByCodPersona;
+    }
+
+    public EntrenadoresEntity getEntrenadoresByCodPersona() {
+        return entrenadoresByCodPersona;
+    }
+
+    public void setEntrenadoresByCodPersona(EntrenadoresEntity entrenadoresByCodPersona) {
+        this.entrenadoresByCodPersona = entrenadoresByCodPersona;
+    }
+
+    public JugadoresEntity getJugadoresByCodPersona() {
+        return jugadoresByCodPersona;
+    }
+
+    public void setJugadoresByCodPersona(JugadoresEntity jugadoresByCodPersona) {
+        this.jugadoresByCodPersona = jugadoresByCodPersona;
     }
 }

@@ -5,24 +5,31 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ENTRENA", schema = "SYSTEM", catalog = "")
-public class EntrenaEntity {
+@Table(name = "ENTRENA", schema = "DAW26", catalog = "")
+public class
+EntrenaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_CONTRATO")
+    @Column(name = "COD_CONTRATO", nullable = false, precision = 0)
     private byte codContrato;
     @Basic
-    @Column(name = "COD_ENTRENADOR")
+    @Column(name = "COD_ENTRENADOR", nullable = true, precision = 0)
     private Byte codEntrenador;
     @Basic
-    @Column(name = "COD_EQUIPO")
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
     private Byte codEquipo;
     @Basic
-    @Column(name = "FECHA_FIN")
+    @Column(name = "FECHA_FIN", nullable = true)
     private Date fechaFin;
     @Basic
-    @Column(name = "FECHA_INICIO")
+    @Column(name = "FECHA_INICIO", nullable = true)
     private Date fechaInicio;
+    @ManyToOne
+    @JoinColumn(name = "COD_ENTRENADOR", referencedColumnName = "COD_ENTRENADOR")
+    private EntrenadoresEntity entrenadoresByCodEntrenador;
+    @ManyToOne
+    @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "COD_EQUIPO")
+    private EquiposEntity equiposByCodEquipo;
 
     public byte getCodContrato() {
         return codContrato;
@@ -75,5 +82,21 @@ public class EntrenaEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codContrato, codEntrenador, codEquipo, fechaFin, fechaInicio);
+    }
+
+    public EntrenadoresEntity getEntrenadoresByCodEntrenador() {
+        return entrenadoresByCodEntrenador;
+    }
+
+    public void setEntrenadoresByCodEntrenador(EntrenadoresEntity entrenadoresByCodEntrenador) {
+        this.entrenadoresByCodEntrenador = entrenadoresByCodEntrenador;
+    }
+
+    public EquiposEntity getEquiposByCodEquipo() {
+        return equiposByCodEquipo;
+    }
+
+    public void setEquiposByCodEquipo(EquiposEntity equiposByCodEquipo) {
+        this.equiposByCodEquipo = equiposByCodEquipo;
     }
 }

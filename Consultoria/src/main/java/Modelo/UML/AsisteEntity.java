@@ -5,24 +5,30 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ASISTE", schema = "SYSTEM", catalog = "")
+@Table(name = "ASISTE", schema = "DAW26", catalog = "")
 public class AsisteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_CONTRATO")
+    @Column(name = "COD_CONTRATO", nullable = false, precision = 0)
     private byte codContrato;
     @Basic
-    @Column(name = "COD_ASISTENTE")
+    @Column(name = "COD_ASISTENTE", nullable = true, precision = 0)
     private Byte codAsistente;
     @Basic
-    @Column(name = "COD_EQUIPO")
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
     private Byte codEquipo;
     @Basic
-    @Column(name = "FECHA_FIN")
+    @Column(name = "FECHA_FIN", nullable = true)
     private Date fechaFin;
     @Basic
-    @Column(name = "FECHA_INICIO")
+    @Column(name = "FECHA_INICIO", nullable = true)
     private Date fechaInicio;
+    @ManyToOne
+    @JoinColumn(name = "COD_ASISTENTE", referencedColumnName = "COD_ASISTENTE")
+    private AsistentesEntity asistentesByCodAsistente;
+    @ManyToOne
+    @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "COD_EQUIPO")
+    private EquiposEntity equiposByCodEquipo;
 
     public byte getCodContrato() {
         return codContrato;
@@ -75,5 +81,21 @@ public class AsisteEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codContrato, codAsistente, codEquipo, fechaFin, fechaInicio);
+    }
+
+    public AsistentesEntity getAsistentesByCodAsistente() {
+        return asistentesByCodAsistente;
+    }
+
+    public void setAsistentesByCodAsistente(AsistentesEntity asistentesByCodAsistente) {
+        this.asistentesByCodAsistente = asistentesByCodAsistente;
+    }
+
+    public EquiposEntity getEquiposByCodEquipo() {
+        return equiposByCodEquipo;
+    }
+
+    public void setEquiposByCodEquipo(EquiposEntity equiposByCodEquipo) {
+        this.equiposByCodEquipo = equiposByCodEquipo;
     }
 }

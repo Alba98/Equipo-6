@@ -1,18 +1,21 @@
 package Modelo.UML;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ROL", schema = "SYSTEM", catalog = "")
+@Table(name = "ROL", schema = "DAW26", catalog = "")
 public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_ROL")
+    @Column(name = "COD_ROL", nullable = false, precision = 0)
     private byte codRol;
     @Basic
-    @Column(name = "NOM_ROL")
+    @Column(name = "NOM_ROL", nullable = true, length = 15)
     private String nomRol;
+    @OneToMany(mappedBy = "rolByCodRol")
+    private Collection<UsuariosEntity> usuariosByCodRol;
 
     public byte getCodRol() {
         return codRol;
@@ -41,5 +44,13 @@ public class RolEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codRol, nomRol);
+    }
+
+    public Collection<UsuariosEntity> getUsuariosByCodRol() {
+        return usuariosByCodRol;
+    }
+
+    public void setUsuariosByCodRol(Collection<UsuariosEntity> usuariosByCodRol) {
+        this.usuariosByCodRol = usuariosByCodRol;
     }
 }

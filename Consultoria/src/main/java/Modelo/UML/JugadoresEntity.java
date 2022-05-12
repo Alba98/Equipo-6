@@ -1,18 +1,24 @@
 package Modelo.UML;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "JUGADORES", schema = "SYSTEM", catalog = "")
+@Table(name = "JUGADORES", schema = "DAW26", catalog = "")
 public class JugadoresEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_JUGADOR")
+    @Column(name = "COD_JUGADOR", nullable = false, precision = 0)
     private byte codJugador;
     @Basic
-    @Column(name = "ROL")
+    @Column(name = "ROL", nullable = true, length = 15)
     private String rol;
+    @OneToOne
+    @JoinColumn(name = "COD_JUGADOR", referencedColumnName = "COD_PERSONA", nullable = false)
+    private PersonasEntity personasByCodJugador;
+    @OneToMany(mappedBy = "jugadoresByCodJugador")
+    private Collection<JugarParaEntity> jugarParasByCodJugador;
 
     public byte getCodJugador() {
         return codJugador;
@@ -41,5 +47,21 @@ public class JugadoresEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codJugador, rol);
+    }
+
+    public PersonasEntity getPersonasByCodJugador() {
+        return personasByCodJugador;
+    }
+
+    public void setPersonasByCodJugador(PersonasEntity personasByCodJugador) {
+        this.personasByCodJugador = personasByCodJugador;
+    }
+
+    public Collection<JugarParaEntity> getJugarParasByCodJugador() {
+        return jugarParasByCodJugador;
+    }
+
+    public void setJugarParasByCodJugador(Collection<JugarParaEntity> jugarParasByCodJugador) {
+        this.jugarParasByCodJugador = jugarParasByCodJugador;
     }
 }

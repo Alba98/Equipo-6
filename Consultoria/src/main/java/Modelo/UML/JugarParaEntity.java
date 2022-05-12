@@ -5,24 +5,30 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "JUGAR_PARA", schema = "SYSTEM", catalog = "")
+@Table(name = "JUGAR_PARA", schema = "DAW26", catalog = "")
 public class JugarParaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_CONTRATO")
+    @Column(name = "COD_CONTRATO", nullable = false, precision = 0)
     private byte codContrato;
     @Basic
-    @Column(name = "COD_JUGADOR")
+    @Column(name = "COD_JUGADOR", nullable = true, precision = 0)
     private Byte codJugador;
     @Basic
-    @Column(name = "COD_EQUIPO")
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
     private Byte codEquipo;
     @Basic
-    @Column(name = "FECHA_FIN")
+    @Column(name = "FECHA_FIN", nullable = true)
     private Date fechaFin;
     @Basic
-    @Column(name = "FECHA_INICIO")
+    @Column(name = "FECHA_INICIO", nullable = true)
     private Date fechaInicio;
+    @ManyToOne
+    @JoinColumn(name = "COD_JUGADOR", referencedColumnName = "COD_JUGADOR")
+    private JugadoresEntity jugadoresByCodJugador;
+    @ManyToOne
+    @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "COD_EQUIPO")
+    private EquiposEntity equiposByCodEquipo;
 
     public byte getCodContrato() {
         return codContrato;
@@ -75,5 +81,21 @@ public class JugarParaEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codContrato, codJugador, codEquipo, fechaFin, fechaInicio);
+    }
+
+    public JugadoresEntity getJugadoresByCodJugador() {
+        return jugadoresByCodJugador;
+    }
+
+    public void setJugadoresByCodJugador(JugadoresEntity jugadoresByCodJugador) {
+        this.jugadoresByCodJugador = jugadoresByCodJugador;
+    }
+
+    public EquiposEntity getEquiposByCodEquipo() {
+        return equiposByCodEquipo;
+    }
+
+    public void setEquiposByCodEquipo(EquiposEntity equiposByCodEquipo) {
+        this.equiposByCodEquipo = equiposByCodEquipo;
     }
 }
