@@ -1,15 +1,15 @@
 package Excepciones;
 
-public class PassUsuarioError extends Exception{
+public class PassAdministradorError extends Exception {
+
     private static String mensajeError;
 
-    public PassUsuarioError(){
+    public PassAdministradorError(){
+    }
+    public PassAdministradorError(String mensaje) {
+        Error.mensajeError = mensaje;
     }
 
-
-    public PassUsuarioError(String mensajeError){
-        Error.mensajeError=mensajeError;
-    }
 
     public static String getMensajeError() {
         mensajeError="La contraseña es un campo obligatorio";
@@ -17,6 +17,6 @@ public class PassUsuarioError extends Exception{
     }
 
     public static void setMensajeError(String mensajeError) {
-        PassUsuarioError.mensajeError = mensajeError;
+        PassAdministradorError.mensajeError = mensajeError;
     }
 }

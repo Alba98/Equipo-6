@@ -7,7 +7,7 @@ public class UsuarioNoExiste extends Exception {
     }
 
     public UsuarioNoExiste(String mensajeError) {
-        error.mensajeError=mensajeError;
+        Error.mensajeError=mensajeError;
     }
 
     public String getMensajeError(){
@@ -16,6 +16,6 @@ public class UsuarioNoExiste extends Exception {
     }
 
     public void setMensajeError(String mensajeError){
-        error.mensajeError=mensajeError;
+        Error.mensajeError=mensajeError;
     }
 }
