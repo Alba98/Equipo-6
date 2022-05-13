@@ -8,15 +8,15 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class ParticipaEntityPK implements Serializable {
-    @Column(name = "COD_EQUIPO1", nullable = false, precision = 0)
+    @Column(name = "COD_EQUIPO1", nullable = false, precision = 0, insertable =false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private byte codEquipo1;
-    @Column(name = "COD_EQUIPO2", nullable = false, precision = 0)
+    @Column(name = "COD_EQUIPO2", nullable = false, precision = 0, insertable =false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private byte codEquipo2;
-    @Column(name = "COD_PARTIDO", nullable = false, precision = 0)
+    @Column(name = "COD_PARTIDO", nullable = false, precision = 0, insertable =false, updatable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private byte codPartido;

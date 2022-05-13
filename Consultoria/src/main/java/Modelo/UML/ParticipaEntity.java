@@ -9,15 +9,15 @@ import java.util.Objects;
 public class ParticipaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_EQUIPO1", nullable = false, precision = 0)
+    @Column(name = "COD_EQUIPO1", nullable = false, precision = 0, insertable =false, updatable = false)
     private byte codEquipo1;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_EQUIPO2", nullable = false, precision = 0)
+    @Column(name = "COD_EQUIPO2", nullable = false, precision = 0, insertable =false, updatable = false)
     private byte codEquipo2;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_PARTIDO", nullable = false, precision = 0)
+    @Column(name = "COD_PARTIDO", nullable = false, precision = 0, insertable =false, updatable = false)
     private byte codPartido;
     @ManyToOne
     @JoinColumn(name = "COD_EQUIPO1", referencedColumnName = "COD_EQUIPO", nullable = false)

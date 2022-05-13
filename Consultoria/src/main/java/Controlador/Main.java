@@ -1,9 +1,7 @@
 package Controlador;
 
 import Modelo.BD.*;
-
 public class Main {
-
     private static TemporadasDAO temporada_dao;
     private static JornadasDAO jornada_dao;
     private static PartidosDAO partido_dao;

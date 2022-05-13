@@ -12,10 +12,10 @@ public class JugarParaEntity {
     @Column(name = "COD_CONTRATO", nullable = false, precision = 0)
     private byte codContrato;
     @Basic
-    @Column(name = "COD_JUGADOR", nullable = true, precision = 0)
+    @Column(name = "COD_JUGADOR", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codJugador;
     @Basic
-    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codEquipo;
     @Basic
     @Column(name = "FECHA_FIN", nullable = true)

@@ -18,7 +18,7 @@ public class PartidosEntity {
     @Column(name = "RESULTADO", nullable = true, length = 3)
     private String resultado;
     @Basic
-    @Column(name = "COD_JORNADA", nullable = true, precision = 0)
+    @Column(name = "COD_JORNADA", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codJornada;
     @OneToMany(mappedBy = "partidosByCodPartido")
     private Collection<ParticipaEntity> participasByCodPartido;

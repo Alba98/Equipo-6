@@ -13,7 +13,7 @@ public class JornadasEntity {
     @Column(name = "COD_JORNADA", nullable = false, precision = 0)
     private byte codJornada;
     @Basic
-    @Column(name = "COD_TEMPORADA", nullable = true, precision = 0)
+    @Column(name = "COD_TEMPORADA", nullable = true, precision = 0,insertable =false, updatable = false)
     private Byte codTemporada;
     @Basic
     @Column(name = "FECHA_JORNADA", nullable = true)

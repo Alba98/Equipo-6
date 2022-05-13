@@ -20,13 +20,7 @@
         <class>Modelo.UML.RolEntity</class>
         <class>Modelo.UML.TemporadasEntity</class>
         <class>Modelo.UML.UsuariosEntity</class>
-        <class>Modelo.UML.VISTAS.VistaAsistenteEntity</class>
-        <class>Modelo.UML.VISTAS.VistaEntrenadorEntity</class>
-        <class>Modelo.UML.VISTAS.VistaEquipoEntity</class>
-        <class>Modelo.UML.VISTAS.VistaJornadaEntity</class>
-        <class>Modelo.UML.VISTAS.VistaJugadorEntity</class>
-        <class>Modelo.UML.VISTAS.VistaPartidoEntity</class>
-        <class>Modelo.UML.VISTAS.VistaUsuariosEntity</class>
+
         <properties>
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.14.101:1521:orclcdb"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
