@@ -1,11 +1,11 @@
 package Vista;
-
+import Controlador.Main;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VLogin {
-    private JPanel pPrincipal;
+    public JPanel pPrincipal;
     private JTextField tFCorreo;
     private JButton loginButton;
     private JLabel tFContraseña;
@@ -28,10 +28,11 @@ public class VLogin {
             }
         });
 
-   
 
 
-    }
+
+
+}
 }
 
 
