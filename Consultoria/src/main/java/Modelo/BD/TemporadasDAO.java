@@ -1,10 +1,14 @@
 package Modelo.BD;
 
-import javax.persistence.StoredProcedureQuery;
+import javax.persistence.*;
 
-public class TemporadasDAO extends DAO  {
+public class TemporadasDAO {
 
-    public TemporadasDAO() {    }
+    protected EntityManagerFactory emf;
+    protected EntityManager em;
+    protected EntityTransaction transaction;
+
+    public TemporadasDAO() { openTransaction();  }
 
     public void crearTemporada() {
         //iniciar transaccion
@@ -17,6 +21,20 @@ public class TemporadasDAO extends DAO  {
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public void openTransaction() {
+        emf = Persistence.createEntityManagerFactory("default");
+        em = emf.createEntityManager();
+        transaction = em.getTransaction();
+    }
+
+    public void closeTransaction() {
+        if (transaction.isActive ()) {
+            transaction.rollback ();
+        }
+        em.close ();
+        emf.close ();
     }
 
 

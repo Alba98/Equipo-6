@@ -6,7 +6,7 @@ import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.sql.Date;
 
-public class JornadasDAO extends DAO  {
+public class JornadasDAO extends BaseDatos {
 
     public JornadasDAO() {    }
 

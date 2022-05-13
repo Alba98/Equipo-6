@@ -1,12 +1,8 @@
 package Modelo.BD;
 
-import oracle.sql.DATE;
-
-import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
-import java.sql.Date;
 
-public class PartidosDAO extends DAO  {
+public class PartidosDAO extends BaseDatos {
 
     public PartidosDAO() {    }
 

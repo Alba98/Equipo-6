@@ -3,7 +3,7 @@ package Modelo.BD;
 import javax.persistence.StoredProcedureQuery;
 import java.sql.Date;
 
-public class AsistentesDAO extends DAO  {
+public class AsistentesDAO extends BaseDatos {
 
     public AsistentesDAO() {    }
 

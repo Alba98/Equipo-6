@@ -18,7 +18,7 @@ public class PersonasEntity {
     @Column(name = "APELLIDO", nullable = true, length = 15)
     private String apellido;
     @Basic
-    @Column(name = "SUELDO", nullable = true, precision = 0)
+    @Column(name = "SUELDO", nullable = true, precision = 2)
     private Integer sueldo;
     @Basic
     @Column(name = "FECHA_NACIMIENTO", nullable = true)
