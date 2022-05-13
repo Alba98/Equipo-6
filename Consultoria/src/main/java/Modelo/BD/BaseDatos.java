@@ -4,15 +4,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class BaseDatos {
     protected EntityManagerFactory emf;
     protected EntityManager em;
     protected EntityTransaction transaction;
 
-    public BaseDatos() {
-
-    }
+    public BaseDatos() { openTransaction();  }
 
     public void openTransaction() {
         emf = Persistence.createEntityManagerFactory("default");
@@ -27,4 +27,13 @@ public class BaseDatos {
         em.close ();
         emf.close ();
     }
+
+    public static java.sql.Date conversionDate(LocalDate fecha) {
+        return java.sql.Date.valueOf(String.valueOf(fecha));
+    }
+
+    public static java.sql.Time conversionTime(LocalTime fecha) {
+        return java.sql.Time.valueOf(fecha);
+    }
+
 }
