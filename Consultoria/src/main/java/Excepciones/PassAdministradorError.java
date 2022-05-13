@@ -1,6 +1,8 @@
 package Excepciones;
 
-public class PassAdministradorError extends Exception {
+
+
+    public class PassAdministradorError extends Exception {
 
     private static String mensajeError;
 
