@@ -148,14 +148,6 @@ public class VUsuario extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        VUsuario V1 = new VUsuario();
-        V1.pack();
-        V1.setLocationRelativeTo(null);
-        V1.setVisible(true);
-        System.exit(0);
-    }
-
     private static void crearXML() throws ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder crearDocumento = factory.newDocumentBuilder();
