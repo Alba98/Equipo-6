@@ -7,6 +7,11 @@ import Modelo.BD.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import Vistas.VCarga;
+import Vistas.VUsuario;
+
+import javax.swing.*;
+
 public class Main {
     private static TemporadasDAO temporada_dao;
     private static JornadasDAO jornada_dao;
@@ -15,6 +20,8 @@ public class Main {
     private static EntrenadoresDAO entrenador_dao;
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
+    private static JFrame carga;
+    private static JDialog usuario;
 
     private static JFrame frame;
 
@@ -132,6 +139,29 @@ public class Main {
     }
     public static void CrearCuenta() {
         VRegistrar();
+    }
+    public static void VCarga() {
+        carga = new JFrame("VCarga");
+        carga.setContentPane(new VCarga().getPanel1());
+        carga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        carga.setLocationRelativeTo(null);
+        carga.pack();
+        carga.setVisible(true);
+    }
+    public static void VUsuario() {
+        carga.dispose();
+        usuario = new VUsuario();
+        usuario.pack();
+        usuario.setLocationRelativeTo(null);
+        usuario.setVisible(true);
+        System.exit(0);
+    }
+    public static void getDatosClasificacion(){
+        //ClasificacionDAO ?:
+    }
+    public static void getDatosJornadaFinal(){
+        //JornadaDAO where cod_jornada = max(cod_jornada):
+
     }
 }
 
