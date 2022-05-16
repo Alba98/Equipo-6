@@ -3,9 +3,8 @@ package Vista;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.company.*;
 
-import static com.company.Main.CrearCalendario;
+import static Controlador.Main.CrearCalendario;
 
 public class VentanaPrincipal {
     private JTabbedPane VentanaAdmins;
