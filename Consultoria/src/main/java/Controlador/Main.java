@@ -40,8 +40,7 @@ public class Main {
         temporada_dao.crearTemporada();
     }
     private static void GenerarJornadasTest() {
-        LocalDate now = LocalDate.now();
-        jornada_dao.crearJornadas(05,  now);
+        jornada_dao.crearJornadas(01,  LocalDate.of(2022, 04, 11));
     }
 
     private static void GenerarPartidosTest() {

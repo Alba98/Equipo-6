@@ -21,6 +21,10 @@ public class TemporadasEntity {
         return codTemporada;
     }
 
+    public void setCodTemporada(byte codTemporada) {
+        this.codTemporada = codTemporada;
+    }
+
     public void setCodTemporada(short codTemporada) {
         this.codTemporada = codTemporada;
     }
