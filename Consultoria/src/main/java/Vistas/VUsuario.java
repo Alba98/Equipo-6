@@ -1,6 +1,10 @@
 package Vistas;
 
 import javax.swing.*;
+import javax.swing.text.Document;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -31,7 +35,6 @@ public class VUsuario extends JDialog {
     private JButton bJornada;
     private JButton bLogout;
     private JLabel info;
-    private JPanel panelPruebas;
 
     public VUsuario() {
         setContentPane(pPrincipal);
@@ -151,5 +154,11 @@ public class VUsuario extends JDialog {
         V1.setLocationRelativeTo(null);
         V1.setVisible(true);
         System.exit(0);
+    }
+
+    private static void crearXML() throws ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder crearDocumento = factory.newDocumentBuilder();
+        Document documento = (Document) crearDocumento.newDocument();
     }
 }
