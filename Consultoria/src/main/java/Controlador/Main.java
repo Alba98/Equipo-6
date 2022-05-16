@@ -10,16 +10,20 @@ public class Main {
     public static void main(String[] args) {
         try {
 
-            JFrame frame = new JFrame("VentanaPrincipal");
-            frame.setContentPane(new VentanaPrincipal().getPanelPrincipal());
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
+            VentanaAdmin();
 
             System.out.println("CONSULTORIA E-SPORTS ");
         } catch (Exception e) {
-            System.out.println("Problemas con la base de datos " + e.getMessage());
+            System.out.println("Problemas " + e.getMessage());
         }
+    }
+
+    private static void VentanaAdmin() {
+        JFrame frame = new JFrame("VentanaAdmin");
+        frame.setContentPane(new VAdmin().getPanelPrincipal());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public static void CrearCalendario() {
