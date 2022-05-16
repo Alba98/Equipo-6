@@ -1,14 +1,11 @@
 package Controlador;
+import Vista.*;
+import javax.swing.*;
 
 import Modelo.BD.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import Vista.*;
-
-import javax.swing.*;
-
 
 public class Main {
     private static TemporadasDAO temporada_dao;
@@ -19,11 +16,10 @@ public class Main {
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
 
+    private static JFrame frame;
+
     public static void main(String[] args) {
         try {
-
-            VentanaAdmin();
-
             System.out.println("CONSULTORIA E-SPORTS ");
 
             generarDAO();
@@ -116,4 +112,26 @@ public class Main {
         if (ventana == 1){
             System.out.println("No");}
     }
+
+    public static void VLogin() {
+        frame = new JFrame("Inicio de sesion");
+        frame.setContentPane(new VLogin().pPrincipal);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
+    }
+
+    public static void VRegistrar() {
+        JFrame frame = new JFrame("VRegistrar");
+        frame.setContentPane(new VRegistrar().getpPrincipal());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public static void CrearCuenta() {
+        VRegistrar();
+    }
 }
+
