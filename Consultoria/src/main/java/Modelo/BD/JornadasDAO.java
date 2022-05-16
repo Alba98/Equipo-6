@@ -17,9 +17,9 @@ public class JornadasDAO extends BaseDatos {
         // Ejecutar package
         StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("GEST_JORNADAS.INSERT_JORNADA");
         // set parameters
-        storedProcedure.registerStoredProcedureParameter("P_COD_TEMPORADA", Byte.class, ParameterMode.IN);
+        storedProcedure.registerStoredProcedureParameter("P_COD_TEMPORADA", Short.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("P_FECHA_JORNADA", Date.class, ParameterMode.IN);
-        storedProcedure.setParameter("P_COD_TEMPORADA", (byte)codTemporada);
+        storedProcedure.setParameter("P_COD_TEMPORADA", (short)codTemporada);
         storedProcedure.setParameter("P_FECHA_JORNADA", conversionDate(fechaJornada));
         // execute SP
         storedProcedure.execute();
