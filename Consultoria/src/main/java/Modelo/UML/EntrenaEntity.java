@@ -5,18 +5,17 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ENTRENA", schema = "DAW26", catalog = "")
-public class
-EntrenaEntity {
+@Table(name = "ENTRENA", schema = "EQDAW06", catalog = "")
+public class EntrenaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "COD_CONTRATO", nullable = false, precision = 0)
     private byte codContrato;
     @Basic
-    @Column(name = "COD_ENTRENADOR", nullable = true, precision = 0)
+    @Column(name = "COD_ENTRENADOR", nullable = true, precision = 0,insertable =false, updatable = false)
     private Byte codEntrenador;
     @Basic
-    @Column(name = "COD_EQUIPO", nullable = true, precision = 0)
+    @Column(name = "COD_EQUIPO", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codEquipo;
     @Basic
     @Column(name = "FECHA_FIN", nullable = true)

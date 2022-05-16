@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "USUARIOS", schema = "DAW26", catalog = "")
+@Table(name = "USUARIOS", schema = "EQDAW06", catalog = "")
 public class UsuariosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,7 +24,7 @@ public class UsuariosEntity {
     @Column(name = "EMAIL", nullable = false, length = 30)
     private String email;
     @Basic
-    @Column(name = "COD_ROL", nullable = true, precision = 0)
+    @Column(name = "COD_ROL", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codRol;
     @ManyToOne
     @JoinColumn(name = "COD_ROL", referencedColumnName = "COD_ROL")

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PERSONAS", schema = "DAW26", catalog = "")
+@Table(name = "PERSONAS", schema = "EQDAW06", catalog = "")
 public class PersonasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,7 +18,7 @@ public class PersonasEntity {
     @Column(name = "APELLIDO", nullable = true, length = 15)
     private String apellido;
     @Basic
-    @Column(name = "SUELDO", nullable = true, precision = 0)
+    @Column(name = "SUELDO", nullable = true, precision = 2)
     private Integer sueldo;
     @Basic
     @Column(name = "FECHA_NACIMIENTO", nullable = true)

@@ -6,14 +6,14 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "JORNADAS", schema = "DAW26", catalog = "")
+@Table(name = "JORNADAS", schema = "EQDAW06", catalog = "")
 public class JornadasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "COD_JORNADA", nullable = false, precision = 0)
     private byte codJornada;
     @Basic
-    @Column(name = "COD_TEMPORADA", nullable = true, precision = 0)
+    @Column(name = "COD_TEMPORADA", nullable = true, precision = 0,insertable =false, updatable = false)
     private Byte codTemporada;
     @Basic
     @Column(name = "FECHA_JORNADA", nullable = true)

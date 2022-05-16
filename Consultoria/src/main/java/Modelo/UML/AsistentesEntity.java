@@ -5,14 +5,14 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ASISTENTES", schema = "DAW26", catalog = "")
+@Table(name = "ASISTENTES", schema = "EQDAW06", catalog = "")
 public class AsistentesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_ASISTENTE", nullable = false, precision = 0)
+    @Column(name = "COD_ASISTENTE", nullable = false, precision = 0, insertable =false, updatable = false)
     private byte codAsistente;
     @Basic
-    @Column(name = "COD_ENTRE_ASOCIADO", nullable = true, precision = 0)
+    @Column(name = "COD_ENTRE_ASOCIADO", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codEntreAsociado;
     @OneToMany(mappedBy = "asistentesByCodAsistente")
     private Collection<AsisteEntity> asistesByCodAsistente;

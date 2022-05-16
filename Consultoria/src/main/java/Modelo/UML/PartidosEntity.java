@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PARTIDOS", schema = "DAW26", catalog = "")
+@Table(name = "PARTIDOS", schema = "EQDAW06", catalog = "")
 public class PartidosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,7 +18,7 @@ public class PartidosEntity {
     @Column(name = "RESULTADO", nullable = true, length = 3)
     private String resultado;
     @Basic
-    @Column(name = "COD_JORNADA", nullable = true, precision = 0)
+    @Column(name = "COD_JORNADA", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codJornada;
     @OneToMany(mappedBy = "partidosByCodPartido")
     private Collection<ParticipaEntity> participasByCodPartido;
