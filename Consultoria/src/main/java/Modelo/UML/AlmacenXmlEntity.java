@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ALMACEN_XML", schema = "SYSTEM", catalog = "")
+@Table(name = "ALMACEN_XML", schema = "EQDAW06", catalog = "")
 public class AlmacenXmlEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

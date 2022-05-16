@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "JORNADAS", schema = "SYSTEM", catalog = "")
+@Table(name = "JORNADAS", schema = "EQDAW06", catalog = "")
 public class JornadasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

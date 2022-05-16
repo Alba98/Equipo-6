@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PARTIDOS", schema = "SYSTEM", catalog = "")
+@Table(name = "PARTIDOS", schema = "EQDAW06", catalog = "")
 public class PartidosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
