@@ -28,6 +28,18 @@ import javax.swing.*;
             }
 
 
+            public static void VRegistrar() {
+                JFrame frame = new JFrame("VRegistrar");
+                frame.setContentPane(new VRegistrar().getpPrincipal());
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+            }
+            public static void CrearCuenta() {
+                VRegistrar();
+            }
+
+
 
 
 
