@@ -1,9 +1,13 @@
 package Modelo.BD;
 
+import Modelo.UML.EntrenadoresEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class EntrenadoresDAO extends BaseDatos {
 
@@ -36,5 +40,21 @@ public class EntrenadoresDAO extends BaseDatos {
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public List<EntrenadoresEntity> consultarEntrenadores() {
+        //iniciar transaccion
+        transaction.begin();
+        List<EntrenadoresEntity> listaEntrenadores;
+
+        // 3. Construir comandos SQL
+        TypedQuery <EntrenadoresEntity > qEventos =
+                em.createNamedQuery("EntrenadoresEntity.todas", EntrenadoresEntity.class);
+        listaEntrenadores = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaEntrenadores;
     }
 }

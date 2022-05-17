@@ -6,6 +6,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ENTRENADORES", schema = "EQDAW06", catalog = "")
+
+@NamedQuery(name = "EntrenadoresEntity.todas", query = "SELECT e FROM EntrenadoresEntity e")
+
 public class EntrenadoresEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
