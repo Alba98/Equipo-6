@@ -35,6 +35,9 @@ public class VUsuario extends JDialog {
     private JButton bJornada;
     private JButton bLogout;
     private JLabel info;
+    private JTextField tfResultadoAdm;
+    private JLabel AResultado;
+    private JButton BResultadoAdm;
 
     public VUsuario() {
         setContentPane(pPrincipal);
