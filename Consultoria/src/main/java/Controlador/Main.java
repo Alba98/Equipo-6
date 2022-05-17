@@ -1,4 +1,5 @@
 package Controlador;
+import Modelo.UML.EntrenadoresEntity;
 import Vista.*;
 import javax.swing.*;
 
@@ -6,8 +7,9 @@ import Modelo.BD.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import javax.swing.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     private static TemporadasDAO temporada_dao;
@@ -17,20 +19,24 @@ public class Main {
     private static EntrenadoresDAO entrenador_dao;
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
-    private static JFrame carga;
-    private static JDialog usuario;
 
-    private static JFrame frame;
+    private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    private static JFrame VLogin, VRegistrar, VAdmin, VCarga;
+    private static JDialog VUsuario;
 
     public static void main(String[] args) {
         try {
-            bd=new BaseDatos();
-            pDAO=new PersonasDAO(bd.getConnection());
-
             System.out.println("CONSULTORIA E-SPORTS ");
 
             generarDAO();
 
+            //VentanaCarga();
+            //VentanaLogin();
+            //VentanaRegistrar();
+            //VentanaUsuario();
+            //VentanaAdmin();
+            
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
@@ -99,12 +105,13 @@ public class Main {
                 LocalDate.of(2023, 06, 30));
     }
 
-    public static void VentanaAdmin() {
-        JFrame frame = new JFrame("VentanaAdmin");
-        frame.setContentPane(new VAdmin().getPanelPrincipal());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    /******************** fin TEST *************************/
+    private static void VentanaAdmin() {
+        VAdmin = new JFrame("VentanaAdmin");
+        VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
+        VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VAdmin.pack();
+        VAdmin.setVisible(true);
     }
 
     public static void CrearCalendario() {
@@ -121,40 +128,40 @@ public class Main {
         }
     }
 
-    public static void VLogin() {
-        frame = new JFrame("Inicio de sesion");
-        frame.setContentPane(new VLogin().pPrincipal);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public static void VentanaLogin() {
+        VLogin = new JFrame("Inicio de sesion");
+        VLogin.setContentPane(new VLogin().pPrincipal);
+        VLogin.setLocationRelativeTo(null);
+        VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VLogin.pack();
+        VLogin.setVisible(true);
 
     }
 
-    public static void VRegistrar() {
-        JFrame frame = new JFrame("VRegistrar");
-        frame.setContentPane(new VRegistrar().getpPrincipal());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public static void VentanaRegistrar() {
+        VRegistrar = new JFrame("VRegistrar");
+        VRegistrar.setContentPane(new VRegistrar().getpPrincipal());
+        VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VRegistrar.pack();
+        VRegistrar.setVisible(true);
     }
     public static void CrearCuenta() {
-        VRegistrar();
+        VentanaRegistrar();
     }
-    public static void VCarga() {
-        carga = new JFrame("VCarga");
-        carga.setContentPane(new VCarga().getPanel1());
-        carga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        carga.setLocationRelativeTo(null);
-        carga.pack();
-        carga.setVisible(true);
+    public static void VentanaCarga() {
+        VCarga = new JFrame("VCarga");
+        VCarga.setContentPane(new VCarga().getPanel1());
+        VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VCarga.setLocationRelativeTo(null);
+        VCarga.pack();
+        VCarga.setVisible(true);
     }
-    public static void VUsuario() {
-        carga.dispose();
-        usuario = new VUsuario();
-        usuario.pack();
-        usuario.setLocationRelativeTo(null);
-        usuario.setVisible(true);
+    public static void VentanaUsuario() {
+        VCarga.dispose();
+        VUsuario = new VUsuario();
+        VUsuario.pack();
+        VUsuario.setLocationRelativeTo(null);
+        VUsuario.setVisible(true);
         System.exit(0);
     }
     public static void getDatosClasificacion(){
@@ -164,5 +171,34 @@ public class Main {
         //JornadaDAO where cod_jornada = max(cod_jornada):
 
     }
+
+    public static void registrarJugador(String nombre, String apellido, String sueldo, String fechaNacimiento,
+                                        String nacionalidad, String nickname, String rol) {
+        LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
+        jugador_dao.crearJugador(nickname, rol, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
+    }
+
+    public static void registrarEntrenador(String nombre, String apellido, String sueldo, String fechaNacimiento,
+                                           String nacionalidad, String nickname) {
+        LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
+        entrenador_dao.crearEntrenador(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
+    }
+
+    public static void registrarAsistente(String nombre, String apellido, String sueldo, String fechaNacimiento,
+                                          String nacionalidad, String nickname, String entrenador) {
+        LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
+        asistente_dao.crearAsistente(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo), entrenador);
+    }
+
+    public static ArrayList<String> getEntrenadores() {
+        List<EntrenadoresEntity> entrenadores = entrenador_dao.consultarEntrenadores();
+        ArrayList<String> nombres = new ArrayList<>(entrenadores.size());
+        for (EntrenadoresEntity entrenador : entrenadores) {
+             nombres.add(entrenador.getPersonasByCodEntrenador().getNickname());
+        }
+        return nombres;
+    }
+
+
 }
 
