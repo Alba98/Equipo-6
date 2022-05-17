@@ -38,7 +38,7 @@ public class VLogin {
                         Main.VentanaAdmin();
                     else
                     if (tFCorreo.getText() == "Select Email from usuarios where cod_rol = 02")
-                        Main.VUsuario();
+                        Main.VentanaUsuario();
                 }
                 else
                 {

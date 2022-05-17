@@ -22,7 +22,8 @@ public class VRegistrar {
                         && !tfFechaNacimiento.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Datos completados correctamente");
-                    Main.VLogin(); }
+                    Main.VentanaLogin();
+                }
                 else
                 {
                     JOptionPane.showMessageDialog(null,"No se ha completado algun requisito");

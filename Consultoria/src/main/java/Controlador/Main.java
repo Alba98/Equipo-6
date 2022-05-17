@@ -106,7 +106,7 @@ public class Main {
     }
 
     /******************** fin TEST *************************/
-    private static void VentanaAdmin() {
+    public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
         VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
