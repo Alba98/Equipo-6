@@ -32,9 +32,13 @@ public class VLogin {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tFCorreo.isValid())
+                if (tFCorreo.getText() == "Select Email from usuarios")
                 {
-
+                    if (tFCorreo.getText() == "Select Email from usuarios where cod_rol = 01")
+                        Main.VentanaAdmin();
+                    else
+                    if (tFCorreo.getText() == "Select Email from usuarios where cod_rol = 02")
+                        Main.VUsuario();
                 }
                 else
                 {
