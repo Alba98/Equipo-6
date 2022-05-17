@@ -106,7 +106,7 @@ public class Main {
     }
 
     /******************** fin TEST *************************/
-    private static void VentanaAdmin() {
+    public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
         VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -199,6 +199,9 @@ public class Main {
         return nombres;
     }
 
-
+    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) {
+        LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
+        equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    }
 }
 
