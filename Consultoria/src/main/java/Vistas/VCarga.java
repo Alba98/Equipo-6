@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VCarga {
     private JPanel panel1;
@@ -16,8 +18,26 @@ public class VCarga {
     private ActionListener al;
 
     public VCarga() {
-        ImageIcon icon = createImageIcon("Vistas/juan-alberto.png", "illojuan");
-        imagen = new JLabel(icon);
+        imagen.setIcon(new ImageIcon("src/main/java/Imagenes/logo.png"));
+
+
+        iniciarButton.setBorderPainted(false);
+        iniciarButton.setFocusable(false);
+        iniciarButton.setRolloverEnabled(true);
+
+        iniciarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                iniciarButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                iniciarButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
         al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,7 +50,7 @@ public class VCarga {
                 }
             }
         };
-        t = new Timer(250, al);//milisegungos --> 1000ms = 1s
+        t = new Timer(150, al);//milisegungos --> 1000ms = 1s
 
         iniciarButton.addActionListener(new ActionListener() {
             @Override
