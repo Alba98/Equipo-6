@@ -1,6 +1,6 @@
 -- GESTIONAR_USUARIOS_CABECERA
 /* 
- Fecha: 03/05/2022
+ Fecha: 17/05/2022
  Descripcion:  Porcedimientos publicos del paquete gestion de usuaios
 
  */

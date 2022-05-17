@@ -20,6 +20,8 @@ public class Main {
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
 
+    private static UsuariosDAO usuario_dao;
+
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static JFrame VLogin, VRegistrar, VAdmin, VCarga;
@@ -50,6 +52,7 @@ public class Main {
         entrenador_dao = new EntrenadoresDAO();
         asistente_dao = new AsistentesDAO();
         equipo_dao = new EquiposDAO();
+        usuario_dao = new UsuariosDAO();
     }
 
     /******************** TEST *************************/
@@ -202,6 +205,10 @@ public class Main {
     public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) {
         LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
         equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    }
+
+    public static void login(String email, char[] password) {
+        usuario_dao.login(email, password);
     }
 }
 
