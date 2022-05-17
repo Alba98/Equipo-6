@@ -9,7 +9,7 @@ public class UsuariosDAO extends BaseDatos {
 
     public UsuariosDAO() {    }
 
-    public void crearUsuario(String nombre, LocalDate fechaNacimiento, String passwrd, String email) {
+    public void crearUsuario(String nombre, LocalDate fechaNacimiento, String passwrd, String email) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -33,7 +33,7 @@ public class UsuariosDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void crearAdministrador(String nombre, LocalDate fechaNacimiento, String passwrd, String email) {
+    public void crearAdministrador(String nombre, LocalDate fechaNacimiento, String passwrd, String email) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -57,7 +57,7 @@ public class UsuariosDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public Byte login(String email, char[] password) throws Exception{
+    public Byte login(String email, char[] password) throws Exception {
         return (Byte) em.createNativeQuery(
                         "SELECT fn_count_comments(:postId) FROM DUAL"
                 )
