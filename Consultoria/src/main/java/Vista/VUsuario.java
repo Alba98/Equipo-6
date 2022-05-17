@@ -139,6 +139,14 @@ public class VUsuario extends JDialog {
                 bLogout.setBackground(UIManager.getColor("control"));
             }
         });
+
+        /* Creo que habría que añadir aquí el boolean y ver como intentar conectarlo */
+        BResultadoAdm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tfResultadoAdm.getText() == "0-0");
+            }
+        });
     }
 
     private void onOK() {
