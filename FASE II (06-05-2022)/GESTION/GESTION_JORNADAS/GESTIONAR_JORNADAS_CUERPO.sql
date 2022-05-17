@@ -86,6 +86,8 @@ BEGIN
     
     NULL;
 EXCEPTION
+    WHEN NO_EQUIPOS THEN
+        RAISE_APPLICATION_ERROR ('-20044' ,'Err. equipos insuficintes para generar jornadas');
     WHEN TEMPORADA_NO_EXISTE THEN
         RAISE_APPLICATION_ERROR ('-20045' ,'Err. temporada inexistente');
     WHEN DUP_VAL_ON_INDEX THEN
