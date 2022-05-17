@@ -227,13 +227,21 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            if(e.getMessage() == "ORA-20054: Err. emai o contrasena incorrecta")
+            if(e.getMessage() == "ORA-20054: Err. email o contrasena incorrecta")
             {
                 VLogin.dispose();
                 VentanaRegistrar();
             }
         }
 
+    }
+
+    public static void registrarUsuario(String nombre, String passwrd, String email, String nacimiento) {
+        LocalDate fecha = LocalDate.parse(nacimiento, formatoFecha);
+        usuario_dao.crearUsuario(nombre, fecha, passwrd, email);
+
+        VRegistrar.dispose();
+        Main.VentanaUsuario();
     }
 }
 

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Controlador.Main;
+import Excepciones.Validaciones;
 
 public class VRegistrar {
     private JPanel pPrincipal;
@@ -18,19 +19,27 @@ public class VRegistrar {
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!tfNombre.getText().isEmpty() && !tfcontraseña.getText().isEmpty() && !tfCorreo.getText().isEmpty()
-                        && !tfFechaNacimiento.getText().isEmpty())
-                {
-                    JOptionPane.showMessageDialog(null,"Datos completados correctamente");
-                    Main.VentanaLogin();
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null,"No se ha completado algun requisito");
-                }
+                registrarUsuario();
             }
         });
     }
+
+    private void registrarUsuario() {
+        if ( validarRegistrarUsuario() ) {
+            try {
+                Main.registrarUsuario(tfNombre.getText(), tfcontraseña.getText(), tfCorreo.getText(), tfFechaNacimiento.getText());
+            } catch (Exception e) {
+                Validaciones.mostrarError(e.getMessage());
+            }
+        }
+
+    }
+
+    private boolean validarRegistrarUsuario() {
+        return (Validaciones.validarTexto(tfNombre) &&  Validaciones.validarTexto(tfcontraseña) &&
+                Validaciones.validarEmail(tfCorreo) &&  Validaciones.validarFecha(tfFechaNacimiento));
+    }
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VRegistrar");
