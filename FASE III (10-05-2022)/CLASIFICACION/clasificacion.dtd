@@ -1,6 +1,13 @@
-<!ELEMENT clasificacion (equipo+)>
-<!ELEMENT equipo (nombre, duenio?,resultado)>
+<!ELEMENT clasificacion (fecha_caducidad, temporada)>
+<!ELEMENT fecha_caducidad (#PCDATA)>
+<!ELEMENT temporada (equipo+)>
+<!ELEMENT equipo (nombre, lista_jugadores)>
 <!ELEMENT nombre (#PCDATA)>
-<!ELEMENT duenio (#PCDATA)>
+<!ELEMENT lista_jugadores (jugador+)>
+<!ELEMENT jugador ((nickname, rol)+)>
+<!ELEMENT nickname (#PCDATA)>
+<!ELEMENT rol (#PCDATA)>
 <!ELEMENT resultado (#PCDATA)>
-<!ATTLIST resultado puntuacion NMTOKEN #REQUIRED>
+<!ATTLIST equipo cod_equipo CDATA #REQUIRED>
+<!ATTLIST equipo partidos_ganados CDATA #REQUIRED>
+<!ATTLIST temporada cod_temporada CDATA #REQUIRED>

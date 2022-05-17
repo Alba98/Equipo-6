@@ -2,24 +2,58 @@
 <clasificacion
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="clasificacion.xsd">
-   <equipo>
+    <fecha_caducidad>2022-05-17</fecha_caducidad>
+   <temporada cod_temporada="1">
+      <equipo cod_equipo="1" partidos_ganados="5">
       <nombre>G2</nombre>
-      <duenio>Carlos Rodriguez</duenio>
-      <resultado puntuacion="9-0" />
+      <lista_jugadores>
+          <jugador>
+            <nickname>BrokenBlade</nickname>
+            <rol>TOP</rol>
+          </jugador>
+           <jugador>
+            <nickname>Jankos</nickname>
+            <rol>JGL</rol>
+          </jugador>
+           <jugador>
+            <nickname>CaPs</nickname>
+            <rol>MID</rol>
+          </jugador>
+           <jugador>
+            <nickname>Flakked</nickname>
+            <rol>ADC</rol>
+          </jugador>
+           <jugador>
+            <nickname>Targamas</nickname>
+            <rol>SUPP</rol>
+          </jugador>
+      </lista_jugadores>
     </equipo>
-    <equipo>
-      <nombre>Rogue</nombre>
-      <duenio>Enrique Cedeña</duenio>
-      <resultado puntuacion="9-2" />
+    <equipo cod_equipo="2" partidos_ganados="6">
+      <nombre>FNATIC</nombre>
+      <lista_jugadores>
+          <jugador>
+            <nickname>Wunder</nickname>
+            <rol>TOP</rol>
+          </jugador>
+           <jugador>
+            <nickname>Razork</nickname>
+            <rol>JGL</rol>
+          </jugador>
+           <jugador>
+            <nickname>Humanoid</nickname>
+            <rol>MID</rol>
+          </jugador>
+           <jugador>
+            <nickname>Upset</nickname>
+            <rol>ADC</rol>
+          </jugador>
+           <jugador>
+            <nickname>Hylissang</nickname>
+            <rol>SUPP</rol>
+          </jugador>
+      </lista_jugadores>
     </equipo>
-    <equipo>
-      <nombre>KOI</nombre>
-      <duenio>Ibai Llanos</duenio>
-      <resultado puntuacion="6-4" />
-    </equipo>
-    <equipo>
-      <nombre>GIANTS</nombre>
-      <duenio>Jose Ramon Diaz</duenio>
-      <resultado puntuacion="7-6" />
-    </equipo>
+    </temporada>
 </clasificacion>
+
