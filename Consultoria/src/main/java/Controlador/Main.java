@@ -117,7 +117,8 @@ public class Main {
             System.out.println("Si");}
         else
         if (ventana == 1){
-            System.out.println("No");}
+            System.out.println("No");
+        }
     }
 
     public static void VLogin() {
