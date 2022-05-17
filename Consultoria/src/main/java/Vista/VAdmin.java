@@ -38,11 +38,8 @@ public class VAdmin {
     private JPanel CEQPrincipal;
     private JLabel NFecha;
     private JLabel NCiudad;
-    private JTextField textField3;
     private JLabel NEsponsor;
-    private JTextField textField4;
     private JLabel NDueño;
-    private JTextField textField5;
     private JPanel CJPrincipal;
     private JLabel NROL;
     private JComboBox cbJROL;
@@ -79,6 +76,15 @@ public class VAdmin {
     private JComboBox cbAEntrenador;
     private JButton bARegistrar;
     private JButton bARestart;
+
+    // Equipos
+    private JTextField tEqNombre;
+    private JTextField tEqFecha;
+    private JTextField tEqCiudad;
+    private JTextField tEqSponsor;
+    private JTextField tEqDuenio;
+    private JButton bEqRegistar;
+    private JButton bEqRestart;
 
     public VAdmin() {
 
@@ -139,6 +145,20 @@ public class VAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 resetAsistente();
+            }
+        });
+
+        bEqRegistar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                registrarEquipos();
+            }
+        });
+
+        bEqRestart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetEquipos();
             }
         });
 
@@ -276,6 +296,30 @@ public class VAdmin {
         }
     }
 
+    private void registrarEquipos() {
+        if ( validarRegistrarAsistente() ) {
+            try {
+                Main.registrarEquipo(tEqNombre.getText(), tEqFecha.getText(), tEqCiudad.getText(),
+                        tEqSponsor.getText(), tEqDuenio.getText());
+            } catch (Exception e) {
+                Validaciones.mostrarError(e.getMessage());
+            }
+        }
+    }
+
+    private boolean validarRegistrarEquipos() {
+        return (Validaciones.validarTexto(tEqNombre) &&  Validaciones.validarFecha(tEqFecha) &&
+                Validaciones.validarTexto(tEqCiudad) &&  Validaciones.validarTexto(tEqSponsor) &&
+                Validaciones.validarTexto(tEqDuenio));
+    }
+
+    private void resetEquipos() {
+        tEqNombre.setText("");
+        tEqFecha.setText("");
+        tEqCiudad.setText("");
+        tEqSponsor.setText("");
+        tEqDuenio.setText("");
+    }
     public JTabbedPane getVentanaAdmins() {
         return VentanaAdmins;
     }

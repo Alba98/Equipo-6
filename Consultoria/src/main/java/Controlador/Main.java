@@ -199,6 +199,9 @@ public class Main {
         return nombres;
     }
 
-
+    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) {
+        LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
+        equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    }
 }
 
