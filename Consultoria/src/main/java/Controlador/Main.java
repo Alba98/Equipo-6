@@ -208,7 +208,32 @@ public class Main {
     }
 
     public static void login(String email, char[] password) {
-        usuario_dao.login(email, password);
+        byte rol = 0;
+        try {
+            rol = usuario_dao.login(email, password);
+            switch (rol)
+            {
+                case 01:
+                    //usuario
+                    System.out.println("usuario");
+                    VLogin.dispose();
+                    VentanaUsuario();
+                    break;
+                case 02:
+                    //admin
+                    System.out.println("admin");
+                    VLogin.dispose();
+                    VentanaAdmin();
+                    break;
+            }
+        } catch (Exception e) {
+            if(e.getMessage() == "ORA-20054: Err. emai o contrasena incorrecta")
+            {
+                VLogin.dispose();
+                VentanaRegistrar();
+            }
+        }
+
     }
 }
 

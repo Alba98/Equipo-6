@@ -57,7 +57,12 @@ public class UsuariosDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void login(String email, char[] password) {
-        
+    public Byte login(String email, char[] password) throws Exception{
+        return (Byte) em.createNativeQuery(
+                        "SELECT fn_count_comments(:postId) FROM DUAL"
+                )
+                .setParameter("USERNAME", email)
+                .setParameter("PASSWD", password)
+                .getSingleResult();
     }
 }
