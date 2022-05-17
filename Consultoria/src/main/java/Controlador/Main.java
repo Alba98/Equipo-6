@@ -20,6 +20,8 @@ public class Main {
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
 
+    private static UsuariosDAO usuario_dao;
+
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static JFrame VLogin, VRegistrar, VAdmin, VCarga;
@@ -50,57 +52,58 @@ public class Main {
         entrenador_dao = new EntrenadoresDAO();
         asistente_dao = new AsistentesDAO();
         equipo_dao = new EquiposDAO();
+        usuario_dao = new UsuariosDAO();
     }
 
     /******************** TEST *************************/
-    public static void GenerarTemporadaTest() {
+    public static void GenerarTemporadaTest() throws Exception {
         temporada_dao.crearTemporada();
     }
-    private static void GenerarJornadasTest() {
+    private static void GenerarJornadasTest() throws Exception {
         jornada_dao.crearJornadas(01,  LocalDate.of(2022, 04, 11));
     }
 
-    private static void GenerarPartidosTest() {
+    private static void GenerarPartidosTest() throws Exception {
         LocalTime now = LocalTime.now();
         partido_dao.crearPartido(now, 01, "Real Horses", "Gasteiz-Goya");
     }
 
-    private static void ResultadosPartidosTest() {
+    private static void ResultadosPartidosTest() throws Exception {
         partido_dao.resultadosPartido(01, "3-2");
     }
 
-    private static void GenerarJugadorTest() {
+    private static void GenerarJugadorTest() throws Exception {
         jugador_dao.crearJugador("The_Core", "TOP", "DARCY", "Wuenz",
                 LocalDate.of(2001, 05, 14), "Taiwanesa", 20000.0 );
     }
 
-    private static void GenerarEntrenadorTest() {
+    private static void GenerarEntrenadorTest() throws Exception {
         entrenador_dao.crearEntrenador("Slayo_15", "Andrea", "Birel",
                 LocalDate.of(1997, 05, 14), "Espaniola", 1500.0 );
     }
 
-    private static void GenerarAsistenteTest() {
+    private static void GenerarAsistenteTest() throws Exception {
         asistente_dao.crearAsistente("Destepo", "Juan", "Antonio",
                 LocalDate.of(1997, 05, 14), "Alemana", 1500.0,
                 "Slayo_15" );
     }
 
-    private static void GenerarEquiposTest() {
+    private static void GenerarEquiposTest() throws Exception {
         equipo_dao.crearEquipos( "Gasteiz-Goya", LocalDate.of(2021, 01, 23),
                 "Vitoria", "Goya", "Eneko Alonso");
     }
 
-    private static void ContratoJugadorTest() {
+    private static void ContratoJugadorTest() throws Exception {
         equipo_dao.contratoJugador(06, 01,  LocalDate.of(2021, 04, 07),
                 LocalDate.of(2023, 06, 30));
     }
 
-    private static void ContratoEntrenadorTest() {
+    private static void ContratoEntrenadorTest() throws Exception {
         equipo_dao.contratoJugador(12, 03,  LocalDate.of(2021, 04, 07),
                 LocalDate.of(2023, 06, 30));
     }
 
-    private static void ContratoAsistenteTest() {
+    private static void ContratoAsistenteTest() throws Exception {
         equipo_dao.contratoJugador(10, 03,  LocalDate.of(2021, 04, 07),
                 LocalDate.of(2023, 06, 30));
     }
@@ -173,24 +176,24 @@ public class Main {
     }
 
     public static void registrarJugador(String nombre, String apellido, String sueldo, String fechaNacimiento,
-                                        String nacionalidad, String nickname, String rol) {
+                                        String nacionalidad, String nickname, String rol) throws Exception{
         LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
         jugador_dao.crearJugador(nickname, rol, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
     }
 
     public static void registrarEntrenador(String nombre, String apellido, String sueldo, String fechaNacimiento,
-                                           String nacionalidad, String nickname) {
+                                           String nacionalidad, String nickname) throws Exception{
         LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
         entrenador_dao.crearEntrenador(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
     }
 
     public static void registrarAsistente(String nombre, String apellido, String sueldo, String fechaNacimiento,
-                                          String nacionalidad, String nickname, String entrenador) {
+                                          String nacionalidad, String nickname, String entrenador) throws Exception{
         LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
         asistente_dao.crearAsistente(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo), entrenador);
     }
 
-    public static ArrayList<String> getEntrenadores() {
+    public static ArrayList<String> getEntrenadores() throws Exception {
         List<EntrenadoresEntity> entrenadores = entrenador_dao.consultarEntrenadores();
         ArrayList<String> nombres = new ArrayList<>(entrenadores.size());
         for (EntrenadoresEntity entrenador : entrenadores) {
@@ -199,9 +202,46 @@ public class Main {
         return nombres;
     }
 
-    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) {
+    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) throws Exception {
         LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
         equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    }
+
+    public static void login(String email, char[] password) {
+        byte rol = 0;
+        try {
+            rol = usuario_dao.login(email, password);
+            switch (rol)
+            {
+                case 01:
+                    //usuario
+                    System.out.println("usuario");
+                    VLogin.dispose();
+                    VentanaUsuario();
+                    break;
+                case 02:
+                    //admin
+                    System.out.println("admin");
+                    VLogin.dispose();
+                    VentanaAdmin();
+                    break;
+            }
+        } catch (Exception e) {
+            if(e.getMessage() == "ORA-20054: Err. email o contrasena incorrecta")
+            {
+                VLogin.dispose();
+                VentanaRegistrar();
+            }
+        }
+
+    }
+
+    public static void registrarUsuario(String nombre, String passwrd, String email, String nacimiento) throws Exception {
+        LocalDate fecha = LocalDate.parse(nacimiento, formatoFecha);
+        usuario_dao.crearUsuario(nombre, fecha, passwrd, email);
+
+        VRegistrar.dispose();
+        Main.VentanaUsuario();
     }
 }
 

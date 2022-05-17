@@ -14,7 +14,7 @@ public class EntrenadoresDAO extends BaseDatos {
     public EntrenadoresDAO() {    }
 
     public void crearEntrenador(String nickname, String nombre, String apellido, LocalDate fechaNacimiento,
-                               String nacionalidad, Double sueldo) {
+                               String nacionalidad, Double sueldo) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -42,7 +42,7 @@ public class EntrenadoresDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public List<EntrenadoresEntity> consultarEntrenadores() {
+    public List<EntrenadoresEntity> consultarEntrenadores() throws Exception {
         //iniciar transaccion
         transaction.begin();
         List<EntrenadoresEntity> listaEntrenadores;

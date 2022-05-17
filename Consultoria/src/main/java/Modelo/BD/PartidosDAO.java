@@ -9,7 +9,7 @@ public class PartidosDAO extends BaseDatos {
 
     public PartidosDAO() {    }
 
-    public void crearPartido(LocalTime horaPartido, int codJornada, String nombreEquipo1, String nombreEquipo2) {
+    public void crearPartido(LocalTime horaPartido, int codJornada, String nombreEquipo1, String nombreEquipo2) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -33,7 +33,7 @@ public class PartidosDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void resultadosPartido(int codPartido, String resultado) {
+    public void resultadosPartido(int codPartido, String resultado) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
