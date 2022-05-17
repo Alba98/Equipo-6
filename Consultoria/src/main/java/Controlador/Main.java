@@ -99,7 +99,7 @@ public class Main {
                 LocalDate.of(2023, 06, 30));
     }
 
-    private static void VentanaAdmin() {
+    public static void VentanaAdmin() {
         JFrame frame = new JFrame("VentanaAdmin");
         frame.setContentPane(new VAdmin().getPanelPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

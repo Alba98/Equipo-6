@@ -18,7 +18,15 @@ public class VRegistrar {
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (!tfNombre.getText().isEmpty() && !tfcontraseña.getText().isEmpty() && !tfCorreo.getText().isEmpty()
+                        && !tfFechaNacimiento.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Datos completados correctamente");
+                    Main.VLogin(); }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"No se ha completado algun requisito");
+                }
             }
         });
     }
