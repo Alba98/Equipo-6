@@ -7,9 +7,6 @@ import Modelo.BD.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import Vistas.VCarga;
-import Vistas.VUsuario;
-
 import javax.swing.*;
 
 public class Main {
