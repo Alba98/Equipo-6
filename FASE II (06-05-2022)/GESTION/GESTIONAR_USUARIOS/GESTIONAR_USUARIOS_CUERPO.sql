@@ -21,7 +21,7 @@ FUNCTION  BUSCAR_USUARIO_POR_EMAIL
         -- Comprobar que existe la persona
         SELECT COD_USUARIO INTO P_COD_USUARIO
         FROM USUARIOS
-        WHERE UPPER(P_EMAIL) = UPPER(P_EMAIL);
+        WHERE UPPER(EMAIL) = UPPER(P_EMAIL);
         -- devolver el codigo de la persona
         RETURN P_COD_USUARIO;
 EXCEPTION
