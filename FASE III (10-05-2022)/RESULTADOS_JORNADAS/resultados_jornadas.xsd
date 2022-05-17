@@ -3,20 +3,19 @@
 <xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="resultados_jornadas" type="resultados_jornadasType" />
    
-
-
     <xs:complexType name="resultados_jornadasType">
     <xs:sequence>
+      <xs:element name="fecha_expiracion" type="xs:date" />
       <xs:element name="jornada"  type="jornadaType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="jornadaType">
     <xs:sequence>
-      <xs:element name="num_jornada" type="t_num_jornada" />
-      <xs:element name="fecha_jornada" type="xs:date"/>
       <xs:element name="partido" type="partidoType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute name="num_jornada" type="t_num_jornada" />
+    <xs:attribute name="fecha_jornada" type="xs:date"/>
   </xs:complexType>
   
   <xs:simpleType name="t_num_jornada">
@@ -27,15 +26,11 @@
 
     <xs:complexType name="partidoType">
     <xs:sequence>
-      <xs:element name="fecha_partido" type="xs:date"/>
-    <xs:element name="cod_partido">
-        <xs:complexType>
-            <xs:attribute name="id_partido" type="cod_partidoType"/>
-        </xs:complexType>
-    </xs:element>
       <xs:element name="resultado" type="resultadoType"/>
       <xs:element name="nombre_equipo" type="xs:string" maxOccurs="2"/>
     </xs:sequence>
+    <xs:attribute name="cod_partido" type="cod_partidoType" />
+    <xs:attribute name="hora_partido" type="xs:time" />
   </xs:complexType>
 
 <xs:simpleType name="cod_partidoType">
@@ -44,15 +39,7 @@
   </xs:restriction>
 </xs:simpleType>
   
-<xs:complexType name="resultadoType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="puntuacion" type="t_puntuacion" />
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>  
-  
-<xs:simpleType name="t_puntuacion">
+<xs:simpleType name="resultadoType">
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-3]-[0-3]"/>    
     </xs:restriction>
