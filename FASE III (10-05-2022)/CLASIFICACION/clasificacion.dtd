@@ -1,4 +1,4 @@
-<!ELEMENT clasificacion (equipo*)>
+<!ELEMENT clasificacion (equipo+)>
 <!ELEMENT equipo (nombre, duenio?,resultado)>
 <!ELEMENT nombre (#PCDATA)>
 <!ELEMENT duenio (#PCDATA)>

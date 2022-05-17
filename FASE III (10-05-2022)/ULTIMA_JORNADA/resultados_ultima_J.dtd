@@ -1,5 +1,5 @@
 <!ELEMENT ultima_jornada (jornada)>
-<!ELEMENT jornada ((num_jornada,fecha_jornada,partido*))>
+<!ELEMENT jornada ((num_jornada,fecha_jornada,partido+))>
 <!ELEMENT num_jornada (#PCDATA)>
 <!ELEMENT fecha_jornada (#PCDATA)>
 <!ELEMENT partido ((fecha_partido,cod_partido,resultado,nombre_equipo+))>
