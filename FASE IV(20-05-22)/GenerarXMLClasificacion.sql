@@ -1,23 +1,19 @@
-
 CREATE TABLE temp_clob_tab(
     result CLOB
 );
-
 
 DECLARE
     qryCTX DBMS_XMLGEN.ctxHandle;
     result CLOB;
 BEGIN
-qryCTX := DBMS_XMLGEN.newContext('SELECT resultado 
-                                  FROM PARTIDOS
-                                  WHERE');
-    
-    
+	qryCTX := DBMS_XMLGEN.newContext('SELECT * FROM VISTA_CLASIFICACION');
+									 
 DBMS_XMLGEN.setRowSetTag(qryCtx,'clasificacion');
 
-DBMS_XMLGEN.setRowTag(qryCtx,'equipo');
+DBMS_XMLGEN.setRowTag(qryCtx,'temporada');
 
 result:= DBMS_XMLGEN.getXML(qryCtx);
+
 INSERT INTO temp_clob_tab VALUES(result);
 
 DBMS_XMLGEN.closeContext(qryCtx);
