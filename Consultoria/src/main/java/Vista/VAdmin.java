@@ -4,6 +4,7 @@ import Controlador.Main;
 import Excepciones.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,6 +92,165 @@ public class VAdmin {
         tJNombre.requestFocus();
         llenarCBRoles(cbJROL);
         llenarCBEntrenadores(cbAEntrenador);
+
+        //Aestetics botonones:
+
+        crearCalendarioButton.setBorderPainted(false);
+        crearCalendarioButton.setFocusable(false);
+        crearCalendarioButton.setRolloverEnabled(true);
+
+        bJRegistrar.setBorderPainted(false);
+        bJRegistrar.setFocusable(false);
+        bJRegistrar.setRolloverEnabled(true);
+
+        bJRestart.setBorderPainted(false);
+        bJRestart.setFocusable(false);
+        bJRestart.setRolloverEnabled(true);
+
+        bERegistrar.setBorderPainted(false);
+        bERegistrar.setFocusable(false);
+        bERegistrar.setRolloverEnabled(true);
+
+        bERestart.setBorderPainted(false);
+        bERestart.setFocusable(false);
+        bERestart.setRolloverEnabled(true);
+
+        bARegistrar.setBorderPainted(false);
+        bARegistrar.setFocusable(false);
+        bARegistrar.setRolloverEnabled(true);
+
+        bARestart.setBorderPainted(false);
+        bARestart.setFocusable(false);
+        bARestart.setRolloverEnabled(true);
+
+        bEqRegistar.setBorderPainted(false);
+        bEqRegistar.setFocusable(false);
+        bEqRegistar.setRolloverEnabled(true);
+
+        bEqRestart.setBorderPainted(false);
+        bEqRestart.setFocusable(false);
+        bEqRestart.setRolloverEnabled(true);
+
+        //funciones MouseListener de los botones:
+
+        crearCalendarioButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                crearCalendarioButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                crearCalendarioButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bJRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bJRegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bJRegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bJRestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bJRestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bJRestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bERegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bERegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bERegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bERestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bERestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bERestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bARegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bARegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bARegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bARestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bARestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bARestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bEqRegistar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bEqRegistar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bEqRegistar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bEqRestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bEqRestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bEqRestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        //Actiones listeners:
 
         bJRegistrar.addActionListener(new ActionListener() {
             @Override

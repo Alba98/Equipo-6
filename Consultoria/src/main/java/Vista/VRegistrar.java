@@ -1,8 +1,12 @@
 package Vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import Controlador.Main;
 import Excepciones.Validaciones;
 
@@ -16,6 +20,23 @@ public class VRegistrar {
 
 
     public VRegistrar() {
+        registrarButton.setBorderPainted(false);
+        registrarButton.setFocusable(false);
+        registrarButton.setRolloverEnabled(true);
+
+        registrarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                registrarButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                registrarButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

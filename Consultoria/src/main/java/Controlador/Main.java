@@ -31,7 +31,7 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            generarDAO();
+            //generarDAO();
 
             //VentanaCarga();
             //VentanaLogin();
@@ -112,6 +112,7 @@ public class Main {
     public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
+        VAdmin.setLocationRelativeTo(null);
         VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VAdmin.pack();
         VAdmin.setVisible(true);
