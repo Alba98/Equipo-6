@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resultados_jornadas 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="resultados_jornadas.xsd">
+    <fecha_expiracion>2022-05-19</fecha_expiracion>
+    <jornada num_jornada="1" fecha_jornada="2022-05-08">
+         <partido cod_partido="01" hora_partido="17:00:00">
+             <resultado>3-0</resultado>
+             <nombre_equipo >FNATIC</nombre_equipo>
+             <nombre_equipo >G2</nombre_equipo>
+         </partido>
+         <partido cod_partido="02" hora_partido="19:00:00">
+             <resultado>3-0</resultado>
+             <nombre_equipo >ASTRALIS</nombre_equipo>
+             <nombre_equipo >MISFITS</nombre_equipo>
+         </partido>
+         <partido cod_partido="03" hora_partido="21:00:00">
+             <resultado>0-3</resultado>
+             <nombre_equipo >MAD LIONS</nombre_equipo>
+             <nombre_equipo >BDS</nombre_equipo>
+         </partido>
+    </jornada>
+    <jornada num_jornada="2" fecha_jornada="2022-05-15">
+         <partido cod_partido="04" hora_partido="17:00:00">
+             <resultado>3-0</resultado>
+             <nombre_equipo >KOI</nombre_equipo>
+             <nombre_equipo >GenG</nombre_equipo>
+         </partido>
+         <partido  cod_partido="05" hora_partido="19:00:00">
+             <resultado>3-0</resultado>
+             <nombre_equipo >GIANTS</nombre_equipo>
+             <nombre_equipo >KC</nombre_equipo>
+         </partido>
+         <partido  cod_partido="06" hora_partido="21:00:00">
+             <resultado>0-3</resultado>
+             <nombre_equipo >T1</nombre_equipo>
+             <nombre_equipo >TSM</nombre_equipo>
+         </partido>
+    </jornada>
+</resultados_jornadas>
