@@ -21,9 +21,10 @@ import java.util.Date;
 
 public class ReadXmlDomParser {
 
-    private static final String FILENAME = "C:\\Users\\Usuario\\Desktop\\Equipo-6\\Consultoria\\resources\\test.xml";
+    private static final String FILENAME = "resources\\test.xml";
 
-    private static final String JORNADAS = "C:\\Users\\Usuario\\Desktop\\Equipo-6\\Consultoria\\resources\\resultados_jornadas_test.xml";
+    private static final String JORNADAS = "resources\\resultados_jornadas.xml";
+    private static final String CLASIFICACION = "resources\\clasificacion.xml";
 
 
     protected DocumentBuilderFactory dbf;
@@ -38,11 +39,19 @@ public class ReadXmlDomParser {
         //ver si los xml existen en el systema
         File jornadas_xml = new File(JORNADAS);
         if (!jornadas_xml.exists()) {
-            System.out.println("OJO: ¡¡No existe el archivo de configuración!!");
+            System.out.println("No existe el archivo " + JORNADAS);
+            generaXMLs(JORNADAS);
+        }
+
+        File clasificacion_xml = new File(CLASIFICACION);
+        if (!jornadas_xml.exists()) {
+            System.out.println("No existe el archivo " + CLASIFICACION);
+            generaXMLs(CLASIFICACION);
         }
 
         //comprobar las fechas de los archivos xml
-        ultimaJornadaXML();
+        //ultimaJornadaXML();
+        clasificacionXML();
     }
 
     public void testXML() throws ParserConfigurationException, SAXException, IOException {
@@ -179,13 +188,13 @@ public class ReadXmlDomParser {
 
                                 for (int e = 0; e < equipos.getLength(); e++) {
 
-                                    Node equipo = equipos.item(p);
+                                    Node equipo = equipos.item(e);
 
                                     if (partido.getNodeType() == Node.ELEMENT_NODE) {
 
                                         Element e_element = (Element) equipo;
 
-                                        String nombre_equipo = equipo.getTextContent();
+                                        String nombre_equipo = e_element.getTextContent();
 
                                         System.out.println("nombre_equipo : " + nombre_equipo);
                                     }
@@ -196,9 +205,118 @@ public class ReadXmlDomParser {
                 }
             }
 
+            generaXMLs(JORNADAS);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
 
     }
+
+    public void clasificacionXML() {
+
+        try {
+            // optional, but recommended
+            // process XML securely, avoid attacks like XML External Entities (XXE)
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            // parse XML file
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            Document doc = db.parse(new File(CLASIFICACION));
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("Root Element : " + doc.getDocumentElement().getNodeName());
+            System.out.println("------");
+
+            // get <fecha_expiracion>
+            String expirationDate = doc.getElementsByTagName("fecha_expiracion").item(0).getTextContent();
+
+            LocalDate hoy = LocalDate.now();
+
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate fecha = LocalDate.parse(expirationDate, formatoFecha);
+
+            if(fecha.isAfter(hoy)) {
+
+                // get <temporada>
+                NodeList temporadas = doc.getElementsByTagName("temporada");
+
+                for (int t = 0; t < temporadas.getLength(); t++) {
+
+                    Node temporada = temporadas.item(t);
+
+                    if (temporada.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element t_element = (Element)temporada;
+
+                        // get staff's attribute
+                        String cod_temporada = t_element.getAttribute("cod_temporada");
+
+                        System.out.println("Element :" + temporada.getNodeName());
+                        System.out.println("cod_temporada : " + cod_temporada);
+
+                        // get <equipo>
+                        NodeList equipos = t_element.getElementsByTagName("equipo");
+
+                        for (int e = 0; e < equipos.getLength(); e++) {
+
+                            Node equipo = equipos.item(e);
+
+                            if (equipo.getNodeType() == Node.ELEMENT_NODE) {
+
+                                Element e_element = (Element) equipo;
+
+                                // get staff's attribute
+                                String cod_equipo = e_element.getAttribute("cod_equipo");
+                                String partidos_ganados = e_element.getAttribute("partidos_ganados");
+
+                                // get text
+                                String e_nombre = e_element.getElementsByTagName("nombre").item(0).getTextContent();
+
+                                System.out.println("Current Element :" + equipo.getNodeName());
+                                System.out.println("nombre : " + e_nombre);
+
+                                // get <lista_jugadores>
+                                NodeList lista_jugadores = e_element.getElementsByTagName("lista_jugadores");
+
+                                Node lista_jugador = lista_jugadores.item(0);
+
+                                if (lista_jugador.getNodeType() == Node.ELEMENT_NODE) {
+
+                                    Element jl_element = (Element) equipo;
+
+                                    NodeList jugadores = jl_element.getElementsByTagName("jugador");
+
+                                    for (int j = 0; j < jugadores.getLength(); j++) {
+
+                                        Node jugador = jugadores.item(j);
+
+                                        if (jugador.getNodeType() == Node.ELEMENT_NODE) {
+
+                                            Element j_element = (Element) jugador;
+
+                                            String nickname = j_element.getElementsByTagName("nickname").item(0).getTextContent();
+                                            String rol = j_element.getElementsByTagName("rol").item(0).getTextContent();
+
+                                            System.out.println("Current Element :" + jugador.getNodeName());
+                                            System.out.println("nickname : " + nickname);
+                                            System.out.println("rol : " + rol);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            generaXMLs(CLASIFICACION);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void generaXMLs(String path) {}
 }
