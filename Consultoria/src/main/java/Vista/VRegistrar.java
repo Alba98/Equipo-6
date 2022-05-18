@@ -11,11 +11,32 @@ public class VRegistrar {
     private JTextField tfNombre;
     private JTextField tfCorreo;
     private JTextField tfFechaNacimiento;
-    private JTextField tfcontraseña;
+    private JPasswordField tfcontraseña;
     private JButton registrarButton;
+    private JCheckBox ckVer;
 
 
-    public VRegistrar() {
+    public VRegistrar(String email) {
+        tfCorreo.setText(email);
+        tfcontraseña.setEchoChar('*');
+/*
+        tfNombre.setText("test");
+        tfFechaNacimiento.setText("03/05/1998");
+        tfcontraseña.setText("test");
+*/
+        
+        ckVer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ckVer.isSelected())
+                {
+                    tfcontraseña.setEchoChar((char)0);
+
+                }else{
+                    tfcontraseña.setEchoChar('*');
+                }
+            }
+        });
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,14 +61,6 @@ public class VRegistrar {
                 Validaciones.validarEmail(tfCorreo) &&  Validaciones.validarFecha(tfFechaNacimiento));
     }
 
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("VRegistrar");
-        frame.setContentPane(new VRegistrar().pPrincipal);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
 
     public JPanel getpPrincipal() {
         return pPrincipal;

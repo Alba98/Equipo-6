@@ -86,8 +86,8 @@ public class Validaciones {
 
             LocalDate hoy = LocalDate.now();
 
-            if (fecha.compareTo(hoy)<=0)
-                throw new Exception("La hora de inicio no puede ser mayor que la de fin");
+            //if (fecha.compareTo(hoy)!=0)
+            //    throw new Exception("La fecha no puede ser posterior a hoy");
 
             return true;
 
