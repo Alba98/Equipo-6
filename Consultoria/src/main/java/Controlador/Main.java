@@ -35,7 +35,7 @@ public class Main {
 
             //VentanaCarga();
             //VentanaLogin();
-            //VentanaRegistrar();
+            //VentanaRegistrar("test@gmail.com");
             //VentanaUsuario();
             //VentanaAdmin();
             
@@ -141,16 +141,14 @@ public class Main {
 
     }
 
-    public static void VentanaRegistrar() {
+    public static void VentanaRegistrar(String email) {
         VRegistrar = new JFrame("VRegistrar");
-        VRegistrar.setContentPane(new VRegistrar().getpPrincipal());
+        VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
         VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VRegistrar.pack();
         VRegistrar.setVisible(true);
     }
-    public static void CrearCuenta() {
-        VentanaRegistrar();
-    }
+
     public static void VentanaCarga() {
         VCarga = new JFrame("VCarga");
         VCarga.setContentPane(new VCarga().getPanel1());
@@ -227,13 +225,12 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            if(e.getCause().getMessage() == "ORA-20054: Err. email o contrasena incorrecta")
+            if(e.getCause().getCause().getMessage().contains("ORA-20054: Err. email o contrasena incorrecta"))
             {
                 VLogin.dispose();
-                VentanaRegistrar();
+                VentanaRegistrar(email);
             }
         }
-
     }
 
     public static void registrarUsuario(String nombre, String passwrd, String email, String nacimiento) throws Exception {

@@ -24,7 +24,7 @@ public class UsuariosDAO extends BaseDatos {
         storedProcedure.registerStoredProcedureParameter("P_EMAIL", String.class, ParameterMode.IN);
 
         storedProcedure.setParameter("P_NOMBRE", nombre);
-        storedProcedure.setParameter("P_FECHA_FUNDACION", conversionDate(fechaNacimiento));
+        storedProcedure.setParameter("P_FECHA_NACIMIENTO", conversionDate(fechaNacimiento));
         storedProcedure.setParameter("P_PASSWORD", passwrd);
         storedProcedure.setParameter("P_EMAIL", email);
         // execute SP
@@ -48,7 +48,7 @@ public class UsuariosDAO extends BaseDatos {
         storedProcedure.registerStoredProcedureParameter("P_EMAIL", String.class, ParameterMode.IN);
 
         storedProcedure.setParameter("P_NOMBRE", nombre);
-        storedProcedure.setParameter("P_FECHA_FUNDACION", conversionDate(fechaNacimiento));
+        storedProcedure.setParameter("P_FECHA_NACIMIENTO", conversionDate(fechaNacimiento));
         storedProcedure.setParameter("P_PASSWORD", passwrd);
         storedProcedure.setParameter("P_EMAIL", email);
         // execute SP
