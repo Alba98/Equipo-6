@@ -19,6 +19,13 @@ public class VLogin {
 
     public VLogin() {
         contra.setEchoChar('*');
+        /*
+        tFCorreo.setText("admin@gmail.com");
+        contra.setText("admin");
+        */
+        tFCorreo.setText("alba@gmail.com");
+        contra.setText("Hola");
+        
         ckVer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

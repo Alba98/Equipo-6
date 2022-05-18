@@ -2,6 +2,7 @@ package Modelo.BD;
 
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -57,12 +58,14 @@ public class UsuariosDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public Byte login(String email, char[] password) throws Exception {
-        return (Byte) em.createNativeQuery(
-                        "SELECT fn_count_comments(:postId) FROM DUAL"
+    public int login(String email, char[] password) throws Exception {
+        BigDecimal rol = (BigDecimal) em.createNativeQuery(
+                        "SELECT log_in(:USERNAME, :PASSWD) FROM DUAL"
                 )
                 .setParameter("USERNAME", email)
                 .setParameter("PASSWD", password)
                 .getSingleResult();
+
+        return rol.intValue();
     }
 }

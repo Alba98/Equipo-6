@@ -160,7 +160,7 @@ public class Main {
         VCarga.setVisible(true);
     }
     public static void VentanaUsuario() {
-        VCarga.dispose();
+        //VCarga.dispose();
         VUsuario = new VUsuario();
         VUsuario.pack();
         VUsuario.setLocationRelativeTo(null);
@@ -208,26 +208,26 @@ public class Main {
     }
 
     public static void login(String email, char[] password) {
-        byte rol = 0;
+        int rol = 0;
         try {
             rol = usuario_dao.login(email, password);
             switch (rol)
             {
                 case 01:
-                    //usuario
-                    System.out.println("usuario");
-                    VLogin.dispose();
-                    VentanaUsuario();
-                    break;
-                case 02:
                     //admin
                     System.out.println("admin");
                     VLogin.dispose();
                     VentanaAdmin();
                     break;
+                case 02:
+                    //usuario
+                    System.out.println("usuario");
+                    VLogin.dispose();
+                    VentanaUsuario();
+                    break;
             }
         } catch (Exception e) {
-            if(e.getMessage() == "ORA-20054: Err. email o contrasena incorrecta")
+            if(e.getCause().getMessage() == "ORA-20054: Err. email o contrasena incorrecta")
             {
                 VLogin.dispose();
                 VentanaRegistrar();
