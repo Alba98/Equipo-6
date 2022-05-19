@@ -1,4 +1,4 @@
-package Factory;
+package Modelo.Factory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,20 +12,19 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class ReadXmlDomParser {
 
-    private static final String FILENAME = "resources\\test.xml";
-
     private static final String JORNADAS = "resources\\resultados_jornadas.xml";
     private static final String CLASIFICACION = "resources\\clasificacion.xml";
+    private static final String ULTIMA_JORNADA = "resources\\resultado_ultima_jornada.xml";
 
+    //datos almacenados
+    private DatosClasificacionXML DatosClasificacion;
+    private DatosJornadasXML DatosJornadas;
 
     protected DocumentBuilderFactory dbf;
 
@@ -33,6 +32,8 @@ public class ReadXmlDomParser {
     public ReadXmlDomParser() {
         // Instantiate the Factory
         dbf = DocumentBuilderFactory.newInstance();
+        DatosClasificacion = new DatosClasificacionXML();
+        DatosJornadas = new DatosJornadasXML();
     }
 
     public void checkXML() {
@@ -49,69 +50,17 @@ public class ReadXmlDomParser {
             generaXMLs(CLASIFICACION);
         }
 
-        //comprobar las fechas de los archivos xml
-        //ultimaJornadaXML();
-        clasificacionXML();
-    }
-
-    public void testXML() throws ParserConfigurationException, SAXException, IOException {
-
-        try {
-            // optional, but recommended
-            // process XML securely, avoid attacks like XML External Entities (XXE)
-            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-
-            // parse XML file
-            DocumentBuilder db = dbf.newDocumentBuilder();
-
-            Document doc = db.parse(new File(FILENAME));
-
-            // optional, but recommended
-            // http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
-            doc.getDocumentElement().normalize();
-
-            System.out.println("Root Element :" + doc.getDocumentElement().getNodeName());
-            System.out.println("------");
-
-            // get <staff>
-            NodeList list = doc.getElementsByTagName("staff");
-
-            for (int temp = 0; temp < list.getLength(); temp++) {
-
-                Node node = list.item(temp);
-
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element element = (Element) node;
-
-                    // get staff's attribute
-                    String id = element.getAttribute("id");
-
-                    // get text
-                    String firstname = element.getElementsByTagName("firstname").item(0).getTextContent();
-                    String lastname = element.getElementsByTagName("lastname").item(0).getTextContent();
-                    String nickname = element.getElementsByTagName("nickname").item(0).getTextContent();
-
-                    NodeList salaryNodeList = element.getElementsByTagName("salary");
-                    String salary = salaryNodeList.item(0).getTextContent();
-
-                    // get salary's attribute
-                    String currency = salaryNodeList.item(0).getAttributes().getNamedItem("currency").getTextContent();
-
-                    System.out.println("Current Element :" + node.getNodeName());
-                    System.out.println("Staff Id : " + id);
-                    System.out.println("First Name : " + firstname);
-                    System.out.println("Last Name : " + lastname);
-                    System.out.println("Nick Name : " + nickname);
-                    System.out.printf("Salary [Currency] : %,.2f [%s]%n%n", Float.parseFloat(salary), currency);
-
-                }
-            }
-
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+        /*
+        File ultima_jornada_xml = new File(ULTIMA_JORNADA);
+        if (!jornadas_xml.exists()) {
+            System.out.println("No existe el archivo " + ULTIMA_JORNADA);
+            generaXMLs(ULTIMA_JORNADA);
         }
+        */
 
+        //comprobar las fechas de los archivos xml
+        ultimaJornadaXML();
+        clasificacionXML();
     }
 
     public void ultimaJornadaXML() {
@@ -128,8 +77,8 @@ public class ReadXmlDomParser {
 
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root Element : " + doc.getDocumentElement().getNodeName());
-            System.out.println("------");
+            // System.out.println("Root Element : " + doc.getDocumentElement().getNodeName());
+            // System.out.println("------");
 
             // get <fecha_expiracion>
             String expirationDate = doc.getElementsByTagName("fecha_expiracion").item(0).getTextContent();
@@ -156,9 +105,11 @@ public class ReadXmlDomParser {
                         String num_jornada = j_element.getAttribute("num_jornada");
                         String fecha_jornada = j_element.getAttribute("fecha_jornada");
 
-                        System.out.println("Element :" + jornada.getNodeName());
-                        System.out.println("num_jornada : " + num_jornada);
-                        System.out.println("fecha_jornada : " + fecha_jornada);
+                        // System.out.println("Element :" + jornada.getNodeName());
+                        // System.out.println("num_jornada : " + num_jornada);
+                        // System.out.println("fecha_jornada : " + fecha_jornada);
+
+                        DatosJornadasXML.Jornada jornadaDOM = DatosJornadas.addJornada(num_jornada, fecha_jornada);
 
                         // get <partido>
                         NodeList partidos = j_element.getElementsByTagName("partido");
@@ -178,10 +129,13 @@ public class ReadXmlDomParser {
                                 // get text
                                 String resultado = p_element.getElementsByTagName("resultado").item(0).getTextContent();
 
-                                    System.out.println("Current Element :" + partido.getNodeName());
-                                    System.out.println("cod_partido : " + cod_partido);
-                                    System.out.println("hora_partido : " + hora_partido);
-                                    System.out.println("resultado : " + resultado);
+                                // System.out.println("Current Element :" + partido.getNodeName());
+                                // System.out.println("cod_partido : " + cod_partido);
+                                // System.out.println("hora_partido : " + hora_partido);
+                                // System.out.println("resultado : " + resultado);
+
+                                DatosJornadasXML.Partido partidoDOM =
+                                        jornadaDOM.addPartido(Integer.parseInt(cod_partido), hora_partido, resultado);
 
                                 // get <nombre_equipo>
                                 NodeList equipos = p_element.getElementsByTagName("nombre_equipo");
@@ -196,7 +150,9 @@ public class ReadXmlDomParser {
 
                                         String nombre_equipo = e_element.getTextContent();
 
-                                        System.out.println("nombre_equipo : " + nombre_equipo);
+                                        // System.out.println("nombre_equipo : " + nombre_equipo);
+
+                                        partidoDOM.addEquipo(nombre_equipo);
                                     }
                                 }
                             }
@@ -206,6 +162,7 @@ public class ReadXmlDomParser {
             }
 
             generaXMLs(JORNADAS);
+
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -226,8 +183,8 @@ public class ReadXmlDomParser {
 
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root Element : " + doc.getDocumentElement().getNodeName());
-            System.out.println("------");
+            // System.out.println("Root Element : " + doc.getDocumentElement().getNodeName());
+            // System.out.println("------");
 
             // get <fecha_expiracion>
             String expirationDate = doc.getElementsByTagName("fecha_expiracion").item(0).getTextContent();
@@ -253,8 +210,10 @@ public class ReadXmlDomParser {
                         // get staff's attribute
                         String cod_temporada = t_element.getAttribute("cod_temporada");
 
-                        System.out.println("Element :" + temporada.getNodeName());
-                        System.out.println("cod_temporada : " + cod_temporada);
+                        // System.out.println("Element :" + temporada.getNodeName());
+                        // System.out.println("cod_temporada : " + cod_temporada);
+
+                        DatosClasificacionXML.Temporada temporadaDOM = DatosClasificacion.addTemporada(cod_temporada);
 
                         // get <equipo>
                         NodeList equipos = t_element.getElementsByTagName("equipo");
@@ -274,8 +233,11 @@ public class ReadXmlDomParser {
                                 // get text
                                 String e_nombre = e_element.getElementsByTagName("nombre").item(0).getTextContent();
 
-                                System.out.println("Current Element :" + equipo.getNodeName());
-                                System.out.println("nombre : " + e_nombre);
+                                // System.out.println("Current Element :" + equipo.getNodeName());
+                                // System.out.println("nombre : " + e_nombre);
+
+                                DatosClasificacionXML.Equipo equipoDOM = temporadaDOM.addEquipo(e_nombre,
+                                            Integer.parseInt(cod_equipo), Integer.parseInt(partidos_ganados));
 
                                 // get <lista_jugadores>
                                 NodeList lista_jugadores = e_element.getElementsByTagName("lista_jugadores");
@@ -299,9 +261,11 @@ public class ReadXmlDomParser {
                                             String nickname = j_element.getElementsByTagName("nickname").item(0).getTextContent();
                                             String rol = j_element.getElementsByTagName("rol").item(0).getTextContent();
 
-                                            System.out.println("Current Element :" + jugador.getNodeName());
-                                            System.out.println("nickname : " + nickname);
-                                            System.out.println("rol : " + rol);
+                                            // System.out.println("Current Element :" + jugador.getNodeName());
+                                            // System.out.println("nickname : " + nickname);
+                                            // System.out.println("rol : " + rol);
+
+                                            equipoDOM.addJugador(nickname, rol);
                                         }
                                     }
                                 }
