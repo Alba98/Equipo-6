@@ -2,32 +2,32 @@
 <clasificacion
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="clasificacion.xsd">
-    <fecha_expiracion>2022-05-17</fecha_expiracion>
+    <fecha_expiracion>2022-05-20</fecha_expiracion>
    <temporada cod_temporada="1">
       <equipo cod_equipo="1" partidos_ganados="5">
-        <nombre>G2</nombre>
-        <lista_jugadores>
-            <jugador>
-              <nickname>BrokenBlade</nickname>
-              <rol>TOP</rol>
-            </jugador>
-            <jugador>
-              <nickname>Jankos</nickname>
-              <rol>JGL</rol>
-            </jugador>
-            <jugador>
-              <nickname>CaPs</nickname>
-              <rol>MID</rol>
-            </jugador>
-            <jugador>
-              <nickname>Flakked</nickname>
-              <rol>ADC</rol>
-            </jugador>
-            <jugador>
-              <nickname>Targamas</nickname>
-              <rol>SUPP</rol>
-            </jugador>
-        </lista_jugadores>
+      <nombre>G2</nombre>
+      <lista_jugadores>
+          <jugador>
+            <nickname>BrokenBlade</nickname>
+            <rol>TOP</rol>
+          </jugador>
+           <jugador>
+            <nickname>Jankos</nickname>
+            <rol>JGL</rol>
+          </jugador>
+           <jugador>
+            <nickname>CaPs</nickname>
+            <rol>MID</rol>
+          </jugador>
+           <jugador>
+            <nickname>Flakked</nickname>
+            <rol>ADC</rol>
+          </jugador>
+           <jugador>
+            <nickname>Targamas</nickname>
+            <rol>SUPP</rol>
+          </jugador>
+      </lista_jugadores>
     </equipo>
     <equipo cod_equipo="2" partidos_ganados="6">
       <nombre>FNATIC</nombre>
