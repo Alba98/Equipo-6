@@ -35,6 +35,9 @@ public class VUsuario extends JDialog {
     private JButton bJornada;
     private JButton bLogout;
     private JLabel info;
+    private JTextField tfResultadoAdm;
+    private JLabel AResultado;
+    private JButton BResultadoAdm;
 
     public VUsuario() {
         setContentPane(pPrincipal);
@@ -134,6 +137,14 @@ public class VUsuario extends JDialog {
             @Override
             public void mouseExited(MouseEvent e) {
                 bLogout.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        /* Creo que habría que añadir aquí el boolean y ver como intentar conectarlo */
+        BResultadoAdm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tfResultadoAdm.getText() == "0-0");
             }
         });
     }
