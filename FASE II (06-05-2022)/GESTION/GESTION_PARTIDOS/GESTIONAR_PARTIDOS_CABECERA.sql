@@ -38,6 +38,9 @@ PROCEDURE INSERT_CLASIFICACION(
 -- **************************************************************	
 
 
+FUNCTION  PARTIDOS_GANADOS
+    (P_COD_EQUIPO NUMBER)
+    RETURN NUMBER;
 
 
 
