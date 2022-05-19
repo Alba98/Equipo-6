@@ -349,6 +349,20 @@ public class VAdmin {
                 llenarCBEntrenadores(cbAEntrenador);
             }
         });
+        tEqNombre.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBEntrenadoresEQ(cbEqEntre);
+                llenarCBAsistentesEQ(cbEqAsistente);
+                llenarCBToplaners(cbEqTOP);
+                llenarCBSuplentesEQ(cbEqSuplente);
+                llenarCBJunglers(cbEqJGL);
+                llenarCBMidlaners(cbEqMID);
+                llenarCBADCarrys(cbEqADC);
+                llenarCBSupports(cbEqSUPP);
+            }
+        });
     }
 
     private void registrarJugador() {
@@ -493,6 +507,119 @@ public class VAdmin {
         tEqSponsor.setText("");
         tEqDuenio.setText("");
     }
+
+    private void llenarCBEntrenadoresEQ(JComboBox cb) {
+        try {
+            ArrayList<String> entrenadores = Main.getEntrenadores();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String entrenador : entrenadores) {
+                cb.addItem(entrenador);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBAsistentesEQ(JComboBox cb) {
+        try {
+            ArrayList<String> asistentes = Main.getAsistentes();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String asistente : asistentes) {
+                cb.addItem(asistente);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBToplaners(JComboBox cb) {
+        try {
+            ArrayList<String> toplaners = Main.getToplaners();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String toplaner : toplaners) {
+                cb.addItem(toplaner);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBJunglers(JComboBox cb) {
+        try {
+            ArrayList<String> junglers = Main.getJunglers();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String jungler : junglers) {
+                cb.addItem(jungler);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBMidlaners(JComboBox cb) {
+        try {
+            ArrayList<String> midlaners = Main.getMidlaners();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String midlaner : midlaners) {
+                cb.addItem(midlaner);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBADCarrys(JComboBox cb) {
+        try {
+            ArrayList<String> ADCarrys = Main.getADCarrys();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String ADCarry : ADCarrys) {
+                cb.addItem(ADCarry);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBSupports(JComboBox cb) {
+        try {
+            ArrayList<String> Supports = Main.getSupports();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String Support : Supports) {
+                cb.addItem(Support);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBSuplentesEQ(JComboBox cb) {
+        try {
+            ArrayList<String> suplentes = Main.getSuplentes();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String suplente : suplentes) {
+                cb.addItem(suplente);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
     public JTabbedPane getVentanaAdmins() {
         return VentanaAdmins;
     }

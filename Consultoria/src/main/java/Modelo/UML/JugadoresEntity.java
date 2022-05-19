@@ -4,6 +4,13 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQuery(name = "JugadoresEntity.todas", query = "SELECT j FROM JugadoresEntity j")
+@NamedQuery(name = "JugadoresEntity.TOP", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'TOP' ")
+@NamedQuery(name = "JugadoresEntity.JGL", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'JGL' ")
+@NamedQuery(name = "JugadoresEntity.MID", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'MID' ")
+@NamedQuery(name = "JugadoresEntity.ADC", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'ADC' ")
+@NamedQuery(name = "JugadoresEntity.SUPP", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'SUPP' ")
+
 @Entity
 @Table(name = "JUGADORES", schema = "EQDAW06", catalog = "")
 public class JugadoresEntity {

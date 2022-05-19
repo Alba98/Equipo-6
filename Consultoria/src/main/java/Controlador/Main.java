@@ -1,5 +1,7 @@
 package Controlador;
+import Modelo.UML.AsistentesEntity;
 import Modelo.UML.EntrenadoresEntity;
+import Modelo.UML.JugadoresEntity;
 import Vista.*;
 import javax.swing.*;
 
@@ -31,13 +33,13 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            //generarDAO();
+            generarDAO();
 
             //VentanaCarga();
             //VentanaLogin();
             //VentanaRegistrar();
             //VentanaUsuario();
-            //VentanaAdmin();
+            VentanaAdmin();
             
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -199,6 +201,69 @@ public class Main {
         ArrayList<String> nombres = new ArrayList<>(entrenadores.size());
         for (EntrenadoresEntity entrenador : entrenadores) {
              nombres.add(entrenador.getPersonasByCodEntrenador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getAsistentes() throws Exception {
+        List<AsistentesEntity> asistentes = asistente_dao.consultarAsistentes();
+        ArrayList<String> nombres = new ArrayList<>(asistentes.size());
+        for (AsistentesEntity asistente : asistentes) {
+            nombres.add(asistente.getPersonasByCodAsistente().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getToplaners() throws Exception {
+        List<JugadoresEntity> toplaners = jugador_dao.consultarToplaners();
+        ArrayList<String> nombres = new ArrayList<>(toplaners.size());
+        for (JugadoresEntity toplaner : toplaners) {
+            nombres.add(toplaner.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getJunglers() throws Exception {
+        List<JugadoresEntity> junglers = jugador_dao.consultarJunglers();
+        ArrayList<String> nombres = new ArrayList<>(junglers.size());
+        for (JugadoresEntity jungler : junglers) {
+            nombres.add(jungler.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getMidlaners() throws Exception {
+        List<JugadoresEntity> midlaners = jugador_dao.consultarMidlaners();
+        ArrayList<String> nombres = new ArrayList<>(midlaners.size());
+        for (JugadoresEntity midlaner : midlaners) {
+            nombres.add(midlaner.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getADCarrys() throws Exception {
+        List<JugadoresEntity> ADCarrys = jugador_dao.consultarADCarrys();
+        ArrayList<String> nombres = new ArrayList<>(ADCarrys.size());
+        for (JugadoresEntity ADCarry : ADCarrys) {
+            nombres.add(ADCarry.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getSupports() throws Exception {
+        List<JugadoresEntity> Supports = jugador_dao.consultarSupports();
+        ArrayList<String> nombres = new ArrayList<>(Supports.size());
+        for (JugadoresEntity Support : Supports) {
+            nombres.add(Support.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getSuplentes() throws Exception {
+        List<JugadoresEntity> jugadores = jugador_dao.consultarJugadores();
+        ArrayList<String> nombres = new ArrayList<>(jugadores.size());
+        for (JugadoresEntity jugador : jugadores) {
+            nombres.add(jugador.getPersonasByCodJugador().getNickname());
         }
         return nombres;
     }
