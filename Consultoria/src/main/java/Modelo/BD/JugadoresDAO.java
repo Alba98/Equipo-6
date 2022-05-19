@@ -1,6 +1,5 @@
 package Modelo.BD;
 
-import Modelo.UML.EntrenadoresEntity;
 import Modelo.UML.JugadoresEntity;
 
 import javax.persistence.ParameterMode;
@@ -140,5 +139,22 @@ public class JugadoresDAO extends BaseDatos {
         transaction.commit();
 
         return listaSupports;
+    }
+
+    public void borrarJugador(String jugadorBorrar) throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity> qEventos =
+                 em.createNamedQuery("JugadoresEntity.borrar", JugadoresEntity.class);
+        qEventos.setParameter(1, jugadorBorrar.toUpperCase());
+        JugadoresEntity consulta = qEventos.getSingleResult();
+        if (consulta != null){
+            em.remove(consulta);
+        }
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
     }
 }

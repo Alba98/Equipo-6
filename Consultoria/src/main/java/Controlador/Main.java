@@ -1,6 +1,7 @@
 package Controlador;
 import Modelo.UML.AsistentesEntity;
 import Modelo.UML.EntrenadoresEntity;
+import Modelo.UML.EquiposEntity;
 import Modelo.UML.JugadoresEntity;
 import Vista.*;
 import javax.swing.*;
@@ -196,6 +197,15 @@ public class Main {
         asistente_dao.crearAsistente(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo), entrenador);
     }
 
+    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) throws Exception {
+        LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
+        equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    }
+
+    public static void borrarJugador(String jugadorBorrar) throws Exception{
+        jugador_dao.borrarJugador(jugadorBorrar);
+    }
+
     public static ArrayList<String> getEntrenadores() throws Exception {
         List<EntrenadoresEntity> entrenadores = entrenador_dao.consultarEntrenadores();
         ArrayList<String> nombres = new ArrayList<>(entrenadores.size());
@@ -268,9 +278,22 @@ public class Main {
         return nombres;
     }
 
-    public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) throws Exception {
-        LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
-        equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
+    public static ArrayList<String> getJugadores() throws Exception {
+        List<JugadoresEntity> jugadores = jugador_dao.consultarJugadores();
+        ArrayList<String> nombres = new ArrayList<>(jugadores.size());
+        for (JugadoresEntity jugador : jugadores) {
+            nombres.add(jugador.getPersonasByCodJugador().getNickname());
+        }
+        return nombres;
+    }
+
+    public static ArrayList<String> getEquipos() throws Exception {
+        List<EquiposEntity> equipos = equipo_dao.consultarEquipos();
+        ArrayList<String> nombres = new ArrayList<>(equipos.size());
+        for (EquiposEntity equipo : equipos) {
+            nombres.add(equipo.getNombre());
+        }
+        return nombres;
     }
 
     public static void login(String email, char[] password) {

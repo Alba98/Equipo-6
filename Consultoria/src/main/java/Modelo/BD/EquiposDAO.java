@@ -1,9 +1,14 @@
 package Modelo.BD;
 
+import Modelo.UML.EquiposEntity;
+import Modelo.UML.JugadoresEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class EquiposDAO extends BaseDatos {
 
@@ -106,6 +111,22 @@ public class EquiposDAO extends BaseDatos {
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public List<EquiposEntity> consultarEquipos() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<EquiposEntity> listaEquipos;
+
+        // 3. Construir comandos SQL
+        TypedQuery<EquiposEntity > qEventos =
+                em.createNamedQuery("EquiposEntity.toda", EquiposEntity.class);
+        listaEquipos = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaEquipos;
     }
 
 }

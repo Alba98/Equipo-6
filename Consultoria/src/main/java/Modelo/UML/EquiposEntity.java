@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQuery(name = "EquiposEntity.toda", query = "SELECT e FROM EquiposEntity e")
+
 @Entity
 @Table(name = "EQUIPOS", schema = "EQDAW06", catalog = "")
 public class EquiposEntity {

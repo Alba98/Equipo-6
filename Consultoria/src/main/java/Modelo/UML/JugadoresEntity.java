@@ -10,6 +10,8 @@ import java.util.Objects;
 @NamedQuery(name = "JugadoresEntity.MID", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'MID' ")
 @NamedQuery(name = "JugadoresEntity.ADC", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'ADC' ")
 @NamedQuery(name = "JugadoresEntity.SUPP", query = "SELECT j FROM JugadoresEntity j WHERE upper(j.rol)= 'SUPP' ")
+@NamedQuery(name = "JugadoresEntity.borrar", query = "SELECT j FROM JugadoresEntity j WHERE j.codJugador = " +
+        "                          (SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 ) ")
 
 @Entity
 @Table(name = "JUGADORES", schema = "EQDAW06", catalog = "")

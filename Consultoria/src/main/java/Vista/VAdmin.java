@@ -99,12 +99,25 @@ public class VAdmin {
     private JLabel lEqSUPP;
     private JComboBox cbEqSuplente;
     private JLabel lEqSuplente;
+    private JPanel CBorrar;
+    private JComboBox cbBJugadores;
+    private JButton bBJugadores;
+    private JComboBox cbBEntrenadores;
+    private JButton bBEntrenadores;
+    private JComboBox cbBAsistentes;
+    private JButton bBAsistentes;
+    private JComboBox cbBEquipos;
+    private JButton bBEquipos;
 
     public VAdmin() {
 
         tJNombre.requestFocus();
         llenarCBRoles(cbJROL);
         llenarCBEntrenadores(cbAEntrenador);
+        llenarCBSuplentesEQ(cbBJugadores);
+        llenarCBEntrenadores(cbBEntrenadores);
+        llenarCBAsistentesEQ(cbBAsistentes);
+        llenarCBEquipos(cbBEquipos);
 
         //Aestetics botonones:
 
@@ -143,6 +156,22 @@ public class VAdmin {
         bEqRestart.setBorderPainted(false);
         bEqRestart.setFocusable(false);
         bEqRestart.setRolloverEnabled(true);
+
+        bBJugadores.setBorderPainted(false);
+        bBJugadores.setFocusable(false);
+        bBJugadores.setRolloverEnabled(true);
+
+        bBEntrenadores.setBorderPainted(false);
+        bBEntrenadores.setFocusable(false);
+        bBEntrenadores.setRolloverEnabled(true);
+
+        bBAsistentes.setBorderPainted(false);
+        bBAsistentes.setFocusable(false);
+        bBAsistentes.setRolloverEnabled(true);
+
+        bBEquipos.setBorderPainted(false);
+        bBEquipos.setFocusable(false);
+        bBEquipos.setRolloverEnabled(true);
 
         //funciones MouseListener de los botones:
 
@@ -263,6 +292,45 @@ public class VAdmin {
             }
         });
 
+        bBJugadores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBJugadores.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBJugadores.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBEntrenadores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBEntrenadores.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBEntrenadores.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBAsistentes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBAsistentes.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBAsistentes.setBackground(UIManager.getColor("control"));
+            }
+        });
+
         //Actiones listeners:
 
         bJRegistrar.addActionListener(new ActionListener() {
@@ -361,6 +429,36 @@ public class VAdmin {
                 llenarCBMidlaners(cbEqMID);
                 llenarCBADCarrys(cbEqADC);
                 llenarCBSupports(cbEqSUPP);
+            }
+        });
+    VentanaAdmins.addComponentListener(new ComponentAdapter() { } );VentanaAdmins.addContainerListener(new ContainerAdapter() { } );
+        bBJugadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
+                try {
+                    Main.borrarJugador(jugadorBorrar);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        bBEntrenadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        bBAsistentes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        bBEquipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
@@ -619,6 +717,22 @@ public class VAdmin {
             Validaciones.mostrarError(e.getMessage());
         }
     }
+
+    private void llenarCBEquipos(JComboBox cb) {
+        try {
+            ArrayList<String> equipos = Main.getEquipos();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String equipo : equipos) {
+                cb.addItem(equipo);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+
 
     public JTabbedPane getVentanaAdmins() {
         return VentanaAdmins;
