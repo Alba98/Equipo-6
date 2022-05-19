@@ -12,7 +12,6 @@ import java.util.Arrays;
 public class VAdmin {
     private JTabbedPane VentanaAdmins;
     private JPanel PanelPrincipal;
-    private JPanel CContrato;
     private JPanel CJugador;
     private JPanel CEquipo;
     private JPanel CEntrenador;
@@ -26,16 +25,6 @@ public class VAdmin {
     private JLabel NNacionalidad;
     private JLabel NNickname;
     private JLabel NEntrenador;
-    private JPanel CCPrincipal;
-    private JLabel NJugador;
-    private JLabel NEquipo;
-    private JLabel FInicio;
-    private JComboBox Codejugador;
-    private JLabel FFinal;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JComboBox Codeequipo;
-    private JLabel Aviso;
     private JPanel CEQPrincipal;
     private JLabel NFecha;
     private JLabel NCiudad;
@@ -68,6 +57,12 @@ public class VAdmin {
 
     //Asistentes
 
+    private JLabel lANombre;
+    private JLabel lAApellido;
+    private JLabel lASueldo;
+    private JLabel lAFechaNac;
+    private JLabel lAPaiS;
+    private JLabel lANickname;
     private JTextField tANombre;
     private JTextField tAApellido;
     private JTextField tASueldo;
@@ -86,6 +81,24 @@ public class VAdmin {
     private JTextField tEqDuenio;
     private JButton bEqRegistar;
     private JButton bEqRestart;
+    private JComboBox cbEqEntre;
+    private JLabel lEqEntrenador;
+    private JLabel lEqSTAFF;
+    private JLabel lEqAsistente;
+    private JComboBox cbEqAsistente;
+    private JLabel lEqTOP;
+    private JComboBox cbEqTOP;
+    private JLabel lEqJugadore;
+    private JLabel lEqJGL;
+    private JComboBox cbEqJGL;
+    private JComboBox cbEqMID;
+    private JLabel lEqMID;
+    private JLabel lEqADC;
+    private JComboBox cbEqADC;
+    private JComboBox cbEqSUPP;
+    private JLabel lEqSUPP;
+    private JComboBox cbEqSuplente;
+    private JLabel lEqSuplente;
 
     public VAdmin() {
 
