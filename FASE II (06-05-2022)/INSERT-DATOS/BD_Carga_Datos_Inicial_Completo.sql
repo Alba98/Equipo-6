@@ -81,3 +81,4 @@ INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUE
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Victoria',  TO_DATE('16/11/1999','DD/MM/YYYY'),'Egibide','Victoria@egibide.org',02);
 
 
+COMMIT;
