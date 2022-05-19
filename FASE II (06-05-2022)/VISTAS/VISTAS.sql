@@ -68,19 +68,21 @@ CREATE OR REPLACE VIEW VISTA_USUARIOS AS
 
 CREATE OR REPLACE VIEW VISTA_CLASIFICACION AS
 
-(SELECT    DISTINCT T.COD_TEMPORADA, E.COD_EQUIPO, E.NOMBRE,J.ROL, PE.NICKNAME
- FROM     EQUIPOS E, JUGADORES J, PERSONAS PE, JUGAR_PARA JP,PARTICIPA PA,
-           PARTIDOS PS, JORNADAS JO, TEMPORADAS T
- WHERE    E.COD_EQUIPO IN JP.COD_EQUIPO 
-           AND E.COD_EQUIPO IN (PA.COD_EQUIPO1,PA.COD_EQUIPO2)
-           AND PA.COD_PARTIDO=PS.COD_PARTIDO
-           AND JO.COD_JORNADA IN PS.COD_JORNADA
-           AND T.COD_TEMPORADA IN JO.COD_TEMPORADA
-           AND JP.COD_JUGADOR=J.COD_JUGADOR 
-           AND J.COD_JUGADOR=PE.COD_PERSONA 
-
-)WITH READ ONLY;
-
+SELECT t.cod_temporada,j.cod_jornada,p.cod_partido,j.fecha_jornada,p.hora_partido,
+       p.resultado,e.nombre,pe.nickname,ju.rol
+FROM   temporadas t,jornadas j, partidos p, participa pa,equipos e,jugar_para jp,
+       jugadores  ju,personas   pe
+WHERE  t.cod_temporada = j.cod_temporada
+    AND j.cod_jornada = p.cod_jornada
+    AND p.cod_partido = pa.cod_partido
+    AND e.cod_equipo = jp.cod_equipo
+    AND jp.cod_jugador = ju.cod_jugador
+    AND ju.cod_jugador = pe.cod_persona
+    AND e.cod_equipo IN ( pa.cod_equipo1, pa.cod_equipo2 )
+ORDER BY
+    j.cod_jornada,
+    pa.cod_partido
+WITH READ ONLY;
 
 
 
