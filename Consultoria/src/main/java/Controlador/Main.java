@@ -130,10 +130,12 @@ public class Main {
                 "Se va a crear el calendario de esta temporada",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
         if (ventana == 0){
-            System.out.println("Si");}
+            System.out.println("Realizando el calenndario");
+            OrganizarCalendario();}
         else
         if (ventana == 1){
-            System.out.println("No");
+            System.out.println("Se le devolverá a la pantalla anterior");
+            return;
         }
     }
 
@@ -246,5 +248,57 @@ public class Main {
         VRegistrar.dispose();
         Main.VentanaUsuario();
     }
+
+
+
+    public static void OrganizarCalendario(){
+
+        /*
+        int[] equipos;
+        String[][] matriz1,matriz2,jornadas;
+        String[][] matriz1,matriz2,jornadas,jornadas2;
+
+        calendario(int N){
+            equipos = new int[N];
+        }
+
+        int cont =0;
+        int cont2 = N-2;
+        matriz1 = new String[N-1][N/2];
+        matriz2 = new String[N-1][N/2];
+        jornadas = new String[N-1][N/2];
+
+        if (setCodEquipo%2 == 0){
+            for (int i=0;i<N-1;i++){
+                for(int j=0;j<N/2;j++){
+                    matriz1[i][j] = String.valueOf(equipos[cont]);
+                    cont++;
+                    if(cont==(N-1)) cont=0;
+
+
+                    if(j==0) matriz2[i][j] = String.valueOf(N);
+                    else {
+                        matriz2[i][j] = String.valueOf(equipos[cont2]);
+                        cont2--;
+                        if(cont2==-1) cont2 = N-2;
+                    }
+
+                    if(j==0){
+                        if(i%2==0) jornadas[i][j] = matriz2[i][j] + "-" + matriz1[i][j] + " ";
+                        else jornadas[i][j] = matriz1[i][j] + "-" + matriz2[i][j] + " ";
+                    }
+                    else jornadas[i][j] = matriz1[i][j] + "-" + matriz2[i][j] + " ";
+            }
+        }
+
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Error, no hay equipos pares");
+            return;
+        }
+        */
+
+    }
+    
 }
 
