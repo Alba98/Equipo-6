@@ -438,6 +438,7 @@ public class VAdmin {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
                 try {
                     Main.borrarJugador(jugadorBorrar);
+                    llenarCBSuplentesEQ(cbBJugadores);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -446,19 +447,40 @@ public class VAdmin {
         bBEntrenadores.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String nomEntre = (String) cbBEntrenadores.getSelectedItem();
+                try {
+                    Main.borrarEntrenador(nomEntre);
+                    llenarCBEntrenadores(cbBEntrenadores);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
         bBAsistentes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String nomAsis = (String) cbBAsistentes.getSelectedItem();
+                try {
+                    Main.borrarAsistente(nomAsis);
+                    llenarCBAsistentesEQ(cbBAsistentes);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
         bBEquipos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String nomEqui = (String) cbBEquipos.getSelectedItem();
+                try {
+                    Main.borrarEquipo(nomEqui);
+                    llenarCBEquipos(cbBEquipos);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
     }

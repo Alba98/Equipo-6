@@ -60,4 +60,21 @@ public class AsistentesDAO extends BaseDatos {
 
         return listaAsistentes;
     }
+
+    public void borrarAsistente(String nomAsis) throws Exception{
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<AsistentesEntity> qEventos =
+                em.createNamedQuery("AsistentesEntity.borrar", AsistentesEntity.class);
+        qEventos.setParameter(1, nomAsis.toUpperCase());
+        AsistentesEntity consulta = qEventos.getSingleResult();
+        if (consulta != null){
+            em.remove(consulta);
+        }
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+    }
 }

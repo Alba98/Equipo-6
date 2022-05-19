@@ -202,8 +202,22 @@ public class Main {
         equipo_dao.crearEquipos(nombre, fecha, ciudad, sponsor, duenio);
     }
 
+    //Borrar jugadores, entrenadores, asistentes y entrenadores:
+
     public static void borrarJugador(String jugadorBorrar) throws Exception{
         jugador_dao.borrarJugador(jugadorBorrar);
+    }
+
+    public static void borrarEntrenador(String nomEntre) throws Exception{
+        entrenador_dao.borrarEntrenador(nomEntre);
+    }
+
+    public static void borrarAsistente(String nomAsis) throws Exception{
+        asistente_dao.borrarAsistente(nomAsis);
+    }
+
+    public static void borrarEquipo(String nomEqui) throws Exception{
+        equipo_dao.borrarEquipo(nomEqui);
     }
 
     public static ArrayList<String> getEntrenadores() throws Exception {

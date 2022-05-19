@@ -1,5 +1,6 @@
 package Modelo.BD;
 
+import Modelo.UML.AsistentesEntity;
 import Modelo.UML.EquiposEntity;
 import Modelo.UML.JugadoresEntity;
 
@@ -127,6 +128,23 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
 
         return listaEquipos;
+    }
+
+    public void borrarEquipo(String nomEqui) throws Exception{
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<EquiposEntity> qEventos =
+                em.createNamedQuery("EquiposEntity.borrar", EquiposEntity.class);
+        qEventos.setParameter(1, nomEqui.toUpperCase());
+        EquiposEntity consulta = qEventos.getSingleResult();
+        if (consulta != null){
+            em.remove(consulta);
+        }
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
     }
 
 }
