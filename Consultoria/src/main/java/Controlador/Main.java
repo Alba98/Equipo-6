@@ -4,9 +4,11 @@ import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.EntrenadoresEntity;
 import Vista.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import Modelo.BD.*;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,8 +28,9 @@ public class Main {
 
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    private static JFrame VLogin, VRegistrar, VAdmin, VCarga;
-    private static JDialog VUsuario;
+    private static JFrame VLogin, VRegistrar, VAdmin, VCarga, VUsuario;
+
+    private static ReadXmlDomParser xmlParser;
 
     public static void main(String[] args) {
         try {
@@ -35,19 +38,20 @@ public class Main {
 
             //VentanaCarga();
 
-            generarDAO();
+            //generarDAO();
 
-            ReadXmlDomParser xmlParser = new ReadXmlDomParser();
+            xmlParser = new ReadXmlDomParser();
             xmlParser.checkXML();
 
             //VentanaLogin();
             //VentanaRegistrar("test@gmail.com");
-            //VentanaUsuario();
+            VentanaUsuario(true);
             //VentanaAdmin();
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
+
     }
 
     private static void generarDAO() {
@@ -144,7 +148,6 @@ public class Main {
         VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VLogin.pack();
         VLogin.setVisible(true);
-
     }
 
     public static void VentanaRegistrar(String email) {
@@ -163,13 +166,18 @@ public class Main {
         VCarga.pack();
         VCarga.setVisible(true);
     }
-    public static void VentanaUsuario() {
+
+    public static void VentanaUsuario(boolean admin) {
         //VCarga.dispose();
-        VUsuario = new VUsuario();
-        VUsuario.pack();
+
+        VUsuario = new JFrame("VUsuario");
+        VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
+        VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VUsuario.setLocationRelativeTo(null);
+        VUsuario.pack();
         VUsuario.setVisible(true);
-        System.exit(0);
+
+       // PanelJornada();
     }
     public static void getDatosClasificacion(){
         //ClasificacionDAO ?:
@@ -227,7 +235,7 @@ public class Main {
                     //usuario
                     System.out.println("usuario");
                     VLogin.dispose();
-                    VentanaUsuario();
+                    VentanaUsuario(false);
                     break;
             }
         } catch (Exception e) {
@@ -244,7 +252,98 @@ public class Main {
         usuario_dao.crearUsuario(nombre, fecha, passwrd, email);
 
         VRegistrar.dispose();
-        Main.VentanaUsuario();
+        Main.VentanaUsuario(false);
+    }
+
+    public static void PanelJornada() {
+
+        Border border = BorderFactory.createLineBorder(Color.PINK, 3);
+
+        JLabel equipo1 = new JLabel();
+        equipo1.setText("equipo1");
+        equipo1.setHorizontalTextPosition(JLabel.CENTER);
+        equipo1.setForeground(Color.GREEN);
+        equipo1.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+        equipo1.setBackground(Color.black);
+        equipo1.setOpaque(true);
+        equipo1.setBorder(border);
+
+        equipo1.setVerticalAlignment(JLabel.CENTER);
+        equipo1.setHorizontalAlignment(JLabel.CENTER);
+
+        equipo1.setBounds(25, 25, 100, 100);
+
+        JLabel puntuacion = new JLabel();
+        puntuacion.setText("3-0");
+        puntuacion.setHorizontalTextPosition(JLabel.CENTER);
+        puntuacion.setForeground(Color.blue);
+        puntuacion.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+        puntuacion.setBackground(Color.black);
+        puntuacion.setOpaque(true);
+        puntuacion.setBorder(border);
+
+        puntuacion.setVerticalAlignment(JLabel.CENTER);
+        puntuacion.setHorizontalAlignment(JLabel.CENTER);
+
+        puntuacion.setBounds(150, 25, 100, 100);
+
+        JLabel equipo2 = new JLabel();
+        equipo2.setText("equipo2");
+        equipo2.setHorizontalTextPosition(JLabel.CENTER);
+        equipo2.setForeground(Color.GREEN);
+        equipo2.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+        equipo2.setBackground(Color.black);
+        equipo2.setOpaque(true);
+        equipo2.setBorder(border);
+
+        equipo2.setVerticalAlignment(JLabel.CENTER);
+        equipo2.setHorizontalAlignment(JLabel.CENTER);
+
+        equipo2.setBounds(275, 25, 100, 100);
+
+        //--------------------------------------------------------------
+        JPanel pPincipal = new JPanel();
+        pPincipal.setBackground(Color.green);
+        pPincipal.setBounds(0, 0, 800, 800);
+        pPincipal.setLayout(null);
+
+        JPanel pJornada = new JPanel();
+        pJornada.setBackground(Color.red);
+        pJornada.setBounds(25, 25, 450, 200);
+        pJornada.setLayout(null);
+
+        JPanel pPartido = new JPanel();
+        pPartido.setBackground(Color.blue);
+        pPartido.setBounds(25, 25, 400, 150);
+        pPartido.setLayout(null);
+
+        //--------------------------------------------------------------
+
+
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(525, 800);
+        frame.setVisible(true);
+
+        pPartido.add(equipo1);
+        pPartido.add(puntuacion);
+        pPartido.add(equipo2);
+        pJornada.add(pPartido);
+        pPincipal.add(pJornada);
+
+        frame.setContentPane(pPincipal);
+
+
+ ///       frame.pack();
+
+        //VUsuario.add(label);
+    }
+
+    public static String getResultadosJornadas() {
+        return xmlParser.getDatosJornadas();
     }
 }
 

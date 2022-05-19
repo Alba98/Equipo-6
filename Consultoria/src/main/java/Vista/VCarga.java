@@ -46,7 +46,7 @@ public class VCarga {
                 }
                 else{
                     t.stop();
-                    Main.VentanaUsuario();;
+                    Main.VentanaUsuario(false);;
                 }
             }
         };

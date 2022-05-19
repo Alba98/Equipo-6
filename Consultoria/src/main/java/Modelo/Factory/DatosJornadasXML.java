@@ -22,6 +22,22 @@ public class DatosJornadasXML {
         public void addEquipo(String nombre) {
             this.equipos.add(nombre);
         }
+
+        public ArrayList<String> getEquipos() {
+            return equipos;
+        }
+
+        public int getCodPartido() {
+            return codPartido;
+        }
+
+        public String getHoraPartido() {
+            return horaPartido;
+        }
+
+        public String getResultado() {
+            return resultado;
+        }
     }
 
     public class Jornada {
@@ -41,6 +57,18 @@ public class DatosJornadasXML {
             this.partidos.add(partido);
             return partido;
         }
+
+        public ArrayList<Partido> getPartidos() {
+            return partidos;
+        }
+
+        public int getNum_jornada() {
+            return num_jornada;
+        }
+
+        public String getFecha_jornada() {
+            return fecha_jornada;
+        }
     }
 
     private ArrayList<Jornada> jornadas;
@@ -55,4 +83,7 @@ public class DatosJornadasXML {
         return jornada;
     }
 
+    public ArrayList<Jornada> getJornadas() {
+        return jornadas;
+    }
 }
