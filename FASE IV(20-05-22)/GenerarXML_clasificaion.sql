@@ -51,6 +51,13 @@ dbms_xmlgen.closeContext(CONTEXTO);
 
 END;
 
+--------------------------------------------------------------------------------
+
+SELECT TO_CHAR(SYSDATE+2,'YYYY-MM-DD"T"HH24:MM:SS')EXPIRATION_DATE FROM DUAL;
+SELECT TO_CHAR(SYSTIMESTAP - INTERVAL '-7' DAY) FROM DUAL;
+
+
+
 
                                     
                                              
