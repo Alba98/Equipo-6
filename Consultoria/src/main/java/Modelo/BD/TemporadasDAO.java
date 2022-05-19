@@ -6,7 +6,7 @@ public class TemporadasDAO extends BaseDatos{
 
     public TemporadasDAO() {  }
 
-    public void crearTemporada() {
+    public void crearTemporada() throws Exception {
         //iniciar transaccion
         transaction.begin();
 

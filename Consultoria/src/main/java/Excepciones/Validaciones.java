@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validaciones {
 
@@ -84,8 +86,8 @@ public class Validaciones {
 
             LocalDate hoy = LocalDate.now();
 
-            if (fecha.compareTo(hoy)<=0)
-                throw new Exception("La hora de inicio no puede ser mayor que la de fin");
+            //if (fecha.compareTo(hoy)!=0)
+            //    throw new Exception("La fecha no puede ser posterior a hoy");
 
             return true;
 
@@ -120,6 +122,29 @@ public class Validaciones {
             hora1.setSelectionStart(0);
             hora1.setSelectionEnd(hora1.getText().length());
             hora1.requestFocus();
+            return false;
+        }
+    }
+
+    public static boolean validarEmail(JTextField textField) {
+        try {
+            String email = textField.getText();
+            if (email.isEmpty())
+                throw new Exception("El " +  textField.getName() + " es un dato obligatorio");
+
+            Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            Matcher m = patron.matcher(email);
+            if (!m.matches())
+                 throw new Exception(textField.getName() + " no válido");
+
+            //textField.setEditable(false);
+            return true;
+        } catch (Exception e) {
+            mostrarError(e.getMessage());
+            textField.setSelectionStart(0);
+            textField.setSelectionEnd(textField.getText().length());
+            textField.requestFocus();
             return false;
         }
     }

@@ -10,7 +10,7 @@ public class AsistentesDAO extends BaseDatos {
     public AsistentesDAO() {    }
 
     public void crearAsistente(String nickname, String nombre, String apellido, LocalDate fechaNacimiento,
-                               String nacionalidad, Double sueldo, String nicknameEntenador) {
+                               String nacionalidad, Double sueldo, String nicknameEntenador) throws Exception {
 
         //iniciar transaccion
         transaction.begin();

@@ -10,7 +10,7 @@ public class EquiposDAO extends BaseDatos {
     public EquiposDAO() {    }
 
     public void crearEquipos(String nombre, LocalDate fechaFundacion, String ciudad, String sponsor,
-                              String nombeDuenio) {
+                              String nombeDuenio) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -36,7 +36,7 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void contratoJugador(int jugador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) {
+    public void contratoJugador(int jugador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -60,7 +60,7 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void contratoEntrenador(int entrenador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) {
+    public void contratoEntrenador(int entrenador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -84,7 +84,7 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public void contratoAsistente(int asistente, int equipo, LocalDate fechaInicio, LocalDate fechaFin) {
+    public void contratoAsistente(int asistente, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
         //iniciar transaccion
         transaction.begin();

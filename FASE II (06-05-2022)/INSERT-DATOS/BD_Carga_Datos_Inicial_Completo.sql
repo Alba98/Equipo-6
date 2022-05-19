@@ -71,10 +71,10 @@ INSERT INTO entrena (COD_ENTRENADOR,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (0
 
 INSERT INTO asiste (COD_ASISTENTE,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (10,03,TO_DATE('30/06/2022','DD/MM/YYYY'),TO_DATE('07/05/2020','DD/MM/YYYY'));
 INSERT INTO asiste (COD_ASISTENTE,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (02,01,TO_DATE('30/06/2022','DD/MM/YYYY'),TO_DATE('05/01/2021','DD/MM/YYYY'));
-
+/*
 INSERT INTO rol VALUES (01,'Administrador');
 INSERT INTO rol VALUES (02,'Usuario');
-
+*/
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Inaki',     TO_DATE('21/07/2000','DD/MM/YYYY'),'Egibide','Inaki@egibide.org',01);
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Idelfonso', TO_DATE('04/05/1998','DD/MM/YYYY'),'Egibide','Idelfonso@egibide.org',02);
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Natalia',   TO_DATE('01/02/2001','DD/MM/YYYY'),'Egibide','Natalia@egibide.org',01);

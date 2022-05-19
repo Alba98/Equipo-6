@@ -10,7 +10,7 @@ public class JugadoresDAO extends BaseDatos {
     public JugadoresDAO() {    }
 
     public void crearJugador(String nickname, String rol, String nombre, String apellido, LocalDate fechaNacimiento,
-                                String nacionalidad, Double sueldo) {
+                                String nacionalidad, Double sueldo) throws Exception {
 
         //iniciar transaccion
         transaction.begin();

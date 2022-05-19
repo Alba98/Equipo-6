@@ -9,7 +9,7 @@ public class JornadasDAO extends BaseDatos {
 
     public JornadasDAO() {    }
 
-    public void crearJornadas(int codTemporada, LocalDate fechaJornada) {
+    public void crearJornadas(int codTemporada, LocalDate fechaJornada) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
