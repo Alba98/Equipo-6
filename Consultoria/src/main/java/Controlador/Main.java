@@ -1,5 +1,6 @@
 package Controlador;
-import Factory.ReadXmlDomParser;
+
+import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.EntrenadoresEntity;
 import Vista.*;
 import javax.swing.*;
@@ -32,17 +33,18 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
+            //VentanaCarga();
+
             generarDAO();
 
-            //VentanaCarga();
+            ReadXmlDomParser xmlParser = new ReadXmlDomParser();
+            xmlParser.checkXML();
+
             //VentanaLogin();
             //VentanaRegistrar("test@gmail.com");
             //VentanaUsuario();
             //VentanaAdmin();
 
-            ReadXmlDomParser xmlParser = new ReadXmlDomParser();
-            xmlParser.checkXML();
-            
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
