@@ -6,6 +6,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "ASISTENTES", schema = "EQDAW06", catalog = "")
+
+@NamedQuery(name = "AsistentesEntity.todas", query = "SELECT a FROM AsistentesEntity a")
+@NamedQuery(name = "AsistentesEntity.borrar", query = "SELECT a FROM AsistentesEntity a WHERE a.codAsistente = " +
+        "                          (SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 ) ")
+
 public class AsistentesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

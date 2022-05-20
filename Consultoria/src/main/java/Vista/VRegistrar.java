@@ -1,8 +1,12 @@
 package Vista;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import Controlador.Main;
 import Excepciones.Validaciones;
 
@@ -16,27 +20,24 @@ public class VRegistrar {
     private JCheckBox ckVer;
 
 
-    public VRegistrar(String email) {
-        tfCorreo.setText(email);
-        tfcontraseña.setEchoChar('*');
-/*
-        tfNombre.setText("test");
-        tfFechaNacimiento.setText("03/05/1998");
-        tfcontraseña.setText("test");
-*/
-        
-        ckVer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (ckVer.isSelected())
-                {
-                    tfcontraseña.setEchoChar((char)0);
+    public VRegistrar() {
+        registrarButton.setBorderPainted(false);
+        registrarButton.setFocusable(false);
+        registrarButton.setRolloverEnabled(true);
 
-                }else{
-                    tfcontraseña.setEchoChar('*');
-                }
+        registrarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                registrarButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                registrarButton.setBackground(UIManager.getColor("control"));
             }
         });
+
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -1,9 +1,14 @@
 package Modelo.BD;
 
+import Modelo.UML.AsistentesEntity;
+import Modelo.UML.EntrenadoresEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class AsistentesDAO extends BaseDatos {
 
@@ -35,6 +40,39 @@ public class AsistentesDAO extends BaseDatos {
         storedProcedure.setParameter("P_NICKNAME_ENTRENADOR", nicknameEntenador);
         // execute SP
         storedProcedure.execute();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+    }
+
+    public List<AsistentesEntity> consultarAsistentes() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<AsistentesEntity> listaAsistentes;
+
+        // 3. Construir comandos SQL
+        TypedQuery<AsistentesEntity > qEventos =
+                em.createNamedQuery("AsistentesEntity.todas", AsistentesEntity.class);
+        listaAsistentes = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaAsistentes;
+    }
+
+    public void borrarAsistente(String nomAsis) throws Exception{
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<AsistentesEntity> qEventos =
+                em.createNamedQuery("AsistentesEntity.borrar", AsistentesEntity.class);
+        qEventos.setParameter(1, nomAsis.toUpperCase());
+        AsistentesEntity consulta = qEventos.getSingleResult();
+        if (consulta != null){
+            em.remove(consulta);
+        }
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();

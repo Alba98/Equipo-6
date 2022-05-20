@@ -1,9 +1,13 @@
 package Modelo.BD;
 
+import Modelo.UML.JugadoresEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class JugadoresDAO extends BaseDatos {
 
@@ -36,6 +40,119 @@ public class JugadoresDAO extends BaseDatos {
         storedProcedure.setParameter("P_SUELDO", sueldo);
         // execute SP
         storedProcedure.execute();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+    }
+
+    public List<JugadoresEntity> consultarJugadores() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaJugadores;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.todas", JugadoresEntity.class);
+        listaJugadores = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaJugadores;
+    }
+
+    public List<JugadoresEntity> consultarToplaners() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaToplaners;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.TOP", JugadoresEntity.class);
+        listaToplaners = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaToplaners;
+    }
+
+    public List<JugadoresEntity> consultarJunglers() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaJunglers;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.JGL", JugadoresEntity.class);
+        listaJunglers = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaJunglers;
+    }
+
+    public List<JugadoresEntity> consultarMidlaners() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaMidlaners;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.MID", JugadoresEntity.class);
+        listaMidlaners = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaMidlaners;
+    }
+
+    public List<JugadoresEntity> consultarADCarrys() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaADCarrys;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.ADC", JugadoresEntity.class);
+        listaADCarrys = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaADCarrys;
+    }
+
+    public List<JugadoresEntity> consultarSupports() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JugadoresEntity> listaSupports;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity > qEventos =
+                em.createNamedQuery("JugadoresEntity.SUPP", JugadoresEntity.class);
+        listaSupports = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaSupports;
+    }
+
+    public void borrarJugador(String jugadorBorrar) throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<JugadoresEntity> qEventos =
+                 em.createNamedQuery("JugadoresEntity.borrar", JugadoresEntity.class);
+        qEventos.setParameter(1, jugadorBorrar.toUpperCase());
+        JugadoresEntity consulta = qEventos.getSingleResult();
+        if (consulta != null){
+            em.remove(consulta);
+        }
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();

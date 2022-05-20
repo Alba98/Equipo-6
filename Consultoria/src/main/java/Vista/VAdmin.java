@@ -4,6 +4,7 @@ import Controlador.Main;
 import Excepciones.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +12,6 @@ import java.util.Arrays;
 public class VAdmin {
     private JTabbedPane VentanaAdmins;
     private JPanel PanelPrincipal;
-    private JPanel CContrato;
     private JPanel CJugador;
     private JPanel CEquipo;
     private JPanel CEntrenador;
@@ -25,16 +25,6 @@ public class VAdmin {
     private JLabel NNacionalidad;
     private JLabel NNickname;
     private JLabel NEntrenador;
-    private JPanel CCPrincipal;
-    private JLabel NJugador;
-    private JLabel NEquipo;
-    private JLabel FInicio;
-    private JComboBox Codejugador;
-    private JLabel FFinal;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JComboBox Codeequipo;
-    private JLabel Aviso;
     private JPanel CEQPrincipal;
     private JLabel NFecha;
     private JLabel NCiudad;
@@ -67,6 +57,12 @@ public class VAdmin {
 
     //Asistentes
 
+    private JLabel lANombre;
+    private JLabel lAApellido;
+    private JLabel lASueldo;
+    private JLabel lAFechaNac;
+    private JLabel lAPaiS;
+    private JLabel lANickname;
     private JTextField tANombre;
     private JTextField tAApellido;
     private JTextField tASueldo;
@@ -85,12 +81,257 @@ public class VAdmin {
     private JTextField tEqDuenio;
     private JButton bEqRegistar;
     private JButton bEqRestart;
+    private JComboBox cbEqEntre;
+    private JLabel lEqEntrenador;
+    private JLabel lEqSTAFF;
+    private JLabel lEqAsistente;
+    private JComboBox cbEqAsistente;
+    private JLabel lEqTOP;
+    private JComboBox cbEqTOP;
+    private JLabel lEqJugadore;
+    private JLabel lEqJGL;
+    private JComboBox cbEqJGL;
+    private JComboBox cbEqMID;
+    private JLabel lEqMID;
+    private JLabel lEqADC;
+    private JComboBox cbEqADC;
+    private JComboBox cbEqSUPP;
+    private JLabel lEqSUPP;
+    private JComboBox cbEqSuplente;
+    private JLabel lEqSuplente;
+    private JPanel CBorrar;
+    private JComboBox cbBJugadores;
+    private JButton bBJugadores;
+    private JComboBox cbBEntrenadores;
+    private JButton bBEntrenadores;
+    private JComboBox cbBAsistentes;
+    private JButton bBAsistentes;
+    private JComboBox cbBEquipos;
+    private JButton bBEquipos;
 
     public VAdmin() {
 
         tJNombre.requestFocus();
         llenarCBRoles(cbJROL);
         llenarCBEntrenadores(cbAEntrenador);
+        llenarCBSuplentesEQ(cbBJugadores);
+        llenarCBEntrenadores(cbBEntrenadores);
+        llenarCBAsistentesEQ(cbBAsistentes);
+        llenarCBEquipos(cbBEquipos);
+
+        //Aestetics botonones:
+
+        crearCalendarioButton.setBorderPainted(false);
+        crearCalendarioButton.setFocusable(false);
+        crearCalendarioButton.setRolloverEnabled(true);
+
+        bJRegistrar.setBorderPainted(false);
+        bJRegistrar.setFocusable(false);
+        bJRegistrar.setRolloverEnabled(true);
+
+        bJRestart.setBorderPainted(false);
+        bJRestart.setFocusable(false);
+        bJRestart.setRolloverEnabled(true);
+
+        bERegistrar.setBorderPainted(false);
+        bERegistrar.setFocusable(false);
+        bERegistrar.setRolloverEnabled(true);
+
+        bERestart.setBorderPainted(false);
+        bERestart.setFocusable(false);
+        bERestart.setRolloverEnabled(true);
+
+        bARegistrar.setBorderPainted(false);
+        bARegistrar.setFocusable(false);
+        bARegistrar.setRolloverEnabled(true);
+
+        bARestart.setBorderPainted(false);
+        bARestart.setFocusable(false);
+        bARestart.setRolloverEnabled(true);
+
+        bEqRegistar.setBorderPainted(false);
+        bEqRegistar.setFocusable(false);
+        bEqRegistar.setRolloverEnabled(true);
+
+        bEqRestart.setBorderPainted(false);
+        bEqRestart.setFocusable(false);
+        bEqRestart.setRolloverEnabled(true);
+
+        bBJugadores.setBorderPainted(false);
+        bBJugadores.setFocusable(false);
+        bBJugadores.setRolloverEnabled(true);
+
+        bBEntrenadores.setBorderPainted(false);
+        bBEntrenadores.setFocusable(false);
+        bBEntrenadores.setRolloverEnabled(true);
+
+        bBAsistentes.setBorderPainted(false);
+        bBAsistentes.setFocusable(false);
+        bBAsistentes.setRolloverEnabled(true);
+
+        bBEquipos.setBorderPainted(false);
+        bBEquipos.setFocusable(false);
+        bBEquipos.setRolloverEnabled(true);
+
+        //funciones MouseListener de los botones:
+
+        crearCalendarioButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                crearCalendarioButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                crearCalendarioButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bJRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bJRegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bJRegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bJRestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bJRestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bJRestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bERegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bERegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bERegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bERestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bERestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bERestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bARegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bARegistrar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bARegistrar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bARestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bARestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bARestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bEqRegistar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bEqRegistar.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bEqRegistar.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bEqRestart.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bEqRestart.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bEqRestart.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBJugadores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBJugadores.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBJugadores.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBEntrenadores.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBEntrenadores.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBEntrenadores.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBAsistentes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBAsistentes.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBAsistentes.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        //Actiones listeners:
 
         bJRegistrar.addActionListener(new ActionListener() {
             @Override
@@ -174,6 +415,72 @@ public class VAdmin {
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 llenarCBEntrenadores(cbAEntrenador);
+            }
+        });
+        tEqNombre.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBEntrenadoresEQ(cbEqEntre);
+                llenarCBAsistentesEQ(cbEqAsistente);
+                llenarCBToplaners(cbEqTOP);
+                llenarCBSuplentesEQ(cbEqSuplente);
+                llenarCBJunglers(cbEqJGL);
+                llenarCBMidlaners(cbEqMID);
+                llenarCBADCarrys(cbEqADC);
+                llenarCBSupports(cbEqSUPP);
+            }
+        });
+    VentanaAdmins.addComponentListener(new ComponentAdapter() { } );VentanaAdmins.addContainerListener(new ContainerAdapter() { } );
+        bBJugadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
+                try {
+                    Main.borrarJugador(jugadorBorrar);
+                    llenarCBSuplentesEQ(cbBJugadores);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        bBEntrenadores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomEntre = (String) cbBEntrenadores.getSelectedItem();
+                try {
+                    Main.borrarEntrenador(nomEntre);
+                    llenarCBEntrenadores(cbBEntrenadores);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
+        bBAsistentes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomAsis = (String) cbBAsistentes.getSelectedItem();
+                try {
+                    Main.borrarAsistente(nomAsis);
+                    llenarCBAsistentesEQ(cbBAsistentes);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
+        bBEquipos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nomEqui = (String) cbBEquipos.getSelectedItem();
+                try {
+                    Main.borrarEquipo(nomEqui);
+                    llenarCBEquipos(cbBEquipos);
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
     }
@@ -320,6 +627,135 @@ public class VAdmin {
         tEqSponsor.setText("");
         tEqDuenio.setText("");
     }
+
+    private void llenarCBEntrenadoresEQ(JComboBox cb) {
+        try {
+            ArrayList<String> entrenadores = Main.getEntrenadores();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String entrenador : entrenadores) {
+                cb.addItem(entrenador);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBAsistentesEQ(JComboBox cb) {
+        try {
+            ArrayList<String> asistentes = Main.getAsistentes();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String asistente : asistentes) {
+                cb.addItem(asistente);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBToplaners(JComboBox cb) {
+        try {
+            ArrayList<String> toplaners = Main.getToplaners();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String toplaner : toplaners) {
+                cb.addItem(toplaner);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBJunglers(JComboBox cb) {
+        try {
+            ArrayList<String> junglers = Main.getJunglers();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String jungler : junglers) {
+                cb.addItem(jungler);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBMidlaners(JComboBox cb) {
+        try {
+            ArrayList<String> midlaners = Main.getMidlaners();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String midlaner : midlaners) {
+                cb.addItem(midlaner);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBADCarrys(JComboBox cb) {
+        try {
+            ArrayList<String> ADCarrys = Main.getADCarrys();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String ADCarry : ADCarrys) {
+                cb.addItem(ADCarry);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBSupports(JComboBox cb) {
+        try {
+            ArrayList<String> Supports = Main.getSupports();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String Support : Supports) {
+                cb.addItem(Support);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBSuplentesEQ(JComboBox cb) {
+        try {
+            ArrayList<String> suplentes = Main.getSuplentes();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String suplente : suplentes) {
+                cb.addItem(suplente);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void llenarCBEquipos(JComboBox cb) {
+        try {
+            ArrayList<String> equipos = Main.getEquipos();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String equipo : equipos) {
+                cb.addItem(equipo);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+
+
     public JTabbedPane getVentanaAdmins() {
         return VentanaAdmins;
     }

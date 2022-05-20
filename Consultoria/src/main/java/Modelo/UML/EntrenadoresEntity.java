@@ -8,6 +8,8 @@ import java.util.Objects;
 @Table(name = "ENTRENADORES", schema = "EQDAW06", catalog = "")
 
 @NamedQuery(name = "EntrenadoresEntity.todas", query = "SELECT e FROM EntrenadoresEntity e")
+@NamedQuery(name = "EntrenadoresEntity.borrar", query = "SELECT e.codEntrenador FROM EntrenadoresEntity e WHERE e.codEntrenador=" +
+        "(SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 )")
 
 public class EntrenadoresEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

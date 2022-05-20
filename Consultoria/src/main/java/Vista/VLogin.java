@@ -3,10 +3,8 @@ import Controlador.Main;
 import Excepciones.Validaciones;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.*;
+import java.awt.event.*;
 
 public class VLogin {
     public JPanel pPrincipal;
@@ -18,6 +16,23 @@ public class VLogin {
 
 
     public VLogin() {
+        loginButton.setBorderPainted(false);
+        loginButton.setFocusable(false);
+        loginButton.setRolloverEnabled(true);
+
+        loginButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                loginButton.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                loginButton.setBackground(UIManager.getColor("control"));
+            }
+        });
+
         contra.setEchoChar('*');
         /*
         tFCorreo.setText("admin@gmail.com");
