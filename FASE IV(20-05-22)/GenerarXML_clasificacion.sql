@@ -1,5 +1,5 @@
-set serveroutput on;
-declare
+PROCEDURE clasificacion
+AS
     textoxml xmltype;
     resultado clob;
     fecha date;

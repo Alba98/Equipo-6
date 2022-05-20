@@ -1,5 +1,7 @@
 package Modelo.Factory;
 
+import Controlador.Main;
+import Excepciones.Validaciones;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -10,7 +12,9 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -339,7 +343,36 @@ public class ReadXmlDomParser {
         return DatosClasificacion;
     }
 
-    public void generaXMLs(String path) {}
+    public void generaXMLs(String path) {
+
+        try {
+            File tempfile = new File("resources", "resultados_jornadas.xml");
+
+            FileWriter fw = new FileWriter( tempfile.getAbsoluteFile( ) );
+            BufferedWriter bw = new BufferedWriter( fw );
+            bw.write( Main.getDatosClasificacionXML() );
+
+            bw.close();
+            fw.close();
+
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+
+        try {
+            File tempfile = new File("resources", "clasificacion.xml");
+
+            FileWriter fw = new FileWriter( tempfile.getAbsoluteFile( ) );
+            BufferedWriter bw = new BufferedWriter( fw );
+            bw.write( Main.getDatosClasificacionXML() );
+
+            bw.close();
+            fw.close();
+
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
 
 
 }

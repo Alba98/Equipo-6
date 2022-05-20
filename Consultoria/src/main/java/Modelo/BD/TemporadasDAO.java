@@ -11,7 +11,7 @@ public class TemporadasDAO extends BaseDatos{
         transaction.begin();
 
         // Ejecutar package
-        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("GEST_TEMPORADA.INSERT_TEMPORADA");
+        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("INSERT_TEMPORADA");
         // execute SP
         storedProcedure.execute();
 

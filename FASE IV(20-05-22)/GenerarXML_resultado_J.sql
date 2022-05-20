@@ -1,5 +1,6 @@
-set serveroutput on;
-declare
+
+PROCEDURE resultados_jornadas
+AS
     textoxml xmltype;
     resultado clob;
     
@@ -29,6 +30,6 @@ begin
     from dual;
     
     resultado := textoxml.getClobVal();
+    insert into almacen_xml(result_xml) values (resultado);
     
-    dbms_output.put_line(resultado);
-end;
+end resultados_jornadas;
