@@ -35,10 +35,7 @@ public class VLogin {
         });
 
         contra.setEchoChar('*');
-
-        tFCorreo.setText("alba@gmail.com");
-        contra.setText("Hola");
-
+        
         ckVer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,10 +49,9 @@ public class VLogin {
             }
         });
 
-
         loginButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { //validarEmail
+            public void actionPerformed(ActionEvent e) {
                 login();
             }
         });
@@ -79,22 +75,6 @@ public class VLogin {
         JPasswordField psswrd = contra;
         psswrd.setEchoChar((char)0);
         Main.login(tFCorreo.getText(), psswrd.getPassword());
-
-        /*
-        if (tFCorreo.getText() == "Select Email from usuarios")
-        {
-            if (tFCorreo.getText() == "Select Email from usuarios where cod_rol = 01")
-                Main.VentanaAdmin();
-            else
-            if (tFCorreo.getText() == "Select Email from usuarios where cod_rol = 02")
-                Main.VentanaUsuario();
-        }
-        else
-        {
-            Main.CrearCuenta();*
-        }
-        */
-
     }
 }
 
