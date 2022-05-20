@@ -289,8 +289,6 @@ public class ReadXmlDomParser {
 
         StringBuilder datos = new StringBuilder();
 
-        datos.append("\t RESULTADOS JORNADAS \n");
-
         for (DatosJornadasXML.Jornada jornada : DatosJornadas.getJornadas()) {
             datos.append("JORNADA ").append(jornada.getNum_jornada()).append("\n");
 
@@ -310,8 +308,6 @@ public class ReadXmlDomParser {
 
     public String getClasificacion() {
         StringBuilder datos = new StringBuilder();
-
-        datos.append("\t CLASIFICACION \n");
 
         for (DatosClasificacionXML.Temporada temporada : DatosClasificacion.getTemporadas()) {
 

@@ -1,9 +1,14 @@
 package Modelo.BD;
 
+import Modelo.UML.EquiposEntity;
+import Modelo.UML.PartidosEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalTime;
+import java.util.List;
 
 public class PartidosDAO extends BaseDatos {
 
@@ -52,6 +57,22 @@ public class PartidosDAO extends BaseDatos {
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public List<PartidosEntity> consultarPartidos() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<PartidosEntity> listaPartidos;
+
+        // 3. Construir comandos SQL
+        TypedQuery<PartidosEntity > qEventos =
+                em.createNamedQuery("PartidosEntity.todos", PartidosEntity.class);
+        listaPartidos = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaPartidos;
     }
 
 }
