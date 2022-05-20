@@ -65,5 +65,21 @@ BEGIN
     GEST_PARTIDOS.INSERT_RESULTADO(P_COD_PARTIDO, P_RESULTADO); 
 END;
 
+SELECT * FROM VISTA_CLASIFICACION;
+
+-- **************************************************************
+
+/*
+    PARTIDOS GANADOS:
+*/
+set serveroutput on;
+DECLARE
+    GANADOS NUMBER(2);
+    P_COD_EQUIPO NUMBER(2) := 03;
+BEGIN
+   SELECT GEST_PARTIDOS.PARTIDOS_GANADOS(P_COD_EQUIPO) INTO GANADOS
+   FROM DUAL;
+   dbms_output.put_line(GANADOS);
+END;
 
 --ROLLBACK;

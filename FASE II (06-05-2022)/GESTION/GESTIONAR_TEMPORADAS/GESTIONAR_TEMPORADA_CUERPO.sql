@@ -4,14 +4,13 @@
   Descripcion:  Paquete gestion de temprodas
  */
  
-CREATE OR REPLACE PACKAGE BODY GEST_TEMPORADA AS
   
 -- **************************************************************
 /*
     Procedimiento INSERT_TEMPORADA: insertar un jugador insertando los datos en 
     persona
 */
-PROCEDURE INSERT_TEMPORADA
+CREATE OR REPLACE PROCEDURE INSERT_TEMPORADA
 AS
 BEGIN    
     --insertar equipo

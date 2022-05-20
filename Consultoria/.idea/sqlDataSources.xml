@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="44846be3-f893-4ed5-8631-c668ebe780c3" name="default Mapping">
+      <data-sources db="73604fb4-02d2-4ab5-b782-481f8ef57efb" />
+      <scope>
+        <node negative="1">
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+          <node kind="schema" qname="DAW26" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

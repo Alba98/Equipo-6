@@ -5,27 +5,30 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "USUARIOS", schema = "SYSTEM", catalog = "")
+@Table(name = "USUARIOS", schema = "EQDAW06", catalog = "")
 public class UsuariosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_USUARIO")
+    @Column(name = "COD_USUARIO", nullable = false, precision = 0)
     private byte codUsuario;
     @Basic
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE", nullable = true, length = 15)
     private String nombre;
     @Basic
-    @Column(name = "FECHA_NACIMIENTO")
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
     private Date fechaNacimiento;
     @Basic
-    @Column(name = "PASSWORD_")
+    @Column(name = "PASSWORD_", nullable = true, length = 20)
     private String password;
     @Basic
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false, length = 30)
     private String email;
     @Basic
-    @Column(name = "COD_ROL")
+    @Column(name = "COD_ROL", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codRol;
+    @ManyToOne
+    @JoinColumn(name = "COD_ROL", referencedColumnName = "COD_ROL")
+    private RolEntity rolByCodRol;
 
     public byte getCodUsuario() {
         return codUsuario;
@@ -86,5 +89,13 @@ public class UsuariosEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codUsuario, nombre, fechaNacimiento, password, email, codRol);
+    }
+
+    public RolEntity getRolByCodRol() {
+        return rolByCodRol;
+    }
+
+    public void setRolByCodRol(RolEntity rolByCodRol) {
+        this.rolByCodRol = rolByCodRol;
     }
 }

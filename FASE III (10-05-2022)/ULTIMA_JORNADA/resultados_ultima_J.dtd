@@ -1,11 +1,10 @@
-<!ELEMENT ultima_jornada (jornada)>
-<!ELEMENT jornada ((num_jornada,fecha_jornada,partido*))>
-<!ELEMENT num_jornada (#PCDATA)>
-<!ELEMENT fecha_jornada (#PCDATA)>
-<!ELEMENT partido ((fecha_partido,cod_partido,resultado,nombre_equipo+))>
-<!ELEMENT fecha_partido (#PCDATA)>
-<!ELEMENT cod_partido (#PCDATA)>
+<!ELEMENT ultima_jornada (fecha_expiracion, jornada)>
+<!ELEMENT fecha_expiracion (#PCDATA)>
+<!ELEMENT jornada (partido+)>
+<!ELEMENT partido ((resultado,nombre_equipo+))>
 <!ELEMENT resultado (#PCDATA)>
 <!ELEMENT nombre_equipo (#PCDATA)>
-<!ATTLIST cod_partido id_partido CDATA #REQUIRED>
-<!ATTLIST resultado puntuacion NMTOKEN #REQUIRED>
+<!ATTLIST jornada num_jornada CDATA #REQUIRED>
+<!ATTLIST jornada fecha_jornada CDATA #REQUIRED>
+<!ATTLIST partido cod_partido CDATA #REQUIRED>
+<!ATTLIST partido hora_partido CDATA #REQUIRED>

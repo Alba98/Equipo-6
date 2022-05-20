@@ -116,4 +116,128 @@ EXCEPTION
         RAISE_APPLICATION_ERROR('-20999','Error desconocido');
 END INSERT_RESULTADO;
 
-END GEST_PARTIDOS;
+
+
+
+/******************************************************************************/
+
+PROCEDURE INSERT_CLASIFICACION(
+	P_COD_EQUIPO1 PARTICIPA.COD_EQUIPO1%TYPE,
+    P_COD_EQUIPO2 PARTICIPA.COD_EQUIPO2%TYPE,
+    P_RESULTADO   PARTIDOS.RESULTADO%TYPE
+)
+
+AS
+
+PUNTOSEQUIPO1 NUMBER(1);
+PUNTOSEQUIPO2 NUMBER(1);
+CLASIFICACION_NO_EXISTE EXCEPTION;
+
+BEGIN
+    SELECT TO_NUMBER(SUBSTR(RESULTADO,1,1)) AS EQUIPO1,
+           TO_NUMBER(SUBSTR(RESULTADO,3,3)) AS EQUIPO2            
+    
+    INTO   PUNTOSEQUIPO1,PUNTOSEQUIPO2
+
+    FROM PARTIDOS;
+
+IF SQL%NOTFOUND
+    THEN
+        RAISE CLASIFICACION_NO_EXISTE;
+END IF;
+
+EXCEPTION 
+
+WHEN CLASIFICACION_NO_EXISTE THEN 
+          RAISE_APPLICATION_ERROR('-20024' ,'Err. clasificaion no existe');
+	WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR('-20999','Error desconocido');
+        
+END INSERT_CLASIFICACION;
+
+-- **************************************************************
+
+-- Programacion de la funcion
+FUNCTION  PARTIDOS_GANADOS
+    (P_COD_EQUIPO NUMBER)
+    RETURN NUMBER
+    AS
+        V_GANADOS NUMBER := 0;
+  
+        CURSOR C_PARTIDOS_EQUIPO IS (
+            SELECT COD_PARTIDO, COD_EQUIPO1
+            FROM PARTICIPA
+            WHERE (COD_EQUIPO1 = P_COD_EQUIPO OR COD_EQUIPO2 = P_COD_EQUIPO));
+            
+        R_EQUIPO1 NUMBER;
+        R_EQUIPO2 NUMBER;
+    BEGIN            
+        FOR REG_COD_PARTIDO IN C_PARTIDOS_EQUIPO 
+        LOOP
+            --CONSEGUIR EL RESULTADO DEL PARTIDO EN CUESTION
+            SELECT to_number(SUBSTR(RESULTADO, 1, 1)), to_number(SUBSTR(RESULTADO, 3, 3))
+                INTO R_EQUIPO1, R_EQUIPO1
+            FROM PARTIDOS
+            WHERE COD_PARTIDO = REG_COD_PARTIDO.COD_PARTIDO;
+                
+            --COMRPOBAR QUE EXISTE UN RESULADO PARA EL PARTIDO
+            --IF(R_EQUIPO1 IS NOT NULL)
+            --THEN
+                --MIRAR SI ES EL EQUIPO1
+                IF(P_COD_EQUIPO = REG_COD_PARTIDO.COD_EQUIPO1)
+                THEN
+                    --COMPROBAR SI HA GANADO
+                    IF (R_EQUIPO1 > R_EQUIPO2)
+                    THEN
+                        V_GANADOS := V_GANADOS + 1;
+                    END IF;
+                ELSE 
+                    -- ES EL EQUIPO2
+                    IF (R_EQUIPO2 > R_EQUIPO1)
+                    THEN
+                        V_GANADOS := V_GANADOS + 1;
+                    END IF;
+                END IF;
+            --END IF;    
+        END LOOP;
+        
+    RETURN V_GANADOS;   
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR('-20999','Error desconocido');
+END PARTIDOS_GANADOS;
+
+END GEST_PARTIDOS;			   
+				   
+
+
+
+
+ 
+
+
+
+
+	
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

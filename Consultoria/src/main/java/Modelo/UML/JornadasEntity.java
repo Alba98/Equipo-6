@@ -2,21 +2,29 @@ package Modelo.UML;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
+@NamedQuery(name = "JornadasEntity.toda", query = "SELECT j FROM JornadasEntity j")
+
 @Entity
-@Table(name = "JORNADAS", schema = "SYSTEM", catalog = "")
+@Table(name = "JORNADAS", schema = "EQDAW06", catalog = "")
 public class JornadasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_JORNADA")
+    @Column(name = "COD_JORNADA", nullable = false, precision = 0)
     private byte codJornada;
     @Basic
-    @Column(name = "COD_TEMPORADA")
+    @Column(name = "COD_TEMPORADA", nullable = true, precision = 0,insertable =false, updatable = false)
     private Byte codTemporada;
     @Basic
-    @Column(name = "FECHA_JORNADA")
+    @Column(name = "FECHA_JORNADA", nullable = true)
     private Date fechaJornada;
+    @ManyToOne
+    @JoinColumn(name = "COD_TEMPORADA", referencedColumnName = "COD_TEMPORADA")
+    private TemporadasEntity temporadasByCodTemporada;
+    @OneToMany(mappedBy = "jornadasByCodJornada")
+    private Collection<PartidosEntity> partidosByCodJornada;
 
     public byte getCodJornada() {
         return codJornada;
@@ -53,5 +61,21 @@ public class JornadasEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codJornada, codTemporada, fechaJornada);
+    }
+
+    public TemporadasEntity getTemporadasByCodTemporada() {
+        return temporadasByCodTemporada;
+    }
+
+    public void setTemporadasByCodTemporada(TemporadasEntity temporadasByCodTemporada) {
+        this.temporadasByCodTemporada = temporadasByCodTemporada;
+    }
+
+    public Collection<PartidosEntity> getPartidosByCodJornada() {
+        return partidosByCodJornada;
+    }
+
+    public void setPartidosByCodJornada(Collection<PartidosEntity> partidosByCodJornada) {
+        this.partidosByCodJornada = partidosByCodJornada;
     }
 }

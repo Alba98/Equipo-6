@@ -2,27 +2,20 @@
 <ultima_jornada 
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="ultima_jornada.xsd">
-    <jornada>
-        <num_jornada>1</num_jornada>
-         <fecha_jornada>2022-05-08</fecha_jornada> 
-         <partido>
-             <fecha_partido>2022-05-08</fecha_partido>
-             <cod_partido id_partido="001" />
-             <resultado puntuacion="3-0" />
-             <nombre_equipo >FNATIC</nombre_equipo>
+    <fecha_expiracion>2022-05-17</fecha_expiracion>
+    <jornada num_jornada="1" fecha_jornada="2022-05-08">
+         <partido cod_partido="01" hora_partido="17:00:00">
+             <resultado>3-0</resultado>
+             <nombre_equipo>FNATIC</nombre_equipo>
              <nombre_equipo >G2</nombre_equipo>
          </partido>
-         <partido>
-             <fecha_partido>2022-05-08</fecha_partido>
-             <cod_partido id_partido="002" />
-             <resultado puntuacion="3-0" />
+         <partido cod_partido="02" hora_partido="19:00:00">
+             <resultado>0-3</resultado>
              <nombre_equipo >ASTRALIS</nombre_equipo>
              <nombre_equipo >MISFITS</nombre_equipo>
          </partido>
-         <partido>
-             <fecha_partido>2022-05-08</fecha_partido>
-             <cod_partido id_partido="003" />
-             <resultado puntuacion="3-0" />
+         <partido cod_partido="03" hora_partido="21:00:00">
+             <resultado>3-0</resultado>
              <nombre_equipo >MAD LIONS</nombre_equipo>
              <nombre_equipo >BDS</nombre_equipo>
          </partido>

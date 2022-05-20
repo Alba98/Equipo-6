@@ -3,6 +3,11 @@ INSERT INTO temporadas (abierta) VALUES ('S');
 INSERT INTO temporadas (abierta) VALUES ('S');
 INSERT INTO temporadas (abierta) VALUES ('S');
 
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Gasteiz-Goya',    TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Ruiz de Villareal');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Real Horses',     TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('UCUENCA E-Sports',TO_DATE('26/11/2018','DD/MM/YYYY'), 'Cuenca', 'Universidad de Cuenca', 'Manuela Penial');
+INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Duero-Pascual',   TO_DATE('30/04/2022','DD/MM/YYYY'), 'Burgos', 'Pascual', 'Rodrigo Infante');
+
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('04/11/2022','DD/MM/YYYY'));
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (01, TO_DATE('11/11/2022','DD/MM/YYYY'));
 INSERT INTO jornadas (cod_temporada, fecha_jornada) VALUES (02, TO_DATE('18/11/2022','DD/MM/YYYY'));
@@ -12,11 +17,6 @@ INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('19:00',null
 INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('21:00','1-3',2);
 INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('20:00','3-0',3);
 INSERT INTO partidos (hora_partido, resultado, cod_jornada) VALUES ('19:00','3-1',4);
-
-INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Gasteiz-Goya',    TO_DATE('23/01/2021','DD/MM/YYYY'), 'Vitoria', 'Goya', 'Eneko Ruiz de Villareal');
-INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Real Horses',     TO_DATE('02/05/2016','DD/MM/YYYY'), 'Madrid', 'SGAE', 'Pablo Luchs');
-INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('UCUENCA E-Sports',TO_DATE('26/11/2018','DD/MM/YYYY'), 'Cuenca', 'Universidad de Cuenca', 'Manuela Penial');
-INSERT INTO equipos (nombre, fecha_nacimiento, ciudad, esponsor, nombre_duenio) VALUES('Duero-Pascual',   TO_DATE('30/04/2022','DD/MM/YYYY'), 'Burgos', 'Pascual', 'Rodrigo Infante');
 
 INSERT INTO participa VALUES (01, 02, 01);
 INSERT INTO participa VALUES (02, 01, 02);
@@ -71,13 +71,14 @@ INSERT INTO entrena (COD_ENTRENADOR,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (0
 
 INSERT INTO asiste (COD_ASISTENTE,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (10,03,TO_DATE('30/06/2022','DD/MM/YYYY'),TO_DATE('07/05/2020','DD/MM/YYYY'));
 INSERT INTO asiste (COD_ASISTENTE,COD_EQUIPO,FECHA_FIN,FECHA_INICIO) VALUES (02,01,TO_DATE('30/06/2022','DD/MM/YYYY'),TO_DATE('05/01/2021','DD/MM/YYYY'));
-
+/*
 INSERT INTO rol VALUES (01,'Administrador');
 INSERT INTO rol VALUES (02,'Usuario');
-
+*/
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Inaki',     TO_DATE('21/07/2000','DD/MM/YYYY'),'Egibide','Inaki@egibide.org',01);
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Idelfonso', TO_DATE('04/05/1998','DD/MM/YYYY'),'Egibide','Idelfonso@egibide.org',02);
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Natalia',   TO_DATE('01/02/2001','DD/MM/YYYY'),'Egibide','Natalia@egibide.org',01);
 INSERT INTO usuarios (nombre, fecha_nacimiento, password_, email, cod_rol) VALUES ('Victoria',  TO_DATE('16/11/1999','DD/MM/YYYY'),'Egibide','Victoria@egibide.org',02);
 
 
+COMMIT;

@@ -1,18 +1,32 @@
 package Modelo.UML;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ASISTENTES", schema = "SYSTEM", catalog = "")
+@Table(name = "ASISTENTES", schema = "EQDAW06", catalog = "")
+
+@NamedQuery(name = "AsistentesEntity.todas", query = "SELECT a FROM AsistentesEntity a")
+@NamedQuery(name = "AsistentesEntity.borrar", query = "SELECT a FROM AsistentesEntity a WHERE a.codAsistente = " +
+        "                          (SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 ) ")
+
 public class AsistentesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_ASISTENTE")
+    @Column(name = "COD_ASISTENTE", nullable = false, precision = 0, insertable =false, updatable = false)
     private byte codAsistente;
     @Basic
-    @Column(name = "COD_ENTRE_ASOCIADO")
+    @Column(name = "COD_ENTRE_ASOCIADO", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codEntreAsociado;
+    @OneToMany(mappedBy = "asistentesByCodAsistente")
+    private Collection<AsisteEntity> asistesByCodAsistente;
+    @OneToOne
+    @JoinColumn(name = "COD_ASISTENTE", referencedColumnName = "COD_PERSONA", nullable = false)
+    private PersonasEntity personasByCodAsistente;
+    @ManyToOne
+    @JoinColumn(name = "COD_ENTRE_ASOCIADO", referencedColumnName = "COD_ENTRENADOR")
+    private EntrenadoresEntity entrenadoresByCodEntreAsociado;
 
     public byte getCodAsistente() {
         return codAsistente;
@@ -41,5 +55,29 @@ public class AsistentesEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codAsistente, codEntreAsociado);
+    }
+
+    public Collection<AsisteEntity> getAsistesByCodAsistente() {
+        return asistesByCodAsistente;
+    }
+
+    public void setAsistesByCodAsistente(Collection<AsisteEntity> asistesByCodAsistente) {
+        this.asistesByCodAsistente = asistesByCodAsistente;
+    }
+
+    public PersonasEntity getPersonasByCodAsistente() {
+        return personasByCodAsistente;
+    }
+
+    public void setPersonasByCodAsistente(PersonasEntity personasByCodAsistente) {
+        this.personasByCodAsistente = personasByCodAsistente;
+    }
+
+    public EntrenadoresEntity getEntrenadoresByCodEntreAsociado() {
+        return entrenadoresByCodEntreAsociado;
+    }
+
+    public void setEntrenadoresByCodEntreAsociado(EntrenadoresEntity entrenadoresByCodEntreAsociado) {
+        this.entrenadoresByCodEntreAsociado = entrenadoresByCodEntreAsociado;
     }
 }

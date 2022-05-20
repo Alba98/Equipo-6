@@ -1,0 +1,41 @@
+-- LOG_IN
+/* 
+ Fecha: 17/05/2022
+ Descripcion:  funcion para hacer login y conseguir el rol del usuario
+*/
+
+
+CREATE OR REPLACE FUNCTION LOG_IN(USERNAME IN VARCHAR2, PASSWD IN VARCHAR2)
+RETURN NUMBER
+AS
+    MATCH_COUNT NUMBER;
+    INCORRECTO EXCEPTION;
+    DUPLICADO EXCEPTION;
+    P_COD_ROL USUARIOS.COD_ROL%TYPE;
+BEGIN
+      SELECT COUNT(*)
+    INTO MATCH_COUNT FROM USUARIOS
+    WHERE EMAIL=USERNAME
+    AND PASSWORD_=PASSWD;
+    
+    IF MATCH_COUNT = 0 THEN
+        RAISE INCORRECTO;
+    ELSIF MATCH_COUNT = 1 THEN
+        --RETURN 'LOGIN SUCCESSFUL!';
+        -- conseguir el cod del rol
+        SELECT COD_ROL INTO P_COD_ROL
+        FROM USUARIOS
+        WHERE UPPER(EMAIL) = UPPER(USERNAME);
+        -- devolver el codigo de la rol
+        RETURN P_COD_ROL;
+    ELSE
+        RAISE DUPLICADO;
+    END IF;
+EXCEPTION
+    WHEN INCORRECTO THEN
+        RAISE_APPLICATION_ERROR (-20054 ,'Err. email o contrasena incorrecta');
+    WHEN DUPLICADO THEN
+        RAISE_APPLICATION_ERROR (-20054 ,'Err. email duplicado');
+	WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20999,'Error desconocido');
+END;

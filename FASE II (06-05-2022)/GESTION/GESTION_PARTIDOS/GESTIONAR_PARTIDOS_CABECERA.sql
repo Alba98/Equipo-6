@@ -25,4 +25,23 @@ AS
         P_COD_PARTIDO PARTIDOS.COD_PARTIDO%TYPE,
         P_RESULTADO PARTIDOS.RESULTADO%TYPE
         );
+-- **************************************************************		
+/*
+Procedimiento CLASIFICACION: Calcular ganador y perdedor
+*/ 
+       
+PROCEDURE INSERT_CLASIFICACION(
+	P_COD_EQUIPO1 PARTICIPA.COD_EQUIPO1%TYPE,
+    P_COD_EQUIPO2 PARTICIPA.COD_EQUIPO2%TYPE,
+    P_RESULTADO   PARTIDOS.RESULTADO%TYPE
+);
+-- **************************************************************	
+
+
+FUNCTION  PARTIDOS_GANADOS
+    (P_COD_EQUIPO NUMBER)
+    RETURN NUMBER;
+
+
+
 END GEST_PARTIDOS;

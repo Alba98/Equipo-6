@@ -1,24 +1,32 @@
 package Modelo.UML;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
+@NamedQuery(name = "PartidosEntity.todos", query = "SELECT p FROM PartidosEntity p")
+
 @Entity
-@Table(name = "PARTIDOS", schema = "SYSTEM", catalog = "")
+@Table(name = "PARTIDOS", schema = "EQDAW06", catalog = "")
 public class PartidosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "COD_PARTIDO")
+    @Column(name = "COD_PARTIDO", nullable = false, precision = 0)
     private byte codPartido;
     @Basic
-    @Column(name = "HORA_PARTIDO")
+    @Column(name = "HORA_PARTIDO", nullable = true, length = 30)
     private String horaPartido;
     @Basic
-    @Column(name = "RESULTADO")
+    @Column(name = "RESULTADO", nullable = true, length = 3)
     private String resultado;
     @Basic
-    @Column(name = "COD_JORNADA")
+    @Column(name = "COD_JORNADA", nullable = true, precision = 0, insertable =false, updatable = false)
     private Byte codJornada;
+    @OneToMany(mappedBy = "partidosByCodPartido")
+    private Collection<ParticipaEntity> participasByCodPartido;
+    @ManyToOne
+    @JoinColumn(name = "COD_JORNADA", referencedColumnName = "COD_JORNADA")
+    private JornadasEntity jornadasByCodJornada;
 
     public byte getCodPartido() {
         return codPartido;
@@ -63,5 +71,21 @@ public class PartidosEntity {
     @Override
     public int hashCode() {
         return Objects.hash(codPartido, horaPartido, resultado, codJornada);
+    }
+
+    public Collection<ParticipaEntity> getParticipasByCodPartido() {
+        return participasByCodPartido;
+    }
+
+    public void setParticipasByCodPartido(Collection<ParticipaEntity> participasByCodPartido) {
+        this.participasByCodPartido = participasByCodPartido;
+    }
+
+    public JornadasEntity getJornadasByCodJornada() {
+        return jornadasByCodJornada;
+    }
+
+    public void setJornadasByCodJornada(JornadasEntity jornadasByCodJornada) {
+        this.jornadasByCodJornada = jornadasByCodJornada;
     }
 }

@@ -6,6 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="Consultoria" value="73604fb4-02d2-4ab5-b782-481f8ef57efb" />
           <factory-entry name="default" value="426e03b9-7f57-4306-adbf-7534a64f7ced" />
         </datasource-mapping>
         <naming-strategy-map />

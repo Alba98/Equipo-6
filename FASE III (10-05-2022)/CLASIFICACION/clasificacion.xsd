@@ -4,31 +4,39 @@
   
   <xs:complexType name="clasificacionType">
     <xs:sequence>
-      <xs:element name="equipo" type="equipoType" maxOccurs="unbounded" />
+    <xs:element name="fecha_caducidad" type="xs:date" />
+    <xs:element name="temporada" type="temporadaType" />
     </xs:sequence>
   </xs:complexType>
 
+<xs:complexType name="temporadaType">
+    <xs:sequence>
+      <xs:element name="equipo" type="equipoType" minOccurs="2" maxOccurs="unbounded" /> 
+    </xs:sequence>
+    <xs:attribute name="cod_temporada" type="xs:byte" />
+</xs:complexType>
 
   <xs:complexType name="equipoType">
     <xs:sequence>
       <xs:element name="nombre" type="xs:string" />
-      <xs:element name="duenio" type="xs:string" />
-      <xs:element name="resultado" type="resultadoType" />
+      <xs:element name="lista_jugadores" type="listajugType" />
     </xs:sequence>
+    <xs:attribute name="cod_equipo" type="xs:int" />
+    <xs:attribute name="partidos_ganados" type="xs:int" />
   </xs:complexType>
   
-  <xs:complexType name="resultadoType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="puntuacion" type="t_puntuacion"/>
-      </xs:extension>
-    </xs:simpleContent>
+  <xs:complexType name="listajugType">
+    <xs:sequence>
+      <xs:element name="jugador" type="jugadorType" maxOccurs="6" minOccurs="5" />    
+    </xs:sequence>  
   </xs:complexType>
   
-  <xs:simpleType name="t_puntuacion">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="[0-9]-[0-9]"/>    
-    </xs:restriction>
-</xs:simpleType>
-  
+  <xs:complexType name="jugadorType">
+    <xs:sequence>
+      <xs:element name="nickname" type="xs:string" />
+      <xs:element name="rol" type="xs:string" />
+    </xs:sequence>  
+  </xs:complexType>
+    
   </xs:schema>
+

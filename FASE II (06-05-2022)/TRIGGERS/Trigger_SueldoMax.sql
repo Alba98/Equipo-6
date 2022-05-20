@@ -1,5 +1,5 @@
 CREATE OR REPLACE TRIGGER T_SueldoMax
-  BEFORE INSERT on jugar_para
+  BEFORE INSERT OR UPDATE on jugar_para
     FOR EACH ROW
       DECLARE
         v_codEquipo NUMBER;
