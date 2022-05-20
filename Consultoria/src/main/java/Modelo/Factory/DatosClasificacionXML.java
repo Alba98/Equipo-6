@@ -12,6 +12,14 @@ public class DatosClasificacionXML {
             this.nickname = nickname;
             this.rol = rol;
         }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public String getRol() {
+            return rol;
+        }
     }
     public class Equipo {
         private String nombre;
@@ -31,6 +39,22 @@ public class DatosClasificacionXML {
             lista_jugadores.add(jugador);
             return  jugador;
         }
+
+        public ArrayList<Jugador> getLista_jugadores() {
+            return lista_jugadores;
+        }
+
+        public String getNombre() {
+            return nombre;
+        }
+
+        public int getCod_equipo() {
+            return cod_equipo;
+        }
+
+        public int getPartidos_ganados() {
+            return partidos_ganados;
+        }
     }
     public class Temporada {
         private int cod_temporada;
@@ -46,6 +70,15 @@ public class DatosClasificacionXML {
             equipos.add(equipo);
             return  equipo;
         }
+
+        public ArrayList<Equipo> getEquipos() {
+            return equipos;
+        }
+
+        public int getCod_temporada() {
+            return cod_temporada;
+        }
+
     }
 
     private ArrayList<Temporada> temporadas;
@@ -60,4 +93,7 @@ public class DatosClasificacionXML {
         return  temporada;
     }
 
+    public ArrayList<Temporada> getTemporadas() {
+        return temporadas;
+    }
 }

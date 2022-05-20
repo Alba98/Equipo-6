@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Factory.DatosClasificacionXML;
 import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.EntrenadoresEntity;
@@ -444,7 +445,164 @@ public class Main {
 
     public static void PanelClasificacion() {
 
-     
+        JFrame frame = new JFrame("CLASIFICACION");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(525, 800);
+
+
+        JPanel pPincipal = new JPanel();
+        pPincipal.setBackground(Color.green);
+        pPincipal.setBounds(0, 0, 800, 800);
+        pPincipal.setLayout(null);
+        JScrollPane scroll = new JScrollPane(pPincipal);
+        JScrollPane s = new JScrollPane(pPincipal, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        Border border = BorderFactory.createLineBorder(Color.PINK, 3);
+
+        int initH_j = 300;
+        int offset_j_y = 50;
+
+        int initPos_p_h = 200;
+
+        for (DatosClasificacionXML.Temporada temporada : xmlParser.getDatosClasificacionXML().getTemporadas()) {
+            //TEMPORDA
+
+            int index_t = temporada.getCod_temporada() - 1;
+            int n_equipos = temporada.getEquipos().size()-1;
+
+            JPanel pJornada = new JPanel();
+            pJornada.setBackground(Color.red);
+
+            pJornada.setBounds(25, 25 + (initH_j+offset_j_y)*index_t, 450, initH_j + (initPos_p_h*n_equipos));
+            pJornada.setLayout(null);
+
+            {
+                JLabel temporada_num = new JLabel();
+                temporada_num.setText("TEMPORDA " + (index_t+1));
+                temporada_num.setHorizontalTextPosition(JLabel.CENTER);
+                temporada_num.setForeground(Color.GREEN);
+                temporada_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                temporada_num.setBackground(Color.black);
+                temporada_num.setOpaque(true);
+                temporada_num.setBorder(border);
+
+                temporada_num.setVerticalAlignment(JLabel.CENTER);
+                temporada_num.setHorizontalAlignment(JLabel.CENTER);
+
+                temporada_num.setBounds(25, 25, 200, 50);
+
+                pJornada.add(temporada_num);
+
+            }
+
+            for (DatosClasificacionXML.Equipo equipo : temporada.getEquipos()) {
+                // EQUIPOS
+
+                int index_e = equipo.getCod_equipo() - 1;
+
+                JPanel pPartido = new JPanel();
+                if(index_e%2 == 0)
+                    pPartido.setBackground(Color.blue);
+                else
+                    pPartido.setBackground(Color.green);
+                pPartido.setBounds(25, 75 + (initPos_p_h)*index_e, 400, initPos_p_h );
+                pPartido.setLayout(null);
+
+                {
+                    JLabel nombre_e = new JLabel();
+                    nombre_e.setText(equipo.getNombre());
+                    nombre_e.setHorizontalTextPosition(JLabel.CENTER);
+                    nombre_e.setForeground(Color.GREEN);
+                    nombre_e.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                    nombre_e.setBackground(Color.black);
+                    nombre_e.setOpaque(true);
+                    nombre_e.setBorder(border);
+
+                    nombre_e.setVerticalAlignment(JLabel.CENTER);
+                    nombre_e.setHorizontalAlignment(JLabel.CENTER);
+
+                    nombre_e.setBounds(25, 25, 175, 50);
+
+                    JLabel partido_ganado = new JLabel();
+                    partido_ganado.setText(String.valueOf(equipo.getPartidos_ganados()));
+                    partido_ganado.setHorizontalTextPosition(JLabel.CENTER);
+                    partido_ganado.setForeground(Color.GREEN);
+                    partido_ganado.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                    partido_ganado.setBackground(Color.black);
+                    partido_ganado.setOpaque(true);
+                    partido_ganado.setBorder(border);
+
+                    partido_ganado.setVerticalAlignment(JLabel.CENTER);
+                    partido_ganado.setHorizontalAlignment(JLabel.CENTER);
+
+                    partido_ganado.setBounds(250, 25, 125, 50);
+
+                    pPartido.add(nombre_e);
+                    pPartido.add(partido_ganado);
+
+
+                }
+
+                for (DatosClasificacionXML.Jugador jugador : equipo.getLista_jugadores()) {
+
+
+
+                    JPanel pJugador = new JPanel();
+                    pJugador.setBackground(Color.red);
+
+                    pJugador.setBounds(25, 25 + (initH_j+offset_j_y)*index_t, 450, initH_j + (initPos_p_h*n_equipos));
+                    pJugador.setLayout(null);
+
+                    {
+                        JLabel nickname = new JLabel();
+                        nickname.setText(jugador.getNickname());
+                        nickname.setHorizontalTextPosition(JLabel.CENTER);
+                        nickname.setForeground(Color.GREEN);
+                        nickname.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                        nickname.setBackground(Color.black);
+                        nickname.setOpaque(true);
+                        nickname.setBorder(border);
+
+                        nickname.setVerticalAlignment(JLabel.CENTER);
+                        nickname.setHorizontalAlignment(JLabel.CENTER);
+
+                        nickname.setBounds(25, 25, 175, 50);
+
+                        JLabel rol = new JLabel();
+                        rol.setText(String.valueOf(jugador.getRol()));
+                        rol.setHorizontalTextPosition(JLabel.CENTER);
+                        rol.setForeground(Color.GREEN);
+                        rol.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                        rol.setBackground(Color.black);
+                        rol.setOpaque(true);
+                        rol.setBorder(border);
+
+                        rol.setVerticalAlignment(JLabel.CENTER);
+                        rol.setHorizontalAlignment(JLabel.CENTER);
+
+                        rol.setBounds(250, 25, 125, 50);
+
+                        pPartido.add(nickname);
+                        pPartido.add(rol);
+
+                    }
+                    pPartido.add(pJugador);
+                }
+
+                pJornada.add(pPartido);
+            }
+
+
+            pPincipal.add(pJornada);
+        }
+
+        frame.setVisible(true);
+        frame.setContentPane(s);
     }
 
     public static String getResultadosJornadas() {
