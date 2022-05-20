@@ -3,6 +3,8 @@ package Modelo.UML;
 import javax.persistence.*;
 import java.util.Objects;
 
+@NamedQuery(name = "AlmacenXmlEntity.todas", query = "SELECT e FROM AlmacenXmlEntity e")
+
 @Entity
 @Table(name = "ALMACEN_XML", schema = "EQDAW06", catalog = "")
 public class AlmacenXmlEntity {

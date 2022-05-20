@@ -28,6 +28,8 @@ public class Main {
 
     private static UsuariosDAO usuario_dao;
 
+    private static AlmacenXML_DAO almacenXML_dao;
+
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private static JFrame VLogin, VRegistrar, VAdmin, VCarga, VUsuario;
@@ -38,14 +40,7 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            //VentanaCarga();
-
-            generarDAO();
-            VentanaAdmin();
-            xmlParser = new ReadXmlDomParser();
-            xmlParser.checkXML();
-
-            VentanaUsuario(true);
+            VentanaCarga();
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -62,6 +57,7 @@ public class Main {
         asistente_dao = new AsistentesDAO();
         equipo_dao = new EquiposDAO();
         usuario_dao = new UsuariosDAO();
+        almacenXML_dao = new AlmacenXML_DAO();
     }
 
     /******************** TEST *************************/
@@ -157,7 +153,20 @@ public class Main {
                         equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
             }
         }
-        System.out.println(matches);
+    }
+
+    public static String getDatosClasificacionXML() throws Exception{
+        almacenXML_dao.borrarDatos();
+        almacenXML_dao.generarClasificion();
+
+        return almacenXML_dao.getDatos().getResultXml();
+    }
+
+    public static String getDatosJornadasXML() throws Exception{
+        almacenXML_dao.borrarDatos();
+        almacenXML_dao.generarJornadas();
+
+        return almacenXML_dao.getDatos().getResultXml();
     }
 
     static class Match { int team1, team2; public Match(int team1, int team2) {
@@ -183,6 +192,7 @@ public class Main {
         VRegistrar = new JFrame("VRegistrar");
         VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
         VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VRegistrar.setLocationRelativeTo(null);
         VRegistrar.pack();
         VRegistrar.setVisible(true);
     }
