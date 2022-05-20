@@ -45,7 +45,7 @@ public class Main {
             xmlParser = new ReadXmlDomParser();
             xmlParser.checkXML();
 
-            VentanaUsuario(true);
+            //VentanaUsuario(true);
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -157,7 +157,7 @@ public class Main {
                         equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
             }
         }
-        System.out.println(matches);
+        //System.out.println(matches);
     }
 
     static class Match { int team1, team2; public Match(int team1, int team2) {
@@ -198,7 +198,7 @@ public class Main {
 
     public static void VentanaUsuario(boolean admin) {
         //VCarga.dispose();
-
+        VAdmin.dispose();
         VUsuario = new JFrame("VUsuario");
         VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
         VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
