@@ -20,6 +20,7 @@ public class VLogin {
         loginButton.setFocusable(false);
         loginButton.setRolloverEnabled(true);
 
+
         loginButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -34,13 +35,10 @@ public class VLogin {
         });
 
         contra.setEchoChar('*');
-        /*
-        tFCorreo.setText("admin@gmail.com");
-        contra.setText("admin");
-        */
+
         tFCorreo.setText("alba@gmail.com");
         contra.setText("Hola");
-        
+
         ckVer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

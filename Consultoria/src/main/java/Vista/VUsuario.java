@@ -105,7 +105,7 @@ public class VUsuario {
         bLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Main.volverLogInUsuario();
             }
         });
         bClasificacion.addMouseListener(new MouseAdapter() {

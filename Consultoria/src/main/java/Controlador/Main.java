@@ -41,17 +41,12 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            //VentanaCarga();
+            VentanaCarga();
 
-            //generarDAO();
+            generarDAO();
 
             xmlParser = new ReadXmlDomParser();
             xmlParser.checkXML();
-
-            //VentanaLogin();
-            //VentanaRegistrar("test@gmail.com");
-            //VentanaUsuario(true);
-            //VentanaAdmin();
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -374,7 +369,7 @@ public class Main {
         pPincipal.setBounds(0, 0, 800, 800);
         pPincipal.setLayout(null);
         JScrollPane scroll = new JScrollPane(pPincipal);
-        JScrollPane s = new JScrollPane(pPincipal, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane s = new JScrollPane(scroll, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         Border border = BorderFactory.createLineBorder(Color.PINK, 3);
 
@@ -722,7 +717,6 @@ public class Main {
     }
 
 
-
     public static void OrganizarCalendario(){
 
         /*
@@ -771,6 +765,28 @@ public class Main {
         */
 
     }
-    
+
+    public static void cargarDatos() {
+        //load DAO + database conexion
+        generarDAO();
+
+        //generate Parser + parse xml
+        xmlParser = new ReadXmlDomParser();
+        xmlParser.checkXML();
+    }
+
+    public static void cerrarVCarga() {
+        VCarga.dispose();
+        VentanaLogin();
+    }
+
+    public static void volverLogInRegistrar() {
+        VRegistrar.dispose();
+        VentanaLogin();
+    }
+    public static void volverLogInUsuario() {
+        VUsuario.dispose();
+        VentanaLogin();
+    }
 }
 
