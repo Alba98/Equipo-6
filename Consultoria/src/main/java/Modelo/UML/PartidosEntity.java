@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+@NamedQuery(name = "PartidosEntity.todos", query = "SELECT p FROM PartidosEntity p")
+
 @Entity
 @Table(name = "PARTIDOS", schema = "EQDAW06", catalog = "")
 public class PartidosEntity {

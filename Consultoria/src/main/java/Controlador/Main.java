@@ -3,10 +3,7 @@ package Controlador;
 import Modelo.Factory.DatosClasificacionXML;
 import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
-import Modelo.UML.AsistentesEntity;
-import Modelo.UML.EntrenadoresEntity;
-import Modelo.UML.EquiposEntity;
-import Modelo.UML.JugadoresEntity;
+import Modelo.UML.*;
 import Vista.*;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,7 +14,7 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class Main {
@@ -41,12 +38,14 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            VentanaCarga();
+           // VentanaCarga();
 
             generarDAO();
 
             xmlParser = new ReadXmlDomParser();
             xmlParser.checkXML();
+
+            VentanaUsuario(true);
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -370,6 +369,8 @@ public class Main {
         pPincipal.setLayout(null);
         JScrollPane scroll = new JScrollPane(pPincipal);
         JScrollPane s = new JScrollPane(scroll, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollBar bar = new JScrollBar();
+        s.add(bar);
 
         Border border = BorderFactory.createLineBorder(Color.PINK, 3);
 
@@ -539,6 +540,7 @@ public class Main {
             pPincipal.add(pJornada);
         }
 
+        s.setVisible(true);
         frame.setVisible(true);
         frame.setContentPane(s);
     }
@@ -556,6 +558,8 @@ public class Main {
         pPincipal.setLayout(null);
         JScrollPane scroll = new JScrollPane(pPincipal);
         JScrollPane s = new JScrollPane(pPincipal, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollBar bar = new JScrollBar();
+        s.add(bar);
 
         Border border = BorderFactory.createLineBorder(Color.PINK, 3);
 
@@ -787,6 +791,26 @@ public class Main {
     public static void volverLogInUsuario() {
         VUsuario.dispose();
         VentanaLogin();
+    }
+
+    public static TreeMap<Integer, String> getPartidosEquipo() throws Exception{
+
+        List<PartidosEntity> partidos = partido_dao.consultarPartidos();
+        TreeMap<Integer, String> nombres = new TreeMap<Integer, String>();
+
+        for (PartidosEntity partido : partidos) {
+            for (ParticipaEntity participaEntity : partido.getParticipasByCodPartido()) {
+                EquiposEntity equipo1 = participaEntity.getEquiposByCodEquipo1();
+                EquiposEntity equipo2 = participaEntity.getEquiposByCodEquipo2();
+
+                nombres.put((int) partido.getCodPartido(), equipo1.getNombre() + " vs " + equipo2.getNombre());
+            }
+        }
+        return nombres;
+    }
+
+    public static void actualizaResutlado(int cod_partido, String resultado) throws Exception{
+        partido_dao.resultadosPartido(cod_partido, resultado);
     }
 }
 
