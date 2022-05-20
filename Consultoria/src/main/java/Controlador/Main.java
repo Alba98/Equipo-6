@@ -145,7 +145,9 @@ public class Main {
 
     public static void OrganizarCalendario() throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
-        int partidos = 4;
+        List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
+        //PArtidos = (numpartidos por jornada (equiposTotales.size/2))*(jorndas totales (jornadasTotales.size))
+        int partidos = (equiposTotales.size()/2)*(jornadasTotales.size());
 
         List<Match> matches = new ArrayList<Match>();
 
@@ -155,7 +157,7 @@ public class Main {
                         equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
             }
         }
-        //.out.println(matches);
+        System.out.println(matches);
     }
 
     static class Match { int team1, team2; public Match(int team1, int team2) {
