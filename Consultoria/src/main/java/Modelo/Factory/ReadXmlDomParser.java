@@ -308,10 +308,42 @@ public class ReadXmlDomParser {
         return datos.toString();
     }
 
+    public String getClasificacion() {
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("\t CLASIFICACION \n");
+
+        for (DatosClasificacionXML.Temporada temporada : DatosClasificacion.getTemporadas()) {
+
+            datos.append("TEMPORADA ").append(temporada.getCod_temporada()).append("\n");
+
+            for (DatosClasificacionXML.Equipo equipo : temporada.getEquipos()) {
+                //EQUIPOS
+                datos.append("        ").append(equipo.getNombre()).append("\t")
+                        .append(equipo.getPartidos_ganados()).append("\n");
+
+                for (DatosClasificacionXML.Jugador jugador : equipo.getLista_jugadores()) {
+
+                    datos.append("\t").append(jugador.getNickname()).append(" \t ").append(jugador.getRol()).append(" \n ");
+                }
+            }
+
+        }
+
+        return datos.toString();
+    }
+
     public DatosJornadasXML getDatosJornadasXML() {
 
        return DatosJornadas;
     }
 
+    public DatosClasificacionXML getDatosClasificacionXML() {
+
+        return DatosClasificacion;
+    }
+
     public void generaXMLs(String path) {}
+
+
 }

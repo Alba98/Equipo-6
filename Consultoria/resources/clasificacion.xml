@@ -2,7 +2,7 @@
 <clasificacion
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="clasificacion.xsd">
-    <fecha_expiracion>2022-05-20</fecha_expiracion>
+    <fecha_expiracion>2022-05-22</fecha_expiracion>
    <temporada cod_temporada="1">
       <equipo cod_equipo="1" partidos_ganados="5">
         <nombre>G2</nombre>

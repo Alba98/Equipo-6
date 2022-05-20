@@ -170,16 +170,14 @@ public class Main {
 
     public static void VentanaUsuario(boolean admin) {
         //VCarga.dispose();
-/*
+
         VUsuario = new JFrame("VUsuario");
         VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
         VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VUsuario.setLocationRelativeTo(null);
         VUsuario.pack();
         VUsuario.setVisible(true);
-*/
-       // PanelJornada();
-        PanelClasificacion();
+
     }
 
     public static void getDatosClasificacion(){
@@ -260,7 +258,7 @@ public class Main {
 
     public static void PanelJornada() {
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Resultados Jornadas");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(525, 800);
 
@@ -450,7 +448,14 @@ public class Main {
     }
 
     public static String getResultadosJornadas() {
+        PanelJornada();
         return xmlParser.getDatosJornadas();
+    }
+
+
+    public static String getClasificacion() {
+        PanelClasificacion();
+        return xmlParser.getClasificacion();
     }
 }
 

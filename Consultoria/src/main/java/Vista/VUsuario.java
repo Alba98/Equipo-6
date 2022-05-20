@@ -83,18 +83,23 @@ public class VUsuario {
         bClasificacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PClasificacion.setVisible(true);
                 PInfo.setVisible(false);
-                PJornada.setVisible(false);
+                // PClasificacion.setVisible(true);
+                // PJornada.setVisible(false);
+
+                getClasificacion();
             }
         });
         bJornada.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PJornada.setVisible(true);
-                PAdmin.setVisible(admin);
-                PClasificacion.setVisible(false);
-                PClasificacion.setVisible(false);
+                PInfo.setVisible(false);
+                // PJornada.setVisible(true);
+                // PAdmin.setVisible(admin);
+                // PClasificacion.setVisible(false);
+                // PClasificacion.setVisible(false);
+
+                getJornadas();
             }
         });
         bLogout.addActionListener(new ActionListener() {
@@ -146,11 +151,15 @@ public class VUsuario {
             }
         });
 
-        crearJornadas();
     }
 
-    private void crearJornadas() {
+    private void getJornadas() {
         taResultados.setText( Main.getResultadosJornadas());
+
+    }
+
+    private void getClasificacion() {
+        taResultados.setText( Main.getClasificacion());
 
     }
 
