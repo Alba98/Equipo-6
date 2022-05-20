@@ -14,20 +14,19 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class ReadXmlDomParser {
 
     private static final String JORNADAS = "resources\\resultados_jornadas.xml";
     private static final String CLASIFICACION = "resources\\clasificacion.xml";
-    private static final String ULTIMA_JORNADA = "resources\\resultado_ultima_jornada.xml";
 
     //datos almacenados
     private DatosClasificacionXML DatosClasificacion;
     private DatosJornadasXML DatosJornadas;
 
     protected DocumentBuilderFactory dbf;
-
 
     public ReadXmlDomParser() {
         // Instantiate the Factory
@@ -282,5 +281,69 @@ public class ReadXmlDomParser {
 
     }
 
+    public DatosClasificacionXML getDatosClasificacion() {
+        return DatosClasificacion;
+    }
+
+    public String getDatosJornadas() {
+
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("\t RESULTADOS JORNADAS \n");
+
+        for (DatosJornadasXML.Jornada jornada : DatosJornadas.getJornadas()) {
+            datos.append("JORNADA ").append(jornada.getNum_jornada()).append("\n");
+
+            for (DatosJornadasXML.Partido partido : jornada.getPartidos()) {
+                datos.append("        PARTIDO ").append(partido.getCodPartido()).append("\t")
+                        .append(partido.getHoraPartido()).append("\n");
+
+                ArrayList<String> equipos = partido.getEquipos();
+
+                datos.append("\t").append(equipos.get(0)).append(" \t ").append(partido.getResultado()).append(" \t ").append(equipos.get(1)).append(" \n ");
+            }
+
+        }
+
+        return datos.toString();
+    }
+
+    public String getClasificacion() {
+        StringBuilder datos = new StringBuilder();
+
+        datos.append("\t CLASIFICACION \n");
+
+        for (DatosClasificacionXML.Temporada temporada : DatosClasificacion.getTemporadas()) {
+
+            datos.append("TEMPORADA ").append(temporada.getCod_temporada()).append("\n");
+
+            for (DatosClasificacionXML.Equipo equipo : temporada.getEquipos()) {
+                //EQUIPOS
+                datos.append("        ").append(equipo.getNombre()).append("\t")
+                        .append(equipo.getPartidos_ganados()).append("\n");
+
+                for (DatosClasificacionXML.Jugador jugador : equipo.getLista_jugadores()) {
+
+                    datos.append("\t").append(jugador.getNickname()).append(" \t ").append(jugador.getRol()).append(" \n ");
+                }
+            }
+
+        }
+
+        return datos.toString();
+    }
+
+    public DatosJornadasXML getDatosJornadasXML() {
+
+       return DatosJornadas;
+    }
+
+    public DatosClasificacionXML getDatosClasificacionXML() {
+
+        return DatosClasificacion;
+    }
+
     public void generaXMLs(String path) {}
+
+
 }

@@ -1,15 +1,14 @@
 package Vista;
 
+import Controlador.Main;
+
 import javax.swing.*;
-import javax.swing.text.Document;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VUsuario extends JDialog {
-    private JPanel pPrincipal;
+public class VUsuario {
+
+    public JPanel pPrincipal;
     private JPanel PInfo;
     private JPanel PClasificacion;
     private JPanel PJornada;
@@ -36,18 +35,20 @@ public class VUsuario extends JDialog {
     private JButton bLogout;
     private JLabel info;
     private JTextField tfResultadoAdm;
-    private JLabel AResultado;
     private JButton BResultadoAdm;
+    private JPanel PAdmin;
+    private JLabel AResultado;
+    private JPanel pTest;
+    private JTextArea taResultados;
 
-    public VUsuario() {
-        setContentPane(pPrincipal);
-        setModal(true);
+    public VUsuario(boolean admin) {
+
         //Parrafo de Información del TextArea:
         String text=
                 "OPCIONES DE LA VENTANA:<br><br>"+
-                "Seleccione el boton CLASIFICACION para conocer la <br> clasificacion actual de la liga<br><br>" +
-                "Seleccione el boton JORNADA para conocer los datos <br> sobre la ultima jornada<br><br>" +
-                "Seleccione el boton LOG OUT para cerrar sesión y salir <br> de la aplicacion<br>"
+                        "Seleccione el boton CLASIFICACION para conocer la <br> clasificacion actual de la liga<br><br>" +
+                        "Seleccione el boton JORNADA para conocer los datos <br> sobre la ultima jornada<br><br>" +
+                        "Seleccione el boton LOG OUT para cerrar sesión y salir <br> de la aplicacion<br>"
                 ;
         //JLabel
         info.setText("<html>" + text + "</html>");
@@ -69,13 +70,9 @@ public class VUsuario extends JDialog {
         PClasificacion.setVisible(false);
         PJornada.setVisible(false);
 
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
+        //Jornadas admin
+        PAdmin.setVisible(admin);
+
 
         // call onCancel() on ESCAPE
         pPrincipal.registerKeyboardAction(new ActionListener() {
@@ -86,17 +83,23 @@ public class VUsuario extends JDialog {
         bClasificacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PClasificacion.setVisible(true);
                 PInfo.setVisible(false);
-                PJornada.setVisible(false);
+                // PClasificacion.setVisible(true);
+                // PJornada.setVisible(false);
+
+                getClasificacion();
             }
         });
         bJornada.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PJornada.setVisible(true);
-                PClasificacion.setVisible(false);
-                PClasificacion.setVisible(false);
+                PInfo.setVisible(false);
+                // PJornada.setVisible(true);
+                // PAdmin.setVisible(admin);
+                // PClasificacion.setVisible(false);
+                // PClasificacion.setVisible(false);
+
+                getJornadas();
             }
         });
         bLogout.addActionListener(new ActionListener() {
@@ -147,21 +150,26 @@ public class VUsuario extends JDialog {
                 if (tfResultadoAdm.getText() == "0-0");
             }
         });
+
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    private void getJornadas() {
+        taResultados.setText( Main.getResultadosJornadas());
+
+    }
+
+    private void getClasificacion() {
+        taResultados.setText( Main.getClasificacion());
+
     }
 
     private void onCancel() {
         // add your code here if necessary
-        dispose();
+   //     dispose();
     }
 
-    private static void crearXML() throws ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder crearDocumento = factory.newDocumentBuilder();
-        Document documento = (Document) crearDocumento.newDocument();
+    public JPanel getpPrincipal() {
+        return pPrincipal;
     }
+
 }
