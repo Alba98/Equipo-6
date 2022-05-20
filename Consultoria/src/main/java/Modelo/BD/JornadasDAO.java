@@ -1,9 +1,13 @@
 package Modelo.BD;
 
+import Modelo.UML.JornadasEntity;
+
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import javax.persistence.TypedQuery;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class JornadasDAO extends BaseDatos {
 
@@ -26,6 +30,22 @@ public class JornadasDAO extends BaseDatos {
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public List<JornadasEntity> consultarJornadas() throws Exception {
+        //iniciar transaccion
+        transaction.begin();
+        List<JornadasEntity> listaJornadas;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JornadasEntity > qEventos =
+                em.createNamedQuery("JornadasEntity.toda", JornadasEntity.class);
+        listaJornadas = qEventos.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return listaJornadas;
     }
 
 }
