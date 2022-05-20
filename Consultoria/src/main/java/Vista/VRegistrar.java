@@ -17,6 +17,7 @@ public class VRegistrar {
     private JTextField tfFechaNacimiento;
     private JPasswordField tfcontraseña;
     private JButton registrarButton;
+    private JButton bLogIn;
     private JCheckBox ckVer;
 
 
@@ -27,6 +28,10 @@ public class VRegistrar {
         registrarButton.setBorderPainted(false);
         registrarButton.setFocusable(false);
         registrarButton.setRolloverEnabled(true);
+
+        bLogIn.setBorderPainted(false);
+        bLogIn.setFocusable(false);
+        bLogIn.setRolloverEnabled(true);
 
         registrarButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -45,6 +50,39 @@ public class VRegistrar {
             @Override
             public void actionPerformed(ActionEvent e) {
                 registrarUsuario();
+            }
+        });
+
+        bLogIn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bLogIn.setBackground(Color.GREEN);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bLogIn.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bLogIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.volverLogInRegistrar();
+            }
+        });
+
+        ckVer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ckVer.isSelected())
+                {
+                    tfcontraseña.setEchoChar((char)0);
+
+                }else{
+                    tfcontraseña.setEchoChar('*');
+                }
             }
         });
     }

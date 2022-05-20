@@ -17,6 +17,8 @@ public class VCarga {
     private Timer t;
     private ActionListener al;
 
+    boolean cargarDatos = true;
+
     public VCarga() {
         imagen.setIcon(new ImageIcon("src/main/java/Imagenes/logo.png"));
 
@@ -41,12 +43,16 @@ public class VCarga {
         al = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(cargarDatos){
+                    Main.cargarDatos();
+                    cargarDatos = false;
+                }
                 if (barraCarga.getValue() < 100){
                     barraCarga.setValue(barraCarga.getValue()+10);
                 }
                 else{
                     t.stop();
-                    Main.VentanaUsuario(false);;
+                    Main.cerrarVCarga();
                 }
             }
         };
