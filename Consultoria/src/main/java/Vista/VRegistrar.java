@@ -20,7 +20,10 @@ public class VRegistrar {
     private JCheckBox ckVer;
 
 
-    public VRegistrar() {
+    public VRegistrar(String email) {
+        tfCorreo.setText(email);
+        tfcontraseña.setEchoChar('*');
+
         registrarButton.setBorderPainted(false);
         registrarButton.setFocusable(false);
         registrarButton.setRolloverEnabled(true);
@@ -45,7 +48,6 @@ public class VRegistrar {
             }
         });
     }
-
     private void registrarUsuario() {
         if ( validarRegistrarUsuario() ) {
             try {

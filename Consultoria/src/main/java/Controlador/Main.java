@@ -50,7 +50,7 @@ public class Main {
 
             //VentanaLogin();
             //VentanaRegistrar("test@gmail.com");
-            VentanaUsuario(true);
+            //VentanaUsuario(true);
             //VentanaAdmin();
 
         } catch (Exception e) {
