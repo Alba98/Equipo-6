@@ -92,7 +92,7 @@ public class VUsuario {
                 PClasificacion.setVisible(true);
                 PJornada.setVisible(false);
 
-                getClasificacion();
+            //    getClasificacion();
             }
         });
         bJornada.addActionListener(new ActionListener() {
@@ -103,7 +103,7 @@ public class VUsuario {
                 PJornada.setVisible(true);
                 PClasificacion.setVisible(false);
 
-                getJornadas();
+            //    getJornadas();
             }
         });
 
