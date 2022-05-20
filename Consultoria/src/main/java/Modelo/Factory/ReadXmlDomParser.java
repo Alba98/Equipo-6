@@ -308,5 +308,10 @@ public class ReadXmlDomParser {
         return datos.toString();
     }
 
+    public DatosJornadasXML getDatosJornadasXML() {
+
+       return DatosJornadas;
+    }
+
     public void generaXMLs(String path) {}
 }

@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.EntrenadoresEntity;
 import Vista.*;
@@ -177,7 +178,8 @@ public class Main {
         VUsuario.pack();
         VUsuario.setVisible(true);
 */
-        PanelJornada();
+       // PanelJornada();
+        PanelClasificacion();
     }
 
     public static void getDatosClasificacion(){
@@ -258,84 +260,11 @@ public class Main {
 
     public static void PanelJornada() {
 
-        Border border = BorderFactory.createLineBorder(Color.PINK, 3);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(525, 800);
 
-        JLabel jornada_num = new JLabel();
-        jornada_num.setText("jornada_num");
-        jornada_num.setHorizontalTextPosition(JLabel.CENTER);
-        jornada_num.setForeground(Color.GREEN);
-        jornada_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
 
-        jornada_num.setBackground(Color.black);
-        jornada_num.setOpaque(true);
-        jornada_num.setBorder(border);
-
-        jornada_num.setVerticalAlignment(JLabel.CENTER);
-        jornada_num.setHorizontalAlignment(JLabel.CENTER);
-
-        jornada_num.setBounds(25, 25, 200, 50);
-
-        JLabel partido_num = new JLabel();
-        partido_num.setText("partido_num");
-        partido_num.setHorizontalTextPosition(JLabel.CENTER);
-        partido_num.setForeground(Color.GREEN);
-        partido_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        partido_num.setBackground(Color.black);
-        partido_num.setOpaque(true);
-        partido_num.setBorder(border);
-
-        partido_num.setVerticalAlignment(JLabel.CENTER);
-        partido_num.setHorizontalAlignment(JLabel.CENTER);
-
-        partido_num.setBounds(25, 25, 200, 50);
-
-        JLabel equipo1 = new JLabel();
-        equipo1.setText("equipo1");
-        equipo1.setHorizontalTextPosition(JLabel.CENTER);
-        equipo1.setForeground(Color.GREEN);
-        equipo1.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        equipo1.setBackground(Color.black);
-        equipo1.setOpaque(true);
-        equipo1.setBorder(border);
-
-        equipo1.setVerticalAlignment(JLabel.CENTER);
-        equipo1.setHorizontalAlignment(JLabel.CENTER);
-
-        equipo1.setBounds(25, 75, 100, 100);
-
-        JLabel puntuacion = new JLabel();
-        puntuacion.setText("3-0");
-        puntuacion.setHorizontalTextPosition(JLabel.CENTER);
-        puntuacion.setForeground(Color.blue);
-        puntuacion.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        puntuacion.setBackground(Color.black);
-        puntuacion.setOpaque(true);
-        puntuacion.setBorder(border);
-
-        puntuacion.setVerticalAlignment(JLabel.CENTER);
-        puntuacion.setHorizontalAlignment(JLabel.CENTER);
-
-        puntuacion.setBounds(150, 75, 100, 100);
-
-        JLabel equipo2 = new JLabel();
-        equipo2.setText("equipo2");
-        equipo2.setHorizontalTextPosition(JLabel.CENTER);
-        equipo2.setForeground(Color.GREEN);
-        equipo2.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-        equipo2.setBackground(Color.black);
-        equipo2.setOpaque(true);
-        equipo2.setBorder(border);
-
-        equipo2.setVerticalAlignment(JLabel.CENTER);
-        equipo2.setHorizontalAlignment(JLabel.CENTER);
-
-        equipo2.setBounds(275, 75, 100, 100);
-
-        //--------------------------------------------------------------
         JPanel pPincipal = new JPanel();
         pPincipal.setBackground(Color.green);
         pPincipal.setBounds(0, 0, 800, 800);
@@ -343,39 +272,181 @@ public class Main {
         JScrollPane scroll = new JScrollPane(pPincipal);
         JScrollPane s = new JScrollPane(pPincipal, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
+        Border border = BorderFactory.createLineBorder(Color.PINK, 3);
 
-        JPanel pJornada = new JPanel();
-        pJornada.setBackground(Color.red);
-        pJornada.setBounds(25, 25, 450, 300);
-        pJornada.setLayout(null);
+        int initH_j = 300;
+        int offset_j_y = 50;
 
-        JPanel pPartido = new JPanel();
-        pPartido.setBackground(Color.blue);
-        pPartido.setBounds(25, 25+50, 400, 200);
-        pPartido.setLayout(null);
+        int initPos_p_h = 200;
 
-        //--------------------------------------------------------------
+        for (DatosJornadasXML.Jornada jornada : xmlParser.getDatosJornadasXML().getJornadas()) {
+            //JORNADA
+
+            int index_j = jornada.getNum_jornada() - 1;
+            int n_partidos = jornada.getPartidos().size()-1;
+
+            JPanel pJornada = new JPanel();
+            if(index_j%2 == 0)
+                pJornada.setBackground(Color.red);
+            else
+                pJornada.setBackground(Color.orange);
+
+            pJornada.setBounds(25, 25 + (initH_j+offset_j_y)*index_j, 450, initH_j + (initPos_p_h*n_partidos));
+            pJornada.setLayout(null);
+
+            {
+                JLabel jornada_num = new JLabel();
+                jornada_num.setText("JORANADA " + (index_j+1));
+                jornada_num.setHorizontalTextPosition(JLabel.CENTER);
+                jornada_num.setForeground(Color.GREEN);
+                jornada_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                jornada_num.setBackground(Color.black);
+                jornada_num.setOpaque(true);
+                jornada_num.setBorder(border);
+
+                jornada_num.setVerticalAlignment(JLabel.CENTER);
+                jornada_num.setHorizontalAlignment(JLabel.CENTER);
+
+                jornada_num.setBounds(25, 25, 200, 50);
+
+                pJornada.add(jornada_num);
+
+                JLabel jornada_fecha = new JLabel();
+                jornada_fecha.setText(jornada.getFecha_jornada());
+                jornada_fecha.setHorizontalTextPosition(JLabel.CENTER);
+                jornada_fecha.setForeground(Color.GREEN);
+                jornada_fecha.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                jornada_fecha.setBackground(Color.black);
+                jornada_fecha.setOpaque(true);
+                jornada_fecha.setBorder(border);
+
+                jornada_fecha.setVerticalAlignment(JLabel.CENTER);
+                jornada_fecha.setHorizontalAlignment(JLabel.CENTER);
+
+                jornada_fecha.setBounds(250, 25, 150, 50);
+
+                pJornada.add(jornada_fecha);
+            }
+
+            for (DatosJornadasXML.Partido partido : jornada.getPartidos()) {
+                // PARTIDO
+
+                int index_p = partido.getCodPartido() - 1;
+
+                JPanel pPartido = new JPanel();
+                if(index_p%2 == 0)
+                    pPartido.setBackground(Color.blue);
+                else
+                    pPartido.setBackground(Color.green);
+                //pPartido.setBounds(25, 25+50, 400, 200);
+                pPartido.setBounds(25, 75 + (initPos_p_h)*index_p, 400, initPos_p_h );
+                pPartido.setLayout(null);
+
+                {
+                    JLabel partido_num = new JLabel();
+                    partido_num.setText("PARTIDO " + (index_p + 1));
+                    partido_num.setHorizontalTextPosition(JLabel.CENTER);
+                    partido_num.setForeground(Color.GREEN);
+                    partido_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                    partido_num.setBackground(Color.black);
+                    partido_num.setOpaque(true);
+                    partido_num.setBorder(border);
+
+                    partido_num.setVerticalAlignment(JLabel.CENTER);
+                    partido_num.setHorizontalAlignment(JLabel.CENTER);
+
+                    partido_num.setBounds(25, 25, 175, 50);
+
+                    JLabel partido_h = new JLabel();
+                    partido_h.setText(partido.getHoraPartido());
+                    partido_h.setHorizontalTextPosition(JLabel.CENTER);
+                    partido_h.setForeground(Color.GREEN);
+                    partido_h.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                    partido_h.setBackground(Color.black);
+                    partido_h.setOpaque(true);
+                    partido_h.setBorder(border);
+
+                    partido_h.setVerticalAlignment(JLabel.CENTER);
+                    partido_h.setHorizontalAlignment(JLabel.CENTER);
+
+                    partido_h.setBounds(250, 25, 125, 50);
 
 
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(525, 800);
+                    //equipos
+                    ArrayList<String> equipos = partido.getEquipos();
+
+                    JLabel equipo1 = new JLabel();
+                    equipo1.setText(equipos.get(0));
+                    equipo1.setHorizontalTextPosition(JLabel.CENTER);
+                    equipo1.setForeground(Color.GREEN);
+                    equipo1.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+                    equipo1.setBackground(Color.black);
+                    equipo1.setOpaque(true);
+                    equipo1.setBorder(border);
+
+                    equipo1.setVerticalAlignment(JLabel.CENTER);
+                    equipo1.setHorizontalAlignment(JLabel.CENTER);
+
+                    equipo1.setBounds(25, 75, 100, 100);
+
+                    JLabel puntuacion = new JLabel();
+                    puntuacion.setText(partido.getResultado());
+                    puntuacion.setHorizontalTextPosition(JLabel.CENTER);
+                    puntuacion.setForeground(Color.blue);
+                    puntuacion.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+                    puntuacion.setBackground(Color.black);
+                    puntuacion.setOpaque(true);
+                    puntuacion.setBorder(border);
+
+                    puntuacion.setVerticalAlignment(JLabel.CENTER);
+                    puntuacion.setHorizontalAlignment(JLabel.CENTER);
+
+                    puntuacion.setBounds(150, 75, 100, 100);
+
+                    JLabel equipo2 = new JLabel();
+                    equipo2.setText(equipos.get(1));
+                    equipo2.setHorizontalTextPosition(JLabel.CENTER);
+                    equipo2.setForeground(Color.GREEN);
+                    equipo2.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 15));
+
+                    equipo2.setBackground(Color.black);
+                    equipo2.setOpaque(true);
+                    equipo2.setBorder(border);
+
+                    equipo2.setVerticalAlignment(JLabel.CENTER);
+                    equipo2.setHorizontalAlignment(JLabel.CENTER);
+
+                    equipo2.setBounds(275, 75, 100, 100);
+
+
+                    pPartido.add(partido_num);
+                    pPartido.add(partido_h);
+                    pPartido.add(equipo1);
+                    pPartido.add(puntuacion);
+                    pPartido.add(equipo2);
+
+                }
+
+                pJornada.add(pPartido);
+            }
+
+
+            pPincipal.add(pJornada);
+        }
+
         frame.setVisible(true);
-
-
-        pPartido.add(partido_num);
-        pPartido.add(equipo1);
-        pPartido.add(puntuacion);
-        pPartido.add(equipo2);
-
-        pJornada.add(jornada_num);
-        pJornada.add(pPartido);
-
-        pPincipal.add(pJornada);
-
         frame.setContentPane(s);
+    }
 
-        //VUsuario.add(label);
+    public static void PanelClasificacion() {
+
+     
     }
 
     public static String getResultadosJornadas() {
