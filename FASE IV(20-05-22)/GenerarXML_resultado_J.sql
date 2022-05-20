@@ -1,47 +1,34 @@
-CREATE TABLE ARCHIVO2 (
- RESULTADO CLOB 
-);
-drop table archivo;
---------------------------------------------------------------------------------
-drop type TYPE_PARTIDO force;
-drop type TYPE_PARTIDOLIST force;
-drop type  TYPE_JORNADA force;
---------------------------------------------------------------------------------
-
-CREATE OR REPLACE TYPE TYPE_PARTIDO AS  OBJECT("@COD_PARTIDO" NUMBER(3),
- 										   	 	"@HORA_PARTIDO" DATE,
-												 NOMBRE_EQUIPO VARCHAR2(5),
-												 RESULTADO VARCHAR2(3));
-												 
-CREATE OR REPLACE TYPE TYPE_PARTIDOLIST AS TABLE OF TYPE_PARTIDO;	
-
-CREATE OR REPLACE TYPE TYPE_JORNADA AS OBJECT("@NUM_JORNADA" NUMBER(3),
-											  "@FECHA_JORNADA" DATE,
-										       JORNADAS TYPE_PARTIDOLIST);
---------------------------------------------------------------------------------
-DECLARE
-    contexto DBMS_XMLGEN.ctxHandle;
-    RESULTADO CLOB;    
-BEGIN
---get query context
-contexto := DBMS_XMLGEN.newContext('SELECT TYPE_JORNADA(C.NUM_JORNADA,C.FECHA_JORNADA
-                                    CAST (MULTISET 
-                                         (SELECT C.COD_PARTIDO
-                                    CAST (MULTISET
-                                         (SELECT C.NOMBRE_EQUIPO,
-                                          FROM VISTA_CLASIFICACION C
-                                         FROM VISTA_CLASIFICACION C
-                                    AS LISTA_JORNADAS))
-                                    FROM VISTA_CLASIFICACION C
-                                    AS EQUIPO_LISTA))
-AS JORNADA   
-FROM VISTA_CLASIFICACION C');
-                                    
-RESULTADO:= dbms_xmlgen.getxml(CONTEXTO);
-INSERT INTO ARCHIVO2 VALUES(RESULTADO);
-dbms_xmlgen.closeContext(CONTEXTO);
-
-END;
---------------------------------------------------------------------------------
-SELECT TO_CHAR(SYSDATE+2,'YYYY-MM-DD"T"HH24:MM:SS')EXPIRATION_DATE FROM DUAL;
-SELECT TO_CHAR(SYSTIMESTAP - INTERVAL '-7' DAY) FROM DUAL;
+set serveroutput on;
+declare
+    textoxml xmltype;
+    resultado clob;
+    
+    fecha date;
+begin
+    select xmlelement("resultados_jornadas",
+        xmlattributes('http://www.w3.org/2001/XMLSchema-instance' "xmlsns:xsi"),
+        xmlelement("fecha_expiracion", to_char(fecha, 'yyyy-mm-dd')),
+        (select xmlagg(xmlelement("jornada",
+            xmlattributes(j.cod_jornada "num_jornada", j.fecha_jornada "fecha_jornada"),
+            (select 
+                xmlagg(xmlelement("partido",
+                    xmlattributes(p.cod_partido "cod_partido", p.hora_partido "hora_partido"),
+                    xmlelement("resultado", p.resultado),
+                    xmlelement("nombre_equipo",
+                        (select e2.nombre from equipos e2 where e2.cod_equipo = pa.cod_equipo1)
+                    ),
+                    xmlelement("nombre_equipo",
+                        (select e2.nombre from equipos e2 where e2.cod_equipo = pa.cod_equipo2)
+                    )
+                ))
+            from partidos p, equipos e, participa pa
+            where p.cod_jornada = j.cod_jornada and
+                pa.cod_partido = p.cod_partido)
+    ))
+    from jornadas j)) into textoxml
+    from dual;
+    
+    resultado := textoxml.getClobVal();
+    
+    dbms_output.put_line(resultado);
+end;
