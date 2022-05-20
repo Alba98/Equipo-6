@@ -406,7 +406,11 @@ public class VAdmin {
         crearCalendarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.CrearCalendario();
+                try {
+                    Main.CrearCalendario();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

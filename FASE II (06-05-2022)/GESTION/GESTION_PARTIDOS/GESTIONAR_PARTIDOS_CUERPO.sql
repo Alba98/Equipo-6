@@ -175,14 +175,14 @@ FUNCTION  PARTIDOS_GANADOS
         FOR REG_COD_PARTIDO IN C_PARTIDOS_EQUIPO 
         LOOP
             --CONSEGUIR EL RESULTADO DEL PARTIDO EN CUESTION
-            SELECT SUBSTR(RESULTADO, 1, 1), SUBSTR(RESULTADO, 3, 3) 
+            SELECT to_number(SUBSTR(RESULTADO, 1, 1)), to_number(SUBSTR(RESULTADO, 3, 3))
                 INTO R_EQUIPO1, R_EQUIPO1
             FROM PARTIDOS
             WHERE COD_PARTIDO = REG_COD_PARTIDO.COD_PARTIDO;
                 
             --COMRPOBAR QUE EXISTE UN RESULADO PARA EL PARTIDO
-            IF(R_EQUIPO1 IS NOT NULL)
-            THEN
+            --IF(R_EQUIPO1 IS NOT NULL)
+            --THEN
                 --MIRAR SI ES EL EQUIPO1
                 IF(P_COD_EQUIPO = REG_COD_PARTIDO.COD_EQUIPO1)
                 THEN
@@ -198,7 +198,7 @@ FUNCTION  PARTIDOS_GANADOS
                         V_GANADOS := V_GANADOS + 1;
                     END IF;
                 END IF;
-            END IF;    
+            --END IF;    
         END LOOP;
         
     RETURN V_GANADOS;   
