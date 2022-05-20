@@ -408,6 +408,7 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Main.CrearCalendario();
+                    Main.VentanaUsuario(true);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

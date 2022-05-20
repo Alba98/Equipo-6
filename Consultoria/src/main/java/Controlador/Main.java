@@ -208,7 +208,7 @@ public class Main {
 
     public static void VentanaUsuario(boolean admin) {
         //VCarga.dispose();
-
+        VAdmin.dispose();
         VUsuario = new JFrame("VUsuario");
         VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
         VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
