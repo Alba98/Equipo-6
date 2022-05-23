@@ -120,13 +120,18 @@ public class VAdmin {
      **/
     public VAdmin()  {
 
-        tJNombre.requestFocus();
-        llenarCBRoles(cbJROL);
-        llenarCBEntrenadores(cbAEntrenador);
-        llenarCBSuplentesEQ(cbBJugadores);
-        llenarCBEntrenadores(cbBEntrenadores);
-        llenarCBAsistentesEQ(cbBAsistentes);
-        llenarCBEquipos(cbBEquipos);
+        try {
+            tJNombre.requestFocus();
+            llenarCBRoles(cbJROL);
+            llenarCB(cbAEntrenador, Main.getEntrenadores());
+            llenarCB(cbBJugadores, Main.getSuplentes());
+            llenarCB(cbBEntrenadores, Main.getEntrenadores());
+            llenarCB(cbBAsistentes, Main.getAsistentes());
+            llenarCB(cbBEquipos, Main.getEquipos());
+        }
+        catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
+        }
 
         //Aesthetics botonones:
         AestheticsBotones();
@@ -372,7 +377,11 @@ public class VAdmin {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                llenarCBEntrenadores(cbAEntrenador);
+                try {
+                    llenarCB(cbAEntrenador, Main.getEntrenadores());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         tEqNombre.addFocusListener(new FocusAdapter() {
@@ -381,7 +390,7 @@ public class VAdmin {
                 super.focusGained(e);
 
                 actualizarCBEquipo();
-
+                
             }
         });
     VentanaAdmins.addComponentListener(new ComponentAdapter() { } );VentanaAdmins.addContainerListener(new ContainerAdapter() { } );
@@ -391,9 +400,9 @@ public class VAdmin {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
                 try {
                     Main.borrarJugador(jugadorBorrar);
-                    llenarCBSuplentesEQ(cbBJugadores);
+                    llenarCB(cbBJugadores, Main.getSuplentes());
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -403,10 +412,10 @@ public class VAdmin {
                 String nomEntre = (String) cbBEntrenadores.getSelectedItem();
                 try {
                     Main.borrarEntrenador(nomEntre);
-                    llenarCBEntrenadores(cbBEntrenadores);
+                    llenarCB(cbBEntrenadores, Main.getEntrenadores());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -416,10 +425,10 @@ public class VAdmin {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
                     Main.borrarAsistente(nomAsis);
-                    llenarCBAsistentesEQ(cbBAsistentes);
+                    llenarCB(cbBAsistentes, Main.getAsistentes());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -429,10 +438,10 @@ public class VAdmin {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
                     Main.borrarEquipo(nomEqui);
-                    llenarCBEquipos(cbBEquipos);
+                    llenarCB(cbBEquipos, Main.getEquipos());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -643,11 +652,20 @@ public class VAdmin {
         cbAEntrenador.setSelectedIndex(0);
     }
 
-    /**
-     *
-     * REGISTRAR UN EQUIPO EN LA BBDD
-     *
-     **/
+    private void llenarCBEntrenadores(JComboBox cb) {
+        try {
+            ArrayList<String> entrenadores = Main.getEntrenadores();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String entrenador : entrenadores) {
+                cb.addItem(entrenador);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
     private void registrarEquipos() {
         if ( validarRegistrarEquipos() ) {
             try {
@@ -702,6 +720,14 @@ public class VAdmin {
         } catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
         }
+    }
+
+    public JTabbedPane getVentanaAdmins() {
+        return VentanaAdmins;
+    }
+
+    public void setVentanaAdmins(JTabbedPane ventanaAdmins) {
+        VentanaAdmins = ventanaAdmins;
     }
 
     /**
