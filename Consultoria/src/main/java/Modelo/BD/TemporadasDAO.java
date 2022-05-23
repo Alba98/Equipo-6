@@ -1,10 +1,19 @@
 package Modelo.BD;
-
 import javax.persistence.*;
 
 public class TemporadasDAO extends BaseDatos{
 
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
     public TemporadasDAO() {  }
+
+    /**
+     * CREACION DE LA TEMPORADA
+     *
+     **/
 
     public void crearTemporada() throws Exception {
         //iniciar transaccion

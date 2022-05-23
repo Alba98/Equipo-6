@@ -1,16 +1,26 @@
 package Modelo.BD;
-
 import Modelo.UML.AlmacenXmlEntity;
 import Modelo.UML.JugadoresEntity;
-
 import javax.persistence.*;
 import java.util.List;
+
+    /**
+    *
+    * @author EQUIPO-6
+    */
 
 public class AlmacenXML_DAO extends BaseDatos{
 
     public AlmacenXML_DAO() {  }
 
-    public void generarClasificion() throws Exception {
+        /**
+         * MÉTODO GENERAR XML DE LA CLASFICIACIÓN
+         *
+         **/
+
+
+
+        public void generarClasificion() throws Exception {
         //iniciar transaccion
         transaction.begin();
 
@@ -23,8 +33,14 @@ public class AlmacenXML_DAO extends BaseDatos{
         transaction.commit();
     }
 
-    public void generarJornadas() {
-        //iniciar transaccion
+        /**
+         * MÉTODO GENERAR XML DE LAS JORNADAS
+         *
+         **/
+
+
+        public void generarJornadas() {
+        //Iniciar transaccion
         transaction.begin();
 
         // Ejecutar package
@@ -36,9 +52,13 @@ public class AlmacenXML_DAO extends BaseDatos{
         transaction.commit();
     }
 
+        /**
+         * BORRAR DATOS DEL ALMACEN XML
+         *
+         **/
 
 
-    public void borrarDatos() throws Exception {
+        public void borrarDatos() throws Exception {
         //iniciar transaccion
         transaction.begin();
 
@@ -51,6 +71,10 @@ public class AlmacenXML_DAO extends BaseDatos{
         transaction.commit();
     }
 
+        /**
+         * OBTENER DATOS DEL ALMACEN XML
+         * @return qAlmacen.getResultList().get(0)
+         **/
 
     public AlmacenXmlEntity getDatos() throws Exception {
         //iniciar transaccion
