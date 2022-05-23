@@ -109,15 +109,20 @@ public class VAdmin {
     private JComboBox cbBEquipos;
     private JButton bBEquipos;
 
-    public VAdmin() {
+    public VAdmin()  {
 
-        tJNombre.requestFocus();
-        llenarCBRoles(cbJROL);
-        llenarCBEntrenadores(cbAEntrenador);
-        llenarCBSuplentesEQ(cbBJugadores);
-        llenarCBEntrenadores(cbBEntrenadores);
-        llenarCBAsistentesEQ(cbBAsistentes);
-        llenarCBEquipos(cbBEquipos);
+        try {
+            tJNombre.requestFocus();
+            llenarCBRoles(cbJROL);
+            llenarCB(cbAEntrenador, Main.getEntrenadores());
+            llenarCB(cbBJugadores, Main.getSuplentes());
+            llenarCB(cbBEntrenadores, Main.getEntrenadores());
+            llenarCB(cbBAsistentes, Main.getAsistentes());
+            llenarCB(cbBEquipos, Main.getEquipos());
+        }
+        catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
+        }
 
         //Aestetics botonones:
 
@@ -410,7 +415,7 @@ public class VAdmin {
                     Main.CrearCalendario();
                     Main.VentanaUsuario(true);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -419,21 +424,30 @@ public class VAdmin {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                llenarCBEntrenadores(cbAEntrenador);
+                try {
+                    llenarCB(cbAEntrenador, Main.getEntrenadores());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         tEqNombre.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                llenarCBEntrenadoresEQ(cbEqEntre);
-                llenarCBAsistentesEQ(cbEqAsistente);
-                llenarCBToplaners(cbEqTOP);
-                llenarCBSuplentesEQ(cbEqSuplente);
-                llenarCBJunglers(cbEqJGL);
-                llenarCBMidlaners(cbEqMID);
-                llenarCBADCarrys(cbEqADC);
-                llenarCBSupports(cbEqSUPP);
+                try {
+                    llenarCB(cbEqEntre, Main.getEntrenadores());
+                    llenarCB(cbEqAsistente, Main.getAsistentes());
+                    llenarCB(cbEqTOP, Main.getToplaners());
+                    llenarCB(cbEqSuplente, Main.getSuplentes());
+                    llenarCB(cbEqJGL, Main.getJunglers());
+                    llenarCB(cbEqMID, Main.getMidlaners());
+                    llenarCB(cbEqADC, Main.getADCarrys());
+                    llenarCB(cbEqSUPP, Main.getSupports());
+                } catch (Exception ex) {
+                    Validaciones.mostrarError(ex.getMessage());
+                }
+
             }
         });
     VentanaAdmins.addComponentListener(new ComponentAdapter() { } );VentanaAdmins.addContainerListener(new ContainerAdapter() { } );
@@ -443,9 +457,9 @@ public class VAdmin {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
                 try {
                     Main.borrarJugador(jugadorBorrar);
-                    llenarCBSuplentesEQ(cbBJugadores);
+                    llenarCB(cbBJugadores, Main.getSuplentes());
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -455,10 +469,10 @@ public class VAdmin {
                 String nomEntre = (String) cbBEntrenadores.getSelectedItem();
                 try {
                     Main.borrarEntrenador(nomEntre);
-                    llenarCBEntrenadores(cbBEntrenadores);
+                    llenarCB(cbBEntrenadores, Main.getEntrenadores());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -468,10 +482,10 @@ public class VAdmin {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
                     Main.borrarAsistente(nomAsis);
-                    llenarCBAsistentesEQ(cbBAsistentes);
+                    llenarCB(cbBAsistentes, Main.getAsistentes());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -481,10 +495,10 @@ public class VAdmin {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
                     Main.borrarEquipo(nomEqui);
-                    llenarCBEquipos(cbBEquipos);
+                    llenarCB(cbBEquipos, Main.getEquipos());
                 }
                 catch (Exception ex){
-                    ex.printStackTrace();
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -594,20 +608,6 @@ public class VAdmin {
         cbAEntrenador.setSelectedIndex(0);
     }
 
-    private void llenarCBEntrenadores(JComboBox cb) {
-        try {
-            ArrayList<String> entrenadores = Main.getEntrenadores();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String entrenador : entrenadores) {
-                cb.addItem(entrenador);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
     private void registrarEquipos() {
         if ( validarRegistrarAsistente() ) {
             try {
@@ -633,133 +633,18 @@ public class VAdmin {
         tEqDuenio.setText("");
     }
 
-    private void llenarCBEntrenadoresEQ(JComboBox cb) {
+    private void llenarCB(JComboBox cb, ArrayList<String> lista) {
         try {
-            ArrayList<String> entrenadores = Main.getEntrenadores();
             cb.removeAllItems();
             cb.addItem("-Ninguno selecccionado-");
             cb.setSelectedIndex(0);
-            for (String entrenador : entrenadores) {
-                cb.addItem(entrenador);
+            for (String item : lista) {
+                cb.addItem(item);
             }
         } catch (Exception e) {
             Validaciones.mostrarError(e.getMessage());
         }
     }
-
-    private void llenarCBAsistentesEQ(JComboBox cb) {
-        try {
-            ArrayList<String> asistentes = Main.getAsistentes();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String asistente : asistentes) {
-                cb.addItem(asistente);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBToplaners(JComboBox cb) {
-        try {
-            ArrayList<String> toplaners = Main.getToplaners();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String toplaner : toplaners) {
-                cb.addItem(toplaner);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBJunglers(JComboBox cb) {
-        try {
-            ArrayList<String> junglers = Main.getJunglers();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String jungler : junglers) {
-                cb.addItem(jungler);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBMidlaners(JComboBox cb) {
-        try {
-            ArrayList<String> midlaners = Main.getMidlaners();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String midlaner : midlaners) {
-                cb.addItem(midlaner);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBADCarrys(JComboBox cb) {
-        try {
-            ArrayList<String> ADCarrys = Main.getADCarrys();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String ADCarry : ADCarrys) {
-                cb.addItem(ADCarry);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBSupports(JComboBox cb) {
-        try {
-            ArrayList<String> Supports = Main.getSupports();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String Support : Supports) {
-                cb.addItem(Support);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBSuplentesEQ(JComboBox cb) {
-        try {
-            ArrayList<String> suplentes = Main.getSuplentes();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String suplente : suplentes) {
-                cb.addItem(suplente);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-    private void llenarCBEquipos(JComboBox cb) {
-        try {
-            ArrayList<String> equipos = Main.getEquipos();
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String equipo : equipos) {
-                cb.addItem(equipo);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
-    }
-
-
 
     public JTabbedPane getVentanaAdmins() {
         return VentanaAdmins;
