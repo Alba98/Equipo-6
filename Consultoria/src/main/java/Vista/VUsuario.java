@@ -88,8 +88,6 @@ public class VUsuario {
             llenarCBPartidos(cbPartidos);
         }
 
-
-        // call onCancel() on ESCAPE
         pPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
