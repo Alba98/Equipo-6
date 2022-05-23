@@ -164,7 +164,7 @@ public class ReadXmlDomParser {
                 }
             }
 
-            generaXMLs(JORNADAS);
+           // generaXMLs(JORNADAS);
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
@@ -278,7 +278,7 @@ public class ReadXmlDomParser {
                 }
             }
 
-            generaXMLs(CLASIFICACION);
+           // generaXMLs(CLASIFICACION);
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
@@ -350,7 +350,7 @@ public class ReadXmlDomParser {
 
             FileWriter fw = new FileWriter( tempfile.getAbsoluteFile( ) );
             BufferedWriter bw = new BufferedWriter( fw );
-            bw.write( Main.getDatosClasificacionXML() );
+            bw.write( Main.getDatosJornadasXML() );
 
             bw.close();
             fw.close();

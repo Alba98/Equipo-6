@@ -6,15 +6,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * VENTANA LOG IN
+ * @author Equipo-6
+ */
 public class VLogin {
-    public JPanel pPrincipal;
+    private JPanel pPrincipal;
     private JTextField tFCorreo;
     private JButton loginButton;
     private JLabel tFContraseña;
     private JPasswordField contra;
     private JCheckBox ckVer;
 
-
+    /**
+     *
+     * CONTRUCTOR DE LA VENTANA LOGIN
+     *
+     **/
     public VLogin() {
         loginButton.setBorderPainted(false);
         loginButton.setFocusable(false);
@@ -71,10 +79,26 @@ public class VLogin {
         });
     }
 
+    /**
+     *
+     * HACER LOGIN EN LA BBDD
+     *
+     **/
     private void login() {
         JPasswordField psswrd = contra;
         psswrd.setEchoChar((char)0);
         Main.login(tFCorreo.getText(), psswrd.getPassword());
+    }
+
+    /**
+     *
+     * GETTER JPANEL PRINCIPAL DE LA VENTANA
+     *
+     * @return pPrincipal
+     *
+     **/
+    public JPanel getpPrincipal() {
+        return pPrincipal;
     }
 }
 

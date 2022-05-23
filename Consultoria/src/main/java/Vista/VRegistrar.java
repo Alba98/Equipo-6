@@ -10,6 +10,10 @@ import java.awt.event.MouseEvent;
 import Controlador.Main;
 import Excepciones.Validaciones;
 
+/**
+ * VENTANA REGISTRAR
+ * @author Equipo-6
+ */
 public class VRegistrar {
     private JPanel pPrincipal;
     private JTextField tfNombre;
@@ -21,6 +25,13 @@ public class VRegistrar {
     private JCheckBox ckVer;
 
 
+    /**
+     *
+     * CONTRUCTOR DE LA VENTANA REGISTRAR
+     *
+     * @param email correo electronico del usuario a registar
+     *
+     **/
     public VRegistrar(String email) {
         tfCorreo.setText(email);
         tfcontraseña.setEchoChar('*');
@@ -86,6 +97,12 @@ public class VRegistrar {
             }
         });
     }
+
+    /**
+     *
+     * REGISTAR UN NUEVO USUARIO EN LA BBDD
+     *
+     **/
     private void registrarUsuario() {
         if ( validarRegistrarUsuario() ) {
             try {
@@ -97,18 +114,26 @@ public class VRegistrar {
 
     }
 
+    /**
+     *
+     * VALIDAR REGISTRAR USUARIO
+     *
+     **/
     private boolean validarRegistrarUsuario() {
         return (Validaciones.validarTexto(tfNombre) &&  Validaciones.validarTexto(tfcontraseña) &&
                 Validaciones.validarEmail(tfCorreo) &&  Validaciones.validarFecha(tfFechaNacimiento));
     }
 
 
+    /**
+     *
+     * GETTER JPANEL PRINCIPAL DE LA VENTANA
+     *
+     * @return pPrincipal
+     *
+     **/
     public JPanel getpPrincipal() {
         return pPrincipal;
-    }
-
-    public void setpPrincipal(JPanel pPrincipal) {
-        this.pPrincipal = pPrincipal;
     }
 }
 

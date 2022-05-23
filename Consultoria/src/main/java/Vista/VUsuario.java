@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * VENTANA USUARIO
+ * @author Equipo-6
+ */
 public class VUsuario {
 
     public JPanel pPrincipal;
@@ -36,6 +40,13 @@ public class VUsuario {
 
     TreeMap<Integer, String> partidos;
 
+    /**
+     *
+     * CONTRUCTOR DE LA VENTANA USUARIO
+     *
+     * @param admin detemina si accedes como usuario o adminsitrador
+     *
+     **/
     public VUsuario(boolean admin) {
 
         //Parrafo de Información del TextArea:
@@ -81,7 +92,7 @@ public class VUsuario {
         // call onCancel() on ESCAPE
         pPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         bClasificacion.addActionListener(new ActionListener() {
@@ -177,6 +188,11 @@ public class VUsuario {
         });
     }
 
+    /**
+     *
+     * ACTUALIZA EL RESULTADO DEL PARTIDO
+     *
+     **/
     private void actualizarResulado() {
         try {
             String partido = cbPartidos.getSelectedItem().toString();
@@ -195,6 +211,13 @@ public class VUsuario {
         }
     }
 
+    /**
+     *
+     * LLENAR COMBOBOX CON LOS PARTIDOS
+     *
+     * @param cb JComboBox
+     *
+     **/
     private void llenarCBPartidos(JComboBox cb)  {
         try {
             partidos = Main.getPartidosEquipo();
@@ -210,21 +233,13 @@ public class VUsuario {
         }
     }
 
-    private void getJornadas() {
-        taJornada.setText( Main.getResultadosJornadas());
-
-    }
-
-    private void getClasificacion() {
-        taCalsificacion.setText( Main.getClasificacion());
-
-    }
-
-    private void onCancel() {
-        // add your code here if necessary
-   //     dispose();
-    }
-
+    /**
+     *
+     * GETTER JPANEL PRINCIPAL DE LA VENTANA
+     *
+     * @return pPrincipal
+     *
+     **/
     public JPanel getpPrincipal() {
         return pPrincipal;
     }

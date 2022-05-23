@@ -181,7 +181,7 @@ public class Main {
 
     public static void VentanaLogin() {
         VLogin = new JFrame("Inicio de sesion");
-        VLogin.setContentPane(new VLogin().pPrincipal);
+        VLogin.setContentPane(new VLogin().getpPrincipal());
         VLogin.setLocationRelativeTo(null);
         VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VLogin.pack();
@@ -199,7 +199,7 @@ public class Main {
 
     public static void VentanaCarga() {
         VCarga = new JFrame("VCarga");
-        VCarga.setContentPane(new VCarga().getPanel1());
+        VCarga.setContentPane(new VCarga().getpPrincipal());
         VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VCarga.setLocationRelativeTo(null);
         VCarga.pack();
@@ -776,6 +776,11 @@ public class Main {
     public static void volverLogInUsuario() {
         VUsuario.dispose();
         VentanaLogin();
+    }
+
+    public static void irVUsuario() {
+        VAdmin.dispose();
+        Main.VentanaUsuario(true);
     }
 
     public static TreeMap<Integer, String> getPartidosEquipo() throws Exception{
