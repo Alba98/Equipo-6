@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 import Modelo.BD.*;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
@@ -45,7 +46,10 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            VentanaCarga();
+           // VentanaCarga();
+
+            generarDAO();
+            VentanaAdmin();
 
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
@@ -115,7 +119,31 @@ public class Main {
      * @throws Exception
      **/
 
-    public static void OrganizarCalendario() throws Exception {
+    public static void OrganizarCalendario(LocalDate fechaJornada) throws Exception {
+        TemporadasEntity temporada = temporada_dao.getUltimaTemporada();
+
+        if(temporada.getAbierta() == "N") {
+            temporada_dao.crearTemporada();
+            temporada = temporada_dao.getUltimaTemporada();
+        }
+
+        int codTemporada = temporada.getCodTemporada();
+
+        temporada_dao.cerrarTemporada(codTemporada);
+
+        jornada_dao.crearJornadas(codTemporada, fechaJornada);
+
+        List<Match> matches = generarEmparejamientos();
+
+        System.out.println(matches.size());
+       // LocalTime startTime = LocalTime.parse("11:00");
+       // for (Match match : matches) {
+       //     partido_dao.crearPartido(startTime, );
+       //     startTime += 1;
+       // }
+    }
+
+    private static List<Match> generarEmparejamientos() throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
         List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
         //PArtidos = (numpartidos por jornada (equiposTotales.size/2))*(jorndas totales (jornadasTotales.size))
@@ -129,6 +157,7 @@ public class Main {
                         equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
             }
         }
+        return matches;
     }
 
     /**
@@ -162,15 +191,14 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
-    
-    static class Match { int team1, team2; public Match(int team1, int team2) {
-        this.team1 = team1;
-        this.team2 = team2;
-    }
+    static class Match {
+        int team1, team2;
+        public Match(int team1, int team2) {
+            this.team1 = team1;
+            this.team2 = team2;
+        }
 
-
-
-    public String toString() {
+        public String toString() {
             return team1 + " vs " + team2;
         }
     }
