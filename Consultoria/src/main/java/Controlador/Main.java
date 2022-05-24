@@ -1,5 +1,4 @@
 package Controlador;
-
 import Excepciones.Validaciones;
 import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
@@ -7,9 +6,7 @@ import Modelo.UML.*;
 import Vista.*;
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import Modelo.BD.*;
-
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +15,7 @@ import java.util.List;
 
 /**
  * MAIN
- * @author Equipo-6
+ * @author EQUIPO-6
  */
 public class Main {
     private static TemporadasDAO temporada_dao;
@@ -72,6 +69,11 @@ public class Main {
         usuario_dao = new UsuariosDAO();
         almacenXML_dao = new AlmacenXML_DAO();
     }
+    /**
+     *
+     * GENERAR VENTANA ADMINISTRADOR
+     *
+     **/
 
     public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
@@ -81,6 +83,14 @@ public class Main {
         VAdmin.pack();
         VAdmin.setVisible(true);
     }
+
+
+        /**
+         *
+         * GENERAR CALENDARIO
+         * @return
+         * @throws Exception
+         **/
 
     public static void CrearCalendario() throws Exception {
         String[] botones = {"Si", "No"};
@@ -98,6 +108,13 @@ public class Main {
         }
     }
 
+    /**
+     *
+     * GENERAR ORGANIZACION DEL CALENDARIO
+     * @return
+     * @throws Exception
+     **/
+
     public static void OrganizarCalendario() throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
         List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
@@ -114,12 +131,29 @@ public class Main {
         }
     }
 
+    /**
+     *
+     * OBTENER DATOS DE LA CLASIFICACION DESDE EL ALMACEN XML
+     * @return almacenXML_dao
+     * @throws Exception
+     **/
+
+
     public static String getDatosClasificacionXML() throws Exception{
         almacenXML_dao.borrarDatos();
         almacenXML_dao.generarClasificion();
 
         return almacenXML_dao.getDatos().getResultXml();
     }
+
+
+    /**
+     *
+     * OBTENER DATOS DE LAs JORNADAS DESDE EL ALMACEN XML
+     * @return almacenXML_dao
+     * @throws Exception
+     *
+     **/
 
     public static String getDatosJornadasXML() throws Exception{
         almacenXML_dao.borrarDatos();
@@ -128,10 +162,13 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
+    
     static class Match { int team1, team2; public Match(int team1, int team2) {
         this.team1 = team1;
         this.team2 = team2;
     }
+
+
 
     public String toString() {
             return team1 + " vs " + team2;
