@@ -185,7 +185,7 @@ public class Validaciones {
                                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
             Matcher m = patron.matcher(email);
             if (!m.matches())
-                 throw new Exception(textField.getName() + " no válido");
+                 throw new Exception("Email: " + email + " no válido");
 
             //textField.setEditable(false);
             return true;
