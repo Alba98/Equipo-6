@@ -82,14 +82,15 @@ public class JugadoresEntity {
         this.rol = rol;
     }
 
-    /**
+
+     /**
      *
-     * COMPARA DOS OBJETOS TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
-     * @return codJugador
-     */
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

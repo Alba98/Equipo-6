@@ -1,8 +1,18 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
+
+    /**
+     *
+     * @author Equipo-6
+     */
+
+    /**
+     * ENTIDAD JUGAR PARA
+     * SENTENCIA PARA OBTENER LOS DATOS DE TODOS LO ELEMENTOS QUE PARTICIPAN EN UN PARTIDO
+     *
+     **/
 
 @Entity
 @Table(name = "JUGAR_PARA", schema = "EQDAW06", catalog = "")
@@ -28,74 +38,208 @@ public class JugarParaEntity {
     private JugadoresEntity jugadoresByCodJugador;
     @ManyToOne
     @JoinColumn(name = "COD_EQUIPO", referencedColumnName = "COD_EQUIPO")
-    private EquiposEntity equiposByCodEquipo;
+        private EquiposEntity equiposByCodEquipo;
 
-    public byte getCodContrato() {
+        /**
+         *
+         * GETTER COD CODIGO CONTRATO
+         *
+         * @return codContrato
+         *
+         **/
+
+        public byte getCodContrato() {
         return codContrato;
     }
 
-    public void setCodContrato(byte codContrato) {
+        /**
+         *
+         * SETTER COD CODIGO CONTRATO
+         *
+         * @param  codContrato
+         *
+         **/
+
+        public void setCodContrato(byte codContrato) {
         this.codContrato = codContrato;
     }
 
-    public Byte getCodJugador() {
-        return codJugador;
-    }
+        /**
+         *
+         * GETTER COD JUGADOR
+         *
+         * @return codJugador
+         *
+         **/
 
-    public void setCodJugador(Byte codJugador) {
-        this.codJugador = codJugador;
-    }
 
-    public Byte getCodEquipo() {
-        return codEquipo;
-    }
+        public Byte getCodJugador() {
+            return codJugador;
+        }
 
-    public void setCodEquipo(Byte codEquipo) {
-        this.codEquipo = codEquipo;
-    }
+        /**
+         *
+         * SETTER COD JUGADOR
+         *
+         * @param  codJugador
+         *
+         **/
 
-    public Date getFechaFin() {
-        return fechaFin;
-    }
+        public void setCodJugador(Byte codJugador) {
+            this.codJugador = codJugador;
+        }
 
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+        /**
+         *
+         * GETTER COD EQUIPO
+         *
+         * @return codEquipo
+         *
+         **/
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+        public Byte getCodEquipo() {
+            return codEquipo;
+        }
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+        /**
+         *
+         * SETTER COD EQUIPO
+         *
+         * @param  codEquipo
+         *
+         **/
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JugarParaEntity that = (JugarParaEntity) o;
-        return codContrato == that.codContrato && Objects.equals(codJugador, that.codJugador) && Objects.equals(codEquipo, that.codEquipo) && Objects.equals(fechaFin, that.fechaFin) && Objects.equals(fechaInicio, that.fechaInicio);
-    }
+        public void setCodEquipo(Byte codEquipo) {
+            this.codEquipo = codEquipo;
+        }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(codContrato, codJugador, codEquipo, fechaFin, fechaInicio);
-    }
+        /**
+         *
+         * GETTER DE LA FECHA FINAL
+         *
+         * @return fechaFin
+         *
+         **/
 
-    public JugadoresEntity getJugadoresByCodJugador() {
+
+        public Date getFechaFin() {
+            return fechaFin;
+        }
+
+
+        /**
+         *
+         * SETTER DE LA FECHA FINAL
+         *
+         * @param  fechaFin
+         *
+         **/
+
+        public void setFechaFin(Date fechaFin) {
+            this.fechaFin = fechaFin;
+        }
+
+        /**
+         *
+         * GETTER DE LA FECHA DE INICIO
+         *
+         * @return fechaInicio
+         *
+         **/
+
+        public Date getFechaInicio() {
+            return fechaInicio;
+        }
+
+        /**
+         *
+         * SETTER DE LA FECHA DE INICIO
+         *
+         * @param fechaInicio
+         *
+         **/
+
+        public void setFechaInicio(Date fechaInicio) {
+            this.fechaInicio = fechaInicio;
+        }
+
+        /**
+         *
+         *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
+         *
+         * @param o
+         *
+         **/
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            JugarParaEntity that = (JugarParaEntity) o;
+            return codContrato == that.codContrato && Objects.equals(codJugador, that.codJugador) && Objects.equals(codEquipo, that.codEquipo) && Objects.equals(fechaFin, that.fechaFin) && Objects.equals(fechaInicio, that.fechaInicio);
+        }
+
+
+        /**
+         *
+         * DEVUElVE EL HASCODE DEL OBJETO
+         *
+         * @return hashcode
+         *
+         **/
+        @Override
+        public int hashCode() {
+            return Objects.hash(codContrato, codJugador, codEquipo, fechaFin, fechaInicio);
+        }
+
+        /**
+         *
+         * GETTER JUGADORES POR CODIGO DE JUGADOR
+         *
+         * @return jugadoresByCodJugador
+         *
+         **/
+
+        public JugadoresEntity getJugadoresByCodJugador() {
         return jugadoresByCodJugador;
-    }
+        }
 
-    public void setJugadoresByCodJugador(JugadoresEntity jugadoresByCodJugador) {
-        this.jugadoresByCodJugador = jugadoresByCodJugador;
-    }
+        /**
+         *
+         * SETTER JUGADORES POR CODIGO DE JUGADOR
+         *
+         * @param  jugadoresByCodJugador
+         *
+         **/
 
-    public EquiposEntity getEquiposByCodEquipo() {
-        return equiposByCodEquipo;
-    }
 
-    public void setEquiposByCodEquipo(EquiposEntity equiposByCodEquipo) {
-        this.equiposByCodEquipo = equiposByCodEquipo;
+        public void setJugadoresByCodJugador(JugadoresEntity jugadoresByCodJugador) {
+            this.jugadoresByCodJugador = jugadoresByCodJugador;
+        }
+
+        /**
+         *
+         * GETTER EQUIPO POR CODIGO DEL EQUIPO
+         *
+         * @return equiposByCodEquipo
+         *
+         **/
+
+
+        public EquiposEntity getEquiposByCodEquipo() {
+            return equiposByCodEquipo;
+        }
+
+        /**
+         *
+         * SETTER EQUIPO POR CODIGO DEL EQUIPO
+         *
+         * @param equiposByCodEquipo
+         *
+         **/
+
+
+        public void setEquiposByCodEquipo(EquiposEntity equiposByCodEquipo) {
+            this.equiposByCodEquipo = equiposByCodEquipo;
+        }
     }
-}

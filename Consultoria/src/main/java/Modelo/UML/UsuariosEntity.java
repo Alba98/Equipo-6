@@ -5,9 +5,15 @@ import java.sql.Date;
 import java.util.Objects;
 
 /**
- * ENTIDAD USUARIOS
+ *
  * @author Equipo-6
  */
+
+/**
+ * ENTIDAD USUARIOS
+ * SENTENCIA SQL PARA OBTENER LOS DATOS DE LOS USUARIOS
+ *
+ **/
 @Entity
 @Table(name = "USUARIOS", schema = "EQDAW06", catalog = "")
 public class UsuariosEntity {
@@ -102,7 +108,7 @@ public class UsuariosEntity {
 
     /**
      *
-     * GETTER CONTRASEÑA
+     * GETTER CONTRASENIA
      *
      * @return password
      *
@@ -113,7 +119,7 @@ public class UsuariosEntity {
 
     /**
      *
-     * SETTER CONTRASEÑA
+     * SETTER CONTRASENIA
      *
      * @param password
      *
@@ -168,7 +174,7 @@ public class UsuariosEntity {
 
     /**
      *
-     * COMPARA DOS OBJETOS DE TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
@@ -183,7 +189,7 @@ public class UsuariosEntity {
 
     /**
      *
-     * DEVUELEVE EL HASCODE DEL OBJETO
+     * DEVUElVE EL HASCODE DEL OBJETO
      *
      * @return hashcode
      *

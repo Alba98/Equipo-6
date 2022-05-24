@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * ENTIDAD EQUIPOS
- * @author Equipo-6
+ * @author EQUIPO-6
  */
 @Entity
 @Table(name = "EQUIPOS", schema = "EQDAW06", catalog = "")
@@ -216,7 +216,7 @@ public class EquiposEntity {
 
     /**
      *
-     * GETTER ASISTES POR COD EQUIPO
+     * GETTER ASISTENTES POR COD EQUIPO
      *
      * @return asistesByCodEquipo
      *
@@ -227,11 +227,12 @@ public class EquiposEntity {
 
     /**
      *
-     * SETTER ASISTES POR COD EQUIPO
+     * SETTER ASISTENTES POR COD EQUIPO
      *
      * @param asistesByCodEquipo
      *
      */
+
     public void setAsistesByCodEquipo(Collection<AsisteEntity> asistesByCodEquipo) {
         this.asistesByCodEquipo = asistesByCodEquipo;
     }
@@ -264,7 +265,10 @@ public class EquiposEntity {
      *
      * @return jugarParasByCodEquipo
      *
+     *
      */
+
+
     public Collection<JugarParaEntity> getJugarParasByCodEquipo() {
         return jugarParasByCodEquipo;
     }

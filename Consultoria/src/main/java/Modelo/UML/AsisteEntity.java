@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * ENTIDAD ASISTE
- * @author Equipo-6
+ * @author  EQUIPO-6
  */
 @Entity
 @Table(name = "ASISTE", schema = "EQDAW06", catalog = "")
@@ -124,7 +124,7 @@ public class AsisteEntity {
 
     /**
      *
-     * GETTER FECHA INICION
+     * GETTER FECHA INICIO
      *
      * @return fechaInicio
      *
@@ -146,13 +146,11 @@ public class AsisteEntity {
 
     /**
      *
-     * COMPARA DOS OBJETO DE TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
-     * @return codContrato
-     *
-     */
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -175,7 +173,7 @@ public class AsisteEntity {
 
     /**
      *
-     * GETTER ASISTENTES POR COD ASISTENTE
+     * GETTER ASISTENTES POR  EL COD ASISTENTE
      *
      * @return asistentesByCodAsistente
      *
@@ -186,7 +184,7 @@ public class AsisteEntity {
 
     /**
      *
-     * SETTER ASISTENTES POR COD ASISTENTE
+     * SETTER ASISTENTES POR EL COD ASISTENTE
      *
      * @param asistentesByCodAsistente
      *

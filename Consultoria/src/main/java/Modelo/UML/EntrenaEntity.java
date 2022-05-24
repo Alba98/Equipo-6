@@ -1,13 +1,12 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
-/**
- * ENTIDAD ENTRENA
- * @author Equipo-6
- */
+    /**
+     * ENTIDAD ENTRENA
+     * @author EQUIPO-6
+     */
 @Entity
 @Table(name = "ENTRENA", schema = "EQDAW06", catalog = "")
 public class EntrenaEntity {
@@ -143,16 +142,15 @@ public class EntrenaEntity {
         this.fechaInicio = fechaInicio;
     }
 
-    /**
-     *
-     * COMPARA DOS OBJETOS TIPO
-     *
-     * @param o
-     *
-     * @return codContrato
-     *
-     */
-    @Override
+        /**
+         *
+         *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
+         *
+         * @param o
+         *
+         **/
+
+        @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

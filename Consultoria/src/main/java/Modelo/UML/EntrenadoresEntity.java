@@ -1,12 +1,11 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
 /**
  * ENTIDAD ENTRENADORES
- * @author Equipo-6
+ * @author EQUIPO-6
  */
 @Entity
 @Table(name = "ENTRENADORES", schema = "EQDAW06", catalog = "")
@@ -58,13 +57,12 @@ public class EntrenadoresEntity {
 
     /**
      *
-     * COMPARA DOS OBJETOS TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
-     * @return codEntrenador
-     *
-     */
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -114,6 +112,7 @@ public class EntrenadoresEntity {
      * @return entrenasByCodEntrenador
      *
      */
+
     public Collection<EntrenaEntity> getEntrenasByCodEntrenador() {
         return entrenasByCodEntrenador;
     }
@@ -125,24 +124,26 @@ public class EntrenadoresEntity {
      * @param entrenasByCodEntrenador
      *
      */
+
     public void setEntrenasByCodEntrenador(Collection<EntrenaEntity> entrenasByCodEntrenador) {
         this.entrenasByCodEntrenador = entrenasByCodEntrenador;
     }
 
     /**
      *
-     * GETTER PERSONAS BY COD ENTRENADOR
+     * GETTER PERSONAS POR COD ENTRENADOR
      *
      * @return personasByCodEntrenador
      *
      */
+
     public PersonasEntity getPersonasByCodEntrenador() {
         return personasByCodEntrenador;
     }
 
     /**
      *
-     * SETTER PERSONAS BY COD ENTRENADOR
+     * SETTER PERSONAS POR COD ENTRENADOR
      *
      * @param personasByCodEntrenador
      */

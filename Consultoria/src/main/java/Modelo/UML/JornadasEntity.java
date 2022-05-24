@@ -1,5 +1,4 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -100,15 +99,15 @@ public class JornadasEntity {
         this.fechaJornada = fechaJornada;
     }
 
+
     /**
      *
-     * COMPARA DOS OBJETOS DE TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
-     * @return codJornada
-     *
-     */
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -154,6 +153,7 @@ public class JornadasEntity {
      * GETTER PARTIDO POR COD JORNADA
      *
      * @return partidosByCodJornada
+     *
      */
     public Collection<PartidosEntity> getPartidosByCodJornada() {
         return partidosByCodJornada;

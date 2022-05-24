@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * ENTIDAD ALMACEN XML
- * Equipo-6
+ *  EQUIPO-6
  */
 @Entity
 @Table(name = "ALMACEN_XML", schema = "EQDAW06", catalog = "")
@@ -69,13 +69,12 @@ public class AlmacenXmlEntity {
 
     /**
      *
-     * COMPARA DOS OBJETOS DE TIPO
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
      *
      * @param o
      *
-     * @return codAlmace
-     *
-     */
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
