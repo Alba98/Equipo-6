@@ -92,7 +92,7 @@ public class Main {
          * @throws Exception
          **/
 
-    public static void CrearCalendario() throws Exception {
+    public static void CrearCalendario(String fecha) throws Exception {
         String[] botones = {"Si", "No"};
         int ventana = JOptionPane.showOptionDialog(null,
                 "¿Estás seguro de crear el calendario? No se podrá modificar ni personas ni equipos",
@@ -100,7 +100,9 @@ public class Main {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
         if (ventana == 0){
             System.out.println("Realizando el calendario");
-            OrganizarCalendario();}
+            LocalDate fechaJ = LocalDate.parse(fecha, formatoFecha);
+            OrganizarCalendario(fechaJ);
+        }
         else
         if (ventana == 1){
             System.out.println("Se le devolverá a la pantalla anterior");
@@ -125,35 +127,30 @@ public class Main {
 
         int codTemporada = temporada.getCodTemporada();
 
+        //comprobar si se puede cerrar la temporada
         temporada_dao.cerrarTemporada(codTemporada);
 
+        //generar las jornadas una vez cerrada la temporada
         jornada_dao.crearJornadas(codTemporada, fechaJornada);
 
-        List<Match> matches = generarEmparejamientos();
-
-        System.out.println(matches.size());
-       // LocalTime startTime = LocalTime.parse("11:00");
-       // for (Match match : matches) {
-       //     partido_dao.crearPartido(startTime, );
-       //     startTime += 1;
-       // }
+        //generar emparejamientos partidos
+        generarEmparejamientos();
     }
 
-    private static List<Match> generarEmparejamientos() throws Exception {
+    private static void generarEmparejamientos() throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
         List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
-        //PArtidos = (numpartidos por jornada (equiposTotales.size/2))*(jorndas totales (jornadasTotales.size))
         int partidos = (equiposTotales.size()/2)*(jornadasTotales.size());
 
-        List<Match> matches = new ArrayList<Match>();
-
         for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
+            LocalTime startTime = LocalTime.parse("11:00");
             for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
-                matches.add(new Match(equiposTotales.get(eq1).getCodEquipo(),
-                        equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
+                partido_dao.crearPartido(startTime, eq1, equiposTotales.get(eq1).getNombre(),
+                        equiposTotales.get(eq2 % equiposTotales.size()).getNombre());
+
+                startTime.plusHours(2);
             }
         }
-        return matches;
     }
 
     /**
@@ -179,34 +176,12 @@ public class Main {
      * @throws Exception
      *
      **/
-
     public static String getDatosJornadasXML() throws Exception{
         almacenXML_dao.borrarDatos();
         almacenXML_dao.generarJornadas();
 
         return almacenXML_dao.getDatos().getResultXml();
     }
-
-    static class Match {
-        int team1, team2;
-        public Match(int team1, int team2) {
-            this.team1 = team1;
-            this.team2 = team2;
-        }
-
-        /**
-         *
-         * MÉTODO representar cualquier objeto como una cadena,
-         * @return almacenXML_dao
-         * @throws Exception
-         *
-         **/
-
-    public String toString() {
-            return team1 + " vs " + team2;
-        }
-    }
-
 
     public static void VentanaLogin() {
         VLogin = new JFrame("Inicio de sesion");

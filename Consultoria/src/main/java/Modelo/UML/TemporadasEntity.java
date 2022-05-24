@@ -9,8 +9,6 @@ import java.util.Objects;
  * SENTENCIA SQL OBTENCIÖN DE TODOS LOS EQUIPOS
  *
  */
-@NamedQuery(name = "TemporadasEntity.max", query = "SELECT t FROM TemporadasEntity t WHERE t.codTemporada = max(t.codTemporada)")
-
 /**
  * ENTIDAD TEMPORADAS
  * @author Equipo-6
