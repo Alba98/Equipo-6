@@ -137,33 +137,25 @@ public class Validaciones {
 
         /**
         * HORA VÁLIDA
-         * @param hora1,hora2 para validar la hora.
+         * @param hora para validar la hora.
          *@throws Exception
          *@return true or false
          **/
 
-        public static boolean validarHora(JTextField hora1, JTextField hora2) {
+        public static boolean validarHora(JTextField hora) {
         try {
-            String hora1_s = hora1.getText();
-            String hora2_s = hora2.getText();
-            if (hora1_s.isEmpty())
-                throw new Exception("La hora de inicio es un dato obligatorio");
-            if (hora2_s.isEmpty())
-                throw new Exception("La hora de fin es un dato obligatorio");
+            String hora_s = hora.getText();
+            if (hora_s.isEmpty())
+                throw new Exception("La hora es un dato obligatorio");
 
-            LocalTime horaI = LocalTime.parse(hora1_s);
-            LocalTime horaF = LocalTime.parse(hora2_s);
-
-            if (horaF.compareTo(horaI)<=0)
-                throw new Exception("La no validas");
+            LocalTime horaI = LocalTime.parse(hora_s);
 
             return true;
-
         } catch (Exception e) {
             mostrarError(e.getMessage());
-            hora1.setSelectionStart(0);
-            hora1.setSelectionEnd(hora1.getText().length());
-            hora1.requestFocus();
+            hora.setSelectionStart(0);
+            hora.setSelectionEnd(hora.getText().length());
+            hora.requestFocus();
             return false;
         }
     }

@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Factory.DatosClasificacionXML;
+import Excepciones.Validaciones;
 import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.*;
@@ -12,7 +12,6 @@ import Modelo.BD.*;
 
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
@@ -319,10 +318,14 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            if(e.getCause().getCause().getMessage().contains("ORA-20054: Err. email o contrasena incorrecta"))
+            if(e.getCause().getCause().getMessage().contains("Err. usuario no resgistrado"))
             {
                 VLogin.dispose();
                 VentanaRegistrar(email);
+            }
+            if(e.getCause().getCause().getMessage().contains("Err. contrasena incorrecta"))
+            {
+                Validaciones.mostrarError("Credencial incorrecta. Pruebe de nuevo");
             }
         }
     }
