@@ -1,14 +1,23 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
+/**
+ * ENTIDAD ENTRENADORES
+ * @author EQUIPO-6
+ */
 @Entity
 @Table(name = "ENTRENADORES", schema = "EQDAW06", catalog = "")
-
+/**
+ * SENTENCIA SQL PARA OBTENER TODOS LOS ENTRENADORES
+ */
 @NamedQuery(name = "EntrenadoresEntity.todas", query = "SELECT e FROM EntrenadoresEntity e")
-@NamedQuery(name = "EntrenadoresEntity.borrar", query = "SELECT e.codEntrenador FROM EntrenadoresEntity e WHERE e.codEntrenador=" +
+/**
+ * SENTENCIA SQL PARA OBTENER UN ENTRENADOR POR NICKNAME:
+ * OBJETIVO FINAL --> BORRADO DEL ENTRENADOR SELECCIONADO
+ */
+@NamedQuery(name = "EntrenadoresEntity.borrar", query = "SELECT e FROM EntrenadoresEntity e WHERE e.codEntrenador=" +
         "(SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 )")
 
 public class EntrenadoresEntity {
@@ -24,13 +33,35 @@ public class EntrenadoresEntity {
     @JoinColumn(name = "COD_ENTRENADOR", referencedColumnName = "COD_PERSONA", nullable = false)
     private PersonasEntity personasByCodEntrenador;
 
+    /**
+     *
+     * GETTER COD ENTRENADOR
+     *
+     * @return codEntrenador
+     *
+     */
     public byte getCodEntrenador() {
         return codEntrenador;
     }
 
+    /**
+     *
+     * SETTER COD ENTRENADOR
+     *
+     * @param codEntrenador
+     *
+     */
     public void setCodEntrenador(byte codEntrenador) {
         this.codEntrenador = codEntrenador;
     }
+
+    /**
+     *
+     *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
+     *
+     * @param o
+     *
+     **/
 
     @Override
     public boolean equals(Object o) {
@@ -40,31 +71,82 @@ public class EntrenadoresEntity {
         return codEntrenador == that.codEntrenador;
     }
 
+    /**
+     *
+     * DEVUELVE EL HASHCODE DEL OBJETO
+     *
+     * @return hashCode
+     *
+     */
     @Override
     public int hashCode() {
         return Objects.hash(codEntrenador);
     }
 
+    /**
+     *
+     * GETTER ASISTENTES POR COD ENTRENADOR
+     *
+     * @return asistentesByCosEntrenador
+     *
+     */
     public Collection<AsistentesEntity> getAsistentesByCodEntrenador() {
         return asistentesByCodEntrenador;
     }
 
+    /**
+     *
+     * SETTER ASISTENTES POR COD ENTRENADOR
+     *
+     * @param asistentesByCodEntrenador
+     *
+     */
     public void setAsistentesByCodEntrenador(Collection<AsistentesEntity> asistentesByCodEntrenador) {
         this.asistentesByCodEntrenador = asistentesByCodEntrenador;
     }
+
+    /**
+     *
+     * GETTER ENTRENAS POR ENTRENADOR
+     *
+     * @return entrenasByCodEntrenador
+     *
+     */
 
     public Collection<EntrenaEntity> getEntrenasByCodEntrenador() {
         return entrenasByCodEntrenador;
     }
 
+    /**
+     *
+     * SETTER ENTRENAS POR COD ENTRENADOR
+     *
+     * @param entrenasByCodEntrenador
+     *
+     */
+
     public void setEntrenasByCodEntrenador(Collection<EntrenaEntity> entrenasByCodEntrenador) {
         this.entrenasByCodEntrenador = entrenasByCodEntrenador;
     }
+
+    /**
+     *
+     * GETTER PERSONAS POR COD ENTRENADOR
+     *
+     * @return personasByCodEntrenador
+     *
+     */
 
     public PersonasEntity getPersonasByCodEntrenador() {
         return personasByCodEntrenador;
     }
 
+    /**
+     *
+     * SETTER PERSONAS POR COD ENTRENADOR
+     *
+     * @param personasByCodEntrenador
+     */
     public void setPersonasByCodEntrenador(PersonasEntity personasByCodEntrenador) {
         this.personasByCodEntrenador = personasByCodEntrenador;
     }

@@ -3,7 +3,6 @@ package Modelo.BD;
 import Modelo.UML.AsistentesEntity;
 import Modelo.UML.EquiposEntity;
 import Modelo.UML.JugadoresEntity;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -11,9 +10,25 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
+
 public class EquiposDAO extends BaseDatos {
 
     public EquiposDAO() {    }
+
+        /**
+         * CREACION DEL EQUIPO
+         * @param nombre  parámetro de registro.
+         * @param fechaFundacion    parámetro de registro.
+         * @param ciudad   parámetro de registro.
+         * @param sponsor parámetro de registro.
+         * @param nombeDuenio parámetro de registro.
+         *
+         **/
 
     public void crearEquipos(String nombre, LocalDate fechaFundacion, String ciudad, String sponsor,
                               String nombeDuenio) throws Exception {
@@ -42,6 +57,14 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         * CONTRATO DEL JUGADOR
+         * @param jugador  parámetro de registro.
+         * @param equipo    parámetro de registro.
+         * @param fechaInicio   parámetro de registro.
+         * @param fechaFin parámetro de registro.
+         *
+         **/
     public void contratoJugador(int jugador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
         //iniciar transaccion
@@ -66,6 +89,14 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         * CONTRATO DEL ENTRENADOR
+         * @param entrenador  parámetro de registro.
+         * @param equipo    parámetro de registro.
+         * @param fechaInicio   parámetro de registro.
+         * @param fechaFin parámetro de registro.
+         *
+         **/
     public void contratoEntrenador(int entrenador, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
         //iniciar transaccion
@@ -89,6 +120,14 @@ public class EquiposDAO extends BaseDatos {
         // ejecutar las transaciones en la base de datos
         transaction.commit();
     }
+        /**
+         * CONTRATO DEL ASISTENTE
+         * @param asistente  parámetro de registro.
+         * @param equipo    parámetro de registro.
+         * @param fechaInicio   parámetro de registro.
+         * @param fechaFin parámetro de registro.
+         *
+         **/
 
     public void contratoAsistente(int asistente, int equipo, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
 
@@ -114,6 +153,12 @@ public class EquiposDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         *
+         *CONSULTA DE EQUIPOS
+         * @return listaEquipos
+         *
+         */
     public List<EquiposEntity> consultarEquipos() throws Exception {
         //iniciar transaccion
         transaction.begin();
@@ -130,6 +175,13 @@ public class EquiposDAO extends BaseDatos {
         return listaEquipos;
     }
 
+        /**
+         *
+         *BORRAR EQUIPO
+         * @param nomEqui
+         *
+         */
+
     public void borrarEquipo(String nomEqui) throws Exception{
         //iniciar transaccion
         transaction.begin();
@@ -137,7 +189,7 @@ public class EquiposDAO extends BaseDatos {
         // 3. Construir comandos SQL
         TypedQuery<EquiposEntity> qEventos =
                 em.createNamedQuery("EquiposEntity.borrar", EquiposEntity.class);
-        qEventos.setParameter(1, nomEqui.toUpperCase());
+        qEventos.setParameter(1, nomEqui);
         EquiposEntity consulta = qEventos.getSingleResult();
         if (consulta != null){
             em.remove(consulta);

@@ -1,8 +1,6 @@
 package Modelo.BD;
-
 import Modelo.UML.EquiposEntity;
 import Modelo.UML.PartidosEntity;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -10,9 +8,25 @@ import java.sql.Date;
 import java.time.LocalTime;
 import java.util.List;
 
+
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
+
 public class PartidosDAO extends BaseDatos {
 
     public PartidosDAO() {    }
+
+        /**
+         * CREACION DEL PARTIDO
+         * @param horaPartido  parámetro de registro.
+         * @param codJornada    parámetro de registro.
+         * @param nombreEquipo1   parámetro de registro.
+         * @param nombreEquipo2 parámetro de registro.
+         *
+         **/
 
     public void crearPartido(LocalTime horaPartido, int codJornada, String nombreEquipo1, String nombreEquipo2) throws Exception {
 
@@ -37,6 +51,12 @@ public class PartidosDAO extends BaseDatos {
         // ejecutar las transaciones en la base de datos
         transaction.commit();
     }
+        /**
+         * INSERTAR RESULTADOS DEL PARTIDO
+         * @param codPartido  parámetro de registro.
+         * @param resultado    parámetro de registro.
+         *
+         **/
 
     public void resultadosPartido(int codPartido, String resultado) throws Exception {
 
@@ -59,6 +79,11 @@ public class PartidosDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         * CONSULTAR INRFORMACION DEL PARTIDO
+         * @return listaPartidos;
+         *
+         **/
     public List<PartidosEntity> consultarPartidos() throws Exception {
         //iniciar transaccion
         transaction.begin();

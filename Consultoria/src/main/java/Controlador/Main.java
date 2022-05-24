@@ -1,15 +1,12 @@
 package Controlador;
-
-import Modelo.Factory.DatosClasificacionXML;
+import Excepciones.Validaciones;
 import Modelo.Factory.DatosJornadasXML;
 import Modelo.Factory.ReadXmlDomParser;
 import Modelo.UML.*;
 import Vista.*;
 import javax.swing.*;
 import javax.swing.border.Border;
-
 import Modelo.BD.*;
-
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +14,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * MAIN
+ * @author EQUIPO-6
+ */
 public class Main {
     private static TemporadasDAO temporada_dao;
     private static JornadasDAO jornada_dao;
@@ -25,9 +26,7 @@ public class Main {
     private static EntrenadoresDAO entrenador_dao;
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
-
     private static UsuariosDAO usuario_dao;
-
     private static AlmacenXML_DAO almacenXML_dao;
 
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -36,18 +35,29 @@ public class Main {
 
     private static ReadXmlDomParser xmlParser;
 
+    /**
+     *
+     * CONTRUCTOR MAIN
+     *
+     * @param args
+     *
+     **/
     public static void main(String[] args) {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
             VentanaCarga();
-
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
 
     }
 
+    /**
+     *
+     * GENERAR OBJETOS DAO
+     *
+     **/
     private static void generarDAO() {
         temporada_dao = new TemporadasDAO();
         jornada_dao = new JornadasDAO();
@@ -59,61 +69,12 @@ public class Main {
         usuario_dao = new UsuariosDAO();
         almacenXML_dao = new AlmacenXML_DAO();
     }
+    /**
+     *
+     * GENERAR VENTANA ADMINISTRADOR
+     *
+     **/
 
-    /******************** TEST *************************/
-    public static void GenerarTemporadaTest() throws Exception {
-        temporada_dao.crearTemporada();
-    }
-    private static void GenerarJornadasTest() throws Exception {
-        jornada_dao.crearJornadas(01,  LocalDate.of(2022, 04, 11));
-    }
-
-    private static void GenerarPartidosTest() throws Exception {
-        LocalTime now = LocalTime.now();
-        partido_dao.crearPartido(now, 01, "Real Horses", "Gasteiz-Goya");
-    }
-
-    private static void ResultadosPartidosTest() throws Exception {
-        partido_dao.resultadosPartido(01, "3-2");
-    }
-
-    private static void GenerarJugadorTest() throws Exception {
-        jugador_dao.crearJugador("The_Core", "TOP", "DARCY", "Wuenz",
-                LocalDate.of(2001, 05, 14), "Taiwanesa", 20000.0 );
-    }
-
-    private static void GenerarEntrenadorTest() throws Exception {
-        entrenador_dao.crearEntrenador("Slayo_15", "Andrea", "Birel",
-                LocalDate.of(1997, 05, 14), "Espaniola", 1500.0 );
-    }
-
-    private static void GenerarAsistenteTest() throws Exception {
-        asistente_dao.crearAsistente("Destepo", "Juan", "Antonio",
-                LocalDate.of(1997, 05, 14), "Alemana", 1500.0,
-                "Slayo_15" );
-    }
-
-    private static void GenerarEquiposTest() throws Exception {
-        equipo_dao.crearEquipos( "Gasteiz-Goya", LocalDate.of(2021, 01, 23),
-                "Vitoria", "Goya", "Eneko Alonso");
-    }
-
-    private static void ContratoJugadorTest() throws Exception {
-        equipo_dao.contratoJugador(06, 01,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    private static void ContratoEntrenadorTest() throws Exception {
-        equipo_dao.contratoJugador(12, 03,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    private static void ContratoAsistenteTest() throws Exception {
-        equipo_dao.contratoJugador(10, 03,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    /******************** fin TEST *************************/
     public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
@@ -123,7 +84,15 @@ public class Main {
         VAdmin.setVisible(true);
     }
 
-    public static void CrearCalendario() throws Exception {
+
+    /**
+     *
+     * GENERAR CALENDARIO
+     * @return
+     * @throws Exception
+     **/
+
+    public static void CrearCalendario(String fechaPrimera) throws Exception {
         String[] botones = {"Si", "No"};
         int ventana = JOptionPane.showOptionDialog(null,
                 "¿Estás seguro de crear el calendario? No se podrá modificar ni personas ni equipos",
@@ -131,7 +100,9 @@ public class Main {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
         if (ventana == 0){
             System.out.println("Realizando el calendario");
-            OrganizarCalendario();}
+            LocalDate fecha = LocalDate.parse(fechaPrimera, formatoFecha);
+            OrganizarCalendario(fecha);
+        }
         else
         if (ventana == 1){
             System.out.println("Se le devolverá a la pantalla anterior");
@@ -139,21 +110,61 @@ public class Main {
         }
     }
 
-    public static void OrganizarCalendario() throws Exception {
+    /**
+     *
+     * GENERAR ORGANIZACION DEL CALENDARIO
+     * @return
+     * @throws Exception
+     **/
+
+    public static void OrganizarCalendario(LocalDate fechaJornada) throws Exception {
+        int codTemporada = temporada_dao.getUltimaTemporada();
+
+        if(temporada_dao.getTemporada(codTemporada).getAbierta() == "N") {
+            temporada_dao.crearTemporada();
+            codTemporada = temporada_dao.getUltimaTemporada();
+        }
+
+        //comprobar si se puede cerrar la temporada
+        temporada_dao.cerrarTemporada(codTemporada);
+
+        jornada_dao.crearJornadas(codTemporada, fechaJornada);
+
+        //generar emparejamientos partidos
+        generarEmparejamientos(temporada_dao.getTemporada(codTemporada));
+    }
+
+    private static void generarEmparejamientos(TemporadasEntity temporada) throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
-        List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
-        //PArtidos = (numpartidos por jornada (equiposTotales.size/2))*(jorndas totales (jornadasTotales.size))
+        Collection<JornadasEntity> jornadasTotales = temporada.getJornadasByCodTemporada();
         int partidos = (equiposTotales.size()/2)*(jornadasTotales.size());
 
-        List<Match> matches = new ArrayList<Match>();
 
-        for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
-            for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
-                matches.add(new Match(equiposTotales.get(eq1).getCodEquipo(),
-                        equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo()));
+        for (JornadasEntity jornada : jornadasTotales) {
+            LocalTime startTime = LocalTime.parse("11:00");
+           // System.out.println(" JORNADA 0" + jornada.getCodJornada());
+
+            for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
+                for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
+                    partido_dao.crearPartido(startTime, 000, equiposTotales.get(eq1).getNombre(),
+                            equiposTotales.get(eq2 % equiposTotales.size()).getNombre());
+
+                    startTime.plusHours(2);
+
+                   // System.out.println(equiposTotales.get(eq1).getCodEquipo() + " vs "+ equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo());
+                }
             }
+
         }
     }
+
+    /**
+     *
+     * OBTENER DATOS DE LA CLASIFICACION DESDE EL ALMACEN XML
+     * @return almacenXML_dao
+     * @throws Exception
+     **/
+
 
     public static String getDatosClasificacionXML() throws Exception{
         almacenXML_dao.borrarDatos();
@@ -162,6 +173,15 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
+
+    /**
+     *
+     * OBTENER DATOS DE LAs JORNADAS DESDE EL ALMACEN XML
+     * @return almacenXML_dao
+     * @throws Exception
+     *
+     **/
+
     public static String getDatosJornadasXML() throws Exception{
         almacenXML_dao.borrarDatos();
         almacenXML_dao.generarJornadas();
@@ -169,25 +189,55 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
-    static class Match { int team1, team2; public Match(int team1, int team2) {
-        this.team1 = team1;
-        this.team2 = team2;
-    }
+    /**
+     * CLASE ANIDADA ESTÁTICA
+     *
+     **/
+
+    static class Match {
+
+        int team1, team2;
+        /**
+         * CREACION DEL OBJETO MATCH
+         * @param team1
+         * @param team2
+         **/
+
+        public Match(int team1, int team2) {
+            this.team1 = team1;
+            this.team2 = team2;
+        }
+
+        /**
+         *
+         * MÉTODO REPRESENTAR EL OBJETO COMO UNA CADENA
+         *
+         **/
+
         public String toString() {
             return team1 + " vs " + team2;
         }
     }
 
-
+    /**
+     *
+     * GENERAR VENTANA DE LOGIN
+     *
+     **/
     public static void VentanaLogin() {
         VLogin = new JFrame("Inicio de sesion");
-        VLogin.setContentPane(new VLogin().pPrincipal);
+        VLogin.setContentPane(new VLogin().getpPrincipal());
         VLogin.setLocationRelativeTo(null);
         VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VLogin.pack();
         VLogin.setVisible(true);
     }
 
+    /**
+     *
+     * GENERAR VENTANA DE REGISTRO
+     * @param email
+     **/
     public static void VentanaRegistrar(String email) {
         VRegistrar = new JFrame("VRegistrar");
         VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
@@ -197,14 +247,26 @@ public class Main {
         VRegistrar.setVisible(true);
     }
 
+    /**
+     *
+     * GENERAR VENTANA DE CARGA
+     *
+     **/
+
     public static void VentanaCarga() {
         VCarga = new JFrame("VCarga");
-        VCarga.setContentPane(new VCarga().getPanel1());
+        VCarga.setContentPane(new VCarga().getpPrincipal());
         VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VCarga.setLocationRelativeTo(null);
         VCarga.pack();
         VCarga.setVisible(true);
     }
+
+    /**
+     *
+     * GENERAR VENTANA USUARIO
+     * @param admin
+     **/
 
     public static void VentanaUsuario(boolean admin) {
         VUsuario = new JFrame("VUsuario");
@@ -215,20 +277,37 @@ public class Main {
         VUsuario.setVisible(true);
 
     }
-
-    public static void getDatosClasificacion(){
-        //ClasificacionDAO ?:
-    }
-    public static void getDatosJornadaFinal(){
-        //JornadaDAO where cod_jornada = max(cod_jornada):
-
-    }
+    /**
+     *
+     * REGISTRAR JUGADOR
+     * @param  nombre
+     * @param  apellido
+     * @param  sueldo
+     * @param  fechaNacimiento
+     * @param  nacionalidad
+     * @param  nickname
+     * @param  rol
+     * @throws Exception
+     **/
 
     public static void registrarJugador(String nombre, String apellido, String sueldo, String fechaNacimiento,
-                                        String nacionalidad, String nickname, String rol) throws Exception{
+                                        String nacionalidad, String nickname, String rol)
+            throws Exception{
         LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
         jugador_dao.crearJugador(nickname, rol, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
     }
+
+    /**
+     *
+     * REGISTRAR ENTRENADOR
+     * @param  nombre
+     * @param  apellido
+     * @param  sueldo
+     * @param  fechaNacimiento
+     * @param  nacionalidad
+     * @param  nickname
+     * @throws Exception
+     **/
 
     public static void registrarEntrenador(String nombre, String apellido, String sueldo, String fechaNacimiento,
                                            String nacionalidad, String nickname) throws Exception{
@@ -236,11 +315,37 @@ public class Main {
         entrenador_dao.crearEntrenador(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo));
     }
 
+    /**
+     *
+     * REGISTRAR ASISTENTES
+     * @param  nombre
+     * @param  apellido
+     * @param  sueldo
+     * @param  fechaNacimiento
+     * @param  nacionalidad
+     * @param  nickname
+     * @param entrenador
+     * @throws Exception
+     **/
+
     public static void registrarAsistente(String nombre, String apellido, String sueldo, String fechaNacimiento,
                                           String nacionalidad, String nickname, String entrenador) throws Exception{
         LocalDate fecha = LocalDate.parse(fechaNacimiento, formatoFecha);
         asistente_dao.crearAsistente(nickname, nombre, apellido, fecha, nacionalidad, Double.parseDouble(sueldo), entrenador);
     }
+
+    /**
+     *
+     * REGISTRAR EQUIPO
+     * @param  nombre
+     * @param  creacion
+     * @param  ciudad
+     * @param  sponsor
+     * @param  duenio
+     * @throws Exception
+     *
+     **/
+
 
     public static void registrarEquipo(String nombre, String creacion, String ciudad, String sponsor, String duenio) throws Exception {
         LocalDate fecha = LocalDate.parse(creacion, formatoFecha);
@@ -249,30 +354,79 @@ public class Main {
 
     //Borrar jugadores, entrenadores, asistentes y entrenadores:
 
+    /**
+     *
+     * BORRAR EQUIPO
+     * @param  jugadorBorrar
+     * @throws Exception
+     *
+     **/
+
     public static void borrarJugador(String jugadorBorrar) throws Exception{
         jugador_dao.borrarJugador(jugadorBorrar);
     }
+    /**
+     *
+     * BORRAR ENTRENADOR
+     * @param  nomEntre
+     * @throws Exception
+     *
+     **/
+
 
     public static void borrarEntrenador(String nomEntre) throws Exception{
         entrenador_dao.borrarEntrenador(nomEntre);
     }
 
+    /**
+     *
+     * BORRAR ASISTENTE
+     * @param nomAsis
+     * @throws Exception
+     *
+     **/
+
     public static void borrarAsistente(String nomAsis) throws Exception{
         asistente_dao.borrarAsistente(nomAsis);
     }
+
+    /**
+     *
+     * BORRAR EQUIPO
+     * @param nomEqui
+     * @throws Exception
+     *
+     **/
 
     public static void borrarEquipo(String nomEqui) throws Exception{
         equipo_dao.borrarEquipo(nomEqui);
     }
 
+
+    /**
+     *
+     * GETTER ENTRENADORES DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
+
     public static ArrayList<String> getEntrenadores() throws Exception {
         List<EntrenadoresEntity> entrenadores = entrenador_dao.consultarEntrenadores();
         ArrayList<String> nombres = new ArrayList<>(entrenadores.size());
         for (EntrenadoresEntity entrenador : entrenadores) {
-             nombres.add(entrenador.getPersonasByCodEntrenador().getNickname());
+            nombres.add(entrenador.getPersonasByCodEntrenador().getNickname());
         }
         return nombres;
     }
+
+    /**
+     *
+     * GETTER ASISTENTES DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
 
     public static ArrayList<String> getAsistentes() throws Exception {
         List<AsistentesEntity> asistentes = asistente_dao.consultarAsistentes();
@@ -283,6 +437,15 @@ public class Main {
         return nombres;
     }
 
+
+    /**
+     *
+     * GETTER TOPLANERS  DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
+
     public static ArrayList<String> getToplaners() throws Exception {
         List<JugadoresEntity> toplaners = jugador_dao.consultarToplaners();
         ArrayList<String> nombres = new ArrayList<>(toplaners.size());
@@ -291,6 +454,14 @@ public class Main {
         }
         return nombres;
     }
+
+    /**
+     *
+     * GETTER JUNGLERS DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
 
     public static ArrayList<String> getJunglers() throws Exception {
         List<JugadoresEntity> junglers = jugador_dao.consultarJunglers();
@@ -301,6 +472,14 @@ public class Main {
         return nombres;
     }
 
+    /**
+     *
+     * GETTER MIDLANERS  DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
+
     public static ArrayList<String> getMidlaners() throws Exception {
         List<JugadoresEntity> midlaners = jugador_dao.consultarMidlaners();
         ArrayList<String> nombres = new ArrayList<>(midlaners.size());
@@ -309,6 +488,14 @@ public class Main {
         }
         return nombres;
     }
+
+    /**
+     *
+     * GETTER ADCARRYS DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
 
     public static ArrayList<String> getADCarrys() throws Exception {
         List<JugadoresEntity> ADCarrys = jugador_dao.consultarADCarrys();
@@ -319,6 +506,14 @@ public class Main {
         return nombres;
     }
 
+    /**
+     *
+     * GETTER SUPPORTS DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
+
     public static ArrayList<String> getSupports() throws Exception {
         List<JugadoresEntity> Supports = jugador_dao.consultarSupports();
         ArrayList<String> nombres = new ArrayList<>(Supports.size());
@@ -328,14 +523,13 @@ public class Main {
         return nombres;
     }
 
-    public static ArrayList<String> getSuplentes() throws Exception {
-        List<JugadoresEntity> jugadores = jugador_dao.consultarJugadores();
-        ArrayList<String> nombres = new ArrayList<>(jugadores.size());
-        for (JugadoresEntity jugador : jugadores) {
-            nombres.add(jugador.getPersonasByCodJugador().getNickname());
-        }
-        return nombres;
-    }
+    /**
+     *
+     * GETTER JUGADORES DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
 
     public static ArrayList<String> getJugadores() throws Exception {
         List<JugadoresEntity> jugadores = jugador_dao.consultarJugadores();
@@ -346,6 +540,14 @@ public class Main {
         return nombres;
     }
 
+    /**
+     *
+     * GETTER EQUIPOS DESDE UN ARRAYLIST Y OBTENER LOS NOMBRES
+     * @return nombres
+     * @throws Exception
+     *
+     **/
+
     public static ArrayList<String> getEquipos() throws Exception {
         List<EquiposEntity> equipos = equipo_dao.consultarEquipos();
         ArrayList<String> nombres = new ArrayList<>(equipos.size());
@@ -354,6 +556,14 @@ public class Main {
         }
         return nombres;
     }
+
+    /**
+     *
+     * MÉTODO PARA COMPROBAR EL REGISTRO DEL USUARIO Y ADMINISTRADOR
+     * @param email
+     * @param password
+     *
+     **/
 
     public static void login(String email, char[] password) {
         int rol = 0;
@@ -375,13 +585,28 @@ public class Main {
                     break;
             }
         } catch (Exception e) {
-            if(e.getCause().getCause().getMessage().contains("ORA-20054: Err. email o contrasena incorrecta"))
+            if(e.getCause().getCause().getMessage().contains("Err. usuario no resgistrado"))
             {
                 VLogin.dispose();
                 VentanaRegistrar(email);
             }
+            if(e.getCause().getCause().getMessage().contains("Err. contrasena incorrecta"))
+            {
+                Validaciones.mostrarError("Credencial incorrecta. Pruebe de nuevo");
+            }
         }
     }
+
+    /**
+     *
+     *GENERAR EL REGISTRO DEL USUARIO
+     * @param nombre
+     * @param passwrd
+     * @param  email
+     * @param nacimiento
+     * @throws Exception
+     **/
+
 
     public static void registrarUsuario(String nombre, String passwrd, String email, String nacimiento) throws Exception {
         LocalDate fecha = LocalDate.parse(nacimiento, formatoFecha);
@@ -390,6 +615,13 @@ public class Main {
         VRegistrar.dispose();
         Main.VentanaUsuario(false);
     }
+
+    /**
+     *
+     *GENERAR LA SECCION DE RESULTADOS DE LA JORNADA
+     *
+     **/
+
 
     public static void PanelJornada() {
 
@@ -580,180 +812,38 @@ public class Main {
         frame.setContentPane(s);
     }
 
-    public static void PanelClasificacion() {
-
-        JFrame frame = new JFrame("CLASIFICACION");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(525, 800);
-
-
-        JPanel pPincipal = new JPanel();
-        pPincipal.setBackground(Color.green);
-        pPincipal.setBounds(0, 0, 800, 800);
-        pPincipal.setLayout(null);
-        JScrollPane scroll = new JScrollPane(pPincipal);
-        JScrollPane s = new JScrollPane(pPincipal, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        JScrollBar bar = new JScrollBar();
-        s.add(bar);
-
-        Border border = BorderFactory.createLineBorder(Color.PINK, 3);
-
-        int initH_j = 300;
-        int offset_j_y = 50;
-
-        int initPos_p_h = 200;
-
-        for (DatosClasificacionXML.Temporada temporada : xmlParser.getDatosClasificacionXML().getTemporadas()) {
-            //TEMPORDA
-
-            int index_t = temporada.getCod_temporada() - 1;
-            int n_equipos = temporada.getEquipos().size()-1;
-
-            JPanel pJornada = new JPanel();
-            pJornada.setBackground(Color.red);
-
-            pJornada.setBounds(25, 25 + (initH_j+offset_j_y)*index_t, 450, initH_j + (initPos_p_h*n_equipos));
-            pJornada.setLayout(null);
-
-            {
-                JLabel temporada_num = new JLabel();
-                temporada_num.setText("TEMPORDA " + (index_t+1));
-                temporada_num.setHorizontalTextPosition(JLabel.CENTER);
-                temporada_num.setForeground(Color.GREEN);
-                temporada_num.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-                temporada_num.setBackground(Color.black);
-                temporada_num.setOpaque(true);
-                temporada_num.setBorder(border);
-
-                temporada_num.setVerticalAlignment(JLabel.CENTER);
-                temporada_num.setHorizontalAlignment(JLabel.CENTER);
-
-                temporada_num.setBounds(25, 25, 200, 50);
-
-                pJornada.add(temporada_num);
-
-            }
-
-            for (DatosClasificacionXML.Equipo equipo : temporada.getEquipos()) {
-                // EQUIPOS
-
-                int index_e = equipo.getCod_equipo() - 1;
-
-                JPanel pPartido = new JPanel();
-                if(index_e%2 == 0)
-                    pPartido.setBackground(Color.blue);
-                else
-                    pPartido.setBackground(Color.green);
-                pPartido.setBounds(25, 75 + (initPos_p_h)*index_e, 400, initPos_p_h );
-                pPartido.setLayout(null);
-
-                {
-                    JLabel nombre_e = new JLabel();
-                    nombre_e.setText(equipo.getNombre());
-                    nombre_e.setHorizontalTextPosition(JLabel.CENTER);
-                    nombre_e.setForeground(Color.GREEN);
-                    nombre_e.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-                    nombre_e.setBackground(Color.black);
-                    nombre_e.setOpaque(true);
-                    nombre_e.setBorder(border);
-
-                    nombre_e.setVerticalAlignment(JLabel.CENTER);
-                    nombre_e.setHorizontalAlignment(JLabel.CENTER);
-
-                    nombre_e.setBounds(25, 25, 175, 50);
-
-                    JLabel partido_ganado = new JLabel();
-                    partido_ganado.setText(String.valueOf(equipo.getPartidos_ganados()));
-                    partido_ganado.setHorizontalTextPosition(JLabel.CENTER);
-                    partido_ganado.setForeground(Color.GREEN);
-                    partido_ganado.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-                    partido_ganado.setBackground(Color.black);
-                    partido_ganado.setOpaque(true);
-                    partido_ganado.setBorder(border);
-
-                    partido_ganado.setVerticalAlignment(JLabel.CENTER);
-                    partido_ganado.setHorizontalAlignment(JLabel.CENTER);
-
-                    partido_ganado.setBounds(250, 25, 125, 50);
-
-                    pPartido.add(nombre_e);
-                    pPartido.add(partido_ganado);
-
-
-                }
-
-                for (DatosClasificacionXML.Jugador jugador : equipo.getLista_jugadores()) {
-
-
-
-                    JPanel pJugador = new JPanel();
-                    pJugador.setBackground(Color.red);
-
-                    pJugador.setBounds(25, 25 + (initH_j+offset_j_y)*index_t, 450, initH_j + (initPos_p_h*n_equipos));
-                    pJugador.setLayout(null);
-
-                    {
-                        JLabel nickname = new JLabel();
-                        nickname.setText(jugador.getNickname());
-                        nickname.setHorizontalTextPosition(JLabel.CENTER);
-                        nickname.setForeground(Color.GREEN);
-                        nickname.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-                        nickname.setBackground(Color.black);
-                        nickname.setOpaque(true);
-                        nickname.setBorder(border);
-
-                        nickname.setVerticalAlignment(JLabel.CENTER);
-                        nickname.setHorizontalAlignment(JLabel.CENTER);
-
-                        nickname.setBounds(25, 25, 175, 50);
-
-                        JLabel rol = new JLabel();
-                        rol.setText(String.valueOf(jugador.getRol()));
-                        rol.setHorizontalTextPosition(JLabel.CENTER);
-                        rol.setForeground(Color.GREEN);
-                        rol.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-
-                        rol.setBackground(Color.black);
-                        rol.setOpaque(true);
-                        rol.setBorder(border);
-
-                        rol.setVerticalAlignment(JLabel.CENTER);
-                        rol.setHorizontalAlignment(JLabel.CENTER);
-
-                        rol.setBounds(250, 25, 125, 50);
-
-                        pPartido.add(nickname);
-                        pPartido.add(rol);
-
-                    }
-                    pPartido.add(pJugador);
-                }
-
-                pJornada.add(pPartido);
-            }
-
-
-            pPincipal.add(pJornada);
-        }
-
-        frame.setVisible(true);
-        frame.setContentPane(s);
-    }
+    /**
+     *
+     *OBTENER LOS RESULTADOS DE LA JORNADAS DESDE EL ALMACEN XML
+     * @return xmlParser.getDatosJornadas()
+     *
+     **/
 
     public static String getResultadosJornadas() {
-        PanelJornada();
+        // PanelJornada();
         return xmlParser.getDatosJornadas();
     }
 
 
+    /**
+     *
+     *OBTENER LOS DATOS DE LA CLASIFICACION DESDE EL ALMACEN XML
+     * @return xmlParser.getDatosJornadas()
+     *
+     **/
+
     public static String getClasificacion() {
-        PanelClasificacion();
+        // PanelClasificacion();
         return xmlParser.getClasificacion();
     }
+
+    /**
+     *
+     *GENERAR LA CARGA DE DATOS DAO
+     *
+     *
+     **/
+
 
     public static void cargarDatos() {
         //load DAO + database conexion
@@ -764,19 +854,61 @@ public class Main {
         xmlParser.checkXML();
     }
 
+    /**
+     *
+     *CERRAR LA VENTANA DE CARGA DEL LOG IN
+     *
+     *
+     **/
+
     public static void cerrarVCarga() {
         VCarga.dispose();
         VentanaLogin();
     }
 
+    /**
+     *
+     *REGRESO A LA VENTANA DE REGISTRO DESDE EL LOG IN
+     *
+     *
+     **/
+
     public static void volverLogInRegistrar() {
         VRegistrar.dispose();
         VentanaLogin();
     }
+
+    /**
+     *
+     *REGRESO A LA VENTANA DEL USUARIO DESDE EL LOG IN
+     *
+     *
+     **/
+
+
     public static void volverLogInUsuario() {
         VUsuario.dispose();
         VentanaLogin();
     }
+
+    /**
+     *
+     *DIRIGIRE A LA VENTANA DEL USUARIO
+     *
+     *
+     **/
+
+    public static void irVUsuario() {
+        VAdmin.dispose();
+        Main.VentanaUsuario(true);
+    }
+
+    /**
+     *
+     *GENERAR LA CONSULTA DE LOS PARTIDOS
+     * @throws Exception
+     * @return nombres
+     **/
 
     public static TreeMap<Integer, String> getPartidosEquipo() throws Exception{
 
@@ -793,6 +925,15 @@ public class Main {
         }
         return nombres;
     }
+
+    /**
+     *
+     *ACTUALIZAR LOS RESULTADOS DEL PARTIDO
+     * @throws Exception
+     *
+     **/
+
+
 
     public static void actualizaResutlado(int cod_partido, String resultado) throws Exception{
         partido_dao.resultadosPartido(cod_partido, resultado);

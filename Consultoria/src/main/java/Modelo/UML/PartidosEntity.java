@@ -1,11 +1,20 @@
 package Modelo.UML;
-
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
 
-@NamedQuery(name = "PartidosEntity.todos", query = "SELECT p FROM PartidosEntity p")
+    /**
+     *
+     * @author Equipo-6
+     */
 
+    /**
+     * ENTIDAD PARTIDOS
+     * SENTENCIA SQL PARA OBTENER LA CANTIDAD DE PARTIDOS
+     *
+    **/
+
+@NamedQuery(name = "PartidosEntity.todos", query = "SELECT p FROM PartidosEntity p")
 @Entity
 @Table(name = "PARTIDOS", schema = "EQDAW06", catalog = "")
 public class PartidosEntity {
@@ -28,64 +37,182 @@ public class PartidosEntity {
     @JoinColumn(name = "COD_JORNADA", referencedColumnName = "COD_JORNADA")
     private JornadasEntity jornadasByCodJornada;
 
-    public byte getCodPartido() {
+        /**
+         *
+         * GETTER COD PARTIDO
+         *
+         * @return codPartido
+         *
+         **/
+
+        public byte getCodPartido() {
         return codPartido;
-    }
+        }
 
-    public void setCodPartido(byte codPartido) {
+        /**
+         *
+         * SETTER COD PARTIDO
+         *
+         * @param codPartido
+         *
+         **/
+
+        public void setCodPartido(byte codPartido) {
         this.codPartido = codPartido;
-    }
+        }
 
-    public String getHoraPartido() {
-        return horaPartido;
-    }
+        /**
+         *
+         * GETTER HORA PARTIDO
+         *
+         * @return  horaPartido
+         *
+         **/
 
-    public void setHoraPartido(String horaPartido) {
-        this.horaPartido = horaPartido;
-    }
+        public String getHoraPartido() {
+            return horaPartido;
+        }
 
-    public String getResultado() {
-        return resultado;
-    }
+        /**
+         *
+         * SETTER HORA PARTIDO
+         *
+         * @param  horaPartido
+         *
+         **/
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
+        public void setHoraPartido(String horaPartido) {
+            this.horaPartido = horaPartido;
+        }
 
-    public Byte getCodJornada() {
-        return codJornada;
-    }
+        /**
+         *
+         * GETTER RESULTADO DEL PARTIDO
+         *
+         * @return  resultado
+         *
+         **/
 
-    public void setCodJornada(Byte codJornada) {
-        this.codJornada = codJornada;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PartidosEntity that = (PartidosEntity) o;
-        return codPartido == that.codPartido && Objects.equals(horaPartido, that.horaPartido) && Objects.equals(resultado, that.resultado) && Objects.equals(codJornada, that.codJornada);
-    }
+        public String getResultado() {
+            return resultado;
+        }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(codPartido, horaPartido, resultado, codJornada);
-    }
 
-    public Collection<ParticipaEntity> getParticipasByCodPartido() {
-        return participasByCodPartido;
-    }
+        /**
+         *
+         * SETTER RESULTADO DEL PARTIDO
+         *
+         * @param  resultado
+         *
+         **/
 
-    public void setParticipasByCodPartido(Collection<ParticipaEntity> participasByCodPartido) {
-        this.participasByCodPartido = participasByCodPartido;
-    }
+        public void setResultado(String resultado) {
+            this.resultado = resultado;
+        }
 
-    public JornadasEntity getJornadasByCodJornada() {
-        return jornadasByCodJornada;
-    }
+        /**
+         *
+         * GETTER COD DE LA JORNADA
+         *
+         * @return  codJornada
+         *
+         **/
 
-    public void setJornadasByCodJornada(JornadasEntity jornadasByCodJornada) {
-        this.jornadasByCodJornada = jornadasByCodJornada;
-    }
-}
+
+        public Byte getCodJornada() {
+            return codJornada;
+        }
+
+        /**
+         *
+         * SETTER  COD DE LA JORNADA
+         *
+         * @param  codJornada
+         *
+         **/
+
+        public void setCodJornada(Byte codJornada) {
+            this.codJornada = codJornada;
+        }
+
+        /**
+         *
+         *COMPARA QUE SEAN OBJETOS DEL MISMO TIPO
+         *
+         * @param o
+         *
+         **/
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            PartidosEntity that = (PartidosEntity) o;
+            return codPartido == that.codPartido && Objects.equals(horaPartido, that.horaPartido) && Objects.equals(resultado, that.resultado) && Objects.equals(codJornada, that.codJornada);
+        }
+
+        /**
+         *
+         * DEVUElVE EL HASCODE DEL OBJETO
+         *
+         * @return hashcode
+         *
+         **/
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(codPartido, horaPartido, resultado, codJornada);
+        }
+
+        /**
+         *
+         * GETTER PARTICIPA POR EL CODIGO DEl PARTIDO
+         *
+         * @return  participasByCodPartido
+         *
+         **/
+
+        public Collection<ParticipaEntity> getParticipasByCodPartido() {
+            return participasByCodPartido;
+        }
+
+        /**
+         *
+         * SETTER PARTICIPA POR EL CODIGO DEl PARTIDO
+         *
+         * @param  participasByCodPartido
+         *
+         **/
+
+        public void setParticipasByCodPartido(Collection<ParticipaEntity> participasByCodPartido) {
+            this.participasByCodPartido = participasByCodPartido;
+        }
+
+
+        /**
+         *
+         * GETTER JORNADAS POR EL CODIGO DE LA JORNADA
+         *
+         * @return   jornadasByCodJornada
+         *
+         **/
+
+
+
+        public JornadasEntity getJornadasByCodJornada() {
+            return jornadasByCodJornada;
+        }
+
+        /**
+         *
+         * SETTER JORNADAS POR EL CODIGO DE LA JORNADA
+         *
+         * @param    jornadasByCodJornada
+         *
+         **/
+
+            public void setJornadasByCodJornada(JornadasEntity jornadasByCodJornada) {
+                this.jornadasByCodJornada = jornadasByCodJornada;
+            }
+        }

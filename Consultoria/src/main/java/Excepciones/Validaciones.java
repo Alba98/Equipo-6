@@ -1,5 +1,4 @@
 package Excepciones;
-
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,7 +6,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * @author EQUIPO-6
+ */
+
 public class Validaciones {
+
+        /**
+         * COMPROBACIÓN DE TEXTO VÁLIDO
+         * @param textField para comprobar la existencia de texto.
+         * @return true or false
+         * @throws Exception
+         *
+         **/
 
     public static boolean validarTexto(JTextField textField) {
         try {
@@ -31,6 +43,14 @@ public class Validaciones {
         }
     }
 
+        /**
+         * NÚMERO VÁLIDO
+         * @param textField
+         * @return true or false
+         * @throws Exception
+         *
+         **/
+
     public static boolean validarInt(JTextField textField) {
         try {
             String num_s = textField.getText();
@@ -53,6 +73,13 @@ public class Validaciones {
         }
     }
 
+        /**
+         * NÚMERO VÁLIDO
+          *@param textField
+         * @return true or false
+         * @throws Exception
+         *
+         **/
     public static boolean validarFloat(JTextField textField) {
         try {
             String num_s = textField.getText();
@@ -75,7 +102,15 @@ public class Validaciones {
         }
     }
 
-    public static boolean validarFecha(JTextField textField) {
+        /**
+         * FECHA VÁLIDO
+         * @param textField para comprobar la fecha cumpliendo un formato concreto.
+         * @return true or false
+         * @throws Exception
+         *
+         **/
+
+        public static boolean validarFecha(JTextField textField) {
         try {
             String date_s = textField.getText();
             if (date_s.isEmpty())
@@ -86,13 +121,15 @@ public class Validaciones {
 
             LocalDate hoy = LocalDate.now();
 
-            //if (fecha.compareTo(hoy)!=0)
-            //    throw new Exception("La fecha no puede ser posterior a hoy");
+            if (fecha.isAfter(hoy)) {
+                mostrarError("La fecha no puede ser posterior a hoy");
+                return false;
+            }
 
             return true;
 
         } catch (Exception e) {
-            mostrarError(e.getMessage());
+            mostrarError("Formato de fecha incorrecto. Mantenga el formato dd/MM/yyyy");
             textField.setSelectionStart(0);
             textField.setSelectionEnd(textField.getText().length());
             textField.requestFocus();
@@ -100,31 +137,64 @@ public class Validaciones {
         }
     }
 
-    public static boolean validarHora(JTextField hora1, JTextField hora2) {
+    public static boolean validarFechaPosterior(JTextField textField) {
         try {
-            String hora1_s = hora1.getText();
-            String hora2_s = hora2.getText();
-            if (hora1_s.isEmpty())
-                throw new Exception("La hora de inicio es un dato obligatorio");
-            if (hora2_s.isEmpty())
-                throw new Exception("La hora de fin es un dato obligatorio");
+            String date_s = textField.getText();
+            if (date_s.isEmpty())
+                throw new Exception("El " +  textField.getName() + " es un dato obligatorio");
 
-            LocalTime horaI = LocalTime.parse(hora1_s);
-            LocalTime horaF = LocalTime.parse(hora2_s);
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fecha = LocalDate.parse(textField.getText(), formato);
 
-            if (horaF.compareTo(horaI)<=0)
-                throw new Exception("La no validas");
+            LocalDate hoy = LocalDate.now();
+
+            if (fecha.isBefore(hoy)) {
+                mostrarError("La fecha no puede ser anterior a hoy");
+                return false;
+            }
 
             return true;
 
         } catch (Exception e) {
-            mostrarError(e.getMessage());
-            hora1.setSelectionStart(0);
-            hora1.setSelectionEnd(hora1.getText().length());
-            hora1.requestFocus();
+            mostrarError("Formato de fecha incorrecto. Mantenga el formato dd/MM/yyyy");
+            textField.setSelectionStart(0);
+            textField.setSelectionEnd(textField.getText().length());
+            textField.requestFocus();
             return false;
         }
     }
+
+        /**
+        * HORA VÁLIDA
+         * @param hora para validar la hora.
+         *@throws Exception
+         *@return true or false
+         **/
+
+        public static boolean validarHora(JTextField hora) {
+        try {
+            String hora_s = hora.getText();
+            if (hora_s.isEmpty())
+                throw new Exception("La hora es un dato obligatorio");
+
+            LocalTime horaI = LocalTime.parse(hora_s);
+
+            return true;
+        } catch (Exception e) {
+            mostrarError(e.getMessage());
+            hora.setSelectionStart(0);
+            hora.setSelectionEnd(hora.getText().length());
+            hora.requestFocus();
+            return false;
+        }
+    }
+
+    /**
+     *EMAIL VÁLIDO
+     *@param textField para validar la existencia de un correo electrónico en función de una expresión regular.
+     *@throws Exception
+     *@return true or false
+     **/
 
     public static boolean validarEmail(JTextField textField) {
         try {
@@ -136,7 +206,7 @@ public class Validaciones {
                                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
             Matcher m = patron.matcher(email);
             if (!m.matches())
-                 throw new Exception(textField.getName() + " no válido");
+                 throw new Exception("Email: " + email + " no válido");
 
             //textField.setEditable(false);
             return true;
@@ -149,9 +219,18 @@ public class Validaciones {
         }
     }
 
+
+
+    /**
+      *MENSAJE ERROR
+      * @param mensaje
+     */
+
     public static void mostrarError(String mensaje) {
         String[] botones = {"Aceptar"};
         JOptionPane.showOptionDialog(null, mensaje, "ERROR",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, botones, botones[0]);
     }
+
+
 }
