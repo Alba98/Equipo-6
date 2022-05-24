@@ -425,7 +425,7 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
-                    boolean seleccionado = nomAsis != "-Ninguno selecccionado--";
+                    boolean seleccionado = nomAsis != "-Ninguno selecccionado-";
                     if(seleccionado) {
                         Main.borrarAsistente(nomAsis);
                         llenarCB(cbBAsistentes, Main.getAsistentes());
@@ -443,7 +443,7 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
-                    boolean equipoSeleccionado = nomEqui != "-Ninguno selecccionado--";
+                    boolean equipoSeleccionado = nomEqui != "-Ninguno selecccionado-";
                     if(equipoSeleccionado) {
                         Main.borrarEquipo(nomEqui);
                         llenarCB(cbBEquipos, Main.getEquipos());
@@ -506,6 +506,11 @@ public class VAdmin {
         });
     }
 
+    /**
+     *
+     * ACTUALIZAR CB BORRAR
+     *
+     **/
     private void llenarCBBorrar() {
         try {
             llenarCB(cbBJugadores, Main.getJugadores());
@@ -581,6 +586,9 @@ public class VAdmin {
                             tJFNacimiento.getText(), tJPais.getText(), tJNickname.getText(),
                             cbJROL.getSelectedItem().toString());
                 }
+                else
+                    Validaciones.mostrarError("selecione un rol");
+
             } catch (Exception e) {
                Validaciones.mostrarError(e.getMessage());
             }
@@ -685,12 +693,14 @@ public class VAdmin {
     private void registrarAsistente() {
         if ( validarRegistrarAsistente() ) {
             try {
-                boolean rolValido = cbJROL.getSelectedItem().toString() != "-Ninguno selecccionado--";
-                if(rolValido) {
+                boolean seleccionado = cbAEntrenador.getSelectedItem().toString() != "-Ninguno selecccionado-";
+                if(seleccionado) {
                     Main.registrarAsistente(tANombre.getText(), tAApellido.getText(), tASueldo.getText(),
                             tAFNacimiento.getText(), tAPais.getText(), tANickname.getText(),
                             cbAEntrenador.getSelectedItem().toString());
                 }
+                else
+                    Validaciones.mostrarError("selecione un asistente");
             } catch (Exception e) {
                 Validaciones.mostrarError(e.getMessage());
             }
