@@ -9,6 +9,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * VENTANA ADMINISTADOR + INSERCION DE DATOS A LA BBDD
+ * @author Equipo-6
+ */
 public class VAdmin {
     private JTabbedPane VentanaAdmins;
     private JPanel PanelPrincipal;
@@ -109,6 +113,11 @@ public class VAdmin {
     private JComboBox cbBEquipos;
     private JButton bBEquipos;
 
+    /**
+     *
+     * CONTRUCTOR DE LA VENTANA DE ADMINISTRADOR
+     *
+     **/
     public VAdmin()  {
 
         try {
@@ -124,59 +133,8 @@ public class VAdmin {
             Validaciones.mostrarError(ex.getMessage());
         }
 
-        //Aestetics botonones:
-
-        crearCalendarioButton.setBorderPainted(false);
-        crearCalendarioButton.setFocusable(false);
-        crearCalendarioButton.setRolloverEnabled(true);
-
-        bJRegistrar.setBorderPainted(false);
-        bJRegistrar.setFocusable(false);
-        bJRegistrar.setRolloverEnabled(true);
-
-        bJRestart.setBorderPainted(false);
-        bJRestart.setFocusable(false);
-        bJRestart.setRolloverEnabled(true);
-
-        bERegistrar.setBorderPainted(false);
-        bERegistrar.setFocusable(false);
-        bERegistrar.setRolloverEnabled(true);
-
-        bERestart.setBorderPainted(false);
-        bERestart.setFocusable(false);
-        bERestart.setRolloverEnabled(true);
-
-        bARegistrar.setBorderPainted(false);
-        bARegistrar.setFocusable(false);
-        bARegistrar.setRolloverEnabled(true);
-
-        bARestart.setBorderPainted(false);
-        bARestart.setFocusable(false);
-        bARestart.setRolloverEnabled(true);
-
-        bEqRegistar.setBorderPainted(false);
-        bEqRegistar.setFocusable(false);
-        bEqRegistar.setRolloverEnabled(true);
-
-        bEqRestart.setBorderPainted(false);
-        bEqRestart.setFocusable(false);
-        bEqRestart.setRolloverEnabled(true);
-
-        bBJugadores.setBorderPainted(false);
-        bBJugadores.setFocusable(false);
-        bBJugadores.setRolloverEnabled(true);
-
-        bBEntrenadores.setBorderPainted(false);
-        bBEntrenadores.setFocusable(false);
-        bBEntrenadores.setRolloverEnabled(true);
-
-        bBAsistentes.setBorderPainted(false);
-        bBAsistentes.setFocusable(false);
-        bBAsistentes.setRolloverEnabled(true);
-
-        bBEquipos.setBorderPainted(false);
-        bBEquipos.setFocusable(false);
-        bBEquipos.setRolloverEnabled(true);
+        //Aesthetics botonones:
+        AestheticsBotones();
 
         //funciones MouseListener de los botones:
 
@@ -411,12 +369,7 @@ public class VAdmin {
         crearCalendarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Main.CrearCalendario();
-                    Main.VentanaUsuario(true);
-                } catch (Exception ex) {
-                    Validaciones.mostrarError(ex.getMessage());
-                }
+                crearCalendario();
             }
         });
 
@@ -435,19 +388,9 @@ public class VAdmin {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-                try {
-                    llenarCB(cbEqEntre, Main.getEntrenadores());
-                    llenarCB(cbEqAsistente, Main.getAsistentes());
-                    llenarCB(cbEqTOP, Main.getToplaners());
-                    llenarCB(cbEqSuplente, Main.getSuplentes());
-                    llenarCB(cbEqJGL, Main.getJunglers());
-                    llenarCB(cbEqMID, Main.getMidlaners());
-                    llenarCB(cbEqADC, Main.getADCarrys());
-                    llenarCB(cbEqSUPP, Main.getSupports());
-                } catch (Exception ex) {
-                    Validaciones.mostrarError(ex.getMessage());
-                }
 
+                actualizarCBEquipo();
+                
             }
         });
     VentanaAdmins.addComponentListener(new ComponentAdapter() { } );VentanaAdmins.addContainerListener(new ContainerAdapter() { } );
@@ -504,6 +447,60 @@ public class VAdmin {
         });
     }
 
+
+    /**
+     *
+     * AESTHETIC DE LOS BOTONES DE LA VETANANA
+     *
+     **/
+    private void AestheticsBotones() {
+        aestheticBoton(crearCalendarioButton);
+        aestheticBoton(bJRegistrar);
+        aestheticBoton(bJRestart);
+        aestheticBoton(bERegistrar);
+        aestheticBoton(bERestart);
+        aestheticBoton(bARegistrar);
+        aestheticBoton(bARestart);
+        aestheticBoton(bEqRegistar);
+        aestheticBoton(bEqRestart);
+        aestheticBoton(bBJugadores);
+        aestheticBoton(bBEntrenadores);
+        aestheticBoton(bBAsistentes);
+        aestheticBoton(bBEquipos);
+    }
+
+    /**
+     *
+     * AESTHETIC BOTON
+     *
+     * @param boton
+     *
+     **/
+    private void aestheticBoton(JButton boton) {
+        boton.setBorderPainted(false);
+        boton.setFocusable(false);
+        boton.setRolloverEnabled(true);
+    }
+
+    /**
+     *
+     * CREAR CALENDARIO PARTIDOS
+     *
+     **/
+    private void crearCalendario() {
+        try {
+            Main.CrearCalendario();
+            Main.irVUsuario();
+        } catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
+        }
+    }
+
+    /**
+     *
+     * REGISTRAR UN JUGADOR EN LA BBDD
+     *
+     **/
     private void registrarJugador() {
         if ( validarRegistrarJugador() ) {
             try {
@@ -519,12 +516,22 @@ public class VAdmin {
         }
     }
 
+    /**
+     *
+     * VALIDAR CAMPOS REGISTO JUGADOR
+     *
+     **/
     private boolean validarRegistrarJugador() {
         return (Validaciones.validarTexto(tJNombre) &&  Validaciones.validarTexto(tJApellido) &&
                 Validaciones.validarFloat(tJSueldo) &&  Validaciones.validarFecha(tJFNacimiento) &&
                 Validaciones.validarTexto(tJPais) &&    Validaciones.validarTexto(tJNickname));
     }
 
+    /**
+     *
+     * RESET VALORES DE JUGADORES
+     *
+     **/
     private void resetJugador() {
         tJNombre.setText("");
         tJApellido.setText("");
@@ -535,6 +542,13 @@ public class VAdmin {
         cbJROL.setSelectedIndex(0);
     }
 
+    /**
+     *
+     * LLENAR COMBOBOX CON LOS POSIBLES ROLES DE LOS JUGADORES
+     *
+     * @param cb JComboBox
+     *
+     **/
     private void llenarCBRoles(JComboBox cb) {
         try {
             ArrayList<String> roles = new ArrayList<String>(
@@ -550,6 +564,11 @@ public class VAdmin {
         }
     }
 
+    /**
+     *
+     * REGISTRAR UN ENTRENADOR EN LA BBDD
+     *
+     **/
     private void registrarEntrenador() {
         if ( validarRegistrarEntrenador() ) {
             try {
@@ -562,12 +581,22 @@ public class VAdmin {
         }
     }
 
+    /**
+     *
+     * VALIDAR CAMPOS REGISTO ENTRENADORES
+     *
+     **/
     private boolean validarRegistrarEntrenador() {
         return (Validaciones.validarTexto(tENombre) &&  Validaciones.validarTexto(tEApellido) &&
                 Validaciones.validarFloat(tESueldo) &&  Validaciones.validarFecha(tEFNacimiento) &&
                 Validaciones.validarTexto(tEPais) &&    Validaciones.validarTexto(tENickname));
     }
 
+    /**
+     *
+     * RESET VALORES DE ENTRENADORES
+     *
+     **/
     private void resetEntrenador() {
         tENombre.setText("");
         tEApellido.setText("");
@@ -577,6 +606,11 @@ public class VAdmin {
         tENickname.setText("");
     }
 
+    /**
+     *
+     * REGISTRAR UN ASISTENTE EN LA BBDD
+     *
+     **/
     private void registrarAsistente() {
         if ( validarRegistrarAsistente() ) {
             try {
@@ -592,12 +626,22 @@ public class VAdmin {
         }
     }
 
+    /**
+     *
+     * VALIDAR CAMPOS REGISTO ASISTENET
+     *
+     **/
     private boolean validarRegistrarAsistente() {
         return (Validaciones.validarTexto(tANombre) &&  Validaciones.validarTexto(tAApellido) &&
                 Validaciones.validarFloat(tASueldo) &&  Validaciones.validarFecha(tAFNacimiento) &&
                 Validaciones.validarTexto(tAPais) &&    Validaciones.validarTexto(tANickname));
     }
 
+    /**
+     *
+     * RESET VALORES DE ASISTENETES
+     *
+     **/
     private void resetAsistente() {
         tANombre.setText("");
         tAApellido.setText("");
@@ -608,8 +652,22 @@ public class VAdmin {
         cbAEntrenador.setSelectedIndex(0);
     }
 
+    private void llenarCBEntrenadores(JComboBox cb) {
+        try {
+            ArrayList<String> entrenadores = Main.getEntrenadores();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String entrenador : entrenadores) {
+                cb.addItem(entrenador);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
     private void registrarEquipos() {
-        if ( validarRegistrarAsistente() ) {
+        if ( validarRegistrarEquipos() ) {
             try {
                 Main.registrarEquipo(tEqNombre.getText(), tEqFecha.getText(), tEqCiudad.getText(),
                         tEqSponsor.getText(), tEqDuenio.getText());
@@ -619,30 +677,48 @@ public class VAdmin {
         }
     }
 
+    /**
+     *
+     * VALIDAR CAMPOS REGISTO EQUIPO
+     *
+     **/
     private boolean validarRegistrarEquipos() {
         return (Validaciones.validarTexto(tEqNombre) &&  Validaciones.validarFecha(tEqFecha) &&
                 Validaciones.validarTexto(tEqCiudad) &&  Validaciones.validarTexto(tEqSponsor) &&
                 Validaciones.validarTexto(tEqDuenio));
     }
 
+    /**
+     *
+     * RESET VALORES DE EQUIPOS
+     *
+     **/
     private void resetEquipos() {
         tEqNombre.setText("");
         tEqFecha.setText("");
         tEqCiudad.setText("");
         tEqSponsor.setText("");
         tEqDuenio.setText("");
+        actualizarCBEquipo();
     }
 
-    private void llenarCB(JComboBox cb, ArrayList<String> lista) {
+    /**
+     *
+     * ACTUALIZAR CB EQUIPOS
+     *
+     **/
+    private void actualizarCBEquipo() {
         try {
-            cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
-            cb.setSelectedIndex(0);
-            for (String item : lista) {
-                cb.addItem(item);
-            }
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
+            llenarCB(cbEqEntre, Main.getEntrenadores());
+            llenarCB(cbEqAsistente, Main.getAsistentes());
+            llenarCB(cbEqTOP, Main.getToplaners());
+            llenarCB(cbEqSuplente, Main.getSuplentes());
+            llenarCB(cbEqJGL, Main.getJunglers());
+            llenarCB(cbEqMID, Main.getMidlaners());
+            llenarCB(cbEqADC, Main.getADCarrys());
+            llenarCB(cbEqSUPP, Main.getSupports());
+        } catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
         }
     }
 
@@ -654,20 +730,37 @@ public class VAdmin {
         VentanaAdmins = ventanaAdmins;
     }
 
+    /**
+     *
+     * LLENAR COMBOBOX GENERICO
+     *
+     * @param cb JComboBox
+     * @param lista Array con los valores con los q llenar la box
+     *
+     **/
+    private void llenarCB(JComboBox cb, ArrayList<String> lista) {
+        try {
+            ArrayList<String> entrenadores = Main.getEntrenadores();
+            cb.removeAllItems();
+            cb.addItem("-Ninguno selecccionado-");
+            cb.setSelectedIndex(0);
+            for (String entrenador : entrenadores) {
+                cb.addItem(entrenador);
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * GETTER JPANEL PRINCIPAL DE LA VENTANA
+     *
+     * @return pPrincipal
+     *
+     **/
     public JPanel getPanelPrincipal() {
         return PanelPrincipal;
-    }
-
-    public void setPanelPrincipal(JPanel panelPrincipal) {
-        PanelPrincipal = panelPrincipal;
-    }
-
-    public JButton getCrearCalendarioButton() {
-        return crearCalendarioButton;
-    }
-
-    public void setCrearCalendarioButton(JButton crearCalendarioButton) {
-        this.crearCalendarioButton = crearCalendarioButton;
     }
 
     private void createUIComponents() {

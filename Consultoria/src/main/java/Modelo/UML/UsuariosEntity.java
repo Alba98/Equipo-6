@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * ENTIDAD USUARIOS
+ * @author Equipo-6
+ */
 @Entity
 @Table(name = "USUARIOS", schema = "EQDAW06", catalog = "")
 public class UsuariosEntity {
@@ -30,54 +34,145 @@ public class UsuariosEntity {
     @JoinColumn(name = "COD_ROL", referencedColumnName = "COD_ROL")
     private RolEntity rolByCodRol;
 
+    /**
+     *
+     * GETTER COD USUARIO
+     *
+     * @return codUsuario
+     *
+     **/
     public byte getCodUsuario() {
         return codUsuario;
     }
 
+    /**
+     *
+     * SETTER COD USUARIO
+     *
+     * @param codUsuario
+     *
+     **/
     public void setCodUsuario(byte codUsuario) {
         this.codUsuario = codUsuario;
     }
 
+    /**
+     *
+     * GETTER NOMBRE
+     *
+     * @return nombre
+     *
+     **/
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * SETTER NOMBRE
+     *
+     * @param nombre
+     *
+     **/
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * GETTER FECHA NACIMIENTO
+     *
+     * @return fechaNacimiento
+     *
+     **/
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
+    /**
+     *
+     * SETTER FECHA NACIMIENTO
+     *
+     * @param fechaNacimiento
+     *
+     **/
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    /**
+     *
+     * GETTER CONTRASEÑA
+     *
+     * @return password
+     *
+     **/
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * SETTER CONTRASEÑA
+     *
+     * @param password
+     *
+     **/
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * GETTER EMAIL
+     *
+     * @return email
+     *
+     **/
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * SETTER EMAIL
+     *
+     * @param email
+     *
+     **/
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * GETTER COD ROL
+     *
+     * @return codRol
+     *
+     **/
     public Byte getCodRol() {
         return codRol;
     }
 
+    /**
+     *
+     * SETTER COD ROL
+     *
+     * @param codRol
+     *
+     **/
     public void setCodRol(Byte codRol) {
         this.codRol = codRol;
     }
 
+    /**
+     *
+     * COMPARA DOS OBJETOS DE TIPO
+     *
+     * @param o
+     *
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,15 +181,36 @@ public class UsuariosEntity {
         return codUsuario == that.codUsuario && Objects.equals(nombre, that.nombre) && Objects.equals(fechaNacimiento, that.fechaNacimiento) && Objects.equals(password, that.password) && Objects.equals(email, that.email) && Objects.equals(codRol, that.codRol);
     }
 
+    /**
+     *
+     * DEVUELEVE EL HASCODE DEL OBJETO
+     *
+     * @return hashcode
+     *
+     **/
     @Override
     public int hashCode() {
         return Objects.hash(codUsuario, nombre, fechaNacimiento, password, email, codRol);
     }
 
+    /**
+     *
+     * GETTER ROL POR EL CODIGO DEL ROL
+     *
+     * @return rolByCodRol
+     *
+     **/
     public RolEntity getRolByCodRol() {
         return rolByCodRol;
     }
 
+    /**
+     *
+     * SETTER ROL POR EL CODIGO DEL ROL
+     *
+     * @param rolByCodRol
+     *
+     **/
     public void setRolByCodRol(RolEntity rolByCodRol) {
         this.rolByCodRol = rolByCodRol;
     }

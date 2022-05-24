@@ -1,8 +1,6 @@
 package Modelo.BD;
-
 import Modelo.UML.EntrenadoresEntity;
 import Modelo.UML.JugadoresEntity;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -10,9 +8,23 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
 public class EntrenadoresDAO extends BaseDatos {
 
     public EntrenadoresDAO() {    }
+    /**
+     * CREACION DEL ENTRENADOR
+     * @param nickname  parámetro de registro.
+     * @param nombre    parámetro de registro.
+     * @param apellido   parámetro de registro.
+     * @param fechaNacimiento parámetro de registro.
+     * @param nacionalidad parámetro de registro.
+     * @param sueldo parámetro de registro.
+     */
 
     public void crearEntrenador(String nickname, String nombre, String apellido, LocalDate fechaNacimiento,
                                String nacionalidad, Double sueldo) throws Exception {
@@ -43,6 +55,14 @@ public class EntrenadoresDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         *
+         *CONSULTA DE ENTRENADOR
+         * @return listaEntrenadores
+         *
+         */
+
+
     public List<EntrenadoresEntity> consultarEntrenadores() throws Exception {
         //iniciar transaccion
         transaction.begin();
@@ -58,6 +78,12 @@ public class EntrenadoresDAO extends BaseDatos {
 
         return listaEntrenadores;
     }
+        /**
+         *
+         *BORRAR ENTRENADOR
+         * @param nomEntre
+         *
+         */
 
     public void borrarEntrenador(String nomEntre) throws Exception{
         //iniciar transaccion

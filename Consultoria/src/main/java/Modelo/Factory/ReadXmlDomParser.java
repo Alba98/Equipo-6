@@ -21,6 +21,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
+/**
+ * PARSER XML
+ * @author Equipo-6
+ */
 public class ReadXmlDomParser {
 
     private static final String JORNADAS = "resources\\resultados_jornadas.xml";
@@ -32,6 +36,11 @@ public class ReadXmlDomParser {
 
     protected DocumentBuilderFactory dbf;
 
+    /**
+     *
+     * CONTRUCTOR PARSER XML
+     *
+     **/
     public ReadXmlDomParser() {
         // Instantiate the Factory
         dbf = DocumentBuilderFactory.newInstance();
@@ -39,33 +48,35 @@ public class ReadXmlDomParser {
         DatosJornadas = new DatosJornadasXML();
     }
 
+    /**
+     *
+     * COMPROBAR SI EXISTEN LOS XML O NECESITAN ACTUALIZACION
+     *
+     **/
     public void checkXML() {
         //ver si los xml existen en el systema
         File jornadas_xml = new File(JORNADAS);
         if (!jornadas_xml.exists()) {
             System.out.println("No existe el archivo " + JORNADAS);
-            generaXMLs(JORNADAS);
+            //generaJornadasXMLs();
         }
 
         File clasificacion_xml = new File(CLASIFICACION);
         if (!jornadas_xml.exists()) {
             System.out.println("No existe el archivo " + CLASIFICACION);
-            generaXMLs(CLASIFICACION);
+            //generaClasificacionXMLs();
         }
-
-        /*
-        File ultima_jornada_xml = new File(ULTIMA_JORNADA);
-        if (!jornadas_xml.exists()) {
-            System.out.println("No existe el archivo " + ULTIMA_JORNADA);
-            generaXMLs(ULTIMA_JORNADA);
-        }
-        */
 
         //comprobar las fechas de los archivos xml
         ultimaJornadaXML();
         clasificacionXML();
     }
 
+    /**
+     *
+     * PARSEAR XML DE JORNADAS
+     *
+     **/
     public void ultimaJornadaXML() {
 
         try {
@@ -164,7 +175,7 @@ public class ReadXmlDomParser {
                 }
             }
 
-            generaXMLs(JORNADAS);
+           // generaJornadasXMLs();
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
@@ -172,6 +183,11 @@ public class ReadXmlDomParser {
 
     }
 
+    /**
+     *
+     * PARSEAR XML CLASIFICACION
+     *
+     **/
     public void clasificacionXML() {
 
         try {
@@ -278,17 +294,21 @@ public class ReadXmlDomParser {
                 }
             }
 
-            generaXMLs(CLASIFICACION);
+            // generaClasificacionXML();
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    public DatosClasificacionXML getDatosClasificacion() {
-        return DatosClasificacion;
-    }
 
+    /**
+     *
+     * GETTER DATOS JORNDAS
+     *
+     * @return datos Jornadas
+     *
+     **/
     public String getDatosJornadas() {
 
         StringBuilder datos = new StringBuilder();
@@ -310,6 +330,13 @@ public class ReadXmlDomParser {
         return datos.toString();
     }
 
+    /**
+     *
+     * GETTER DATOS CLASIFICACION
+     *
+     * @return datos clasificacion
+     *
+     **/
     public String getClasificacion() {
         StringBuilder datos = new StringBuilder();
 
@@ -333,31 +360,37 @@ public class ReadXmlDomParser {
         return datos.toString();
     }
 
+
+    /**
+     *
+     * GETTER DATOS DE JORNADAS
+     *
+     * @return DatosClasificacion
+     *
+     **/
     public DatosJornadasXML getDatosJornadasXML() {
 
        return DatosJornadas;
     }
 
+    /**
+     *
+     * GETTER DATOS DE LA CLASIFICACION
+     *
+     * @return DatosClasificacion
+     *
+     **/
     public DatosClasificacionXML getDatosClasificacionXML() {
 
         return DatosClasificacion;
     }
 
-    public void generaXMLs(String path) {
-
-        try {
-            File tempfile = new File("resources", "resultados_jornadas.xml");
-
-            FileWriter fw = new FileWriter( tempfile.getAbsoluteFile( ) );
-            BufferedWriter bw = new BufferedWriter( fw );
-            bw.write( Main.getDatosClasificacionXML() );
-
-            bw.close();
-            fw.close();
-
-        } catch (Exception e) {
-            Validaciones.mostrarError(e.getMessage());
-        }
+    /**
+     *
+     * GENERAR CLASIFICACION XML DESDE EL PROCEDIMIENTO DE BBDD Y GUARDAR EN EL ARCHIVO
+     *
+     **/
+    public void generaClasificacionXMLs() {
 
         try {
             File tempfile = new File("resources", "clasificacion.xml");
@@ -374,5 +407,26 @@ public class ReadXmlDomParser {
         }
     }
 
+    /**
+     *
+     * GENERAR JORNADAS XML DESDE EL PROCEDIMIENTO DE BBDD Y GUARDAR EN EL ARCHIVO
+     *
+     **/
+    public void generaJornadasXMLs() {
+
+        try {
+            File tempfile = new File("resources", "resultados_jornadas.xml");
+
+            FileWriter fw = new FileWriter( tempfile.getAbsoluteFile( ) );
+            BufferedWriter bw = new BufferedWriter( fw );
+            bw.write( Main.getDatosJornadasXML() );
+
+            bw.close();
+            fw.close();
+
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
 
 }

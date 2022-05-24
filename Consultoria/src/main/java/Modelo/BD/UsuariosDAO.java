@@ -1,14 +1,28 @@
 package Modelo.BD;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
 public class UsuariosDAO extends BaseDatos {
 
     public UsuariosDAO() {    }
+
+        /**
+         * CREACION DEL USUARIO
+         * @param nombre  parámetro de registro.
+         * @param fechaNacimiento    parámetro de registro.
+         * @param passwrd   parámetro de registro.
+         * @param email parámetro de registro.
+         *
+         **/
+
 
     public void crearUsuario(String nombre, LocalDate fechaNacimiento, String passwrd, String email) throws Exception {
 
@@ -34,6 +48,14 @@ public class UsuariosDAO extends BaseDatos {
         transaction.commit();
     }
 
+        /**
+         * CREACION DEL ADMINISTRADOR
+         * @param nombre  parámetro de registro.
+         * @param fechaNacimiento    parámetro de registro.
+         * @param passwrd   parámetro de registro.
+         * @param email parámetro de registro.
+         *
+         **/
     public void crearAdministrador(String nombre, LocalDate fechaNacimiento, String passwrd, String email) throws Exception {
 
         //iniciar transaccion
@@ -57,6 +79,15 @@ public class UsuariosDAO extends BaseDatos {
         // ejecutar las transaciones en la base de datos
         transaction.commit();
     }
+
+        /**
+         * INICIO DE SESION
+         * @param  email parámetro de entrada para inciciar sesión.
+         * @param password   parámetro de entrada para inciciar sesión.
+         * @return rol.intValue()
+         *
+         **/
+
 
     public int login(String email, char[] password) throws Exception {
         BigDecimal rol = (BigDecimal) em.createNativeQuery(

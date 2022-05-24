@@ -1,5 +1,4 @@
 package Excepciones;
-
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,7 +6,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * @author EQUIPO-6
+ */
+
 public class Validaciones {
+
+        /**
+         * COMPROBACIÓN DE TEXTO VÁLIDO
+         * @param textField para comprobar la existencia de texto.
+         * @return true or false
+         * @throws Exception
+         *
+         **/
 
     public static boolean validarTexto(JTextField textField) {
         try {
@@ -31,6 +43,14 @@ public class Validaciones {
         }
     }
 
+        /**
+         * NÚMERO VÁLIDO
+         * @param textField
+         * @return true or false
+         * @throws Exception
+         *
+         **/
+
     public static boolean validarInt(JTextField textField) {
         try {
             String num_s = textField.getText();
@@ -53,6 +73,13 @@ public class Validaciones {
         }
     }
 
+        /**
+         * NÚMERO VÁLIDO
+          *@param textField
+         * @return true or false
+         * @throws Exception
+         *
+         **/
     public static boolean validarFloat(JTextField textField) {
         try {
             String num_s = textField.getText();
@@ -75,7 +102,15 @@ public class Validaciones {
         }
     }
 
-    public static boolean validarFecha(JTextField textField) {
+        /**
+         * FECHA VÁLIDO
+         * @param textField para comprobar la fecha cumpliendo un formato concreto.
+         * @return true or false
+         * @throws Exception
+         *
+         **/
+
+        public static boolean validarFecha(JTextField textField) {
         try {
             String date_s = textField.getText();
             if (date_s.isEmpty())
@@ -100,7 +135,14 @@ public class Validaciones {
         }
     }
 
-    public static boolean validarHora(JTextField hora1, JTextField hora2) {
+        /**
+        * HORA VÁLIDA
+         * @param hora1,hora2 para validar la hora.
+         *@throws Exception
+         *@return true or false
+         **/
+
+        public static boolean validarHora(JTextField hora1, JTextField hora2) {
         try {
             String hora1_s = hora1.getText();
             String hora2_s = hora2.getText();
@@ -126,6 +168,13 @@ public class Validaciones {
         }
     }
 
+    /**
+     *EMAIL VÁLIDO
+     *@param textField para validar la existencia de un correo electrónico en función de una expresión regular.
+     *@throws Exception
+     *@return true or false
+     **/
+
     public static boolean validarEmail(JTextField textField) {
         try {
             String email = textField.getText();
@@ -148,6 +197,12 @@ public class Validaciones {
             return false;
         }
     }
+
+
+    /**
+      *MENSAJE ERROR
+      * @param mensaje
+     */
 
     public static void mostrarError(String mensaje) {
         String[] botones = {"Aceptar"};

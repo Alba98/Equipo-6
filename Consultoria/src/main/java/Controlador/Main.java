@@ -17,6 +17,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 
+/**
+ * MAIN
+ * @author Equipo-6
+ */
 public class Main {
     private static TemporadasDAO temporada_dao;
     private static JornadasDAO jornada_dao;
@@ -36,6 +40,13 @@ public class Main {
 
     private static ReadXmlDomParser xmlParser;
 
+    /**
+     *
+     * CONTRUCTOR MAIN
+     *
+     * @param args
+     *
+     **/
     public static void main(String[] args) {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
@@ -48,6 +59,11 @@ public class Main {
 
     }
 
+    /**
+     *
+     * GENERAR OBJETOS DAO
+     *
+     **/
     private static void generarDAO() {
         temporada_dao = new TemporadasDAO();
         jornada_dao = new JornadasDAO();
@@ -181,7 +197,7 @@ public class Main {
 
     public static void VentanaLogin() {
         VLogin = new JFrame("Inicio de sesion");
-        VLogin.setContentPane(new VLogin().pPrincipal);
+        VLogin.setContentPane(new VLogin().getpPrincipal());
         VLogin.setLocationRelativeTo(null);
         VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VLogin.pack();
@@ -199,7 +215,7 @@ public class Main {
 
     public static void VentanaCarga() {
         VCarga = new JFrame("VCarga");
-        VCarga.setContentPane(new VCarga().getPanel1());
+        VCarga.setContentPane(new VCarga().getpPrincipal());
         VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         VCarga.setLocationRelativeTo(null);
         VCarga.pack();
@@ -612,6 +628,11 @@ public class Main {
     public static void volverLogInUsuario() {
         VUsuario.dispose();
         VentanaLogin();
+    }
+
+    public static void irVUsuario() {
+        VAdmin.dispose();
+        Main.VentanaUsuario(true);
     }
 
     public static TreeMap<Integer, String> getPartidosEquipo() throws Exception{

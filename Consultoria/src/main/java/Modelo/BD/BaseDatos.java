@@ -1,5 +1,4 @@
 package Modelo.BD;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -7,7 +6,12 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class BaseDatos {
+
+    /**
+     *
+     * @author EQUIPO-6
+     */
+   public class BaseDatos {
     protected EntityManagerFactory emf;
     protected EntityManager em;
     protected EntityTransaction transaction;

@@ -9,8 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+/**
+ * VENTANA LOG IN
+ * @author Equipo-6
+ */
 public class VCarga {
-    private JPanel panel1;
+    private JPanel pPrincipal;
     private JProgressBar barraCarga;
     private JButton iniciarButton;
     private JLabel imagen;
@@ -19,9 +24,13 @@ public class VCarga {
 
     boolean cargarDatos = true;
 
+    /**
+     *
+     * CONTRUCTOR DE LA VENTANA DE CARGA
+     *
+     **/
     public VCarga() {
         imagen.setIcon(new ImageIcon("src/main/java/Imagenes/logo.png"));
-
 
         iniciarButton.setBorderPainted(false);
         iniciarButton.setFocusable(false);
@@ -68,18 +77,15 @@ public class VCarga {
         });
     }
 
-    private ImageIcon createImageIcon(String path, String description) {
-        java.net.URL imgURL = getClass().getResource(path);
-        if (imgURL != null){
-            return new ImageIcon(imgURL, description);
-        }
-        else{
-            System.out.println("No se ha encontrado el archivo: " + path);
-            return null;
-        }
-    }
 
-    public JPanel getPanel1() {
-        return panel1;
+    /**
+     *
+     * GETTER JPANEL PRINCIPAL DE LA VENTANA
+     *
+     * @return pPrincipal
+     *
+     **/
+    public JPanel getpPrincipal() {
+        return pPrincipal;
     }
 }

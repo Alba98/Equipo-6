@@ -1,8 +1,6 @@
 package Modelo.BD;
-
 import Modelo.UML.AsistentesEntity;
 import Modelo.UML.EntrenadoresEntity;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -10,9 +8,23 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AsistentesDAO extends BaseDatos {
+    /**
+     *
+     * @author EQUIPO-6
+     */
+
+    public class AsistentesDAO extends BaseDatos {
 
     public AsistentesDAO() {    }
+    /**
+     * CREACION DEL ASISTENTE
+     * @param nickname  parámetro de registro.
+     * @param nombre    parámetro de registro.
+     * @param apellido   parámetro de registro.
+     * @param fechaNacimiento parámetro de registro.
+     * @param nacionalidad parámetro de registro.
+     * @param sueldo parámetro de registro.
+     **/
 
     public void crearAsistente(String nickname, String nombre, String apellido, LocalDate fechaNacimiento,
                                String nacionalidad, Double sueldo, String nicknameEntenador) throws Exception {
@@ -45,7 +57,15 @@ public class AsistentesDAO extends BaseDatos {
         transaction.commit();
     }
 
-    public List<AsistentesEntity> consultarAsistentes() throws Exception {
+        /**
+         *
+         *CONSULTA DE ASISTENTE
+         * @return listaAsistentes
+         *
+         */
+
+
+        public List<AsistentesEntity> consultarAsistentes() throws Exception {
         //iniciar transaccion
         transaction.begin();
         List<AsistentesEntity> listaAsistentes;
@@ -60,6 +80,13 @@ public class AsistentesDAO extends BaseDatos {
 
         return listaAsistentes;
     }
+
+        /**
+         *
+         *BORRAR ASISTENTE
+         * @param nomAsis
+         *
+         */
 
     public void borrarAsistente(String nomAsis) throws Exception{
         //iniciar transaccion

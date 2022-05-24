@@ -1,7 +1,5 @@
 package Modelo.BD;
-
 import Modelo.UML.JugadoresEntity;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
@@ -9,9 +7,25 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+        /**
+         *
+         * @author EQUIPO-6
+         */
+
+
 public class JugadoresDAO extends BaseDatos {
 
     public JugadoresDAO() {    }
+
+            /**
+             * CREACION DEL JUGADOR
+             * @param nickname  parámetro de registro.
+             * @param rol    parámetro de registro.
+             * @param nombre   parámetro de registro.
+             * @param apellido parámetro de registro.
+             * @param fechaNacimiento parámetro de registro.
+             *
+             **/
 
     public void crearJugador(String nickname, String rol, String nombre, String apellido, LocalDate fechaNacimiento,
                                 String nacionalidad, Double sueldo) throws Exception {
@@ -45,6 +59,14 @@ public class JugadoresDAO extends BaseDatos {
         transaction.commit();
     }
 
+            /**
+             *
+             *CONSULTA DE JUGADORES
+             * @return listaJugadores
+             *
+             */
+
+
     public List<JugadoresEntity> consultarJugadores() throws Exception {
         //iniciar transaccion
         transaction.begin();
@@ -61,7 +83,15 @@ public class JugadoresDAO extends BaseDatos {
         return listaJugadores;
     }
 
-    public List<JugadoresEntity> consultarToplaners() throws Exception {
+            /**
+             *
+             *CONSULTA DE TOPLANERS
+             * @return listaToplaners
+             *
+             */
+
+
+            public List<JugadoresEntity> consultarToplaners() throws Exception {
         //iniciar transaccion
         transaction.begin();
         List<JugadoresEntity> listaToplaners;
@@ -76,6 +106,13 @@ public class JugadoresDAO extends BaseDatos {
 
         return listaToplaners;
     }
+
+            /**
+             *
+             *CONSULTA DE JUNGLERS
+             * @return listaJunglers
+             *
+             */
 
     public List<JugadoresEntity> consultarJunglers() throws Exception {
         //iniciar transaccion
@@ -92,6 +129,13 @@ public class JugadoresDAO extends BaseDatos {
 
         return listaJunglers;
     }
+            /**
+             *
+             *CONSULTA DE MIDLANERS
+             * @return listaMidlaners
+             *
+             */
+
 
     public List<JugadoresEntity> consultarMidlaners() throws Exception {
         //iniciar transaccion
@@ -108,8 +152,15 @@ public class JugadoresDAO extends BaseDatos {
 
         return listaMidlaners;
     }
+            /**
+             *
+             *CONSULTA DE AD CARRYS
+             * @return listaADCarrys
+             *
+             */
 
-    public List<JugadoresEntity> consultarADCarrys() throws Exception {
+
+            public List<JugadoresEntity> consultarADCarrys() throws Exception {
         //iniciar transaccion
         transaction.begin();
         List<JugadoresEntity> listaADCarrys;
@@ -124,6 +175,13 @@ public class JugadoresDAO extends BaseDatos {
 
         return listaADCarrys;
     }
+
+            /**
+             *
+             *CONSULTA DE SUPPORTS
+             * @return listaSupports
+             *
+             */
 
     public List<JugadoresEntity> consultarSupports() throws Exception {
         //iniciar transaccion
@@ -140,6 +198,14 @@ public class JugadoresDAO extends BaseDatos {
 
         return listaSupports;
     }
+
+
+            /**
+             *
+             *BORRAR JUGADOR
+             * @param jugadorBorrar
+             *
+             */
 
     public void borrarJugador(String jugadorBorrar) throws Exception {
         //iniciar transaccion
