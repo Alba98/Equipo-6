@@ -567,7 +567,10 @@ public class VAdmin {
      * CREAR CALENDARIO PARTIDOS
      *
      *
-     * @param fechaPrimeraJ*/
+     * @param fechaPrimeraJ
+     *
+     **/
+
     private void crearCalendario(String fechaPrimeraJ) {
         try {
             Main.CrearCalendario(fechaPrimeraJ);
