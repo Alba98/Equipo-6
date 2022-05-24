@@ -121,13 +121,15 @@ public class Validaciones {
 
             LocalDate hoy = LocalDate.now();
 
-            //if (fecha.compareTo(hoy)!=0)
-            //    throw new Exception("La fecha no puede ser posterior a hoy");
+            if (fecha.isAfter(hoy)) {
+                mostrarError("La fecha no puede ser posterior a hoy");
+                return false;
+            }
 
             return true;
 
         } catch (Exception e) {
-            mostrarError(e.getMessage());
+            mostrarError("Formato de fecha incorrecto. Mantenga el formato dd/MM/yyyy");
             textField.setSelectionStart(0);
             textField.setSelectionEnd(textField.getText().length());
             textField.requestFocus();
