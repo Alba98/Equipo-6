@@ -6,9 +6,11 @@ import java.util.Objects;
 
 /**
  *
- * SENTENCIA SQL OBTENCIÖN DE TODOS LOS EQUIPOS
+ * SENTENCIA SQL OBTENCION TEMPORADA POR CODIGO
  *
  */
+@NamedQuery(name = "TemporadasEntity.porCod", query = "SELECT t FROM TemporadasEntity t WHERE t.codTemporada = ?1")
+
 /**
  * ENTIDAD TEMPORADAS
  * @author Equipo-6

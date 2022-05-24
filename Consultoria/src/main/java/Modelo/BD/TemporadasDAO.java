@@ -1,8 +1,11 @@
 package Modelo.BD;
 import Modelo.UML.EquiposEntity;
+import Modelo.UML.JornadasEntity;
 import Modelo.UML.TemporadasEntity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class TemporadasDAO extends BaseDatos{
 
@@ -30,33 +33,44 @@ public class TemporadasDAO extends BaseDatos{
         transaction.commit();
     }
 
-    public TemporadasEntity getUltimaTemporada() {
-        //iniciar transaccion
-        transaction.begin();
+    public int getUltimaTemporada() {
+        BigDecimal codTemporada = (BigDecimal) em.createNativeQuery(
+                        "SELECT max_temporada() FROM DUAL"
+                )
+                .getSingleResult();
 
-        // Ejecutar package
-        TypedQuery<TemporadasEntity> qEventos =
-                em.createNamedQuery("TemporadasEntity.max", TemporadasEntity.class);
-        TemporadasEntity consulta = qEventos.getSingleResult();
-
-
-        // ejecutar las transaciones en la base de datos
-        transaction.commit();
-
-        return consulta;
+        return codTemporada.intValue();
     }
 
     public void cerrarTemporada(int cod) throws Exception{
+
+        TemporadasEntity temporada = getTemporada(cod);
+
         //iniciar transaccion
         transaction.begin();
 
-        TemporadasEntity temporada = new TemporadasEntity();
-        temporada.setCodTemporada((byte) cod);
         temporada.setAbierta("N");
 
         em.persist(temporada);
 
         // ejecutar las transaciones en la base de datos
         transaction.commit();
+    }
+
+    public TemporadasEntity getTemporada(int cod) {
+        //iniciar transaccion
+        transaction.begin();
+
+        // 3. Construir comandos SQL
+        TypedQuery<TemporadasEntity > query =
+                em.createNamedQuery("TemporadasEntity.porCod", TemporadasEntity.class);
+        query.setParameter(1, (short)cod);
+
+        TemporadasEntity temp = query.getSingleResult();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return  temp;
     }
 }

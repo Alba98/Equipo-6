@@ -118,14 +118,12 @@ public class Main {
      **/
 
     public static void OrganizarCalendario(LocalDate fechaJornada) throws Exception {
-        TemporadasEntity temporada = temporada_dao.getUltimaTemporada();
+        int codTemporada = temporada_dao.getUltimaTemporada();
 
-        if(temporada.getAbierta() == "N") {
+        if(temporada_dao.getTemporada(codTemporada).getAbierta() == "N") {
             temporada_dao.crearTemporada();
-            temporada = temporada_dao.getUltimaTemporada();
+            codTemporada = temporada_dao.getUltimaTemporada();
         }
-
-        int codTemporada = temporada.getCodTemporada();
 
         //comprobar si se puede cerrar la temporada
         temporada_dao.cerrarTemporada(codTemporada);
@@ -134,22 +132,30 @@ public class Main {
         jornada_dao.crearJornadas(codTemporada, fechaJornada);
 
         //generar emparejamientos partidos
-        generarEmparejamientos();
+        generarEmparejamientos(temporada_dao.getTemporada(codTemporada));
     }
 
-    private static void generarEmparejamientos() throws Exception {
+    private static void generarEmparejamientos(TemporadasEntity temporada) throws Exception {
         List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
-        List<JornadasEntity> jornadasTotales = jornada_dao.consultarJornadas();
+        Collection<JornadasEntity> jornadasTotales = temporada.getJornadasByCodTemporada();
         int partidos = (equiposTotales.size()/2)*(jornadasTotales.size());
 
-        for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
-            LocalTime startTime = LocalTime.parse("11:00");
-            for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
-                partido_dao.crearPartido(startTime, eq1, equiposTotales.get(eq1).getNombre(),
-                        equiposTotales.get(eq2 % equiposTotales.size()).getNombre());
 
-                startTime.plusHours(2);
+        for (JornadasEntity jornada : jornadasTotales) {
+            LocalTime startTime = LocalTime.parse("11:00");
+            System.out.println(" JORNADA 0" + jornada.getCodJornada());
+
+            for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
+                for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
+                    partido_dao.crearPartido(startTime, 000, equiposTotales.get(eq1).getNombre(),
+                            equiposTotales.get(eq2 % equiposTotales.size()).getNombre());
+
+                    startTime.plusHours(2);
+
+                    System.out.println(equiposTotales.get(eq1).getCodEquipo() + " vs "+ equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo());
+                }
             }
+
         }
     }
 
