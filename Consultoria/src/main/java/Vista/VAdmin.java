@@ -112,6 +112,7 @@ public class VAdmin {
     private JButton bBAsistentes;
     private JComboBox cbBEquipos;
     private JButton bBEquipos;
+    private JTextField fechaPrimeraJornada;
 
     /**
      *
@@ -360,7 +361,10 @@ public class VAdmin {
         crearCalendarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                crearCalendario();
+                if (Validaciones.validarFecha(fechaPrimeraJornada)) {
+                    String fechaPrimeraJ = fechaPrimeraJornada.getText();
+                    crearCalendario(fechaPrimeraJ);
+                }
             }
         });
 
@@ -562,8 +566,9 @@ public class VAdmin {
      *
      * CREAR CALENDARIO PARTIDOS
      *
-     **/
-    private void crearCalendario() {
+     *
+     * @param fechaPrimeraJ*/
+    private void crearCalendario(String fechaPrimeraJ) {
         try {
             Main.CrearCalendario();
             Main.irVUsuario();
