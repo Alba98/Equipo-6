@@ -46,11 +46,7 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-           // VentanaCarga();
-
-            generarDAO();
-            VentanaAdmin();
-
+           VentanaCarga();
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
@@ -198,7 +194,15 @@ public class Main {
             this.team2 = team2;
         }
 
-        public String toString() {
+        /**
+         *
+         * MÉTODO representar cualquier objeto como una cadena,
+         * @return almacenXML_dao
+         * @throws Exception
+         *
+         **/
+
+    public String toString() {
             return team1 + " vs " + team2;
         }
     }
