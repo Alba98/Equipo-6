@@ -124,10 +124,8 @@ public class VAdmin {
             tJNombre.requestFocus();
             llenarCBRoles(cbJROL);
             llenarCB(cbAEntrenador, Main.getEntrenadores());
-            llenarCB(cbBJugadores, Main.getJugadores());
-            llenarCB(cbBEntrenadores, Main.getEntrenadores());
-            llenarCB(cbBAsistentes, Main.getAsistentes());
-            llenarCB(cbBEquipos, Main.getEquipos());
+            llenarCBBorrar();
+            actualizarCBEquipo();
         }
         catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
@@ -381,7 +379,6 @@ public class VAdmin {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-
                 actualizarCBEquipo();
                 
             }
@@ -459,6 +456,66 @@ public class VAdmin {
                 }
             }
         });
+        CBorrar.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBBorrar();
+            }
+        });
+
+
+        CJugador.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetJugador();
+            }
+        });
+
+        CEntrenador.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetEntrenador();
+            }
+        });
+
+        CAsistente.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetAsistente();
+            }
+        });
+
+        CEquipo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetEquipos();
+            }
+        });
+        VentanaAdmins.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBBorrar();
+                actualizarCBEquipo();
+            }
+        });
+    }
+
+    private void llenarCBBorrar() {
+        try {
+            llenarCB(cbBJugadores, Main.getJugadores());
+            llenarCB(cbBEntrenadores, Main.getEntrenadores());
+            llenarCB(cbBAsistentes, Main.getAsistentes());
+            llenarCB(cbBEquipos, Main.getEquipos());
+        }
+        catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
+        }
     }
 
 
@@ -664,6 +721,7 @@ public class VAdmin {
         tAPais.setText("");
         tANickname.setText("");
         cbAEntrenador.setSelectedIndex(0);
+        llenarCBEntrenadores(cbAEntrenador);
     }
 
     private void llenarCBEntrenadores(JComboBox cb) {
@@ -735,14 +793,6 @@ public class VAdmin {
         } catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
         }
-    }
-
-    public JTabbedPane getVentanaAdmins() {
-        return VentanaAdmins;
-    }
-
-    public void setVentanaAdmins(JTabbedPane ventanaAdmins) {
-        VentanaAdmins = ventanaAdmins;
     }
 
     /**
