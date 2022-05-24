@@ -695,6 +695,7 @@ public class VAdmin {
      **/
     private void resetEquipos() {
         tEqNombre.setText("");
+        tEqNombre.setText("");
         tEqFecha.setText("");
         tEqCiudad.setText("");
         tEqSponsor.setText("");
@@ -740,12 +741,11 @@ public class VAdmin {
      **/
     private void llenarCB(JComboBox cb, ArrayList<String> lista) {
         try {
-            ArrayList<String> entrenadores = Main.getEntrenadores();
             cb.removeAllItems();
             cb.addItem("-Ninguno selecccionado-");
             cb.setSelectedIndex(0);
-            for (String entrenador : entrenadores) {
-                cb.addItem(entrenador);
+            for (String item : lista) {
+                cb.addItem(item);
             }
         } catch (Exception e) {
             Validaciones.mostrarError(e.getMessage());
