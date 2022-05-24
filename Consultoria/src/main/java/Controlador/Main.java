@@ -29,9 +29,7 @@ public class Main {
     private static EntrenadoresDAO entrenador_dao;
     private static AsistentesDAO asistente_dao;
     private static EquiposDAO equipo_dao;
-
     private static UsuariosDAO usuario_dao;
-
     private static AlmacenXML_DAO almacenXML_dao;
 
     private static final DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -76,60 +74,6 @@ public class Main {
         almacenXML_dao = new AlmacenXML_DAO();
     }
 
-    /******************** TEST *************************/
-    public static void GenerarTemporadaTest() throws Exception {
-        temporada_dao.crearTemporada();
-    }
-    private static void GenerarJornadasTest() throws Exception {
-        jornada_dao.crearJornadas(01,  LocalDate.of(2022, 04, 11));
-    }
-
-    private static void GenerarPartidosTest() throws Exception {
-        LocalTime now = LocalTime.now();
-        partido_dao.crearPartido(now, 01, "Real Horses", "Gasteiz-Goya");
-    }
-
-    private static void ResultadosPartidosTest() throws Exception {
-        partido_dao.resultadosPartido(01, "3-2");
-    }
-
-    private static void GenerarJugadorTest() throws Exception {
-        jugador_dao.crearJugador("The_Core", "TOP", "DARCY", "Wuenz",
-                LocalDate.of(2001, 05, 14), "Taiwanesa", 20000.0 );
-    }
-
-    private static void GenerarEntrenadorTest() throws Exception {
-        entrenador_dao.crearEntrenador("Slayo_15", "Andrea", "Birel",
-                LocalDate.of(1997, 05, 14), "Espaniola", 1500.0 );
-    }
-
-    private static void GenerarAsistenteTest() throws Exception {
-        asistente_dao.crearAsistente("Destepo", "Juan", "Antonio",
-                LocalDate.of(1997, 05, 14), "Alemana", 1500.0,
-                "Slayo_15" );
-    }
-
-    private static void GenerarEquiposTest() throws Exception {
-        equipo_dao.crearEquipos( "Gasteiz-Goya", LocalDate.of(2021, 01, 23),
-                "Vitoria", "Goya", "Eneko Alonso");
-    }
-
-    private static void ContratoJugadorTest() throws Exception {
-        equipo_dao.contratoJugador(06, 01,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    private static void ContratoEntrenadorTest() throws Exception {
-        equipo_dao.contratoJugador(12, 03,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    private static void ContratoAsistenteTest() throws Exception {
-        equipo_dao.contratoJugador(10, 03,  LocalDate.of(2021, 04, 07),
-                LocalDate.of(2023, 06, 30));
-    }
-
-    /******************** fin TEST *************************/
     public static void VentanaAdmin() {
         VAdmin = new JFrame("VentanaAdmin");
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
@@ -189,7 +133,8 @@ public class Main {
         this.team1 = team1;
         this.team2 = team2;
     }
-        public String toString() {
+
+    public String toString() {
             return team1 + " vs " + team2;
         }
     }
@@ -229,14 +174,6 @@ public class Main {
         VUsuario.setLocationRelativeTo(null);
         VUsuario.pack();
         VUsuario.setVisible(true);
-
-    }
-
-    public static void getDatosClasificacion(){
-        //ClasificacionDAO ?:
-    }
-    public static void getDatosJornadaFinal(){
-        //JornadaDAO where cod_jornada = max(cod_jornada):
 
     }
 
@@ -340,15 +277,6 @@ public class Main {
         ArrayList<String> nombres = new ArrayList<>(Supports.size());
         for (JugadoresEntity Support : Supports) {
             nombres.add(Support.getPersonasByCodJugador().getNickname());
-        }
-        return nombres;
-    }
-
-    public static ArrayList<String> getSuplentes() throws Exception {
-        List<JugadoresEntity> jugadores = jugador_dao.consultarJugadores();
-        ArrayList<String> nombres = new ArrayList<>(jugadores.size());
-        for (JugadoresEntity jugador : jugadores) {
-            nombres.add(jugador.getPersonasByCodJugador().getNickname());
         }
         return nombres;
     }

@@ -101,7 +101,7 @@ public class VUsuario {
                 PClasificacion.setVisible(true);
                 PJornada.setVisible(false);
 
-            //    getClasificacion();
+                getClasificacion();
             }
         });
         bJornada.addActionListener(new ActionListener() {
@@ -112,7 +112,7 @@ public class VUsuario {
                 PJornada.setVisible(true);
                 PClasificacion.setVisible(false);
 
-            //    getJornadas();
+                getJornadas();
             }
         });
 
@@ -229,6 +229,26 @@ public class VUsuario {
         } catch (Exception e) {
             Validaciones.mostrarError(e.getMessage());
         }
+    }
+
+    /**
+     *
+     * LLENAR DATOS XML JORANDA
+     *
+     **/
+    private void getJornadas() {
+        taJornada.setText( Main.getResultadosJornadas());
+
+    }
+
+    /**
+     *
+     * LLENAR DATOS XML CLASIFICACION
+     *
+     **/
+    private void getClasificacion() {
+        taCalsificacion.setText( Main.getClasificacion());
+
     }
 
     /**

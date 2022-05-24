@@ -124,7 +124,7 @@ public class VAdmin {
             tJNombre.requestFocus();
             llenarCBRoles(cbJROL);
             llenarCB(cbAEntrenador, Main.getEntrenadores());
-            llenarCB(cbBJugadores, Main.getSuplentes());
+            llenarCB(cbBJugadores, Main.getJugadores());
             llenarCB(cbBEntrenadores, Main.getEntrenadores());
             llenarCB(cbBAsistentes, Main.getAsistentes());
             llenarCB(cbBEquipos, Main.getEquipos());
@@ -400,7 +400,7 @@ public class VAdmin {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
                 try {
                     Main.borrarJugador(jugadorBorrar);
-                    llenarCB(cbBJugadores, Main.getSuplentes());
+                    llenarCB(cbBJugadores, Main.getJugadores());
                 } catch (Exception ex) {
                     Validaciones.mostrarError(ex.getMessage());
                 }
@@ -713,7 +713,7 @@ public class VAdmin {
             llenarCB(cbEqEntre, Main.getEntrenadores());
             llenarCB(cbEqAsistente, Main.getAsistentes());
             llenarCB(cbEqTOP, Main.getToplaners());
-            llenarCB(cbEqSuplente, Main.getSuplentes());
+            llenarCB(cbEqSuplente, Main.getJugadores());
             llenarCB(cbEqJGL, Main.getJunglers());
             llenarCB(cbEqMID, Main.getMidlaners());
             llenarCB(cbEqADC, Main.getADCarrys());
