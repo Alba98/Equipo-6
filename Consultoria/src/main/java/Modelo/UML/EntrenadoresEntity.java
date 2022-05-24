@@ -18,7 +18,7 @@ import java.util.Objects;
  * SENTENCIA SQL PARA OBTENER UN ENTRENADOR POR NICKNAME:
  * OBJETIVO FINAL --> BORRADO DEL ENTRENADOR SELECCIONADO
  */
-@NamedQuery(name = "EntrenadoresEntity.borrar", query = "SELECT e.codEntrenador FROM EntrenadoresEntity e WHERE e.codEntrenador=" +
+@NamedQuery(name = "EntrenadoresEntity.borrar", query = "SELECT e FROM EntrenadoresEntity e WHERE e.codEntrenador=" +
         "(SELECT e.codPersona FROM PersonasEntity e WHERE upper(e.nickname)=?1 )")
 
 public class EntrenadoresEntity {

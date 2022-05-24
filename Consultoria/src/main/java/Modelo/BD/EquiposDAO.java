@@ -189,7 +189,7 @@ public class EquiposDAO extends BaseDatos {
         // 3. Construir comandos SQL
         TypedQuery<EquiposEntity> qEventos =
                 em.createNamedQuery("EquiposEntity.borrar", EquiposEntity.class);
-        qEventos.setParameter(1, nomEqui.toUpperCase());
+        qEventos.setParameter(1, nomEqui);
         EquiposEntity consulta = qEventos.getSingleResult();
         if (consulta != null){
             em.remove(consulta);

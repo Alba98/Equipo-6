@@ -324,13 +324,6 @@ public class VAdmin {
             }
         });
 
-        bERegistrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrarEntrenador();
-            }
-        });
-
         bERestart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -380,7 +373,7 @@ public class VAdmin {
                 try {
                     llenarCB(cbAEntrenador, Main.getEntrenadores());
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -398,9 +391,15 @@ public class VAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
+
                 try {
-                    Main.borrarJugador(jugadorBorrar);
-                    llenarCB(cbBJugadores, Main.getJugadores());
+                    boolean seleccionado = jugadorBorrar != "-Ninguno selecccionado--";
+                    if(seleccionado) {
+                        Main.borrarJugador(jugadorBorrar);
+                        llenarCB(cbBJugadores, Main.getJugadores());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un jugador");
                 } catch (Exception ex) {
                     Validaciones.mostrarError(ex.getMessage());
                 }
@@ -411,8 +410,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEntre = (String) cbBEntrenadores.getSelectedItem();
                 try {
-                    Main.borrarEntrenador(nomEntre);
-                    llenarCB(cbBEntrenadores, Main.getEntrenadores());
+                    boolean seleccionado = nomEntre != "-Ninguno selecccionado--";
+                    if(seleccionado) {
+                        Main.borrarEntrenador(nomEntre);
+                        llenarCB(cbBEntrenadores, Main.getEntrenadores());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un entrenador");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
@@ -424,8 +428,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
-                    Main.borrarAsistente(nomAsis);
-                    llenarCB(cbBAsistentes, Main.getAsistentes());
+                    boolean seleccionado = nomAsis != "-Ninguno selecccionado--";
+                    if(seleccionado) {
+                        Main.borrarAsistente(nomAsis);
+                        llenarCB(cbBAsistentes, Main.getAsistentes());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un asistente");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
@@ -437,8 +446,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
-                    Main.borrarEquipo(nomEqui);
-                    llenarCB(cbBEquipos, Main.getEquipos());
+                    boolean equipoSeleccionado = nomEqui != "-Ninguno selecccionado--";
+                    if(equipoSeleccionado) {
+                        Main.borrarEquipo(nomEqui);
+                        llenarCB(cbBEquipos, Main.getEquipos());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un asistente");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());

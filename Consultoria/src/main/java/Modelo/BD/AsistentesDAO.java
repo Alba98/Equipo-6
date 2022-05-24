@@ -63,9 +63,7 @@ import java.util.List;
          * @return listaAsistentes
          *
          */
-
-
-        public List<AsistentesEntity> consultarAsistentes() throws Exception {
+    public List<AsistentesEntity> consultarAsistentes() throws Exception {
         //iniciar transaccion
         transaction.begin();
         List<AsistentesEntity> listaAsistentes;
