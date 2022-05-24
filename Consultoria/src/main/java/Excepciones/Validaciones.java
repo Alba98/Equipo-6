@@ -137,6 +137,33 @@ public class Validaciones {
         }
     }
 
+    public static boolean validarFechaPosterior(JTextField textField) {
+        try {
+            String date_s = textField.getText();
+            if (date_s.isEmpty())
+                throw new Exception("El " +  textField.getName() + " es un dato obligatorio");
+
+            DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate fecha = LocalDate.parse(textField.getText(), formato);
+
+            LocalDate hoy = LocalDate.now();
+
+            if (fecha.isBefore(hoy)) {
+                mostrarError("La fecha no puede ser anterior a hoy");
+                return false;
+            }
+
+            return true;
+
+        } catch (Exception e) {
+            mostrarError("Formato de fecha incorrecto. Mantenga el formato dd/MM/yyyy");
+            textField.setSelectionStart(0);
+            textField.setSelectionEnd(textField.getText().length());
+            textField.requestFocus();
+            return false;
+        }
+    }
+
         /**
         * HORA VÁLIDA
          * @param hora para validar la hora.
@@ -193,6 +220,7 @@ public class Validaciones {
     }
 
 
+
     /**
       *MENSAJE ERROR
       * @param mensaje
@@ -203,4 +231,6 @@ public class Validaciones {
         JOptionPane.showOptionDialog(null, mensaje, "ERROR",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, botones, botones[0]);
     }
+
+
 }

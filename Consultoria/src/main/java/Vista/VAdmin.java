@@ -361,7 +361,7 @@ public class VAdmin {
         crearCalendarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Validaciones.validarFecha(fechaPrimeraJornada)) {
+                if (Validaciones.validarFechaPosterior(fechaPrimeraJornada)) {
                     String fechaPrimeraJ = fechaPrimeraJornada.getText();
                     crearCalendario(fechaPrimeraJ);
                 }
@@ -570,7 +570,7 @@ public class VAdmin {
      * @param fechaPrimeraJ*/
     private void crearCalendario(String fechaPrimeraJ) {
         try {
-            Main.CrearCalendario();
+            Main.CrearCalendario(fechaPrimeraJ);
             Main.irVUsuario();
         } catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
@@ -590,6 +590,8 @@ public class VAdmin {
                     Main.registrarJugador(tJNombre.getText(), tJApellido.getText(), tJSueldo.getText(),
                             tJFNacimiento.getText(), tJPais.getText(), tJNickname.getText(),
                             cbJROL.getSelectedItem().toString());
+
+                    resetJugador();
                 }
                 else
                     Validaciones.mostrarError("selecione un rol");
@@ -659,6 +661,7 @@ public class VAdmin {
                 Main.registrarEntrenador(tENombre.getText(), tEApellido.getText(), tESueldo.getText(),
                                          tEFNacimiento.getText(), tEPais.getText(), tENickname.getText());
 
+                resetEntrenador();
             } catch (Exception e) {
                 Validaciones.mostrarError(e.getMessage());
             }
@@ -703,6 +706,7 @@ public class VAdmin {
                     Main.registrarAsistente(tANombre.getText(), tAApellido.getText(), tASueldo.getText(),
                             tAFNacimiento.getText(), tAPais.getText(), tANickname.getText(),
                             cbAEntrenador.getSelectedItem().toString());
+                    resetAsistente();
                 }
                 else
                     Validaciones.mostrarError("selecione un asistente");
@@ -758,6 +762,7 @@ public class VAdmin {
             try {
                 Main.registrarEquipo(tEqNombre.getText(), tEqFecha.getText(), tEqCiudad.getText(),
                         tEqSponsor.getText(), tEqDuenio.getText());
+                resetEquipos();
             } catch (Exception e) {
                 Validaciones.mostrarError(e.getMessage());
             }
