@@ -124,10 +124,8 @@ public class VAdmin {
             tJNombre.requestFocus();
             llenarCBRoles(cbJROL);
             llenarCB(cbAEntrenador, Main.getEntrenadores());
-            llenarCB(cbBJugadores, Main.getJugadores());
-            llenarCB(cbBEntrenadores, Main.getEntrenadores());
-            llenarCB(cbBAsistentes, Main.getAsistentes());
-            llenarCB(cbBEquipos, Main.getEquipos());
+            llenarCBBorrar();
+            actualizarCBEquipo();
         }
         catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
@@ -324,13 +322,6 @@ public class VAdmin {
             }
         });
 
-        bERegistrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrarEntrenador();
-            }
-        });
-
         bERestart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -380,7 +371,7 @@ public class VAdmin {
                 try {
                     llenarCB(cbAEntrenador, Main.getEntrenadores());
                 } catch (Exception ex) {
-                    throw new RuntimeException(ex);
+                    Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
@@ -388,7 +379,6 @@ public class VAdmin {
             @Override
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
-
                 actualizarCBEquipo();
                 
             }
@@ -398,9 +388,15 @@ public class VAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
+
                 try {
-                    Main.borrarJugador(jugadorBorrar);
-                    llenarCB(cbBJugadores, Main.getJugadores());
+                    boolean seleccionado = jugadorBorrar != "-Ninguno selecccionado--";
+                    if(seleccionado) {
+                        Main.borrarJugador(jugadorBorrar);
+                        llenarCB(cbBJugadores, Main.getJugadores());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un jugador");
                 } catch (Exception ex) {
                     Validaciones.mostrarError(ex.getMessage());
                 }
@@ -411,8 +407,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEntre = (String) cbBEntrenadores.getSelectedItem();
                 try {
-                    Main.borrarEntrenador(nomEntre);
-                    llenarCB(cbBEntrenadores, Main.getEntrenadores());
+                    boolean seleccionado = nomEntre != "-Ninguno selecccionado--";
+                    if(seleccionado) {
+                        Main.borrarEntrenador(nomEntre);
+                        llenarCB(cbBEntrenadores, Main.getEntrenadores());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un entrenador");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
@@ -424,8 +425,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
-                    Main.borrarAsistente(nomAsis);
-                    llenarCB(cbBAsistentes, Main.getAsistentes());
+                    boolean seleccionado = nomAsis != "-Ninguno selecccionado-";
+                    if(seleccionado) {
+                        Main.borrarAsistente(nomAsis);
+                        llenarCB(cbBAsistentes, Main.getAsistentes());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un asistente");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
@@ -437,14 +443,84 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
-                    Main.borrarEquipo(nomEqui);
-                    llenarCB(cbBEquipos, Main.getEquipos());
+                    boolean equipoSeleccionado = nomEqui != "-Ninguno selecccionado-";
+                    if(equipoSeleccionado) {
+                        Main.borrarEquipo(nomEqui);
+                        llenarCB(cbBEquipos, Main.getEquipos());
+                    }
+                    else
+                        Validaciones.mostrarError("selecione un asistente");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
                 }
             }
         });
+        CBorrar.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBBorrar();
+            }
+        });
+
+
+        CJugador.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetJugador();
+            }
+        });
+
+        CEntrenador.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetEntrenador();
+            }
+        });
+
+        CAsistente.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetAsistente();
+            }
+        });
+
+        CEquipo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                resetEquipos();
+            }
+        });
+        VentanaAdmins.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                llenarCBBorrar();
+                actualizarCBEquipo();
+            }
+        });
+    }
+
+    /**
+     *
+     * ACTUALIZAR CB BORRAR
+     *
+     **/
+    private void llenarCBBorrar() {
+        try {
+            llenarCB(cbBJugadores, Main.getJugadores());
+            llenarCB(cbBEntrenadores, Main.getEntrenadores());
+            llenarCB(cbBAsistentes, Main.getAsistentes());
+            llenarCB(cbBEquipos, Main.getEquipos());
+        }
+        catch (Exception ex) {
+            Validaciones.mostrarError(ex.getMessage());
+        }
     }
 
 
@@ -510,6 +586,9 @@ public class VAdmin {
                             tJFNacimiento.getText(), tJPais.getText(), tJNickname.getText(),
                             cbJROL.getSelectedItem().toString());
                 }
+                else
+                    Validaciones.mostrarError("selecione un rol");
+
             } catch (Exception e) {
                Validaciones.mostrarError(e.getMessage());
             }
@@ -614,12 +693,14 @@ public class VAdmin {
     private void registrarAsistente() {
         if ( validarRegistrarAsistente() ) {
             try {
-                boolean rolValido = cbJROL.getSelectedItem().toString() != "-Ninguno selecccionado--";
-                if(rolValido) {
+                boolean seleccionado = cbAEntrenador.getSelectedItem().toString() != "-Ninguno selecccionado-";
+                if(seleccionado) {
                     Main.registrarAsistente(tANombre.getText(), tAApellido.getText(), tASueldo.getText(),
                             tAFNacimiento.getText(), tAPais.getText(), tANickname.getText(),
                             cbAEntrenador.getSelectedItem().toString());
                 }
+                else
+                    Validaciones.mostrarError("selecione un asistente");
             } catch (Exception e) {
                 Validaciones.mostrarError(e.getMessage());
             }
@@ -650,6 +731,7 @@ public class VAdmin {
         tAPais.setText("");
         tANickname.setText("");
         cbAEntrenador.setSelectedIndex(0);
+        llenarCBEntrenadores(cbAEntrenador);
     }
 
     private void llenarCBEntrenadores(JComboBox cb) {
@@ -721,14 +803,6 @@ public class VAdmin {
         } catch (Exception ex) {
             Validaciones.mostrarError(ex.getMessage());
         }
-    }
-
-    public JTabbedPane getVentanaAdmins() {
-        return VentanaAdmins;
-    }
-
-    public void setVentanaAdmins(JTabbedPane ventanaAdmins) {
-        VentanaAdmins = ventanaAdmins;
     }
 
     /**

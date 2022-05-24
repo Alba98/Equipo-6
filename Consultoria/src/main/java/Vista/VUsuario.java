@@ -194,7 +194,7 @@ public class VUsuario {
     private void actualizarResulado() {
         try {
             String partido = cbPartidos.getSelectedItem().toString();
-            boolean partidoSeleccionado = partido != "-Ninguno selecccionado--";
+            boolean partidoSeleccionado = partido != "-Ninguno selecccionado-";
             if(partidoSeleccionado) {
                 int cod_partido = 0;
                 for (Map.Entry<Integer, String> entry : partidos.entrySet()) {
@@ -204,6 +204,8 @@ public class VUsuario {
 
                 Main.actualizaResutlado(cod_partido, tResultado.getText());
             }
+            else
+                Validaciones.mostrarError("seleccione un partido");
         } catch (Exception e) {
             Validaciones.mostrarError(e.getMessage());
         }
