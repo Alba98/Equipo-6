@@ -15,6 +15,8 @@ import java.util.Objects;
  *
  */
 @NamedQuery(name = "JornadasEntity.toda", query = "SELECT j FROM JornadasEntity j")
+@NamedQuery(name = "JornadasEntity.porCodT", query = "SELECT j FROM JornadasEntity j WHERE j.codTemporada = ?1")
+
 
 public class JornadasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

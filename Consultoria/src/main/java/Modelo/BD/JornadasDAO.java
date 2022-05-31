@@ -63,4 +63,21 @@ public class JornadasDAO extends BaseDatos {
         return listaJornadas;
     }
 
+    public List<JornadasEntity> getJornadasTemporada(int codTemporada) {
+        //iniciar transaccion
+        transaction.begin();
+        List<JornadasEntity> listaJornadas;
+
+        // 3. Construir comandos SQL
+        TypedQuery<JornadasEntity> query =
+                em.createNamedQuery("JornadasEntity.porCodT", JornadasEntity.class);
+        query.setParameter(1, (byte) codTemporada);
+
+        listaJornadas = query.getResultList();
+
+        // ejecutar las transaciones en la base de datos
+        transaction.commit();
+
+        return  listaJornadas;
+    }
 }
