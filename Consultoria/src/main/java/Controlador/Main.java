@@ -35,6 +35,8 @@ public class Main {
 
     private static ReadXmlDomParser xmlParser;
 
+    private static ImageIcon icon = new ImageIcon("resources\\Imagenes\\icon.png");
+
     /**
      *
      * CONTRUCTOR MAIN
@@ -80,6 +82,7 @@ public class Main {
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
         VAdmin.setLocationRelativeTo(null);
         VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VAdmin.setIconImage(icon.getImage());
         VAdmin.pack();
         VAdmin.setVisible(true);
     }
@@ -94,6 +97,7 @@ public class Main {
         VLogin.setContentPane(new VLogin().getpPrincipal());
         VLogin.setLocationRelativeTo(null);
         VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VLogin.setIconImage(icon.getImage());
         VLogin.pack();
         VLogin.setVisible(true);
     }
@@ -107,6 +111,7 @@ public class Main {
         VRegistrar = new JFrame("VRegistrar");
         VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
         VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VRegistrar.setIconImage(icon.getImage());
         VRegistrar.setLocationRelativeTo(null);
         VRegistrar.pack();
         VRegistrar.setVisible(true);
@@ -122,6 +127,7 @@ public class Main {
         VCarga = new JFrame("VCarga");
         VCarga.setContentPane(new VCarga().getpPrincipal());
         VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VCarga.setIconImage(icon.getImage());
         VCarga.setLocationRelativeTo(null);
         VCarga.pack();
         VCarga.setVisible(true);
@@ -137,6 +143,7 @@ public class Main {
         VUsuario = new JFrame("VUsuario");
         VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
         VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VUsuario.setIconImage(icon.getImage());
         VUsuario.setLocationRelativeTo(null);
         VUsuario.pack();
         VUsuario.setVisible(true);

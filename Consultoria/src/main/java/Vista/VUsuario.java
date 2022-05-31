@@ -36,6 +36,7 @@ public class VUsuario {
     private JButton bActualizar;
     private JTextField tResultado;
     private JButton bAdmin;
+    private JPanel pVAdmin;
 
     TreeMap<Integer, String> partidos;
 
