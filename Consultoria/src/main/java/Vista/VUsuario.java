@@ -107,6 +107,11 @@ public class VUsuario {
                 PJornada.setVisible(false);
 
                 getClasificacion();
+
+
+                pPrincipal.validate();
+                pPrincipal.repaint();
+                pPrincipal.updateUI();
             }
         });
         bJornada.addActionListener(new ActionListener() {
@@ -118,6 +123,10 @@ public class VUsuario {
                 PClasificacion.setVisible(false);
 
                 getJornadas();
+
+                pPrincipal.validate();
+                pPrincipal.repaint();
+                pPrincipal.updateUI();
             }
         });
 
@@ -206,6 +215,32 @@ public class VUsuario {
                 Main.irVAdmin();
             }
         });
+
+        cbPartidos.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                verResultado();
+            }
+
+
+        });
+    }
+
+    private void verResultado() {
+        try {
+            String partido = cbPartidos.getSelectedItem().toString();
+            boolean partidoSeleccionado = partido != "-Ninguno selecccionado-";
+            if(partidoSeleccionado) {
+                int cod_partido = 0;
+                for (Map.Entry<Integer, String> entry : partidos.entrySet()) {
+                    if (entry.getValue() == partido)
+                        cod_partido = entry.getKey();
+                }
+
+                tResultado.setText(Main.verResultado(cod_partido));
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
     }
 
     private void aestheticBoton(JButton boton) {

@@ -926,5 +926,15 @@ public class Main {
     public static void actualizaResutlado(int cod_partido, String resultado) throws Exception{
         partido_dao.resultadosPartido(cod_partido, resultado);
     }
+
+    public static String verResultado(int cod_partido) throws Exception{
+        List<PartidosEntity> partidos = partido_dao.consultarPartidos();
+        for (PartidosEntity partido : partidos) {
+            if(partido.getCodPartido() == cod_partido)
+                return partido.getResultado();
+        }
+
+        return "";
+    }
 }
 
