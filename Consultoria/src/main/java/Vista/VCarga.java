@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.ConexionThread;
 import Controlador.Main;
 
 import javax.swing.*;
@@ -36,6 +37,9 @@ public class VCarga {
         iniciarButton.setFocusable(false);
         iniciarButton.setRolloverEnabled(true);
 
+        ConexionThread conexionThead = new ConexionThread();
+        Thread thread = new Thread(conexionThead);
+
         iniciarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -53,13 +57,20 @@ public class VCarga {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(cargarDatos){
-                    Main.cargarDatos();
+                   //Main.cargarDatos();
+                    thread.start();
                     cargarDatos = false;
                 }
+
                 if (barraCarga.getValue() < 100){
-                    barraCarga.setValue(barraCarga.getValue()+10);
+                    barraCarga.setValue(barraCarga.getValue()+5);
                 }
                 else{
+                    try {
+                        thread.join();
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     t.stop();
                     Main.cerrarVCarga();
                 }
