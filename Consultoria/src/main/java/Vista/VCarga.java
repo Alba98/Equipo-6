@@ -31,7 +31,7 @@ public class VCarga {
      *
      **/
     public VCarga() {
-        imagen.setIcon(new ImageIcon("src/main/java/Imagenes/logo.png"));
+        imagen.setIcon(new ImageIcon("resources\\Imagenes\\logo.png"));
 
         iniciarButton.setBorderPainted(false);
         iniciarButton.setFocusable(false);
