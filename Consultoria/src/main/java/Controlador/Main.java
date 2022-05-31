@@ -84,6 +84,64 @@ public class Main {
         VAdmin.setVisible(true);
     }
 
+    /**
+     *
+     * GENERAR VENTANA DE LOGIN
+     *
+     **/
+    public static void VentanaLogin() {
+        VLogin = new JFrame("Inicio de sesion");
+        VLogin.setContentPane(new VLogin().getpPrincipal());
+        VLogin.setLocationRelativeTo(null);
+        VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VLogin.pack();
+        VLogin.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA DE REGISTRO
+     * @param email
+     **/
+    public static void VentanaRegistrar(String email) {
+        VRegistrar = new JFrame("VRegistrar");
+        VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
+        VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VRegistrar.setLocationRelativeTo(null);
+        VRegistrar.pack();
+        VRegistrar.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA DE CARGA
+     *
+     **/
+
+    public static void VentanaCarga() {
+        VCarga = new JFrame("VCarga");
+        VCarga.setContentPane(new VCarga().getpPrincipal());
+        VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VCarga.setLocationRelativeTo(null);
+        VCarga.pack();
+        VCarga.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA USUARIO
+     * @param admin
+     **/
+
+    public static void VentanaUsuario(boolean admin) {
+        VUsuario = new JFrame("VUsuario");
+        VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
+        VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VUsuario.setLocationRelativeTo(null);
+        VUsuario.pack();
+        VUsuario.setVisible(true);
+
+    }
 
     /**
      *
@@ -189,94 +247,6 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
-    /**
-     * CLASE ANIDADA ESTÁTICA
-     *
-     **/
-
-    static class Match {
-
-        int team1, team2;
-        /**
-         * CREACION DEL OBJETO MATCH
-         * @param team1
-         * @param team2
-         **/
-
-        public Match(int team1, int team2) {
-            this.team1 = team1;
-            this.team2 = team2;
-        }
-
-        /**
-         *
-         * MÉTODO REPRESENTAR EL OBJETO COMO UNA CADENA
-         *
-         **/
-
-        public String toString() {
-            return team1 + " vs " + team2;
-        }
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE LOGIN
-     *
-     **/
-    public static void VentanaLogin() {
-        VLogin = new JFrame("Inicio de sesion");
-        VLogin.setContentPane(new VLogin().getpPrincipal());
-        VLogin.setLocationRelativeTo(null);
-        VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VLogin.pack();
-        VLogin.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE REGISTRO
-     * @param email
-     **/
-    public static void VentanaRegistrar(String email) {
-        VRegistrar = new JFrame("VRegistrar");
-        VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
-        VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VRegistrar.setLocationRelativeTo(null);
-        VRegistrar.pack();
-        VRegistrar.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE CARGA
-     *
-     **/
-
-    public static void VentanaCarga() {
-        VCarga = new JFrame("VCarga");
-        VCarga.setContentPane(new VCarga().getpPrincipal());
-        VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VCarga.setLocationRelativeTo(null);
-        VCarga.pack();
-        VCarga.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA USUARIO
-     * @param admin
-     **/
-
-    public static void VentanaUsuario(boolean admin) {
-        VUsuario = new JFrame("VUsuario");
-        VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
-        VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VUsuario.setLocationRelativeTo(null);
-        VUsuario.pack();
-        VUsuario.setVisible(true);
-
-    }
     /**
      *
      * REGISTRAR JUGADOR
@@ -900,7 +870,18 @@ public class Main {
 
     public static void irVUsuario() {
         VAdmin.dispose();
-        Main.VentanaUsuario(true);
+        VentanaUsuario(true);
+    }
+
+    /**
+     *
+     *DIRIGIRE A LA VENTANA DEL ADMIN
+     *
+     *
+     **/
+    public static void irVAdmin() {
+        VUsuario.dispose();
+        VentanaAdmin();
     }
 
     /**

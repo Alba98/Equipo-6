@@ -6,8 +6,6 @@ import Excepciones.Validaciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,6 +35,7 @@ public class VUsuario {
     private JComboBox cbPartidos;
     private JButton bActualizar;
     private JTextField tResultado;
+    private JButton bAdmin;
 
     TreeMap<Integer, String> partidos;
 
@@ -85,8 +84,13 @@ public class VUsuario {
         //Jornadas admin
         {
             bResultados.setVisible(admin);
+            bAdmin.setVisible(admin);
+            if(admin)
             llenarCBPartidos(cbPartidos);
         }
+
+        aestheticBoton(bActualizar);
+        aestheticBoton(bAdmin);
 
         pPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -184,6 +188,18 @@ public class VUsuario {
                 actualizarResulado();
             }
         });
+        bAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.irVAdmin();
+            }
+        });
+    }
+
+    private void aestheticBoton(JButton boton) {
+        boton.setBorderPainted(false);
+        boton.setFocusable(false);
+        boton.setRolloverEnabled(true);
     }
 
     /**

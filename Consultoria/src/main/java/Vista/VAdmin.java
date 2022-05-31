@@ -113,6 +113,7 @@ public class VAdmin {
     private JComboBox cbBEquipos;
     private JButton bBEquipos;
     private JTextField fechaPrimeraJornada;
+    private JButton bUsuario;
 
     /**
      *
@@ -508,6 +509,12 @@ public class VAdmin {
                 actualizarCBEquipo();
             }
         });
+        bUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.irVUsuario();
+            }
+        });
     }
 
     /**
@@ -547,6 +554,8 @@ public class VAdmin {
         aestheticBoton(bBEntrenadores);
         aestheticBoton(bBAsistentes);
         aestheticBoton(bBEquipos);
+
+        aestheticBoton(bUsuario);
     }
 
     /**
