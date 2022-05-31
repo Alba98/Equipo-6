@@ -43,7 +43,7 @@ public class VCarga {
         iniciarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                iniciarButton.setBackground(Color.GREEN);
+                iniciarButton.setBackground(new Color(150,237,217));
             }
 
             @Override

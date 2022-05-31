@@ -139,7 +139,7 @@ public class VUsuario {
         bClasificacion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bClasificacion.setBackground(Color.GREEN);
+                bClasificacion.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -151,7 +151,7 @@ public class VUsuario {
         bJornada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bJornada.setBackground(Color.GREEN);
+                bJornada.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -174,12 +174,23 @@ public class VUsuario {
         bResultados.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bResultados.setBackground(Color.GREEN);
+                bResultados.setBackground(new Color(150,237,217));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 bResultados.setBackground(UIManager.getColor("control"));
+            }
+        });
+        bAdmin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bAdmin.setBackground(new Color(150,237,217));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                bAdmin.setBackground(UIManager.getColor("control"));
             }
         });
         bActualizar.addActionListener(new ActionListener() {

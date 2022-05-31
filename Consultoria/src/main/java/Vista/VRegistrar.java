@@ -47,7 +47,7 @@ public class VRegistrar {
         registrarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                registrarButton.setBackground(Color.GREEN);
+                registrarButton.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -67,7 +67,7 @@ public class VRegistrar {
         bLogIn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bLogIn.setBackground(Color.GREEN);
+                bLogIn.setBackground(new Color(150,237,217));
             }
 
             @Override
