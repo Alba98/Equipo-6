@@ -28,7 +28,7 @@ public class PartidosDAO extends BaseDatos {
          *
          **/
 
-    public void crearPartido(LocalTime horaPartido, int codJornada, String nombreEquipo1, String nombreEquipo2) throws Exception {
+    public void crearPartido(String horaPartido, int codJornada, String nombreEquipo1, String nombreEquipo2) throws Exception {
 
         //iniciar transaccion
         transaction.begin();
@@ -36,15 +36,16 @@ public class PartidosDAO extends BaseDatos {
         // Ejecutar
         StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("GEST_PARTIDOS.INSERT_PARTIDO");
         // set parameters
-        storedProcedure.registerStoredProcedureParameter("P_HORA_PARTIDO", Date.class, ParameterMode.IN);
+        storedProcedure.registerStoredProcedureParameter("P_HORA_PARTIDO", String.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("P_COD_JORNADA", Byte.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("P_EQUIPO1", String.class, ParameterMode.IN);
         storedProcedure.registerStoredProcedureParameter("P_EQUIPO2", String.class, ParameterMode.IN);
 
-        storedProcedure.setParameter("P_HORA_PARTIDO", conversionTime(horaPartido));
+        storedProcedure.setParameter("P_HORA_PARTIDO", horaPartido);
         storedProcedure.setParameter("P_COD_JORNADA", (byte) codJornada);
         storedProcedure.setParameter("P_EQUIPO1", nombreEquipo1);
         storedProcedure.setParameter("P_EQUIPO2", nombreEquipo2);
+
         // execute SP
         storedProcedure.execute();
 

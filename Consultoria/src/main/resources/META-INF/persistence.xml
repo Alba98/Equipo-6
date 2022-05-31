@@ -22,10 +22,10 @@
         <class>Modelo.UML.UsuariosEntity</class>
 
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@172.20.225.114:1521:orcl"/>
+            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@192.168.14.101:1521:orclcdb"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver"/>
-            <property name="hibernate.connection.username" value="eqdaw06"/>
-            <property name="hibernate.connection.password" value="eqdaw06"/>
+            <property name="hibernate.connection.username" value="system"/>
+            <property name="hibernate.connection.password" value="oracle"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

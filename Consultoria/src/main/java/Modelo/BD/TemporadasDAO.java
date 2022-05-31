@@ -39,6 +39,9 @@ public class TemporadasDAO extends BaseDatos{
                 )
                 .getSingleResult();
 
+        if(codTemporada == null)
+            return -1;
+
         return codTemporada.intValue();
     }
 

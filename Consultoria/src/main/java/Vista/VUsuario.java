@@ -6,8 +6,6 @@ import Excepciones.Validaciones;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,6 +35,8 @@ public class VUsuario {
     private JComboBox cbPartidos;
     private JButton bActualizar;
     private JTextField tResultado;
+    private JButton bAdmin;
+    private JPanel pVAdmin;
 
     TreeMap<Integer, String> partidos;
 
@@ -85,8 +85,13 @@ public class VUsuario {
         //Jornadas admin
         {
             bResultados.setVisible(admin);
+            bAdmin.setVisible(admin);
+            if(admin)
             llenarCBPartidos(cbPartidos);
         }
+
+        aestheticBoton(bActualizar);
+        aestheticBoton(bAdmin);
 
         pPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -102,6 +107,11 @@ public class VUsuario {
                 PJornada.setVisible(false);
 
                 getClasificacion();
+
+
+                pPrincipal.validate();
+                pPrincipal.repaint();
+                pPrincipal.updateUI();
             }
         });
         bJornada.addActionListener(new ActionListener() {
@@ -113,6 +123,10 @@ public class VUsuario {
                 PClasificacion.setVisible(false);
 
                 getJornadas();
+
+                pPrincipal.validate();
+                pPrincipal.repaint();
+                pPrincipal.updateUI();
             }
         });
 
@@ -135,7 +149,7 @@ public class VUsuario {
         bClasificacion.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bClasificacion.setBackground(Color.GREEN);
+                bClasificacion.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -147,7 +161,7 @@ public class VUsuario {
         bJornada.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bJornada.setBackground(Color.GREEN);
+                bJornada.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -170,12 +184,23 @@ public class VUsuario {
         bResultados.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bResultados.setBackground(Color.GREEN);
+                bResultados.setBackground(new Color(150,237,217));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 bResultados.setBackground(UIManager.getColor("control"));
+            }
+        });
+        bAdmin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bAdmin.setBackground(new Color(150,237,217));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                bAdmin.setBackground(UIManager.getColor("control"));
             }
         });
         bActualizar.addActionListener(new ActionListener() {
@@ -184,6 +209,44 @@ public class VUsuario {
                 actualizarResulado();
             }
         });
+        bAdmin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.irVAdmin();
+            }
+        });
+
+        cbPartidos.addActionListener (new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                verResultado();
+            }
+
+
+        });
+    }
+
+    private void verResultado() {
+        try {
+            String partido = cbPartidos.getSelectedItem().toString();
+            boolean partidoSeleccionado = partido != "-Ninguno selecccionado-";
+            if(partidoSeleccionado) {
+                int cod_partido = 0;
+                for (Map.Entry<Integer, String> entry : partidos.entrySet()) {
+                    if (entry.getValue() == partido)
+                        cod_partido = entry.getKey();
+                }
+
+                tResultado.setText(Main.verResultado(cod_partido));
+            }
+        } catch (Exception e) {
+            Validaciones.mostrarError(e.getMessage());
+        }
+    }
+
+    private void aestheticBoton(JButton boton) {
+        boton.setBorderPainted(false);
+        boton.setFocusable(false);
+        boton.setRolloverEnabled(true);
     }
 
     /**

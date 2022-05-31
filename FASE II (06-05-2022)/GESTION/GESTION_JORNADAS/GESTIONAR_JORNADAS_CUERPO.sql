@@ -60,9 +60,6 @@ BEGIN
     IF (V_COD_TEMPORADA IS NULL)
     THEN 
         RAISE TEMPORADA_NO_EXISTE;
-    ELSIF (V_COD_TEMPORADA = -1)
-    THEN
-        RAISE DUP_VAL_ON_INDEX;
     ELSE
        --insertar jornada
        
@@ -76,10 +73,10 @@ BEGIN
             v_count:= v_count -1;
 
             for cod_jornada in 0 .. v_count loop
-
-                p_fecha_resultado := p_fecha_resultado + 7;
     
                 Insert INTO jornadas(fecha_jornada, cod_temporada) values (p_fecha_resultado, p_cod_temporada);
+                
+                p_fecha_resultado := p_fecha_resultado + 7;
 
             end loop;
     END IF;

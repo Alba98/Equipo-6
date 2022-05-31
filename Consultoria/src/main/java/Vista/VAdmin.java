@@ -113,7 +113,9 @@ public class VAdmin {
     private JComboBox cbBEquipos;
     private JButton bBEquipos;
     private JTextField fechaPrimeraJornada;
+    private JButton bUsuario;
 
+    private String ningunoSelecionado = "-Ninguno selecccionado-";
     /**
      *
      * CONTRUCTOR DE LA VENTANA DE ADMINISTRADOR
@@ -140,7 +142,7 @@ public class VAdmin {
         crearCalendarioButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                crearCalendarioButton.setBackground(Color.GREEN);
+                crearCalendarioButton.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -153,7 +155,7 @@ public class VAdmin {
         bJRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bJRegistrar.setBackground(Color.GREEN);
+                bJRegistrar.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -166,7 +168,7 @@ public class VAdmin {
         bJRestart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bJRestart.setBackground(Color.GREEN);
+                bJRestart.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -179,7 +181,7 @@ public class VAdmin {
         bERegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bERegistrar.setBackground(Color.GREEN);
+                bERegistrar.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -192,7 +194,7 @@ public class VAdmin {
         bERestart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bERestart.setBackground(Color.GREEN);
+                bERestart.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -205,7 +207,7 @@ public class VAdmin {
         bARegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bARegistrar.setBackground(Color.GREEN);
+                bARegistrar.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -218,7 +220,7 @@ public class VAdmin {
         bARestart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bARestart.setBackground(Color.GREEN);
+                bARestart.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -231,7 +233,7 @@ public class VAdmin {
         bEqRegistar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bEqRegistar.setBackground(Color.GREEN);
+                bEqRegistar.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -244,7 +246,7 @@ public class VAdmin {
         bEqRestart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bEqRestart.setBackground(Color.GREEN);
+                bEqRestart.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -257,7 +259,7 @@ public class VAdmin {
         bBJugadores.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bBJugadores.setBackground(Color.GREEN);
+                bBJugadores.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -270,7 +272,7 @@ public class VAdmin {
         bBEntrenadores.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bBEntrenadores.setBackground(Color.GREEN);
+                bBEntrenadores.setBackground(new Color(150,237,217));
             }
 
             @Override
@@ -283,13 +285,38 @@ public class VAdmin {
         bBAsistentes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                bBAsistentes.setBackground(Color.GREEN);
+                bBAsistentes.setBackground(new Color(150,237,217));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
                 bBAsistentes.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bBEquipos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bBEquipos.setBackground(new Color(150,237,217));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                bBEquipos.setBackground(UIManager.getColor("control"));
+            }
+        });
+
+        bUsuario.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bUsuario.setBackground(new Color(150,237,217));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                bUsuario.setBackground(UIManager.getColor("control"));
             }
         });
 
@@ -394,7 +421,7 @@ public class VAdmin {
                 String jugadorBorrar = (String) cbBJugadores.getSelectedItem();
 
                 try {
-                    boolean seleccionado = jugadorBorrar != "-Ninguno selecccionado--";
+                    boolean seleccionado = jugadorBorrar != ningunoSelecionado;
                     if(seleccionado) {
                         Main.borrarJugador(jugadorBorrar);
                         llenarCB(cbBJugadores, Main.getJugadores());
@@ -411,7 +438,7 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEntre = (String) cbBEntrenadores.getSelectedItem();
                 try {
-                    boolean seleccionado = nomEntre != "-Ninguno selecccionado--";
+                    boolean seleccionado = nomEntre != ningunoSelecionado;
                     if(seleccionado) {
                         Main.borrarEntrenador(nomEntre);
                         llenarCB(cbBEntrenadores, Main.getEntrenadores());
@@ -429,7 +456,7 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomAsis = (String) cbBAsistentes.getSelectedItem();
                 try {
-                    boolean seleccionado = nomAsis != "-Ninguno selecccionado-";
+                    boolean seleccionado = nomAsis != ningunoSelecionado;
                     if(seleccionado) {
                         Main.borrarAsistente(nomAsis);
                         llenarCB(cbBAsistentes, Main.getAsistentes());
@@ -447,13 +474,13 @@ public class VAdmin {
             public void actionPerformed(ActionEvent e) {
                 String nomEqui = (String) cbBEquipos.getSelectedItem();
                 try {
-                    boolean equipoSeleccionado = nomEqui != "-Ninguno selecccionado-";
+                    boolean equipoSeleccionado = nomEqui != ningunoSelecionado;
                     if(equipoSeleccionado) {
                         Main.borrarEquipo(nomEqui);
                         llenarCB(cbBEquipos, Main.getEquipos());
                     }
                     else
-                        Validaciones.mostrarError("selecione un asistente");
+                        Validaciones.mostrarError("selecione un equipo");
                 }
                 catch (Exception ex){
                     Validaciones.mostrarError(ex.getMessage());
@@ -508,6 +535,12 @@ public class VAdmin {
                 actualizarCBEquipo();
             }
         });
+        bUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.irVUsuario();
+            }
+        });
     }
 
     /**
@@ -547,6 +580,8 @@ public class VAdmin {
         aestheticBoton(bBEntrenadores);
         aestheticBoton(bBAsistentes);
         aestheticBoton(bBEquipos);
+
+        aestheticBoton(bUsuario);
     }
 
     /**
@@ -588,7 +623,7 @@ public class VAdmin {
     private void registrarJugador() {
         if ( validarRegistrarJugador() ) {
             try {
-                boolean rolValido = cbJROL.getSelectedItem().toString() != "-Ninguno selecccionado-";
+                boolean rolValido = cbJROL.getSelectedItem().toString() != ningunoSelecionado;
                 if(rolValido) {
                     Main.registrarJugador(tJNombre.getText(), tJApellido.getText(), tJSueldo.getText(),
                             tJFNacimiento.getText(), tJPais.getText(), tJNickname.getText(),
@@ -643,7 +678,7 @@ public class VAdmin {
             ArrayList<String> roles = new ArrayList<String>(
                     Arrays.asList("TOP", "JGL", "MID", "ADC", "SUPP"));
             cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
+            cb.addItem(ningunoSelecionado);
             cb.setSelectedIndex(0);
             for (String rol : roles) {
                 cb.addItem(rol);
@@ -704,7 +739,7 @@ public class VAdmin {
     private void registrarAsistente() {
         if ( validarRegistrarAsistente() ) {
             try {
-                boolean seleccionado = cbAEntrenador.getSelectedItem().toString() != "-Ninguno selecccionado-";
+                boolean seleccionado = cbAEntrenador.getSelectedItem().toString() != ningunoSelecionado;
                 if(seleccionado) {
                     Main.registrarAsistente(tANombre.getText(), tAApellido.getText(), tASueldo.getText(),
                             tAFNacimiento.getText(), tAPais.getText(), tANickname.getText(),
@@ -750,7 +785,7 @@ public class VAdmin {
         try {
             ArrayList<String> entrenadores = Main.getEntrenadores();
             cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
+            cb.addItem(ningunoSelecionado);
             cb.setSelectedIndex(0);
             for (String entrenador : entrenadores) {
                 cb.addItem(entrenador);
@@ -829,7 +864,7 @@ public class VAdmin {
     private void llenarCB(JComboBox cb, ArrayList<String> lista) {
         try {
             cb.removeAllItems();
-            cb.addItem("-Ninguno selecccionado-");
+            cb.addItem(ningunoSelecionado);
             cb.setSelectedIndex(0);
             for (String item : lista) {
                 cb.addItem(item);
@@ -838,6 +873,7 @@ public class VAdmin {
             Validaciones.mostrarError(e.getMessage());
         }
     }
+
 
     /**
      *

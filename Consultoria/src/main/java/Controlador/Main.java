@@ -35,6 +35,8 @@ public class Main {
 
     private static ReadXmlDomParser xmlParser;
 
+    private static ImageIcon icon = new ImageIcon("resources\\Imagenes\\icon.png");
+
     /**
      *
      * CONTRUCTOR MAIN
@@ -46,7 +48,9 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            VentanaCarga();
+            cargarDatos();
+            generarEmparejamientos(temporada_dao.getTemporada(01));
+            //VentanaCarga();
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
@@ -80,10 +84,73 @@ public class Main {
         VAdmin.setContentPane(new VAdmin().getPanelPrincipal());
         VAdmin.setLocationRelativeTo(null);
         VAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VAdmin.setIconImage(icon.getImage());
         VAdmin.pack();
         VAdmin.setVisible(true);
     }
 
+    /**
+     *
+     * GENERAR VENTANA DE LOGIN
+     *
+     **/
+    public static void VentanaLogin() {
+        VLogin = new JFrame("Inicio de sesion");
+        VLogin.setContentPane(new VLogin().getpPrincipal());
+        VLogin.setLocationRelativeTo(null);
+        VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VLogin.setIconImage(icon.getImage());
+        VLogin.pack();
+        VLogin.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA DE REGISTRO
+     * @param email
+     **/
+    public static void VentanaRegistrar(String email) {
+        VRegistrar = new JFrame("VRegistrar");
+        VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
+        VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VRegistrar.setIconImage(icon.getImage());
+        VRegistrar.setLocationRelativeTo(null);
+        VRegistrar.pack();
+        VRegistrar.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA DE CARGA
+     *
+     **/
+
+    public static void VentanaCarga() {
+        VCarga = new JFrame("VCarga");
+        VCarga.setContentPane(new VCarga().getpPrincipal());
+        VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VCarga.setIconImage(icon.getImage());
+        VCarga.setLocationRelativeTo(null);
+        VCarga.pack();
+        VCarga.setVisible(true);
+    }
+
+    /**
+     *
+     * GENERAR VENTANA USUARIO
+     * @param admin
+     **/
+
+    public static void VentanaUsuario(boolean admin) {
+        VUsuario = new JFrame("VUsuario");
+        VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
+        VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        VUsuario.setIconImage(icon.getImage());
+        VUsuario.setLocationRelativeTo(null);
+        VUsuario.pack();
+        VUsuario.setVisible(true);
+
+    }
 
     /**
      *
@@ -120,7 +187,7 @@ public class Main {
     public static void OrganizarCalendario(LocalDate fechaJornada) throws Exception {
         int codTemporada = temporada_dao.getUltimaTemporada();
 
-        if(temporada_dao.getTemporada(codTemporada).getAbierta() == "N") {
+        if(codTemporada == -1 || temporada_dao.getTemporada(codTemporada).getAbierta() == "N") {
             temporada_dao.crearTemporada();
             codTemporada = temporada_dao.getUltimaTemporada();
         }
@@ -135,26 +202,33 @@ public class Main {
     }
 
     private static void generarEmparejamientos(TemporadasEntity temporada) throws Exception {
-        List<EquiposEntity> equiposTotales = equipo_dao.consultarEquipos();
-        Collection<JornadasEntity> jornadasTotales = temporada.getJornadasByCodTemporada();
-        int partidos = (equiposTotales.size()/2)*(jornadasTotales.size());
+        List<EquiposEntity> equipos = equipo_dao.consultarEquipos();
+        List<JornadasEntity> jornadas = jornada_dao.getJornadasTemporada(temporada.getCodTemporada());
+        int partidos = (equipos.size()/2)*(jornadas.size())/2;
 
 
-        for (JornadasEntity jornada : jornadasTotales) {
+        int countJornada = 0;
+
+        for (int eq1=0; eq1 < equipos.size(); eq1++)
+        {
             LocalTime startTime = LocalTime.parse("11:00");
-           // System.out.println(" JORNADA 0" + jornada.getCodJornada());
+            System.out.println("Jornada " + countJornada);
 
-            for (int eq1=0; eq1 < equiposTotales.size(); eq1++){
-                for (int eq2 = eq1+1; eq2 <= eq1 + partidos/2; eq2++){
-                    partido_dao.crearPartido(startTime, 000, equiposTotales.get(eq1).getNombre(),
-                            equiposTotales.get(eq2 % equiposTotales.size()).getNombre());
+            for (int eq2 = eq1+1, e1 = eq1; eq2 <= eq1 + partidos/2; eq2++, e1 = (e1 + 3) % equipos.size() )
+            {
+                if(eq2 != e1)
+                {
+                    partido_dao.crearPartido(startTime.toString(),
+                            jornadas.get(countJornada).getCodJornada(),
+                            equipos.get(e1).getNombre(),
+                            equipos.get(eq2 % equipos.size()).getNombre());
 
-                    startTime.plusHours(2);
+                    startTime = startTime.plusHours(2);
 
-                   // System.out.println(equiposTotales.get(eq1).getCodEquipo() + " vs "+ equiposTotales.get(eq2 % equiposTotales.size()).getCodEquipo());
+                    // System.out.println(equipos.get(e1).getCodEquipo() + " vs "+ equipos.get(eq2 % equipos.size()).getCodEquipo());
                 }
             }
-
+            countJornada++;
         }
     }
 
@@ -189,94 +263,6 @@ public class Main {
         return almacenXML_dao.getDatos().getResultXml();
     }
 
-    /**
-     * CLASE ANIDADA ESTÁTICA
-     *
-     **/
-
-    static class Match {
-
-        int team1, team2;
-        /**
-         * CREACION DEL OBJETO MATCH
-         * @param team1
-         * @param team2
-         **/
-
-        public Match(int team1, int team2) {
-            this.team1 = team1;
-            this.team2 = team2;
-        }
-
-        /**
-         *
-         * MÉTODO REPRESENTAR EL OBJETO COMO UNA CADENA
-         *
-         **/
-
-        public String toString() {
-            return team1 + " vs " + team2;
-        }
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE LOGIN
-     *
-     **/
-    public static void VentanaLogin() {
-        VLogin = new JFrame("Inicio de sesion");
-        VLogin.setContentPane(new VLogin().getpPrincipal());
-        VLogin.setLocationRelativeTo(null);
-        VLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VLogin.pack();
-        VLogin.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE REGISTRO
-     * @param email
-     **/
-    public static void VentanaRegistrar(String email) {
-        VRegistrar = new JFrame("VRegistrar");
-        VRegistrar.setContentPane(new VRegistrar(email).getpPrincipal());
-        VRegistrar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VRegistrar.setLocationRelativeTo(null);
-        VRegistrar.pack();
-        VRegistrar.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA DE CARGA
-     *
-     **/
-
-    public static void VentanaCarga() {
-        VCarga = new JFrame("VCarga");
-        VCarga.setContentPane(new VCarga().getpPrincipal());
-        VCarga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VCarga.setLocationRelativeTo(null);
-        VCarga.pack();
-        VCarga.setVisible(true);
-    }
-
-    /**
-     *
-     * GENERAR VENTANA USUARIO
-     * @param admin
-     **/
-
-    public static void VentanaUsuario(boolean admin) {
-        VUsuario = new JFrame("VUsuario");
-        VUsuario.setContentPane(new VUsuario(admin).getpPrincipal());
-        VUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        VUsuario.setLocationRelativeTo(null);
-        VUsuario.pack();
-        VUsuario.setVisible(true);
-
-    }
     /**
      *
      * REGISTRAR JUGADOR
@@ -900,7 +886,18 @@ public class Main {
 
     public static void irVUsuario() {
         VAdmin.dispose();
-        Main.VentanaUsuario(true);
+        VentanaUsuario(true);
+    }
+
+    /**
+     *
+     *DIRIGIRE A LA VENTANA DEL ADMIN
+     *
+     *
+     **/
+    public static void irVAdmin() {
+        VUsuario.dispose();
+        VentanaAdmin();
     }
 
     /**
@@ -937,6 +934,16 @@ public class Main {
 
     public static void actualizaResutlado(int cod_partido, String resultado) throws Exception{
         partido_dao.resultadosPartido(cod_partido, resultado);
+    }
+
+    public static String verResultado(int cod_partido) throws Exception{
+        List<PartidosEntity> partidos = partido_dao.consultarPartidos();
+        for (PartidosEntity partido : partidos) {
+            if(partido.getCodPartido() == cod_partido)
+                return partido.getResultado();
+        }
+
+        return "";
     }
 }
 

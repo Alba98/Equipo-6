@@ -32,7 +32,7 @@ public class VLogin {
         loginButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                loginButton.setBackground(Color.GREEN);
+                loginButton.setBackground(new Color(150,237,217));
             }
 
             @Override
