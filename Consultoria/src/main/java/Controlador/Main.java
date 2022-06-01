@@ -48,9 +48,7 @@ public class Main {
         try {
             System.out.println("CONSULTORIA E-SPORTS ");
 
-            cargarDatos();
-            generarEmparejamientos(temporada_dao.getTemporada(01));
-            //VentanaCarga();
+            VentanaCarga();
         } catch (Exception e) {
             System.out.println("Problemas " + e.getMessage());
         }
